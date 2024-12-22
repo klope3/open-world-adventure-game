@@ -74,3 +74,13 @@ crashlytics-build.properties
 #My Settings
 /[Pp]ackages/
 /[Aa]ssets/[Ss]tarter[Aa]ssets/
+/[Aa]ssets/ECM2/[Ww]alkthrough/
+/[Aa]ssets/ECM2/[Ww]alkthrough.meta
+/[Aa]ssets/ECM2/[Ss]hared[Aa]ssets/
+/[Aa]ssets/ECM2/[Ss]hared[Aa]ssets.meta
+/[Aa]ssets/ECM2/README.md
+/[Aa]ssets/ECM2/README.md.meta
+/[Aa]ssets/ECM2/[Ee]xamples/
+/[Aa]ssets/ECM2/[Ee]xamples.meta
+/[Aa]ssets/ECM2/[Ee]ditor/
+/[Aa]ssets/ECM2/[Ee]ditor.meta
