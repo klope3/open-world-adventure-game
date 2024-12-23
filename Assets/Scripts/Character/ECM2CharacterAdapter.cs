@@ -25,4 +25,9 @@ public class ECM2CharacterAdapter : MonoBehaviour
             character.StopJumping(); //will not be able to jump again until this is called
         }
     }
+
+    public Vector3 GetMovementInput()
+    {
+        return inputProvider.GetInput();
+    }
 }
