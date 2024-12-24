@@ -8,13 +8,21 @@ public class ECM2CharacterAdapter : MonoBehaviour
 {
     [SerializeField] private Character character;
     [SerializeField] private DirectionalInputProvider inputProvider;
+    [SerializeField] public bool canMove = true;
 
     private void Update()
     {
         Vector2 inputVec = inputProvider.GetInput();
         Vector3 moveVec = new Vector3(inputVec.x, 0, inputVec.y);
         moveVec = moveVec.relativeTo(character.cameraTransform);
-        character.SetMovementDirection(moveVec);
+
+        if (canMove)
+        {
+            character.SetMovementDirection(moveVec);
+        } else
+        {
+            character.SetMovementDirection(Vector3.zero);
+        }
 
         //temp
         if (Input.GetKeyDown(KeyCode.Space))
