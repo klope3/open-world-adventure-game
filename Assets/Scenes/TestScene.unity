@@ -2130,6 +2130,7 @@ GameObject:
   - component: {fileID: 1185212338}
   - component: {fileID: 1185212339}
   - component: {fileID: 1185212340}
+  - component: {fileID: 1185212341}
   m_Layer: 3
   m_Name: Character
   m_TagString: Player
@@ -2361,8 +2362,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 1185212331}
+  playerStateManager: {fileID: 1185212341}
   adapter: {fileID: 1185212337}
-  meleeAttack: {fileID: 1185212340}
   animator: {fileID: 1488012242}
 --- !u!114 &1185212340
 MonoBehaviour:
@@ -2371,13 +2372,32 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1185212330}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad87b15eb47051c4aa2a7366ffab6bdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 1185212331}
   characterAdapter: {fileID: 1185212337}
+  meleeZone: {fileID: 1365353555}
+  meleeZoneActiveTime: 0.1
+  attacksPerSecond: 3
+  stopMovementTime: 0.4
+--- !u!114 &1185212341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1185212330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 131073e460a689642946e745c1385147, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1488012242}
+  characterAdapter: {fileID: 1185212337}
+  character: {fileID: 1185212331}
   meleeZone: {fileID: 1365353555}
   meleeZoneActiveTime: 0.1
   attacksPerSecond: 3

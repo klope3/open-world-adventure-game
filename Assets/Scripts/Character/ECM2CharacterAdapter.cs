@@ -23,15 +23,6 @@ public class ECM2CharacterAdapter : MonoBehaviour
         {
             character.SetMovementDirection(Vector3.zero);
         }
-
-        //temp
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            character.Jump();
-        } else if (Input.GetKeyUp(KeyCode.Space))
-        {
-            character.StopJumping(); //will not be able to jump again until this is called
-        }
     }
 
     public Vector3 GetMovementInput()
