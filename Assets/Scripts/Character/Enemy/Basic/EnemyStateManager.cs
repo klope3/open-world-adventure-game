@@ -11,6 +11,11 @@ public class EnemyStateManager : StateManager<EnemyState>
     private float wanderMoveTime;
     [SerializeField] private float playerChaseDistance;
     [SerializeField] private float chaseSpeed;
+    [SerializeField] private float attackSpeed;
+    [SerializeField] private float attackDuration;
+    [SerializeField] private float attackProximity;
+    [SerializeField] private float attackRecoveryDuration;
+    public System.Action OnAttack;
 
     protected override string GetInitialStateName()
     {
@@ -29,13 +34,26 @@ public class EnemyStateManager : StateManager<EnemyState>
 
         EnemyBasicWanderState wanderState = new EnemyBasicWanderState();
         EnemyBasicChaseState chaseState = new EnemyBasicChaseState();
+        EnemyBasicAttackState attackState = new EnemyBasicAttackState();
+        EnemyBasicPauseState pauseState = new EnemyBasicPauseState();
         
         wanderState.Initialize(this, character, playerObj, transform, wanderMoveSpeed, wanderMoveTime, playerChaseDistance);
-        chaseState.Initialize(this, character, playerObj, transform, playerChaseDistance, chaseSpeed);
+        chaseState.Initialize(this, character, playerObj, transform, playerChaseDistance, chaseSpeed, attackProximity);
+        attackState.Initialize(this, character, playerObj, transform, attackSpeed, attackDuration);
+        pauseState.Initialize(this, character, playerObj, transform, attackRecoveryDuration);
+
+        attackState.OnEnter += AttackState_OnEnter;
 
         states.Add("Wander", wanderState);
         states.Add("Chase", chaseState);
+        states.Add("Attack", attackState);
+        states.Add("Pause", pauseState);
 
         return states;
+    }
+
+    private void AttackState_OnEnter()
+    {
+        OnAttack?.Invoke();
     }
 }

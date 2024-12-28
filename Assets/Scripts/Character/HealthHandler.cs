@@ -9,7 +9,12 @@ public class HealthHandler : MonoBehaviour
     [SerializeField] private int maxHealth;
     [SerializeField] private bool invincible;
     [SerializeField] private bool destroyOnDeath;
+
+    [SerializeField, Tooltip("Can't be hurt for this long after taking damage.")] 
+    private float graceTime;
+
     [SerializeField] private bool showLogs;
+    private float graceTimer;
     private int curHealth;
     public UnityEvent OnDamage;
     public UnityEvent OnHeal;
@@ -26,11 +31,22 @@ public class HealthHandler : MonoBehaviour
     private void Awake()
     {
         curHealth = startingHealth;
+        graceTimer = graceTime;
+    }
+
+    private void Update()
+    {
+        if (graceTimer < graceTime)
+        {
+            graceTimer += Time.deltaTime;
+        }
     }
 
     public void AddHealth(int amount)
     {
         if (amount == 0 || (amount < 0 && invincible))
+            return;
+        if (amount < 0 && graceTimer < graceTime)
             return;
 
         curHealth += amount;
@@ -41,7 +57,10 @@ public class HealthHandler : MonoBehaviour
         if (amount > 0)
             OnHeal?.Invoke();
         if (amount < 0)
+        {
+            graceTimer = 0;
             OnDamage?.Invoke();
+        } 
         if (curHealth == 0)
         {
             OnDie?.Invoke();

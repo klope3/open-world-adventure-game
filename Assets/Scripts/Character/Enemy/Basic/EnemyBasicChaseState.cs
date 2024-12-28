@@ -7,6 +7,7 @@ public class EnemyBasicChaseState : EnemyState
 {
     private float playerChaseDistance;
     private float chaseSpeed;
+    private float attackProximity;
 
     public override void EnterState()
     {
@@ -23,6 +24,10 @@ public class EnemyBasicChaseState : EnemyState
         {
             stateManager.SwitchState("Wander");
             return;
+        } else if (flattened.magnitude < attackProximity)
+        {
+            stateManager.SwitchState("Attack");
+            return;
         }
 
         character.SetMovementDirection(flattened.normalized);
@@ -33,10 +38,11 @@ public class EnemyBasicChaseState : EnemyState
         Debug.Log("Exiting chase");
     }
 
-    public void Initialize(EnemyStateManager stateManager, Character character, GameObject playerObj, Transform ownTransform, float playerChaseDistance, float chaseSpeed)
+    public void Initialize(EnemyStateManager stateManager, Character character, GameObject playerObj, Transform ownTransform, float playerChaseDistance, float chaseSpeed, float attackProximity)
     {
         Initialize(stateManager, character, playerObj, ownTransform);
         this.playerChaseDistance = playerChaseDistance;
         this.chaseSpeed = chaseSpeed;
+        this.attackProximity = attackProximity;
     }
 }
