@@ -16,6 +16,7 @@ public class HealthHandler : MonoBehaviour
     [SerializeField] private bool showLogs;
     private float graceTimer;
     private int curHealth;
+    public UnityEvent OnAwake;
     public UnityEvent OnDamage;
     public UnityEvent OnHeal;
     public UnityEvent OnDie;
@@ -27,11 +28,19 @@ public class HealthHandler : MonoBehaviour
             return curHealth;
         }
     }
+    public int MaxHealth
+    {
+        get
+        {
+            return maxHealth;
+        }
+    }
 
     private void Awake()
     {
         curHealth = startingHealth;
         graceTimer = graceTime;
+        OnAwake?.Invoke();
     }
 
     private void Update()
