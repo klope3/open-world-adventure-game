@@ -7093,6 +7093,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: player
       objectReference: {fileID: 0}
+    - target: {fileID: 3505068965197213699, guid: af0280f9f4bac37448804397c363f87a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d687199745dbdeb4b97223bc11c684db, type: 2}
     - target: {fileID: 5866666021909216657, guid: af0280f9f4bac37448804397c363f87a,
         type: 3}
       propertyPath: m_Controller
@@ -7103,6 +7108,11 @@ PrefabInstance:
       propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7402483750096178387, guid: af0280f9f4bac37448804397c363f87a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3ec6909a2666996448341e535d5b5314, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
