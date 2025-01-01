@@ -14,6 +14,7 @@ public class PlayerAnimation : MonoBehaviour
     private int jumpHash;
     private int landHash;
     private int attackHash;
+    private int fallHash;
 
     private void Awake()
     {
@@ -21,10 +22,17 @@ public class PlayerAnimation : MonoBehaviour
         jumpHash = Hash("Jump");
         landHash = Hash("Land");
         attackHash = Hash("Attack");
+        fallHash = Hash("Fall");
     
         character.Jumped += Character_Jumped;
         character.Landed += Character_Landed;
         playerStateManager.OnAttack += PlayerStateManager_OnAttack;
+        adapter.LeftGround += Adapter_LeftGround;
+    }
+
+    private void Adapter_LeftGround()
+    {
+        animator.SetTrigger(fallHash);
     }
 
     private void PlayerStateManager_OnAttack()
