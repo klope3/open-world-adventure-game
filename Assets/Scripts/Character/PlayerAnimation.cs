@@ -27,10 +27,10 @@ public class PlayerAnimation : MonoBehaviour
         character.Jumped += Character_Jumped;
         character.Landed += Character_Landed;
         playerStateManager.OnAttack += PlayerStateManager_OnAttack;
-        adapter.LeftGround += Adapter_LeftGround;
+        playerStateManager.OnLeftGround += PlayerStateManager_OnLeftGround;
     }
 
-    private void Adapter_LeftGround()
+    private void PlayerStateManager_OnLeftGround()
     {
         animator.SetTrigger(fallHash);
     }

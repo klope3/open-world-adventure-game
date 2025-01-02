@@ -13,6 +13,12 @@ public class PlayerStateManager : StateManager<PlayerState>
     [SerializeField] private float attacksPerSecond;
     [SerializeField] private float stopMovementTime;
     public System.Action OnAttack;
+    public System.Action OnLeftGround;
+
+    protected override void StartAwake()
+    {
+        characterAdapter.LeftGround += CharacterAdapter_LeftGround;
+    }
 
     protected override string GetInitialStateName()
     {
@@ -34,6 +40,7 @@ public class PlayerStateManager : StateManager<PlayerState>
         fallingState.Initialize(this, character, characterAdapter);
 
         attackState.OnEnter += AttackState_OnEnter;
+        fallingState.OnEnter += FallingState_OnEnter;
 
         states.Add("Idle", idleState);
         states.Add("Attack", attackState);
@@ -45,5 +52,15 @@ public class PlayerStateManager : StateManager<PlayerState>
     private void AttackState_OnEnter()
     {
         OnAttack?.Invoke();
+    }
+
+    private void FallingState_OnEnter()
+    {
+        OnLeftGround?.Invoke();
+    }
+
+    private void CharacterAdapter_LeftGround()
+    {
+        SwitchState("Falling");
     }
 }

@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class FallingState : PlayerState
 {
+    public System.Action OnEnter;
+
     public override void EnterState()
     {
         Debug.Log("Entering falling");
+        OnEnter?.Invoke();
     }
 
     public override void UpdateState()

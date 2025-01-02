@@ -11,6 +11,7 @@ public abstract class StateManager<TState> : MonoBehaviour where TState : State
 
     private void Awake()
     {
+        StartAwake();
         registeredStates = GetStateDictionary();
 
         string initialStateName = GetInitialStateName();
@@ -24,6 +25,7 @@ public abstract class StateManager<TState> : MonoBehaviour where TState : State
 
     protected abstract string GetInitialStateName();
     protected abstract Dictionary<string, TState> GetStateDictionary();
+    protected abstract void StartAwake();
 
     private void Update()
     {

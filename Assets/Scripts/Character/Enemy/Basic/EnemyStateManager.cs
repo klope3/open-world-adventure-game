@@ -17,6 +17,10 @@ public class EnemyStateManager : StateManager<EnemyState>
     [SerializeField] private float attackRecoveryDuration;
     public System.Action OnAttack;
 
+    protected override void StartAwake()
+    {
+    }
+
     protected override string GetInitialStateName()
     {
         return "Wander";
