@@ -10,7 +10,7 @@ public class EnemyBasicPauseState : EnemyState
 
     public override void EnterState()
     {
-        character.maxWalkSpeed = 0;
+        character.SetMovementDirection(Vector3.zero);
     }
 
     public override void ExitState()

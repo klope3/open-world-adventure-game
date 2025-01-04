@@ -9,6 +9,7 @@ public class EnemyBasicWanderState : EnemyState
     private float moveSpeed;
     private float timer;
     private float timerMax;
+    private float pauseTimerMax;
     private bool moving;
 
     public override void EnterState()
@@ -31,19 +32,15 @@ public class EnemyBasicWanderState : EnemyState
 
         timer += Time.deltaTime;
 
-        if (timer > timerMax)
+        if (timer > timerMax && moving)
         {
-            if (moving)
-            {
-                character.maxWalkSpeed = 0;
-                moving = false;
-            } else
-            {
-                character.maxWalkSpeed = moveSpeed;
-                character.SetMovementDirection(PickRandomDirection());
-                moving = true;
-            }
-
+            character.SetMovementDirection(Vector3.zero);
+            moving = false;
+            timer = 0;
+        } else if (timer > pauseTimerMax && !moving)
+        {
+            character.SetMovementDirection(PickRandomDirection());
+            moving = true;
             timer = 0;
         }
     }
@@ -59,10 +56,11 @@ public class EnemyBasicWanderState : EnemyState
         return new Vector3(rand.x, 0, rand.y);
     }
 
-    public void Initialize(EnemyStateManager stateManager, Character character, GameObject playerObj, Transform ownTransform, float wanderMoveSpeed, float wanderMoveTime, float playerChaseDistance)
+    public void Initialize(EnemyStateManager stateManager, Character character, GameObject playerObj, Transform ownTransform, float wanderMoveSpeed, float wanderMoveTime, float wanderPauseTime, float playerChaseDistance)
     {
         Initialize(stateManager, character, playerObj, ownTransform);
         timerMax = wanderMoveTime;
+        pauseTimerMax = wanderPauseTime;
         moveSpeed = wanderMoveSpeed;
         this.playerChaseDistance = playerChaseDistance;
     }

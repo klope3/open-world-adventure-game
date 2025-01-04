@@ -18,6 +18,8 @@ public class EnemyBasicAttackState : EnemyState
 
         character.SetMovementDirection(flattened);
         character.maxWalkSpeed = attackSpeed;
+
+        OnEnter?.Invoke();
     }
 
     public override void ExitState()

@@ -7,8 +7,13 @@ public class EnemyStateManager : StateManager<EnemyState>
 {
     [SerializeField] private Character character;
     [SerializeField] private float wanderMoveSpeed;
-    [SerializeField, Tooltip("The enemy will move for this long, then pause for this long, then repeat.")] 
+
+    [SerializeField, Tooltip("The enemy will move for this long before pausing.")] 
     private float wanderMoveTime;
+
+    [SerializeField, Tooltip("The enemy will pause for this long after moving.")]
+    private float wanderPauseTime;
+
     [SerializeField] private float playerChaseDistance;
     [SerializeField] private float chaseSpeed;
     [SerializeField] private float attackSpeed;
@@ -41,7 +46,7 @@ public class EnemyStateManager : StateManager<EnemyState>
         EnemyBasicAttackState attackState = new EnemyBasicAttackState();
         EnemyBasicPauseState pauseState = new EnemyBasicPauseState();
         
-        wanderState.Initialize(this, character, playerObj, transform, wanderMoveSpeed, wanderMoveTime, playerChaseDistance);
+        wanderState.Initialize(this, character, playerObj, transform, wanderMoveSpeed, wanderMoveTime, wanderPauseTime, playerChaseDistance);
         chaseState.Initialize(this, character, playerObj, transform, playerChaseDistance, chaseSpeed, attackProximity);
         attackState.Initialize(this, character, playerObj, transform, attackSpeed, attackDuration);
         pauseState.Initialize(this, character, playerObj, transform, attackRecoveryDuration);
