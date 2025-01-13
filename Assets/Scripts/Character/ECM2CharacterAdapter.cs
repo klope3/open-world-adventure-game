@@ -7,13 +7,21 @@ using ECM2;
 public class ECM2CharacterAdapter : MonoBehaviour
 {
     [SerializeField] private Character character;
-    [SerializeField] private DirectionalInputProvider inputProvider;
+    //[SerializeField] private DirectionalInputProvider inputProvider;
     [SerializeField] public bool canMove = true;
+    //private InputActions inputActions;
     public System.Action LeftGround; //ECM2 does not seem to provide this event, but we can use some of its methods to easily implement it
+
+    private void Awake()
+    {
+        //inputActions = new InputActions();
+        //inputActions.Player.Enable();
+    }
 
     private void Update()
     {
-        Vector2 inputVec = inputProvider.GetInput();
+        Vector2 inputVec = InputActionsProvider.InputActions.Player.Move.ReadValue<Vector2>();
+        //Vector2 inputVec = inputProvider.GetInput();
         Vector3 moveVec = new Vector3(inputVec.x, 0, inputVec.y);
         moveVec = moveVec.relativeTo(character.cameraTransform);
 
@@ -33,6 +41,7 @@ public class ECM2CharacterAdapter : MonoBehaviour
 
     public Vector3 GetMovementInput()
     {
-        return inputProvider.GetInput();
+        return InputActionsProvider.InputActions.Player.Move.ReadValue<Vector2>();
+        //return inputProvider.GetInput();
     }
 }

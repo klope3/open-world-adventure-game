@@ -930,9 +930,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c9f38aadb3bda4448cea3538a9bf0a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  referenceRt: {fileID: 731688790}
-  multiplier: 0.025
-  snapBack: 1
 --- !u!114 &119687912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2895,9 +2892,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c9f38aadb3bda4448cea3538a9bf0a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  referenceRt: {fileID: 1053261609}
-  multiplier: 0.025
-  snapBack: 1
 --- !u!114 &810398338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4411,7 +4405,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 1185212331}
-  inputProvider: {fileID: 24122764}
   canMove: 1
 --- !u!114 &1185212338
 MonoBehaviour:
@@ -4426,7 +4419,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   testTransform: {fileID: 0}
-  inputProvider: {fileID: 889490241}
   cameraFollow: {fileID: 876356}
   targetableDetector: {fileID: 1266175055}
   sensitivity: 100

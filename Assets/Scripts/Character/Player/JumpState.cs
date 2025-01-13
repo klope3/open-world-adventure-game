@@ -13,10 +13,10 @@ public class JumpState : PlayerState
 
     public override void UpdateState()
     {
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            character.StopJumping();
-        }
+        //if (Input.GetKeyUp(KeyCode.Space))
+        //{
+        //    character.StopJumping();
+        //}
     }
 
     //exit from releasing jump, or landing

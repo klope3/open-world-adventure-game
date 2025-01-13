@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class CameraController : MonoBehaviour
 {
     [SerializeField] private Transform testTransform;
-    [SerializeField] private DirectionalInputProvider inputProvider;
+    //[SerializeField] private DirectionalInputProvider inputProvider;
     [SerializeField] private Transform cameraFollow;
     [SerializeField] private GameObjectDetector targetableDetector;
     [SerializeField] private float sensitivity;
@@ -25,6 +25,7 @@ public class CameraController : MonoBehaviour
     private void Awake()
     {
         targetablePoints = new List<TargetablePoint>();
+        InputActionsProvider.InputActions.Player.ZTarget.started += ZTarget_started;
     }
 
     private void OnEnable()
@@ -37,6 +38,29 @@ public class CameraController : MonoBehaviour
     {
         targetableDetector.OnObjectEntered -= TargetableDetector_OnObjectEntered;
         targetableDetector.OnObjectExited -= TargetableDetector_OnObjectExited;
+    }
+
+    private void ZTarget_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        bool prevIsTargeting = isTargeting;
+        isTargeting = !isTargeting;
+
+        if (!prevIsTargeting && isTargeting)
+        {
+            targetingAngles = cameraFollow.eulerAngles;
+            OnTargetingStart?.Invoke();
+        }
+        if (prevIsTargeting && !isTargeting) OnTargetingEnd?.Invoke();
+
+        if (!targetedPoint)
+        {
+            targetedPoint = pointToBeTargeted;
+        }
+        else
+        {
+            if (angles.x > 180) angles.x -= 360;
+            targetedPoint = null;
+        }
     }
 
     private void TargetableDetector_OnObjectExited(GameObject obj)
@@ -84,7 +108,7 @@ public class CameraController : MonoBehaviour
     private void Update()
     {
         UpdateTargetables();
-        TargetingInput();
+        //TargetingInput();
 
         if (isTargeting)
         {
@@ -100,7 +124,7 @@ public class CameraController : MonoBehaviour
         }
 
         Vector3 initialAngles = new Vector3(angles.x, angles.y, angles.z);
-        Vector2 inputVec = inputProvider.GetInput();
+        Vector2 inputVec = InputActionsProvider.InputActions.Player.RotateCamera.ReadValue<Vector2>();
         angles.x += inputVec.y * sensitivity * Time.deltaTime;
         angles.y += inputVec.x * sensitivity * Time.deltaTime;
 
@@ -110,32 +134,10 @@ public class CameraController : MonoBehaviour
         cameraFollow.eulerAngles = angles;
     }
 
-    private void TargetingInput()
-    {
-        //temp input
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            bool prevIsTargeting = isTargeting;
-            isTargeting = !isTargeting;
-
-            if (!prevIsTargeting && isTargeting)
-            {
-                targetingAngles = cameraFollow.eulerAngles;
-                OnTargetingStart?.Invoke();
-            }
-            if (prevIsTargeting && !isTargeting) OnTargetingEnd?.Invoke();
-
-            if (!targetedPoint)
-            {
-                targetedPoint = pointToBeTargeted;
-            }
-            else
-            {
-                if (angles.x > 180) angles.x -= 360;
-                targetedPoint = null;
-            }
-        }
-    }
+    //private void TargetingInput()
+    //{
+    //
+    //}
 
     private void UpdateTargetables()
     {
