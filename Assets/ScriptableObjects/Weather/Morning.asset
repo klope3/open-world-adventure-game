@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfb90cf4da6d09f438ec05ada47eb32c, type: 3}
+  m_Name: Morning
+  m_EditorClassIdentifier: 
+  horizonColor: {r: 0.6603774, g: 0.5373214, b: 0.51334995, a: 1}
+  zenithColor: {r: 0.39607844, g: 0.40602684, b: 0.6313726, a: 0}
+  ambientLightColor: {r: 0.23529412, g: 0.1222631, b: 0.09019609, a: 0}
+  sunColor: {r: 0.3773585, g: 0.31605554, b: 0.28978285, a: 0}
+  sunInnerColor: {r: 1, g: 0.8545585, b: 0.6264151, a: 1}
+  sunOuterColor: {r: 1, g: 0.6421679, b: 0.3339622, a: 1}
+  cloudColor: {r: 0.34346744, g: 0.35100967, b: 0.4528302, a: 0.3764706}
+  fogColor: {r: 0.46226418, g: 0.41516557, b: 0.36806694, a: 0}
+  fogDensity: 0.005
