@@ -20,7 +20,7 @@ public class ECM2CharacterAdapter : MonoBehaviour
 
     private void Update()
     {
-        Vector2 inputVec = InputActionsProvider.InputActions.Player.Move.ReadValue<Vector2>();
+        Vector2 inputVec = InputActionsProvider.InputActions.Player.PrimaryDirectionalAxis.ReadValue<Vector2>();
         //Vector2 inputVec = inputProvider.GetInput();
         Vector3 moveVec = new Vector3(inputVec.x, 0, inputVec.y);
         moveVec = moveVec.relativeTo(character.cameraTransform);
@@ -41,7 +41,8 @@ public class ECM2CharacterAdapter : MonoBehaviour
 
     public Vector3 GetMovementInput()
     {
-        return InputActionsProvider.InputActions.Player.Move.ReadValue<Vector2>();
+        if (!canMove) return Vector3.zero;
+        return InputActionsProvider.InputActions.Player.PrimaryDirectionalAxis.ReadValue<Vector2>();
         //return inputProvider.GetInput();
     }
 }

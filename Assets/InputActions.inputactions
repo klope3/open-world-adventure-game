@@ -6,7 +6,7 @@
             "id": "32bd98b0-67a6-4510-9481-b61d4fbdde7a",
             "actions": [
                 {
-                    "name": "Jump",
+                    "name": "AButton",
                     "type": "Button",
                     "id": "6e6c868d-dc20-4774-be9c-e912e84797a1",
                     "expectedControlType": "Button",
@@ -15,7 +15,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Move",
+                    "name": "PrimaryDirectionalAxis",
                     "type": "Value",
                     "id": "3d39919a-d2ef-4c7f-b1fb-3aae880cb095",
                     "expectedControlType": "Vector2",
@@ -24,7 +24,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "RotateCamera",
+                    "name": "SecondaryDirectionalAxis",
                     "type": "Value",
                     "id": "f2ee8e37-c65d-4f73-bbc8-1c9dff3845e3",
                     "expectedControlType": "Vector2",
@@ -33,7 +33,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Attack",
+                    "name": "BButton",
                     "type": "Button",
                     "id": "2eede954-1d16-4a2d-aaf2-f6a1fa252be3",
                     "expectedControlType": "Button",
@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "InteractButton",
+                    "type": "Button",
+                    "id": "836d12ad-fa09-4d85-80ad-dd15a9ec03e9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -59,7 +68,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "KBM",
-                    "action": "Jump",
+                    "action": "AButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -70,7 +79,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Jump",
+                    "action": "AButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -81,7 +90,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "PrimaryDirectionalAxis",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -92,7 +101,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "KBM",
-                    "action": "Move",
+                    "action": "PrimaryDirectionalAxis",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -103,7 +112,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "KBM",
-                    "action": "Move",
+                    "action": "PrimaryDirectionalAxis",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -114,7 +123,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "KBM",
-                    "action": "Move",
+                    "action": "PrimaryDirectionalAxis",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -125,7 +134,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "KBM",
-                    "action": "Move",
+                    "action": "PrimaryDirectionalAxis",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -136,7 +145,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Move",
+                    "action": "PrimaryDirectionalAxis",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -147,7 +156,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "RotateCamera",
+                    "action": "SecondaryDirectionalAxis",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -158,7 +167,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "KBM",
-                    "action": "RotateCamera",
+                    "action": "SecondaryDirectionalAxis",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -169,7 +178,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "KBM",
-                    "action": "RotateCamera",
+                    "action": "SecondaryDirectionalAxis",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -180,7 +189,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "KBM",
-                    "action": "RotateCamera",
+                    "action": "SecondaryDirectionalAxis",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -191,7 +200,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "KBM",
-                    "action": "RotateCamera",
+                    "action": "SecondaryDirectionalAxis",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -202,7 +211,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "RotateCamera",
+                    "action": "SecondaryDirectionalAxis",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -213,7 +222,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "KBM",
-                    "action": "Attack",
+                    "action": "BButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -224,7 +233,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Attack",
+                    "action": "BButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -247,6 +256,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "ZTarget",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d977cf0e-6542-43a7-aac8-98cb67621a55",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KBM",
+                    "action": "InteractButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fee00090-943e-49c5-b9c2-68219ccb13b7",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "InteractButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

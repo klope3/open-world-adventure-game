@@ -9,6 +9,9 @@ public class PlayerStateManager : StateManager<PlayerState>
     [SerializeField] private ECM2CharacterAdapter characterAdapter;
     [SerializeField] private Character character;
     [SerializeField] private Collider meleeZone;
+    [SerializeField] private InteractionZone interactionZone;
+    [SerializeField] private DialogueManager dialogueManager;
+    [SerializeField] private CameraController cameraController;
     [SerializeField] private float meleeZoneActiveTime;
     [SerializeField] private float attacksPerSecond;
     [SerializeField] private float stopMovementTime;
@@ -33,11 +36,13 @@ public class PlayerStateManager : StateManager<PlayerState>
         AttackState attackState = new AttackState();
         JumpState jumpState = new JumpState();
         FallingState fallingState = new FallingState();
+        DialogueState dialogueState = new DialogueState();
 
-        idleState.Initialize(this, character, characterAdapter);
+        idleState.Initialize(this, character, characterAdapter, interactionZone, cameraController);
         attackState.Initialize(this, character, characterAdapter, meleeZone, 1 / attacksPerSecond);
         jumpState.Initialize(this, character, characterAdapter);
         fallingState.Initialize(this, character, characterAdapter);
+        dialogueState.Initialize(this, character, characterAdapter, dialogueManager);
 
         attackState.OnEnter += AttackState_OnEnter;
         fallingState.OnEnter += FallingState_OnEnter;
@@ -46,6 +51,7 @@ public class PlayerStateManager : StateManager<PlayerState>
         states.Add("Attack", attackState);
         states.Add("Jump", jumpState);
         states.Add("Falling", fallingState);
+        states.Add("Dialogue", dialogueState);
         return states;
     }
 
@@ -62,5 +68,10 @@ public class PlayerStateManager : StateManager<PlayerState>
     private void CharacterAdapter_LeftGround()
     {
         SwitchState("Falling");
+    }
+
+    public bool IsInState(PlayerState state)
+    {
+        return CurrentState == state;
     }
 }

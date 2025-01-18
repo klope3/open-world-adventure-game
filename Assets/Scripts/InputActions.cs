@@ -28,7 +28,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             ""id"": ""32bd98b0-67a6-4510-9481-b61d4fbdde7a"",
             ""actions"": [
                 {
-                    ""name"": ""Jump"",
+                    ""name"": ""AButton"",
                     ""type"": ""Button"",
                     ""id"": ""6e6c868d-dc20-4774-be9c-e912e84797a1"",
                     ""expectedControlType"": ""Button"",
@@ -37,7 +37,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Move"",
+                    ""name"": ""PrimaryDirectionalAxis"",
                     ""type"": ""Value"",
                     ""id"": ""3d39919a-d2ef-4c7f-b1fb-3aae880cb095"",
                     ""expectedControlType"": ""Vector2"",
@@ -46,7 +46,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""RotateCamera"",
+                    ""name"": ""SecondaryDirectionalAxis"",
                     ""type"": ""Value"",
                     ""id"": ""f2ee8e37-c65d-4f73-bbc8-1c9dff3845e3"",
                     ""expectedControlType"": ""Vector2"",
@@ -55,7 +55,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Attack"",
+                    ""name"": ""BButton"",
                     ""type"": ""Button"",
                     ""id"": ""2eede954-1d16-4a2d-aaf2-f6a1fa252be3"",
                     ""expectedControlType"": ""Button"",
@@ -71,6 +71,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""InteractButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""836d12ad-fa09-4d85-80ad-dd15a9ec03e9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -81,7 +90,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KBM"",
-                    ""action"": ""Jump"",
+                    ""action"": ""AButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -92,7 +101,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""Jump"",
+                    ""action"": ""AButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -103,7 +112,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""PrimaryDirectionalAxis"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -114,7 +123,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KBM"",
-                    ""action"": ""Move"",
+                    ""action"": ""PrimaryDirectionalAxis"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -125,7 +134,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KBM"",
-                    ""action"": ""Move"",
+                    ""action"": ""PrimaryDirectionalAxis"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -136,7 +145,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KBM"",
-                    ""action"": ""Move"",
+                    ""action"": ""PrimaryDirectionalAxis"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -147,7 +156,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KBM"",
-                    ""action"": ""Move"",
+                    ""action"": ""PrimaryDirectionalAxis"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -158,7 +167,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""Move"",
+                    ""action"": ""PrimaryDirectionalAxis"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -169,7 +178,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""RotateCamera"",
+                    ""action"": ""SecondaryDirectionalAxis"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -180,7 +189,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KBM"",
-                    ""action"": ""RotateCamera"",
+                    ""action"": ""SecondaryDirectionalAxis"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -191,7 +200,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KBM"",
-                    ""action"": ""RotateCamera"",
+                    ""action"": ""SecondaryDirectionalAxis"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -202,7 +211,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KBM"",
-                    ""action"": ""RotateCamera"",
+                    ""action"": ""SecondaryDirectionalAxis"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -213,7 +222,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KBM"",
-                    ""action"": ""RotateCamera"",
+                    ""action"": ""SecondaryDirectionalAxis"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -224,7 +233,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""RotateCamera"",
+                    ""action"": ""SecondaryDirectionalAxis"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -235,7 +244,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KBM"",
-                    ""action"": ""Attack"",
+                    ""action"": ""BButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -246,7 +255,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""Attack"",
+                    ""action"": ""BButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -269,6 +278,28 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""ZTarget"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d977cf0e-6542-43a7-aac8-98cb67621a55"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KBM"",
+                    ""action"": ""InteractButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fee00090-943e-49c5-b9c2-68219ccb13b7"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""InteractButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -302,11 +333,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
 }");
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
-        m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
-        m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
-        m_Player_RotateCamera = m_Player.FindAction("RotateCamera", throwIfNotFound: true);
-        m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
+        m_Player_AButton = m_Player.FindAction("AButton", throwIfNotFound: true);
+        m_Player_PrimaryDirectionalAxis = m_Player.FindAction("PrimaryDirectionalAxis", throwIfNotFound: true);
+        m_Player_SecondaryDirectionalAxis = m_Player.FindAction("SecondaryDirectionalAxis", throwIfNotFound: true);
+        m_Player_BButton = m_Player.FindAction("BButton", throwIfNotFound: true);
         m_Player_ZTarget = m_Player.FindAction("ZTarget", throwIfNotFound: true);
+        m_Player_InteractButton = m_Player.FindAction("InteractButton", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -368,20 +400,22 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     // Player
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
-    private readonly InputAction m_Player_Jump;
-    private readonly InputAction m_Player_Move;
-    private readonly InputAction m_Player_RotateCamera;
-    private readonly InputAction m_Player_Attack;
+    private readonly InputAction m_Player_AButton;
+    private readonly InputAction m_Player_PrimaryDirectionalAxis;
+    private readonly InputAction m_Player_SecondaryDirectionalAxis;
+    private readonly InputAction m_Player_BButton;
     private readonly InputAction m_Player_ZTarget;
+    private readonly InputAction m_Player_InteractButton;
     public struct PlayerActions
     {
         private @InputActions m_Wrapper;
         public PlayerActions(@InputActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Jump => m_Wrapper.m_Player_Jump;
-        public InputAction @Move => m_Wrapper.m_Player_Move;
-        public InputAction @RotateCamera => m_Wrapper.m_Player_RotateCamera;
-        public InputAction @Attack => m_Wrapper.m_Player_Attack;
+        public InputAction @AButton => m_Wrapper.m_Player_AButton;
+        public InputAction @PrimaryDirectionalAxis => m_Wrapper.m_Player_PrimaryDirectionalAxis;
+        public InputAction @SecondaryDirectionalAxis => m_Wrapper.m_Player_SecondaryDirectionalAxis;
+        public InputAction @BButton => m_Wrapper.m_Player_BButton;
         public InputAction @ZTarget => m_Wrapper.m_Player_ZTarget;
+        public InputAction @InteractButton => m_Wrapper.m_Player_InteractButton;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -391,40 +425,46 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
-            @Jump.started += instance.OnJump;
-            @Jump.performed += instance.OnJump;
-            @Jump.canceled += instance.OnJump;
-            @Move.started += instance.OnMove;
-            @Move.performed += instance.OnMove;
-            @Move.canceled += instance.OnMove;
-            @RotateCamera.started += instance.OnRotateCamera;
-            @RotateCamera.performed += instance.OnRotateCamera;
-            @RotateCamera.canceled += instance.OnRotateCamera;
-            @Attack.started += instance.OnAttack;
-            @Attack.performed += instance.OnAttack;
-            @Attack.canceled += instance.OnAttack;
+            @AButton.started += instance.OnAButton;
+            @AButton.performed += instance.OnAButton;
+            @AButton.canceled += instance.OnAButton;
+            @PrimaryDirectionalAxis.started += instance.OnPrimaryDirectionalAxis;
+            @PrimaryDirectionalAxis.performed += instance.OnPrimaryDirectionalAxis;
+            @PrimaryDirectionalAxis.canceled += instance.OnPrimaryDirectionalAxis;
+            @SecondaryDirectionalAxis.started += instance.OnSecondaryDirectionalAxis;
+            @SecondaryDirectionalAxis.performed += instance.OnSecondaryDirectionalAxis;
+            @SecondaryDirectionalAxis.canceled += instance.OnSecondaryDirectionalAxis;
+            @BButton.started += instance.OnBButton;
+            @BButton.performed += instance.OnBButton;
+            @BButton.canceled += instance.OnBButton;
             @ZTarget.started += instance.OnZTarget;
             @ZTarget.performed += instance.OnZTarget;
             @ZTarget.canceled += instance.OnZTarget;
+            @InteractButton.started += instance.OnInteractButton;
+            @InteractButton.performed += instance.OnInteractButton;
+            @InteractButton.canceled += instance.OnInteractButton;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
         {
-            @Jump.started -= instance.OnJump;
-            @Jump.performed -= instance.OnJump;
-            @Jump.canceled -= instance.OnJump;
-            @Move.started -= instance.OnMove;
-            @Move.performed -= instance.OnMove;
-            @Move.canceled -= instance.OnMove;
-            @RotateCamera.started -= instance.OnRotateCamera;
-            @RotateCamera.performed -= instance.OnRotateCamera;
-            @RotateCamera.canceled -= instance.OnRotateCamera;
-            @Attack.started -= instance.OnAttack;
-            @Attack.performed -= instance.OnAttack;
-            @Attack.canceled -= instance.OnAttack;
+            @AButton.started -= instance.OnAButton;
+            @AButton.performed -= instance.OnAButton;
+            @AButton.canceled -= instance.OnAButton;
+            @PrimaryDirectionalAxis.started -= instance.OnPrimaryDirectionalAxis;
+            @PrimaryDirectionalAxis.performed -= instance.OnPrimaryDirectionalAxis;
+            @PrimaryDirectionalAxis.canceled -= instance.OnPrimaryDirectionalAxis;
+            @SecondaryDirectionalAxis.started -= instance.OnSecondaryDirectionalAxis;
+            @SecondaryDirectionalAxis.performed -= instance.OnSecondaryDirectionalAxis;
+            @SecondaryDirectionalAxis.canceled -= instance.OnSecondaryDirectionalAxis;
+            @BButton.started -= instance.OnBButton;
+            @BButton.performed -= instance.OnBButton;
+            @BButton.canceled -= instance.OnBButton;
             @ZTarget.started -= instance.OnZTarget;
             @ZTarget.performed -= instance.OnZTarget;
             @ZTarget.canceled -= instance.OnZTarget;
+            @InteractButton.started -= instance.OnInteractButton;
+            @InteractButton.performed -= instance.OnInteractButton;
+            @InteractButton.canceled -= instance.OnInteractButton;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -462,10 +502,11 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     }
     public interface IPlayerActions
     {
-        void OnJump(InputAction.CallbackContext context);
-        void OnMove(InputAction.CallbackContext context);
-        void OnRotateCamera(InputAction.CallbackContext context);
-        void OnAttack(InputAction.CallbackContext context);
+        void OnAButton(InputAction.CallbackContext context);
+        void OnPrimaryDirectionalAxis(InputAction.CallbackContext context);
+        void OnSecondaryDirectionalAxis(InputAction.CallbackContext context);
+        void OnBButton(InputAction.CallbackContext context);
         void OnZTarget(InputAction.CallbackContext context);
+        void OnInteractButton(InputAction.CallbackContext context);
     }
 }

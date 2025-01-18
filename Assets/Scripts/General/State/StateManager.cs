@@ -8,6 +8,13 @@ public abstract class StateManager<TState> : MonoBehaviour where TState : State
     public Dictionary<string, TState> registeredStates { get; private set; }
     private TState currentState;
     public float TimeInState { get; private set; }
+    public TState CurrentState
+    {
+        get
+        {
+            return currentState;
+        }
+    }
 
     private void Awake()
     {

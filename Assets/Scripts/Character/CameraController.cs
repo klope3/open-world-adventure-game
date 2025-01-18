@@ -25,7 +25,6 @@ public class CameraController : MonoBehaviour
     private void Awake()
     {
         targetablePoints = new List<TargetablePoint>();
-        InputActionsProvider.InputActions.Player.ZTarget.started += ZTarget_started;
     }
 
     private void OnEnable()
@@ -40,7 +39,7 @@ public class CameraController : MonoBehaviour
         targetableDetector.OnObjectExited -= TargetableDetector_OnObjectExited;
     }
 
-    private void ZTarget_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    public void ToggleTargeting()
     {
         bool prevIsTargeting = isTargeting;
         isTargeting = !isTargeting;
@@ -124,7 +123,7 @@ public class CameraController : MonoBehaviour
         }
 
         Vector3 initialAngles = new Vector3(angles.x, angles.y, angles.z);
-        Vector2 inputVec = InputActionsProvider.InputActions.Player.RotateCamera.ReadValue<Vector2>();
+        Vector2 inputVec = InputActionsProvider.InputActions.Player.SecondaryDirectionalAxis.ReadValue<Vector2>();
         angles.x += inputVec.y * sensitivity * Time.deltaTime;
         angles.y += inputVec.x * sensitivity * Time.deltaTime;
 
