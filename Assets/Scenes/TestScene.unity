@@ -5638,11 +5638,7 @@ MonoBehaviour:
   sunInnerMeshRenderer: {fileID: 1636640600}
   sunOuterMeshRenderer: {fileID: 902990542}
   sunMoonParent: {fileID: 522821722}
-  morningDuration: 60
-  dayDuration: 120
-  eveningDuration: 60
-  nightDuration: 120
-  timeMultiplier: 1
+  timeMultiplier: 0.00278
 --- !u!1001 &1283297286
 PrefabInstance:
   m_ObjectHideFlags: 0

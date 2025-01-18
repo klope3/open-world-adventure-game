@@ -19,24 +19,26 @@ public class WeatherManager : MonoBehaviour
 
     [SerializeField] private Transform sunMoonParent;
 
-    [SerializeField] private float morningDuration;
-    [SerializeField] private float dayDuration;
-    [SerializeField] private float eveningDuration;
-    [SerializeField] private float nightDuration;
-    [SerializeField] private float timeMultiplier = 1;
+    [SerializeField] private float timeMultiplier = 0.00278f;
     [ShowInInspector, DisplayAsString] private float timer;
     [ShowInInspector, DisplayAsString] public TimeOfDay CurrentTimeOfDay
     {
         get
         {
-            CalculateValues(out float morningEnd, out float dayMidpoint, out float dayEnd, out float eveningEnd, out float nightMidpoint, out float nightEnd);
-            if (timer >= 0 && timer < morningEnd) return TimeOfDay.Morning;
-            if (timer >= morningEnd && timer < dayEnd) return TimeOfDay.Day;
-            if (timer >= dayEnd && timer < eveningEnd) return TimeOfDay.Evening;
+            if (timer >= MORNING_START && timer < DAY_START) return TimeOfDay.Morning;
+            if (timer >= DAY_START && timer < EVENING_START) return TimeOfDay.Day;
+            if (timer >= EVENING_START && timer < NIGHT_START) return TimeOfDay.Evening;
             return TimeOfDay.Night;
         }
     }
 
+    private readonly float MORNING_START = 0;
+    private readonly float DAY_START = 0.0625f;
+    private readonly float EVENING_START = 0.4375f;
+    private readonly float NIGHT_START = 0.5f;
+
+    private readonly float FULL_NIGHT_COLORS_START = 0.625f; //environment will be 100% night-colored at this time
+    private readonly float FULL_NIGHT_COLORS_END = 0.875f; //environment will finish being 100% night-colored at this time; during the night the colors remain consistent; start lerping toward day colors
 
     public enum TimeOfDay
     {
@@ -49,62 +51,49 @@ public class WeatherManager : MonoBehaviour
     private void Update()
     {
         timer += Time.deltaTime * timeMultiplier;
-        float nightEnd = morningDuration + dayDuration + eveningDuration + nightDuration;
-        if (timer > nightEnd) timer = 0;
+        if (timer > 1) timer = 0;
 
         PrepareLerp(out float lerpStartValue, out float lerpEndValue, out EnvironmentSettingsSO lerpStartColors, out EnvironmentSettingsSO lerpEndColors);
         ApplyLerp(lerpStartValue, lerpEndValue, lerpStartColors, lerpEndColors);
         RotateSunMoon();
     }
 
-    private void CalculateValues(out float morningEnd, out float dayMidpoint, out float dayEnd, out float eveningEnd, out float nightMidpoint, out float nightEnd)
-    {
-        morningEnd = morningDuration;
-        dayMidpoint = morningEnd + dayDuration / 2;
-        dayEnd = dayMidpoint + dayDuration / 2;
-        eveningEnd = dayEnd + eveningDuration;
-        nightMidpoint = eveningEnd + nightDuration / 2;
-        nightEnd = nightMidpoint + nightDuration / 2;
-    }
-
     private void PrepareLerp(out float lerpStartValue, out float lerpEndValue, out EnvironmentSettingsSO lerpStartColors, out EnvironmentSettingsSO lerpEndColors)
     {
-        CalculateValues(out float morningEnd, out float dayMidpoint, out float dayEnd, out float eveningEnd, out float nightMidpoint, out float nightEnd);
-
-        if (timer >= 0 && timer < morningEnd)
+        if (CurrentTimeOfDay == TimeOfDay.Morning)
         {
-            lerpStartValue = 0;
-            lerpEndValue = morningEnd;
+            lerpStartValue = MORNING_START;
+            lerpEndValue = DAY_START;
             lerpStartColors = morningColors;
             lerpEndColors = dayColors;
-        } else if (timer >= morningEnd && timer < dayMidpoint)
+        } else if (CurrentTimeOfDay == TimeOfDay.Day)
         {
-            lerpStartValue = morningEnd;
-            lerpEndValue = dayMidpoint;
+            lerpStartValue = 1;
+            lerpEndValue = 1;
             lerpStartColors = dayColors;
-            lerpEndColors = dayColors;
-        } else if (timer >= dayMidpoint && timer < dayEnd)
+            lerpEndColors = dayColors; //essentially no color change during day
+        } else if (CurrentTimeOfDay == TimeOfDay.Evening)
         {
-            lerpStartValue = dayMidpoint;
-            lerpEndValue = dayEnd;
+            lerpStartValue = EVENING_START;
+            lerpEndValue = NIGHT_START;
             lerpStartColors = dayColors;
             lerpEndColors = eveningColors;
-        } else if (timer >= dayEnd && timer < eveningEnd)
+        } else if (timer >= NIGHT_START && timer < FULL_NIGHT_COLORS_START)
         {
-            lerpStartValue = dayEnd;
-            lerpEndValue = eveningEnd;
+            lerpStartValue = NIGHT_START;
+            lerpEndValue = FULL_NIGHT_COLORS_START;
             lerpStartColors = eveningColors;
             lerpEndColors = nightColors;
-        } else if (timer >= eveningEnd && timer < nightMidpoint)
+        } else if (timer >= FULL_NIGHT_COLORS_START && timer < FULL_NIGHT_COLORS_END)
         {
-            lerpStartValue = eveningEnd;
-            lerpEndValue = nightMidpoint;
+            lerpStartValue = 1;
+            lerpEndValue = 1;
             lerpStartColors = nightColors;
-            lerpEndColors = nightColors;
+            lerpEndColors = nightColors; //essentially no color change during night
         } else
         {
-            lerpStartValue = nightMidpoint;
-            lerpEndValue = nightEnd;
+            lerpStartValue = FULL_NIGHT_COLORS_END;
+            lerpEndValue = 1;
             lerpStartColors = nightColors;
             lerpEndColors = morningColors;
         }
@@ -126,32 +115,30 @@ public class WeatherManager : MonoBehaviour
 
     private void RotateSunMoon()
     {
-        float nightEnd = morningDuration + dayDuration + eveningDuration + nightDuration;
-        float angleX = 360 / nightEnd * timer * -1;
-        sunMoonParent.eulerAngles = new Vector3(angleX, 0, 0);
+        sunMoonParent.eulerAngles = new Vector3(timer * -360, 0, 0);
     }
 
     [Button]
     public void SetTime(TimeOfDay timeOfDay)
     {
-        CalculateValues(out float morningEnd, out float dayMidpoint, out float dayEnd, out float eveningEnd, out float nightMidpoint, out float nightEnd);
         if (timeOfDay == TimeOfDay.Morning)
         {
-            timer = 0;
+            timer = MORNING_START;
         }
         if (timeOfDay == TimeOfDay.Day)
         {
-            timer = morningEnd;
+            timer = DAY_START;
         }
         if (timeOfDay == TimeOfDay.Evening)
         {
-            timer = dayEnd;
+            timer = EVENING_START;
         }
         if (timeOfDay == TimeOfDay.Night)
         {
-            timer = eveningEnd;
+            timer = NIGHT_START;
         }
         PrepareLerp(out float lerpStartValue, out float lerpEndValue, out EnvironmentSettingsSO lerpStartColors, out EnvironmentSettingsSO lerpEndColors);
         ApplyLerp(lerpStartValue, lerpEndValue, lerpStartColors, lerpEndColors);
+        RotateSunMoon();
     }
 }
