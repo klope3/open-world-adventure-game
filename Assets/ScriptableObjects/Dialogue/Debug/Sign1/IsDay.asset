@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0933c0aed28c6cd47b4d4c0ce822478b, type: 3}
-  m_Name: Node2
+  m_Script: {fileID: 11500000, guid: 4ad9fc21f6190464e96586a8daca8dfb, type: 3}
+  m_Name: IsDay
   m_EditorClassIdentifier: 
-  textAsset: {fileID: 4900000, guid: efa70701b845df649870e2d8123d614d, type: 3}
-  nextNode: {fileID: 11400000, guid: fb892e2c9c73b0243b31977a303d5acb, type: 2}
+  requiredTime: 1

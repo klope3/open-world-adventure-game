@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 [CreateAssetMenu(fileName = "DialogueNodeSO", menuName = "Scriptable Objects/DialogueNodeSO")]
-public class DialogueNodeSO : ScriptableObject
+public class DialogueNodeSO : SerializedScriptableObject
 {
     [SerializeField] private TextAsset textAsset;
-    [SerializeField] private DialogueNodeSO nextNode;
+    [SerializeField] private DialogueNodeWithCondition[] nextNodeOptions;
 
     public string Text
     {
@@ -15,11 +16,16 @@ public class DialogueNodeSO : ScriptableObject
             return textAsset.text;
         }
     }
-    public DialogueNodeSO NextNode
+
+    public DialogueNodeSO ChooseNextNode()
     {
-        get
+        if (nextNodeOptions == null || nextNodeOptions.Length == 0) return null;
+
+        for (int i = 0; i < nextNodeOptions.Length; i++)
         {
-            return nextNode;
+            if (nextNodeOptions[i].Condition.Evaluate()) return nextNodeOptions[i].Node;
         }
+
+        return null;
     }
 }

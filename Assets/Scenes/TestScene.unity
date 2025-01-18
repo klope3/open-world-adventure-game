@@ -5576,7 +5576,7 @@ GameObject:
   - component: {fileID: 1268012136}
   m_Layer: 0
   m_Name: Environment
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5642,6 +5642,7 @@ MonoBehaviour:
   dayDuration: 120
   eveningDuration: 60
   nightDuration: 120
+  timeMultiplier: 1
 --- !u!1001 &1283297286
 PrefabInstance:
   m_ObjectHideFlags: 0

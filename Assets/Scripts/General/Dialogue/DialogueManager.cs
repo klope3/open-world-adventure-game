@@ -21,12 +21,12 @@ public class DialogueManager : MonoBehaviour
     {
         if (dialogueBox.FinishedPrinting())
         {
-            if (currentNode.NextNode == null)
+            if (currentNode.ChooseNextNode() == null)
             {
                 StopDialogue();
             } else
             {
-                currentNode = currentNode.NextNode;
+                currentNode = currentNode.ChooseNextNode();
                 dialogueBox.Print(currentNode.Text);
             }
         }
@@ -41,6 +41,6 @@ public class DialogueManager : MonoBehaviour
 
     public bool AnyFurtherNodes()
     {
-        return currentNode.NextNode != null;
+        return currentNode.ChooseNextNode() != null;
     }
 }

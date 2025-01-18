@@ -23,7 +23,20 @@ public class WeatherManager : MonoBehaviour
     [SerializeField] private float dayDuration;
     [SerializeField] private float eveningDuration;
     [SerializeField] private float nightDuration;
-    private float timer;
+    [SerializeField] private float timeMultiplier = 1;
+    [ShowInInspector, DisplayAsString] private float timer;
+    [ShowInInspector, DisplayAsString] public TimeOfDay CurrentTimeOfDay
+    {
+        get
+        {
+            CalculateValues(out float morningEnd, out float dayMidpoint, out float dayEnd, out float eveningEnd, out float nightMidpoint, out float nightEnd);
+            if (timer >= 0 && timer < morningEnd) return TimeOfDay.Morning;
+            if (timer >= morningEnd && timer < dayEnd) return TimeOfDay.Day;
+            if (timer >= dayEnd && timer < eveningEnd) return TimeOfDay.Evening;
+            return TimeOfDay.Night;
+        }
+    }
+
 
     public enum TimeOfDay
     {
@@ -35,7 +48,7 @@ public class WeatherManager : MonoBehaviour
 
     private void Update()
     {
-        timer += Time.deltaTime;
+        timer += Time.deltaTime * timeMultiplier;
         float nightEnd = morningDuration + dayDuration + eveningDuration + nightDuration;
         if (timer > nightEnd) timer = 0;
 

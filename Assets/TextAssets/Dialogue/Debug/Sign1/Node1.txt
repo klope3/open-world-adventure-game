@@ -1,1 +1,1 @@
-You found sign #1!
+You found sign #1! This is a magic sign. It knows if it's daytime or not!
