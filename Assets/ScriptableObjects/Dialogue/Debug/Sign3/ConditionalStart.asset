@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0933c0aed28c6cd47b4d4c0ce822478b, type: 3}
+  m_Name: ConditionalStart
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: bc294b960cc80884bb6752e9f45802ec, type: 2}
+    - {fileID: 11400000, guid: bd5d26ede1dfd20429785300854ff481, type: 2}
+    - {fileID: 11400000, guid: 04dc52f8b056b9646a17d436a3acf60d, type: 2}
+    - {fileID: 11400000, guid: dc501c21776dafc4e93aa5b8a9d60d5a, type: 2}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: nextNodeOptions
+      Entry: 7
+      Data: 0|DialogueNodeWithCondition[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 1|DialogueNodeWithCondition, Assembly-CSharp
+    - Name: condition
+      Entry: 10
+      Data: 0
+    - Name: node
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 2|DialogueNodeWithCondition, Assembly-CSharp
+    - Name: condition
+      Entry: 10
+      Data: 2
+    - Name: node
+      Entry: 10
+      Data: 3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  textAsset: {fileID: 0}
+  responseChoices: []
+  passthru: 1

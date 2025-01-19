@@ -8,13 +8,27 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private PlayerStateManager playerStateManager;
     [SerializeField] private WeatherManager weatherManager;
     private DialogueNodeSO currentNode;
+    private int selectedChoiceIndex;
+    public int SelectedChoiceIndex
+    {
+        get
+        {
+            return selectedChoiceIndex;
+        }
+    }
 
     public void InitiateDialogue(DialogueInitiator initiator)
     {
         currentNode = initiator.ChooseStartingNode();
-        dialogueBox.Print(currentNode.Text);
+        while (currentNode.Passthru)
+        {
+            currentNode = currentNode.ChooseNextNode();
+        }
+
+        dialogueBox.Print(currentNode.Text, currentNode.HasChoices());
         playerStateManager.SwitchState("Dialogue");
         weatherManager.enabled = false;
+        selectedChoiceIndex = 0;
     }
 
     public void TryAdvanceDialogue()
@@ -27,7 +41,7 @@ public class DialogueManager : MonoBehaviour
             } else
             {
                 currentNode = currentNode.ChooseNextNode();
-                dialogueBox.Print(currentNode.Text);
+                dialogueBox.Print(currentNode.Text, currentNode.HasChoices());
             }
         }
     }
@@ -39,8 +53,29 @@ public class DialogueManager : MonoBehaviour
         weatherManager.enabled = true;
     }
 
+    public string[] GetDialogueChoices()
+    {
+        string[] choices = { };
+        if (currentNode.ResponseChoices == null) return choices;
+        return currentNode.ResponseChoices;
+    }
+
     public bool AnyFurtherNodes()
     {
         return currentNode.ChooseNextNode() != null;
+    }
+
+    public void IncrementChoiceIndex(int increment)
+    {
+        if (!dialogueBox.FinishedPrinting()) return;
+
+        string[] choices = currentNode.ResponseChoices;
+        if (choices == null || choices.Length < 2) return;
+
+        selectedChoiceIndex += increment;
+        if (selectedChoiceIndex < 0) selectedChoiceIndex = choices.Length - 1;
+        if (selectedChoiceIndex > choices.Length - 1) selectedChoiceIndex = 0;
+
+        dialogueBox.UpdateChoiceIndicators();
     }
 }

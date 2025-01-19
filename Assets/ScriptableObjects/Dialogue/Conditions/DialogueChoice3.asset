@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ad9fc21f6190464e96586a8daca8dfb, type: 3}
-  m_Name: IsDay
+  m_Script: {fileID: 11500000, guid: f968483eefc88c848973416c39dce9ba, type: 3}
+  m_Name: DialogueChoice3
   m_EditorClassIdentifier: 
-  requiredTime: 1
+  requiredChoiceIndex: 3

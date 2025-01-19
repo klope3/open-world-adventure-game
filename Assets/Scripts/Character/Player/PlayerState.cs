@@ -14,8 +14,7 @@ public abstract class PlayerState : State
         this.stateManager = stateManager;
         this.characterAdapter = characterAdapter;
         this.character = character;
-        PostInitialize();
     }
 
-    protected abstract void PostInitialize();
+    public abstract void PostInitialize();
 }

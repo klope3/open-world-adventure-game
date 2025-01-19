@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
-public abstract class DialogueInitiator : MonoBehaviour
+public abstract class DialogueInitiator : MonoBehaviour, IInteractable
 {
     protected DialogueManager dialogueManager;
 
@@ -13,4 +14,9 @@ public abstract class DialogueInitiator : MonoBehaviour
     }
 
     public abstract DialogueNodeSO ChooseStartingNode();
+
+    public void DoInteraction()
+    {
+        dialogueManager.InitiateDialogue(this);
+    }
 }

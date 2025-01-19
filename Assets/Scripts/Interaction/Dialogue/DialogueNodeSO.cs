@@ -8,6 +8,24 @@ public class DialogueNodeSO : SerializedScriptableObject
 {
     [SerializeField] private TextAsset textAsset;
     [SerializeField] private DialogueNodeWithCondition[] nextNodeOptions;
+    [SerializeField] private string[] responseChoices;
+    [SerializeField, Tooltip("If true, the DialogueManager will NOT print this node and will instead use its ChooseNextNode() method to proceed immediately. Useful for conditional dialogue beginnings.")] 
+    private bool passthru;
+    
+    public string[] ResponseChoices
+    {
+        get
+        {
+            return responseChoices;
+        }
+    }
+    public bool Passthru
+    {
+        get
+        {
+            return passthru;
+        }
+    }
 
     public string Text
     {
@@ -27,5 +45,11 @@ public class DialogueNodeSO : SerializedScriptableObject
         }
 
         return null;
+    }
+
+    public bool HasChoices()
+    {
+        if (responseChoices == null) return false;
+        return responseChoices.Length > 0;
     }
 }

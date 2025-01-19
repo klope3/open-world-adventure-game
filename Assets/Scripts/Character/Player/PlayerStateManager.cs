@@ -11,7 +11,9 @@ public class PlayerStateManager : StateManager<PlayerState>
     [SerializeField] private Collider meleeZone;
     [SerializeField] private InteractionZone interactionZone;
     [SerializeField] private DialogueManager dialogueManager;
+    [SerializeField] private DialogueBox dialogueBox;
     [SerializeField] private CameraController cameraController;
+    [SerializeField] private InputActionsEvents inputActionsEvents;
     [SerializeField] private float meleeZoneActiveTime;
     [SerializeField] private float attacksPerSecond;
     [SerializeField] private float stopMovementTime;
@@ -42,7 +44,13 @@ public class PlayerStateManager : StateManager<PlayerState>
         attackState.Initialize(this, character, characterAdapter, meleeZone, 1 / attacksPerSecond);
         jumpState.Initialize(this, character, characterAdapter);
         fallingState.Initialize(this, character, characterAdapter);
-        dialogueState.Initialize(this, character, characterAdapter, dialogueManager);
+        dialogueState.Initialize(this, character, characterAdapter, dialogueManager, dialogueBox, inputActionsEvents);
+
+        idleState.PostInitialize();
+        attackState.PostInitialize();
+        jumpState.PostInitialize();
+        fallingState.PostInitialize();
+        dialogueState.PostInitialize();
 
         attackState.OnEnter += AttackState_OnEnter;
         fallingState.OnEnter += FallingState_OnEnter;

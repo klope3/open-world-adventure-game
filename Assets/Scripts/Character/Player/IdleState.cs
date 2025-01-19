@@ -44,7 +44,7 @@ public class IdleState : PlayerState
         this.cameraController = cameraController;
     }
 
-    protected override void PostInitialize()
+    public override void PostInitialize()
     {
         Debug.Log("PostInitialize in idle");
         InputActionsProvider.InputActions.Player.AButton.started += Jump_started;

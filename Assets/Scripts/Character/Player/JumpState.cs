@@ -25,7 +25,7 @@ public class JumpState : PlayerState
         Debug.Log("Exiting jump");
     }
 
-    protected override void PostInitialize()
+    public override void PostInitialize()
     {
         character.ReachedJumpApex += Character_ReachedJumpApex;
         character.Landed += Character_Landed; //edge case where we land on something before finishing jump process

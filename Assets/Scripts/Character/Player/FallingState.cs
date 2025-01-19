@@ -21,7 +21,7 @@ public class FallingState : PlayerState
         Debug.Log("Exiting falling");
     }
 
-    protected override void PostInitialize()
+    public override void PostInitialize()
     {
         character.Landed += Character_Landed;
     }

@@ -50,7 +50,7 @@ public class AttackState : PlayerState
         this.timeInState = timeInState;
     }
 
-    protected override void PostInitialize()
+    public override void PostInitialize()
     {
 
     }

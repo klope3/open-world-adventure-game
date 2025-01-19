@@ -19,6 +19,10 @@ public class DialogueBox : MonoBehaviour
     [SerializeField] private DialogueManager dialogueManager;
     [SerializeField] private GameObject continueArrow;
     [SerializeField] private GameObject stopSquare;
+    [SerializeField] private TextMeshProUGUI dialogueChoice0Text;
+    [SerializeField] private TextMeshProUGUI dialogueChoice1Text;
+    [SerializeField] private GameObject dialogueChoice0Indicator;
+    [SerializeField] private GameObject dialogueChoice1Indicator;
     private int characterCount;
     private string currentText;
     private bool shown;
@@ -29,16 +33,25 @@ public class DialogueBox : MonoBehaviour
         boxRt.localScale = new Vector2(shrinkScaleX, shrinkScaleY);
         text.gameObject.SetActive(false);
         shown = false;
+        dialogueChoice0Indicator.SetActive(false);
+        dialogueChoice1Indicator.SetActive(false);
+        dialogueChoice0Text.gameObject.SetActive(false);
+        dialogueChoice1Text.gameObject.SetActive(false);
     }
 
-    public void Print(string msg)
+    public void Print(string msg, bool messageHasChoices)
     {
         if (!shown) Show();
+        text.verticalAlignment = messageHasChoices ? VerticalAlignmentOptions.Top : VerticalAlignmentOptions.Middle;
         characterCount = 0;
         currentText = msg;
         text.text = "";
         stopSquare.SetActive(false);
         continueArrow.SetActive(false);
+        dialogueChoice0Indicator.SetActive(false);
+        dialogueChoice1Indicator.SetActive(false);
+        dialogueChoice0Text.gameObject.SetActive(false);
+        dialogueChoice1Text.gameObject.SetActive(false);
         StartCoroutine(CO_DelayedPrintStart());
     }
 
@@ -60,6 +73,8 @@ public class DialogueBox : MonoBehaviour
         shown = false;
         stopSquare.SetActive(false);
         continueArrow.SetActive(false);
+        dialogueChoice0Indicator.SetActive(false);
+        dialogueChoice1Indicator.SetActive(false);
     }
 
     private IEnumerator CO_DelayedPrintStart()
@@ -77,8 +92,28 @@ public class DialogueBox : MonoBehaviour
             yield return new WaitForSeconds(perCharacterDelay);
         }
 
-        if (dialogueManager.AnyFurtherNodes()) continueArrow.SetActive(true);
+        string[] responseChoices = dialogueManager.GetDialogueChoices();
+        if (responseChoices.Length > 0)
+        {
+            dialogueChoice0Text.text = responseChoices[0];
+            dialogueChoice0Text.gameObject.SetActive(true);
+
+            if (responseChoices.Length > 1)
+            {
+                dialogueChoice1Text.text = responseChoices[1];
+                dialogueChoice1Text.gameObject.SetActive(true);
+            }
+
+            UpdateChoiceIndicators();
+        }
+        else if (dialogueManager.AnyFurtherNodes()) continueArrow.SetActive(true);
         else stopSquare.SetActive(true);
+    }
+
+    public void UpdateChoiceIndicators()
+    {
+        dialogueChoice0Indicator.SetActive(dialogueManager.SelectedChoiceIndex == 0);
+        dialogueChoice1Indicator.SetActive(dialogueManager.SelectedChoiceIndex == 1);
     }
 
     public bool FinishedPrinting()
