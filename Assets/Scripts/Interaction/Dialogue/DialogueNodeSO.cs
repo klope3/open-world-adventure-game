@@ -6,7 +6,7 @@ using Sirenix.OdinInspector;
 [CreateAssetMenu(fileName = "DialogueNodeSO", menuName = "Scriptable Objects/DialogueNodeSO")]
 public class DialogueNodeSO : SerializedScriptableObject
 {
-    [SerializeField] private TextAsset textAsset;
+    [SerializeField, TextArea(7, 7)] private string text;
     [SerializeField] private DialogueNodeWithCondition[] nextNodeOptions;
     [SerializeField] private string[] responseChoices;
     [SerializeField, Tooltip("If true, the DialogueManager will NOT print this node and will instead use its ChooseNextNode() method to proceed immediately. Useful for conditional dialogue beginnings.")] 
@@ -31,7 +31,7 @@ public class DialogueNodeSO : SerializedScriptableObject
     {
         get
         {
-            return textAsset.text;
+            return text;
         }
     }
 
