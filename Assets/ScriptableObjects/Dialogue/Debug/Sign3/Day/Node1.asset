@@ -61,7 +61,8 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  textAsset: {fileID: 4900000, guid: f5cda4eb0d28e7145813dbb05c910d4e, type: 3}
+  text: You found sign #3! This is another magic sign. It's daytime, so guess the
+    daytime number!
   responseChoices:
   - Is the answer 42?
   - Is the answer 6?

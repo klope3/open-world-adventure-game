@@ -12,5 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0933c0aed28c6cd47b4d4c0ce822478b, type: 3}
   m_Name: Node3
   m_EditorClassIdentifier: 
-  textAsset: {fileID: 4900000, guid: 7ae049f58e5e53b4bb027cde42acf7b1, type: 3}
-  nextNode: {fileID: 0}
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: nextNodeOptions
+      Entry: 6
+      Data: 
+  text: This is sign 1's third node.
+  responseChoices: []
+  passthru: 0

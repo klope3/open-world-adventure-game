@@ -47,4 +47,6 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  textAsset: {fileID: 4900000, guid: b5c8c0140e3686843ba20adca546d28e, type: 3}
+  text: It's daytime right now!
+  responseChoices: []
+  passthru: 0

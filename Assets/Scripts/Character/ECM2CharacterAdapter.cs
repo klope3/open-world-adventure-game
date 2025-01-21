@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ECM2;
+using Sirenix.OdinInspector;
 
 //Bridge between ECM2 Character and custom logic
 public class ECM2CharacterAdapter : MonoBehaviour
@@ -9,6 +10,8 @@ public class ECM2CharacterAdapter : MonoBehaviour
     [SerializeField] private Character character;
     //[SerializeField] private DirectionalInputProvider inputProvider;
     [SerializeField] public bool canMove = true;
+    public Vector3 inputOverride;
+    public bool useInputOverride;
     //private InputActions inputActions;
     public System.Action LeftGround; //ECM2 does not seem to provide this event, but we can use some of its methods to easily implement it
 
@@ -24,6 +27,7 @@ public class ECM2CharacterAdapter : MonoBehaviour
         //Vector2 inputVec = inputProvider.GetInput();
         Vector3 moveVec = new Vector3(inputVec.x, 0, inputVec.y);
         moveVec = moveVec.relativeTo(character.cameraTransform);
+        if (useInputOverride) moveVec = inputOverride;
 
         if (canMove)
         {

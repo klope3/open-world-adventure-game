@@ -3,40 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using ECM2;
 
-public class IdleState : PlayerState
+public class MoveForwardState : PlayerState
 {
     private InteractionZone interactionZone;
     private CameraController cameraController;
 
-    //default state
     public override void EnterState()
     {
-        Debug.Log("Entering idle");
-        characterAdapter.canMove = true;
-    }
 
-    public override void UpdateState()
-    {
-        if (characterAdapter.GetMovementInput().magnitude >= 0.005f)
-        {
-            stateManager.SwitchState("MoveForward");
-        }
-        //if (Input.GetKeyDown(KeyCode.LeftControl))
-        //{
-        //    stateManager.SwitchState("Attack");
-        //}
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    character.Jump();
-        //} else if (Input.GetKeyUp(KeyCode.Space))
-        //{
-        //    character.StopJumping();
-        //}
     }
 
     public override void ExitState()
     {
-        Debug.Log("Exiting idle");
+
+    }
+
+    public override void PostInitialize()
+    {
+        InputActionsProvider.InputActions.Player.DodgeButton.started += DodgeButton_started;
+        InputActionsProvider.InputActions.Player.AButton.started += Jump_started;
+        InputActionsProvider.InputActions.Player.BButton.started += Attack_started;
+        InputActionsProvider.InputActions.Player.InteractButton.started += InteractButton_started;
+        InputActionsProvider.InputActions.Player.ZTarget.started += ZTarget_started;
+    }
+
+    public override void UpdateState()
+    {
+        if (characterAdapter.GetMovementInput().magnitude <= 0.005f)
+        {
+            stateManager.SwitchState("Idle");
+            return;
+        }
     }
 
     public void Initialize(PlayerStateManager stateManager, Character character, ECM2CharacterAdapter characterAdapter, InteractionZone interactionZone, CameraController cameraController)
@@ -44,19 +41,6 @@ public class IdleState : PlayerState
         Initialize(stateManager, character, characterAdapter);
         this.interactionZone = interactionZone;
         this.cameraController = cameraController;
-    }
-
-    public override void PostInitialize()
-    {
-        Debug.Log("PostInitialize in idle");
-        InputActionsProvider.InputActions.Player.AButton.started += Jump_started;
-
-        InputActionsProvider.InputActions.Player.BButton.started += Attack_started;
-
-        InputActionsProvider.InputActions.Player.InteractButton.started += InteractButton_started;
-
-        InputActionsProvider.InputActions.Player.ZTarget.started += ZTarget_started;
-        //character.Jumped += Character_Jumped;
     }
 
     private void ZTarget_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -84,14 +68,8 @@ public class IdleState : PlayerState
         stateManager.SwitchState("Jump");
     }
 
-    private void Jump_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void DodgeButton_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-        character.Jump();
-        stateManager.SwitchState("Jump");
-    }
-
-    private void Character_Jumped()
-    {
-        stateManager.SwitchState("Jump");
+        if (stateManager.IsInState(this)) stateManager.SwitchState("Roll");
     }
 }

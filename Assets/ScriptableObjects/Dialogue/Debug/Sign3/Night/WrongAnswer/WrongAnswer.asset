@@ -24,6 +24,6 @@ MonoBehaviour:
     - Name: nextNodeOptions
       Entry: 6
       Data: 
-  textAsset: {fileID: 4900000, guid: 3217644d431d1de44b4bab6c9f31a3df, type: 3}
+  text: Sorry, try again next time.
   responseChoices: []
   passthru: 0

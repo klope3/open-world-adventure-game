@@ -1189,6 +1189,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 607736183}
     m_Modifications:
+    - target: {fileID: 739091319284739326, guid: bc9752effe1d9704594ddfc191f5dbd8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2247981772079582934, guid: bc9752effe1d9704594ddfc191f5dbd8,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1299,6 +1304,11 @@ PrefabInstance:
       propertyPath: m_text
       value: No
       objectReference: {fileID: 0}
+    - target: {fileID: 9133960246577099491, guid: bc9752effe1d9704594ddfc191f5dbd8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1351,7 +1361,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &285266432
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2670,7 +2680,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.91764706}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5126,7 +5136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotationMode: 1
-  _rotationRate: 540
+  _rotationRate: 800
   _startingMovementMode: 1
   _maxWalkSpeed: 9.5
   _minAnalogWalkSpeed: 0
@@ -5308,6 +5318,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: {fileID: 1185212331}
   canMove: 1
+  inputOverride: {x: 0, y: 0, z: 0}
+  useInputOverride: 0
 --- !u!114 &1185212338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5396,6 +5408,9 @@ MonoBehaviour:
   meleeZoneActiveTime: 0.1
   attacksPerSecond: 3
   stopMovementTime: 0.4
+  rollDuration: 0.7
+  rollSpeed: 19
+  rollDeceleration: -24
 --- !u!114 &1185212342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11927,6 +11942,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 607736183}
     m_Modifications:
+    - target: {fileID: 739091319284739326, guid: bc9752effe1d9704594ddfc191f5dbd8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2247981772079582934, guid: bc9752effe1d9704594ddfc191f5dbd8,
         type: 3}
       propertyPath: m_Pivot.x
@@ -12031,6 +12051,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Choice0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9133960246577099491, guid: bc9752effe1d9704594ddfc191f5dbd8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -80,6 +80,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DodgeButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""32a31865-25f7-49c6-b3b3-35cb28a642c8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -302,6 +311,28 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""InteractButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2754e34b-4d9f-4912-a81d-1c7a66866912"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KBM"",
+                    ""action"": ""DodgeButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c60454a5-6bf8-482e-8376-cd95b8d28314"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""DodgeButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -339,6 +370,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Player_BButton = m_Player.FindAction("BButton", throwIfNotFound: true);
         m_Player_ZTarget = m_Player.FindAction("ZTarget", throwIfNotFound: true);
         m_Player_InteractButton = m_Player.FindAction("InteractButton", throwIfNotFound: true);
+        m_Player_DodgeButton = m_Player.FindAction("DodgeButton", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -406,6 +438,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_BButton;
     private readonly InputAction m_Player_ZTarget;
     private readonly InputAction m_Player_InteractButton;
+    private readonly InputAction m_Player_DodgeButton;
     public struct PlayerActions
     {
         private @InputActions m_Wrapper;
@@ -416,6 +449,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         public InputAction @BButton => m_Wrapper.m_Player_BButton;
         public InputAction @ZTarget => m_Wrapper.m_Player_ZTarget;
         public InputAction @InteractButton => m_Wrapper.m_Player_InteractButton;
+        public InputAction @DodgeButton => m_Wrapper.m_Player_DodgeButton;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -443,6 +477,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @InteractButton.started += instance.OnInteractButton;
             @InteractButton.performed += instance.OnInteractButton;
             @InteractButton.canceled += instance.OnInteractButton;
+            @DodgeButton.started += instance.OnDodgeButton;
+            @DodgeButton.performed += instance.OnDodgeButton;
+            @DodgeButton.canceled += instance.OnDodgeButton;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -465,6 +502,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @InteractButton.started -= instance.OnInteractButton;
             @InteractButton.performed -= instance.OnInteractButton;
             @InteractButton.canceled -= instance.OnInteractButton;
+            @DodgeButton.started -= instance.OnDodgeButton;
+            @DodgeButton.performed -= instance.OnDodgeButton;
+            @DodgeButton.canceled -= instance.OnDodgeButton;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -508,5 +548,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         void OnBButton(InputAction.CallbackContext context);
         void OnZTarget(InputAction.CallbackContext context);
         void OnInteractButton(InputAction.CallbackContext context);
+        void OnDodgeButton(InputAction.CallbackContext context);
     }
 }

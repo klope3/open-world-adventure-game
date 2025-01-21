@@ -24,6 +24,6 @@ MonoBehaviour:
     - Name: nextNodeOptions
       Entry: 6
       Data: 
-  textAsset: {fileID: 4900000, guid: 7aecbf43cd2e76a4795a14485538c187, type: 3}
+  text: Congratulations, you guessed right!
   responseChoices: []
   passthru: 0
