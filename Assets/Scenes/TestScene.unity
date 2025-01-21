@@ -5408,9 +5408,9 @@ MonoBehaviour:
   meleeZoneActiveTime: 0.1
   attacksPerSecond: 3
   stopMovementTime: 0.4
-  rollDuration: 0.7
-  rollSpeed: 19
-  rollDeceleration: -24
+  rollDuration: 0.6
+  rollSpeed: 23
+  rollDeceleration: -34
 --- !u!114 &1185212342
 MonoBehaviour:
   m_ObjectHideFlags: 0
