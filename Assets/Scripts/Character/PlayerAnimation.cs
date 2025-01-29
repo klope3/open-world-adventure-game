@@ -11,6 +11,8 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] private Animator animator;
 
     private int speedHash;
+    private int speedXHash;
+    private int speedYHash;
     private int jumpHash;
     private int landHash;
     private int attackHash;
@@ -25,6 +27,8 @@ public class PlayerAnimation : MonoBehaviour
         attackHash = Hash("Attack");
         fallHash = Hash("Fall");
         rollHash = Hash("Roll");
+        speedXHash = Hash("SpeedX");
+        speedYHash = Hash("SpeedY");
     
         character.Jumped += Character_Jumped;
         character.Landed += Character_Landed;
@@ -65,7 +69,11 @@ public class PlayerAnimation : MonoBehaviour
     
     private void Update()
     {
-        animator.SetFloat(speedHash, adapter.GetMovementInput().magnitude);
+        //animator.SetFloat(speedHash, adapter.GetMovementInput().magnitude);
+        Vector3 inputVec = adapter.GetMovementInput();
+        Vector3 squareVec = Utils.ApproximateSquareInputVector(inputVec);
+        animator.SetFloat(speedXHash, squareVec.x);
+        animator.SetFloat(speedYHash, squareVec.y);
     }
     
     private static int Hash(string str)

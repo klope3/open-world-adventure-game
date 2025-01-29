@@ -88,6 +88,8 @@ crashlytics-build.properties
 /[Aa]ssets/[Tt]ext[Mm]esh*[Pp]ro.meta
 /[Aa]ssets/[Aa]nimations/[Mm]ixamo/
 /[Aa]ssets/[Aa]nimations/[Mm]ixamo.meta
+/[Aa]ssets/[Aa]nimations/[Cc]ustom/
+/[Aa]ssets/[Aa]nimations/[Cc]ustom.meta
 /[Aa]ssets/[Aa]nimations/[Kk]evin*[Ii]glesias/
 /[Aa]ssets/[Aa]nimations/[Kk]evin*[Ii]glesias.meta
 /[Aa]ssets/[Pp]lugins/[Ss]irenix/
