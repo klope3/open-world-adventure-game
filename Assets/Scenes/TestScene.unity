@@ -5317,6 +5317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 1185212331}
+  cameraController: {fileID: 1185212338}
   canMove: 1
   inputOverride: {x: 0, y: 0, z: 0}
   useInputOverride: 0
@@ -5383,6 +5384,7 @@ MonoBehaviour:
   character: {fileID: 1185212331}
   playerStateManager: {fileID: 1185212341}
   adapter: {fileID: 1185212337}
+  cameraController: {fileID: 1185212338}
   animator: {fileID: 2075878638}
 --- !u!114 &1185212341
 MonoBehaviour:

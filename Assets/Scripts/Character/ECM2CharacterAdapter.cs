@@ -8,6 +8,7 @@ using Sirenix.OdinInspector;
 public class ECM2CharacterAdapter : MonoBehaviour
 {
     [SerializeField] private Character character;
+    [SerializeField] private CameraController cameraController;
     //[SerializeField] private DirectionalInputProvider inputProvider;
     [SerializeField] public bool canMove = true;
     public Vector3 inputOverride;
@@ -19,6 +20,8 @@ public class ECM2CharacterAdapter : MonoBehaviour
     {
         //inputActions = new InputActions();
         //inputActions.Player.Enable();
+        cameraController.OnTargetingStarted += CameraController_OnTargetingStarted;
+        cameraController.OnTargetingEnded += CameraController_OnTargetingEnded;
     }
 
     private void Update()
@@ -41,6 +44,16 @@ public class ECM2CharacterAdapter : MonoBehaviour
         {
             LeftGround?.Invoke();
         }
+    }
+
+    private void CameraController_OnTargetingStarted()
+    {
+        character.SetRotationMode(Character.RotationMode.OrientRotationToViewDirection);
+    }
+
+    private void CameraController_OnTargetingEnded()
+    {
+        character.SetRotationMode(Character.RotationMode.OrientRotationToMovement);
     }
 
     public Vector3 GetMovementInput()

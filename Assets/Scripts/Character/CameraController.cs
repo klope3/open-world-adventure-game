@@ -21,6 +21,8 @@ public class CameraController : MonoBehaviour
 
     public UnityEvent OnTargetingStart;
     public UnityEvent OnTargetingEnd;
+    public System.Action OnTargetingStarted;
+    public System.Action OnTargetingEnded;
 
     private void Awake()
     {
@@ -48,8 +50,13 @@ public class CameraController : MonoBehaviour
         {
             targetingAngles = cameraFollow.eulerAngles;
             OnTargetingStart?.Invoke();
+            OnTargetingStarted?.Invoke();
         }
-        if (prevIsTargeting && !isTargeting) OnTargetingEnd?.Invoke();
+        if (prevIsTargeting && !isTargeting)
+        {
+            OnTargetingEnd?.Invoke();
+            OnTargetingEnded?.Invoke();
+        }
 
         if (!targetedPoint)
         {

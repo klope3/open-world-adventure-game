@@ -8,6 +8,7 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] private Character character;
     [SerializeField] private PlayerStateManager playerStateManager;
     [SerializeField] private ECM2CharacterAdapter adapter;
+    [SerializeField] private CameraController cameraController;
     [SerializeField] private Animator animator;
 
     private int speedHash;
@@ -18,6 +19,7 @@ public class PlayerAnimation : MonoBehaviour
     private int attackHash;
     private int fallHash;
     private int rollHash;
+    private int targetingHash;
 
     private void Awake()
     {
@@ -29,12 +31,25 @@ public class PlayerAnimation : MonoBehaviour
         rollHash = Hash("Roll");
         speedXHash = Hash("SpeedX");
         speedYHash = Hash("SpeedY");
+        targetingHash = Hash("Targeting");
     
         character.Jumped += Character_Jumped;
         character.Landed += Character_Landed;
         playerStateManager.OnAttack += PlayerStateManager_OnAttack;
         playerStateManager.OnLeftGround += PlayerStateManager_OnLeftGround;
         playerStateManager.OnRoll += PlayerStateManager_OnRoll;
+        cameraController.OnTargetingStarted += CameraController_OnTargetingStarted;
+        cameraController.OnTargetingEnded += CameraController_OnTargetingEnded;
+    }
+
+    private void CameraController_OnTargetingEnded()
+    {
+        animator.SetBool(targetingHash, false);
+    }
+
+    private void CameraController_OnTargetingStarted()
+    {
+        animator.SetBool(targetingHash, true);
     }
 
     private void PlayerStateManager_OnLeftGround()
@@ -69,11 +84,11 @@ public class PlayerAnimation : MonoBehaviour
     
     private void Update()
     {
-        //animator.SetFloat(speedHash, adapter.GetMovementInput().magnitude);
         Vector3 inputVec = adapter.GetMovementInput();
         Vector3 squareVec = Utils.ApproximateSquareInputVector(inputVec);
         animator.SetFloat(speedXHash, squareVec.x);
         animator.SetFloat(speedYHash, squareVec.y);
+        animator.SetFloat(speedHash, inputVec.magnitude);
     }
     
     private static int Hash(string str)
