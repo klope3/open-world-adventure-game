@@ -5,7 +5,7 @@ using UnityEngine;
 public static class InputActionsProvider
 {
     private static InputActions inputActions;
-    public static InputActions InputActions
+    private static InputActions InputActions
     {
         get
         {
@@ -13,8 +13,76 @@ public static class InputActionsProvider
             {
                 inputActions = new InputActions();
                 inputActions.Player.Enable();
+
+                inputActions.Player.InteractButton.started += InteractButton_started;
+                inputActions.Player.AButton.started += AButton_started;
+                inputActions.Player.AButton.canceled += AButton_canceled;
+                inputActions.Player.BButton.started += BButton_started;
+                inputActions.Player.ZTarget.started += ZTarget_started;
+                inputActions.Player.DodgeButton.started += DodgeButton_started;
             }
             return inputActions;
         }
+    }
+
+    public static System.Action OnInteractButtonStarted;
+    public static System.Action OnAButtonStarted;
+    public static System.Action OnAButtonCanceled;
+    public static System.Action OnBButtonStarted;
+    public static System.Action OnZTargetStarted;
+    public static System.Action OnDodgeButtonStarted;
+
+    private static bool overridePrimaryAxis;
+    private static Vector3 primaryAxisOverrideVec;
+
+    public static void LockPrimaryAxisTo(Vector3 lockedVec)
+    {
+        primaryAxisOverrideVec = lockedVec;
+        overridePrimaryAxis = true;
+    }
+
+    public static void UnlockPrimaryAxis()
+    {
+        overridePrimaryAxis = false;
+    }
+
+    private static void DodgeButton_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnDodgeButtonStarted?.Invoke();
+    }
+
+    private static void ZTarget_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnZTargetStarted?.Invoke();
+    }
+
+    private static void BButton_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnBButtonStarted?.Invoke();
+    }
+
+    private static void InteractButton_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnInteractButtonStarted?.Invoke();
+    }
+
+    private static void AButton_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnAButtonStarted?.Invoke();
+    }
+
+    private static void AButton_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnAButtonCanceled?.Invoke();
+    }
+
+    public static Vector2 GetPrimaryAxis()
+    {
+        return overridePrimaryAxis ? primaryAxisOverrideVec : InputActions.Player.PrimaryDirectionalAxis.ReadValue<Vector2>();
+    }
+
+    public static Vector2 GetSecondaryAxis()
+    {
+        return InputActions.Player.SecondaryDirectionalAxis.ReadValue<Vector2>();
     }
 }

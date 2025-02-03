@@ -20,16 +20,21 @@ public class MoveForwardState : PlayerState
 
     public override void PostInitialize()
     {
-        InputActionsProvider.InputActions.Player.DodgeButton.started += DodgeButton_started;
-        InputActionsProvider.InputActions.Player.AButton.started += Jump_started;
-        InputActionsProvider.InputActions.Player.BButton.started += Attack_started;
-        InputActionsProvider.InputActions.Player.InteractButton.started += InteractButton_started;
-        InputActionsProvider.InputActions.Player.ZTarget.started += ZTarget_started;
+        InputActionsProvider.OnDodgeButtonStarted += DodgeButton_started;
+        InputActionsProvider.OnAButtonStarted += Jump_started;
+        InputActionsProvider.OnBButtonStarted += Attack_started;
+        InputActionsProvider.OnInteractButtonStarted += InteractButton_started;
+        InputActionsProvider.OnZTargetStarted += ZTarget_started;
+        //InputActionsProvider.InputActions.Player.DodgeButton.started += DodgeButton_started;
+        //InputActionsProvider.InputActions.Player.AButton.started += Jump_started;
+        //InputActionsProvider.InputActions.Player.BButton.started += Attack_started;
+        //InputActionsProvider.InputActions.Player.InteractButton.started += InteractButton_started;
+        //InputActionsProvider.InputActions.Player.ZTarget.started += ZTarget_started;
     }
 
     public override void UpdateState()
     {
-        if (characterAdapter.GetMovementInput().magnitude <= 0.005f)
+        if (InputActionsProvider.GetPrimaryAxis().magnitude <= 0.005f)
         {
             stateManager.SwitchState("Idle");
             return;
@@ -43,24 +48,24 @@ public class MoveForwardState : PlayerState
         this.cameraController = cameraController;
     }
 
-    private void ZTarget_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void ZTarget_started()
     {
         if (stateManager.IsInState(this)) cameraController.ToggleTargeting();
     }
 
-    private void InteractButton_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void InteractButton_started()
     {
         if (stateManager.IsInState(this)) interactionZone.Interact();
     }
 
-    private void Attack_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void Attack_started()
     {
         if (!stateManager.IsInState(this)) return;
 
         stateManager.SwitchState("Attack");
     }
 
-    private void Jump_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void Jump_started()
     {
         if (!stateManager.IsInState(this)) return;
 
@@ -68,7 +73,7 @@ public class MoveForwardState : PlayerState
         stateManager.SwitchState("Jump");
     }
 
-    private void DodgeButton_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void DodgeButton_started()
     {
         if (stateManager.IsInState(this)) stateManager.SwitchState("Roll");
     }

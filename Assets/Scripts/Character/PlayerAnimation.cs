@@ -84,7 +84,7 @@ public class PlayerAnimation : MonoBehaviour
     
     private void Update()
     {
-        Vector3 inputVec = adapter.GetMovementInput();
+        Vector3 inputVec = InputActionsProvider.GetPrimaryAxis();
         Vector3 squareVec = Utils.ApproximateSquareInputVector(inputVec);
         animator.SetFloat(speedXHash, squareVec.x);
         animator.SetFloat(speedYHash, squareVec.y);

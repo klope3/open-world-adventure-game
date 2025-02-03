@@ -130,7 +130,7 @@ public class CameraController : MonoBehaviour
         }
 
         Vector3 initialAngles = new Vector3(angles.x, angles.y, angles.z);
-        Vector2 inputVec = InputActionsProvider.InputActions.Player.SecondaryDirectionalAxis.ReadValue<Vector2>();
+        Vector2 inputVec = InputActionsProvider.GetSecondaryAxis();
         angles.x += inputVec.y * sensitivity * Time.deltaTime;
         angles.y += inputVec.x * sensitivity * Time.deltaTime;
 

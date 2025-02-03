@@ -34,7 +34,7 @@ public class DialogueState : PlayerState
 
     public override void PostInitialize()
     {
-        InputActionsProvider.InputActions.Player.InteractButton.started += InteractButton_started;
+        InputActionsProvider.OnInteractButtonStarted += InteractButton_started;
 
         inputActionsEvents.OnPrimaryDirectionalAxisStartedUp += InputActionsEvents_OnPrimaryDirectionalAxisStartedUp;
         inputActionsEvents.OnPrimaryDirectionalAxisStartedDown += InputActionsEvents_OnPrimaryDirectionalAxisStartedDown;
@@ -50,7 +50,7 @@ public class DialogueState : PlayerState
         if (stateManager.IsInState(this)) dialogueManager.IncrementChoiceIndex(-1);
     }
 
-    private void InteractButton_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void InteractButton_started()
     {
         if (stateManager.IsInState(this)) dialogueManager.TryAdvanceDialogue();
     }

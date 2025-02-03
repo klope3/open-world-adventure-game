@@ -29,10 +29,11 @@ public class JumpState : PlayerState
     {
         character.ReachedJumpApex += Character_ReachedJumpApex;
         character.Landed += Character_Landed; //edge case where we land on something before finishing jump process
-        InputActionsProvider.InputActions.Player.AButton.canceled += Jump_canceled;
+        //InputActionsProvider.InputActions.Player.AButton.canceled += Jump_canceled;
+        InputActionsProvider.OnAButtonCanceled += Jump_canceled;
     }
 
-    private void Jump_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void Jump_canceled()
     {
         if (!stateManager.IsInState(this)) return;
 

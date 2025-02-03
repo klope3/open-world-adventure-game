@@ -14,7 +14,7 @@ public class InputActionsEvents : MonoBehaviour
 
     private void Update()
     {
-        Vector2 newPrimaryDirectionalAxisInput = InputActionsProvider.InputActions.Player.PrimaryDirectionalAxis.ReadValue<Vector2>();
+        Vector2 newPrimaryDirectionalAxisInput = InputActionsProvider.GetPrimaryAxis();
         if (lastPrimaryDirectionAxisInput.y < 0.005f && newPrimaryDirectionalAxisInput.y >= 0.005f)
         {
             OnPrimaryDirectionalAxisStartedUp?.Invoke();

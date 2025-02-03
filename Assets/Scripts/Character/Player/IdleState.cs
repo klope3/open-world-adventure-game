@@ -17,7 +17,7 @@ public class IdleState : PlayerState
 
     public override void UpdateState()
     {
-        if (characterAdapter.GetMovementInput().magnitude >= 0.005f)
+        if (InputActionsProvider.GetPrimaryAxis().magnitude >= 0.005f)
         {
             stateManager.SwitchState("MoveForward");
         }
@@ -49,34 +49,38 @@ public class IdleState : PlayerState
     public override void PostInitialize()
     {
         Debug.Log("PostInitialize in idle");
-        InputActionsProvider.InputActions.Player.AButton.started += Jump_started;
-
-        InputActionsProvider.InputActions.Player.BButton.started += Attack_started;
-
-        InputActionsProvider.InputActions.Player.InteractButton.started += InteractButton_started;
-
-        InputActionsProvider.InputActions.Player.ZTarget.started += ZTarget_started;
+        InputActionsProvider.OnAButtonStarted += Jump_started;
+        InputActionsProvider.OnBButtonStarted += Attack_started;
+        InputActionsProvider.OnInteractButtonStarted += InteractButton_started;
+        InputActionsProvider.OnZTargetStarted += ZTarget_started;
+        //InputActionsProvider.InputActions.Player.AButton.started += Jump_started;
+        //
+        //InputActionsProvider.InputActions.Player.BButton.started += Attack_started;
+        //
+        //InputActionsProvider.InputActions.Player.InteractButton.started += InteractButton_started;
+        //
+        //InputActionsProvider.InputActions.Player.ZTarget.started += ZTarget_started;
         //character.Jumped += Character_Jumped;
     }
 
-    private void ZTarget_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void ZTarget_started()
     {
         if (stateManager.IsInState(this)) cameraController.ToggleTargeting();
     }
 
-    private void InteractButton_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void InteractButton_started()
     {
         if (stateManager.IsInState(this)) interactionZone.Interact();
     }
 
-    private void Attack_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void Attack_started()
     {
         if (!stateManager.IsInState(this)) return;
 
         stateManager.SwitchState("Attack");
     }
 
-    private void Jump_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void Jump_started()
     {
         if (!stateManager.IsInState(this)) return;
 
@@ -84,7 +88,7 @@ public class IdleState : PlayerState
         stateManager.SwitchState("Jump");
     }
 
-    private void Jump_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void Jump_performed()
     {
         character.Jump();
         stateManager.SwitchState("Jump");
