@@ -9,17 +9,11 @@ public class ECM2CharacterAdapter : MonoBehaviour
 {
     [SerializeField] private Character character;
     [SerializeField] private CameraController cameraController;
-    //[SerializeField] private DirectionalInputProvider inputProvider;
     [SerializeField] public bool canMove = true;
-    //public Vector3 inputOverride;
-    //public bool useInputOverride;
-    //private InputActions inputActions;
     public System.Action LeftGround; //ECM2 does not seem to provide this event, but we can use some of its methods to easily implement it
 
     private void Awake()
     {
-        //inputActions = new InputActions();
-        //inputActions.Player.Enable();
         cameraController.OnTargetingStarted += CameraController_OnTargetingStarted;
         cameraController.OnTargetingEnded += CameraController_OnTargetingEnded;
     }
@@ -27,11 +21,8 @@ public class ECM2CharacterAdapter : MonoBehaviour
     private void Update()
     {
         Vector3 inputVec = InputActionsProvider.GetPrimaryAxis();
-        //Vector2 inputVec = InputActionsProvider.InputActions.Player.PrimaryDirectionalAxis.ReadValue<Vector2>();
-        //Vector2 inputVec = inputProvider.GetInput();
         Vector3 moveVec = new Vector3(inputVec.x, 0, inputVec.y);
         moveVec = moveVec.relativeTo(character.cameraTransform);
-        //if (useInputOverride) moveVec = inputOverride;
 
         if (canMove)
         {
@@ -56,11 +47,4 @@ public class ECM2CharacterAdapter : MonoBehaviour
     {
         character.SetRotationMode(Character.RotationMode.OrientRotationToMovement);
     }
-
-    //public Vector3 GetMovementInput()
-    //{
-    //    if (!canMove) return Vector3.zero;
-    //    return InputActionsProvider.InputActions.Player.PrimaryDirectionalAxis.ReadValue<Vector2>();
-    //    //return inputProvider.GetInput();
-    //}
 }

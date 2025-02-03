@@ -17,11 +17,7 @@ public class RollState : PlayerState
         initialMoveSpeed = character.maxWalkSpeed;
 
         Vector2 inputVec = InputActionsProvider.GetPrimaryAxis();
-        //Vector3 moveVec = new Vector3(inputVec.x, 0, inputVec.y);
-        //moveVec = moveVec.relativeTo(character.cameraTransform);
         InputActionsProvider.LockPrimaryAxisTo(inputVec);
-        //characterAdapter.inputOverride = moveVec;
-        //characterAdapter.useInputOverride = true; //lock to whatever the input was at start
 
         OnEnter?.Invoke();
     }
@@ -30,7 +26,6 @@ public class RollState : PlayerState
     {
         character.maxWalkSpeed = initialMoveSpeed;
         InputActionsProvider.UnlockPrimaryAxis();
-        //characterAdapter.useInputOverride = false; //release lock on the input
     }
 
     public override void PostInitialize()

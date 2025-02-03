@@ -25,11 +25,6 @@ public class MoveForwardState : PlayerState
         InputActionsProvider.OnBButtonStarted += Attack_started;
         InputActionsProvider.OnInteractButtonStarted += InteractButton_started;
         InputActionsProvider.OnZTargetStarted += ZTarget_started;
-        //InputActionsProvider.InputActions.Player.DodgeButton.started += DodgeButton_started;
-        //InputActionsProvider.InputActions.Player.AButton.started += Jump_started;
-        //InputActionsProvider.InputActions.Player.BButton.started += Attack_started;
-        //InputActionsProvider.InputActions.Player.InteractButton.started += InteractButton_started;
-        //InputActionsProvider.InputActions.Player.ZTarget.started += ZTarget_started;
     }
 
     public override void UpdateState()

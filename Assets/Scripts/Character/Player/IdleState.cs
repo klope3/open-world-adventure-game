@@ -21,17 +21,6 @@ public class IdleState : PlayerState
         {
             stateManager.SwitchState("MoveForward");
         }
-        //if (Input.GetKeyDown(KeyCode.LeftControl))
-        //{
-        //    stateManager.SwitchState("Attack");
-        //}
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    character.Jump();
-        //} else if (Input.GetKeyUp(KeyCode.Space))
-        //{
-        //    character.StopJumping();
-        //}
     }
 
     public override void ExitState()
@@ -53,14 +42,6 @@ public class IdleState : PlayerState
         InputActionsProvider.OnBButtonStarted += Attack_started;
         InputActionsProvider.OnInteractButtonStarted += InteractButton_started;
         InputActionsProvider.OnZTargetStarted += ZTarget_started;
-        //InputActionsProvider.InputActions.Player.AButton.started += Jump_started;
-        //
-        //InputActionsProvider.InputActions.Player.BButton.started += Attack_started;
-        //
-        //InputActionsProvider.InputActions.Player.InteractButton.started += InteractButton_started;
-        //
-        //InputActionsProvider.InputActions.Player.ZTarget.started += ZTarget_started;
-        //character.Jumped += Character_Jumped;
     }
 
     private void ZTarget_started()
@@ -85,17 +66,6 @@ public class IdleState : PlayerState
         if (!stateManager.IsInState(this)) return;
 
         character.Jump();
-        stateManager.SwitchState("Jump");
-    }
-
-    private void Jump_performed()
-    {
-        character.Jump();
-        stateManager.SwitchState("Jump");
-    }
-
-    private void Character_Jumped()
-    {
         stateManager.SwitchState("Jump");
     }
 }

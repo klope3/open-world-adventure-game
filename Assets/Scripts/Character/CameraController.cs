@@ -6,7 +6,6 @@ using UnityEngine.Events;
 public class CameraController : MonoBehaviour
 {
     [SerializeField] private Transform testTransform;
-    //[SerializeField] private DirectionalInputProvider inputProvider;
     [SerializeField] private Transform cameraFollow;
     [SerializeField] private GameObjectDetector targetableDetector;
     [SerializeField] private float sensitivity;
@@ -114,7 +113,6 @@ public class CameraController : MonoBehaviour
     private void Update()
     {
         UpdateTargetables();
-        //TargetingInput();
 
         if (isTargeting)
         {
@@ -129,7 +127,6 @@ public class CameraController : MonoBehaviour
             return;
         }
 
-        Vector3 initialAngles = new Vector3(angles.x, angles.y, angles.z);
         Vector2 inputVec = InputActionsProvider.GetSecondaryAxis();
         angles.x += inputVec.y * sensitivity * Time.deltaTime;
         angles.y += inputVec.x * sensitivity * Time.deltaTime;
@@ -139,11 +136,6 @@ public class CameraController : MonoBehaviour
 
         cameraFollow.eulerAngles = angles;
     }
-
-    //private void TargetingInput()
-    //{
-    //
-    //}
 
     private void UpdateTargetables()
     {

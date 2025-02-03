@@ -13,10 +13,7 @@ public class JumpState : PlayerState
 
     public override void UpdateState()
     {
-        //if (Input.GetKeyUp(KeyCode.Space))
-        //{
-        //    character.StopJumping();
-        //}
+
     }
 
     //exit from releasing jump, or landing
@@ -29,7 +26,6 @@ public class JumpState : PlayerState
     {
         character.ReachedJumpApex += Character_ReachedJumpApex;
         character.Landed += Character_Landed; //edge case where we land on something before finishing jump process
-        //InputActionsProvider.InputActions.Player.AButton.canceled += Jump_canceled;
         InputActionsProvider.OnAButtonCanceled += Jump_canceled;
     }
 
