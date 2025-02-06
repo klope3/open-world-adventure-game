@@ -240,7 +240,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""id"": ""24fab239-b9db-47be-8a1c-82e81005d157"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""ScaleVector2(y=-1)"",
                     ""groups"": ""Gamepad"",
                     ""action"": ""SecondaryDirectionalAxis"",
                     ""isComposite"": false,
@@ -260,7 +260,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""44e50099-0391-455a-828e-bc6c7de91104"",
-                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KBM"",
