@@ -248,6 +248,17 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""40ed3f08-f566-4923-a354-1c1ab90f684b"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": ""ScaleVector2(x=0.2,y=-0.2)"",
+                    ""groups"": ""KBM"",
+                    ""action"": ""SecondaryDirectionalAxis"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""44e50099-0391-455a-828e-bc6c7de91104"",
                     ""path"": ""<Keyboard>/leftCtrl"",
                     ""interactions"": """",

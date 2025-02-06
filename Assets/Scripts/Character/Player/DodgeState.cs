@@ -3,21 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using ECM2;
 
-public class RollState : PlayerState
+public class DodgeState : PlayerState
 {
     private float speed;
     private float duration;
-    private float initialMoveSpeed;
     private float deceleration;
+    private float initialMoveSpeed;
+    private float initialAcceleration;
 
     public System.Action OnEnter;
 
     public override void EnterState()
     {
         initialMoveSpeed = character.maxWalkSpeed;
+        initialAcceleration = character.maxAcceleration;
 
         Vector2 inputVec = InputActionsProvider.GetPrimaryAxis();
         InputActionsProvider.LockPrimaryAxisTo(inputVec);
+
+        character.maxAcceleration = 1000; //max mobility during dodge
 
         OnEnter?.Invoke();
     }
@@ -25,6 +29,7 @@ public class RollState : PlayerState
     public override void ExitState()
     {
         character.maxWalkSpeed = initialMoveSpeed;
+        character.maxAcceleration = initialAcceleration;
         InputActionsProvider.UnlockPrimaryAxis();
     }
 

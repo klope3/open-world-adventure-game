@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ECM2;
 
-public class MoveForwardState : PlayerState
+public class MovingState : PlayerState
 {
     private InteractionZone interactionZone;
     private CameraController cameraController;
@@ -70,6 +70,17 @@ public class MoveForwardState : PlayerState
 
     private void DodgeButton_started()
     {
-        if (stateManager.IsInState(this)) stateManager.SwitchState("Roll");
+        if (!stateManager.IsInState(this)) return;
+
+        if (!cameraController.IsTargeting)
+        {
+            stateManager.SwitchState("Roll");
+            return;
+        } else
+        {
+            stateManager.SwitchState("Dodge");
+        }
+
+
     }
 }

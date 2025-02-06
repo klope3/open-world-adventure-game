@@ -11,6 +11,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float sensitivity;
     [SerializeField] private float minX;
     [SerializeField] private float maxX;
+    [SerializeField] private bool lockCursor;
     private Vector3 angles;
     private bool isTargeting;
     private Vector3 targetingAngles; //eulerAngles to maintain if targeting without an actual target
@@ -23,9 +24,18 @@ public class CameraController : MonoBehaviour
     public System.Action OnTargetingStarted;
     public System.Action OnTargetingEnded;
 
+    public bool IsTargeting
+    {
+        get
+        {
+            return isTargeting;
+        }
+    }
+
     private void Awake()
     {
         targetablePoints = new List<TargetablePoint>();
+        if (lockCursor) Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void OnEnable()

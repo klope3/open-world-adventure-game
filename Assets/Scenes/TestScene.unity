@@ -5319,8 +5319,6 @@ MonoBehaviour:
   character: {fileID: 1185212331}
   cameraController: {fileID: 1185212338}
   canMove: 1
-  inputOverride: {x: 0, y: 0, z: 0}
-  useInputOverride: 0
 --- !u!114 &1185212338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5339,6 +5337,7 @@ MonoBehaviour:
   sensitivity: 100
   minX: -60
   maxX: 60
+  lockCursor: 1
   OnTargetingStart:
     m_PersistentCalls:
       m_Calls:
@@ -5413,6 +5412,10 @@ MonoBehaviour:
   rollDuration: 0.6
   rollSpeed: 23
   rollDeceleration: -34
+  dodgeDuration: 0.4
+  dodgeSpeed: 23
+  dodgeDeceleration: -60
+  dodgeJumpForce: 50
 --- !u!114 &1185212342
 MonoBehaviour:
   m_ObjectHideFlags: 0

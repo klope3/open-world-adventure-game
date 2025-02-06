@@ -19,7 +19,7 @@ public class IdleState : PlayerState
     {
         if (InputActionsProvider.GetPrimaryAxis().magnitude >= 0.005f)
         {
-            stateManager.SwitchState("MoveForward");
+            stateManager.SwitchState("Moving");
         }
     }
 

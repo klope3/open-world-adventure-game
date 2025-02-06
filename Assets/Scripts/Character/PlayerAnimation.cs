@@ -20,6 +20,7 @@ public class PlayerAnimation : MonoBehaviour
     private int fallHash;
     private int rollHash;
     private int targetingHash;
+    private int dodgeHash;
 
     private void Awake()
     {
@@ -32,14 +33,17 @@ public class PlayerAnimation : MonoBehaviour
         speedXHash = Hash("SpeedX");
         speedYHash = Hash("SpeedY");
         targetingHash = Hash("Targeting");
+        dodgeHash = Hash("Dodge");
     
         character.Jumped += Character_Jumped;
         character.Landed += Character_Landed;
         playerStateManager.OnAttack += PlayerStateManager_OnAttack;
         playerStateManager.OnLeftGround += PlayerStateManager_OnLeftGround;
         playerStateManager.OnRoll += PlayerStateManager_OnRoll;
+        playerStateManager.OnDodge += PlayerStateManager_OnDodge;
         cameraController.OnTargetingStarted += CameraController_OnTargetingStarted;
         cameraController.OnTargetingEnded += CameraController_OnTargetingEnded;
+        
     }
 
     private void CameraController_OnTargetingEnded()
@@ -65,6 +69,11 @@ public class PlayerAnimation : MonoBehaviour
     private void PlayerStateManager_OnRoll()
     {
         animator.SetTrigger(rollHash);
+    }
+
+    private void PlayerStateManager_OnDodge()
+    {
+        animator.SetTrigger(dodgeHash);
     }
 
     public void SetJumpTrigger()
