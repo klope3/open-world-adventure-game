@@ -11,6 +11,7 @@ public class AttackState : PlayerState
     private float damageZoneTimer;
 
     public System.Action OnEnter;
+    public System.Action OnExit;
 
     public override void EnterState()
     {
@@ -41,6 +42,7 @@ public class AttackState : PlayerState
     public override void ExitState()
     {
         Debug.Log("Exiting attack");
+        OnExit?.Invoke();
     }
 
     public void Initialize(PlayerStateManager stateManager, Character character, ECM2CharacterAdapter characterAdapter, Collider damageZone, float timeInState)

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ECM2;
+using UnityEngine.Events;
 
 public class PlayerStateManager : StateManager<PlayerState>
 {
@@ -28,6 +29,9 @@ public class PlayerStateManager : StateManager<PlayerState>
     public System.Action OnLeftGround;
     public System.Action OnRoll;
     public System.Action OnDodge;
+
+    public UnityEvent OnAttackStart;
+    public UnityEvent OnAttackEnd;
 
     protected override void StartAwake()
     {
@@ -71,6 +75,7 @@ public class PlayerStateManager : StateManager<PlayerState>
         dodgeState.PostInitialize();
 
         attackState.OnEnter += AttackState_OnEnter;
+        attackState.OnExit += AttackState_OnExit;
         fallingState.OnEnter += FallingState_OnEnter;
         rollState.OnEnter += RollState_OnEnter;
         dodgeState.OnEnter += DodgeState_OnEnter;
@@ -94,6 +99,12 @@ public class PlayerStateManager : StateManager<PlayerState>
     private void AttackState_OnEnter()
     {
         OnAttack?.Invoke();
+        OnAttackStart?.Invoke();
+    }
+
+    private void AttackState_OnExit()
+    {
+        OnAttackEnd?.Invoke();
     }
 
     private void FallingState_OnEnter()
