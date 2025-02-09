@@ -5317,7 +5317,6 @@ Transform:
   - {fileID: 1869623304}
   - {fileID: 876356}
   - {fileID: 1985160121}
-  - {fileID: 1365353553}
   - {fileID: 2096275192}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5438,7 +5437,9 @@ MonoBehaviour:
   cameraController: {fileID: 1185212338}
   inputActionsEvents: {fileID: 1881556815}
   meleeZoneActiveTime: 0.1
-  attacksPerSecond: 3
+  attacksPerSecond: 0.3
+  standardAttackDuration: 0.35
+  standardAttackChainDelay: 0.25
   stopMovementTime: 0.4
   rollDuration: 0.6
   rollSpeed: 23
@@ -5447,7 +5448,7 @@ MonoBehaviour:
   dodgeSpeed: 23
   dodgeDeceleration: -60
   dodgeJumpForce: 50
-  OnAttackStart:
+  OnAnyAttackStart:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1803779200}
@@ -5462,12 +5463,36 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-  OnAttackEnd:
+      - m_Target: {fileID: 1365353552}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  OnAnyAttackEnd:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1803779200}
         m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
         m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1365353552}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6263,6 +6288,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1677735569}
+    - targetCorrespondingSourceObject: {fileID: 8725866108186182888, guid: 87849ada3f5baec4885b43450cdbc425,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1365353553}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87849ada3f5baec4885b43450cdbc425, type: 3}
 --- !u!1 &1351901428
@@ -6458,7 +6487,7 @@ GameObject:
   - component: {fileID: 1365353555}
   - component: {fileID: 1365353554}
   m_Layer: 3
-  m_Name: MeleeAttackDamageZone
+  m_Name: SwordDamageZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6473,11 +6502,11 @@ Transform:
   m_GameObject: {fileID: 1365353552}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.27, z: 0.95}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0, y: 0.5606, z: 0}
+  m_LocalScale: {x: 0.14126508, y: 1.0082355, z: 0.052811503}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1185212335}
+  m_Father: {fileID: 164105298}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1365353554
 MonoBehaviour:

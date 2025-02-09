@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ECM2;
 
-public class AttackState : PlayerState
+public class Attack2State : PlayerState
 {
     private float timeInState;
     private float chainDelay;
@@ -13,13 +13,13 @@ public class AttackState : PlayerState
 
     public override void EnterState()
     {
-        Debug.Log("Entering attack");
+        Debug.Log("Entering attack2");
         characterAdapter.canMove = false;
         InputActionsProvider.OnBButtonStarted += Attack_started;
 
         OnEnter?.Invoke();
     }
-    
+
     public override void UpdateState()
     {
         if (stateManager.TimeInState > timeInState)
@@ -27,10 +27,10 @@ public class AttackState : PlayerState
             stateManager.SwitchState("Idle");
         }
     }
-    
+
     public override void ExitState()
     {
-        Debug.Log("Exiting attack");
+        Debug.Log("Exiting attack2");
         InputActionsProvider.OnBButtonStarted -= Attack_started;
         OnExit?.Invoke();
     }
@@ -48,6 +48,6 @@ public class AttackState : PlayerState
 
     private void Attack_started()
     {
-        if (stateManager.TimeInState > chainDelay) stateManager.SwitchState("Attack2");
+        if (stateManager.TimeInState > chainDelay) stateManager.SwitchState("Attack");
     }
 }

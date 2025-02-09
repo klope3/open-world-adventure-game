@@ -17,6 +17,7 @@ public class PlayerAnimation : MonoBehaviour
     private int jumpHash;
     private int landHash;
     private int attackHash;
+    private int attack2Hash;
     private int fallHash;
     private int rollHash;
     private int targetingHash;
@@ -28,6 +29,7 @@ public class PlayerAnimation : MonoBehaviour
         jumpHash = Hash("Jump");
         landHash = Hash("Land");
         attackHash = Hash("Attack");
+        attack2Hash = Hash("Attack2");
         fallHash = Hash("Fall");
         rollHash = Hash("Roll");
         speedXHash = Hash("SpeedX");
@@ -38,6 +40,7 @@ public class PlayerAnimation : MonoBehaviour
         character.Jumped += Character_Jumped;
         character.Landed += Character_Landed;
         playerStateManager.OnAttack += PlayerStateManager_OnAttack;
+        playerStateManager.OnAttack2 += PlayerStateManager_OnAttack2;
         playerStateManager.OnLeftGround += PlayerStateManager_OnLeftGround;
         playerStateManager.OnRoll += PlayerStateManager_OnRoll;
         playerStateManager.OnDodge += PlayerStateManager_OnDodge;
@@ -64,6 +67,11 @@ public class PlayerAnimation : MonoBehaviour
     private void PlayerStateManager_OnAttack()
     {
         animator.SetTrigger(attackHash);
+    }
+
+    private void PlayerStateManager_OnAttack2()
+    {
+        animator.SetTrigger(attack2Hash);
     }
 
     private void PlayerStateManager_OnRoll()
