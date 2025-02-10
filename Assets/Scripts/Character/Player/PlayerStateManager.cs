@@ -36,10 +36,12 @@ public class PlayerStateManager : StateManager<PlayerState>
 
     public UnityEvent OnAnyAttackStart; 
     public UnityEvent OnAnyAttackEnd;
+    public UnityEvent OnLanded;
 
     protected override void StartAwake()
     {
         characterAdapter.LeftGround += CharacterAdapter_LeftGround;
+        character.Landed += Character_Landed;
     }
 
     protected override string GetInitialStateName()
@@ -141,6 +143,11 @@ public class PlayerStateManager : StateManager<PlayerState>
     private void CharacterAdapter_LeftGround()
     {
         SwitchState("Falling");
+    }
+
+    private void Character_Landed(Vector3 landingVelocity)
+    {
+        OnLanded?.Invoke();
     }
 
     public bool IsInState(PlayerState state)
