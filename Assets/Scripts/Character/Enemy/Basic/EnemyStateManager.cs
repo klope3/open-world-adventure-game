@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using ECM2;
 
 public class EnemyStateManager : StateManager<EnemyState>
@@ -21,6 +22,9 @@ public class EnemyStateManager : StateManager<EnemyState>
     [SerializeField] private float attackProximity;
     [SerializeField] private float attackRecoveryDuration;
     public System.Action OnAttack;
+    public UnityEvent OnAttackStart;
+    public UnityEvent OnAttackEnd;
+
 
     protected override void StartAwake()
     {
@@ -52,6 +56,7 @@ public class EnemyStateManager : StateManager<EnemyState>
         pauseState.Initialize(this, character, playerObj, transform, attackRecoveryDuration);
 
         attackState.OnEnter += AttackState_OnEnter;
+        attackState.OnExit += AttackState_OnExit;
 
         states.Add("Wander", wanderState);
         states.Add("Chase", chaseState);
@@ -64,5 +69,11 @@ public class EnemyStateManager : StateManager<EnemyState>
     private void AttackState_OnEnter()
     {
         OnAttack?.Invoke();
+        OnAttackStart?.Invoke();
+    }
+
+    private void AttackState_OnExit()
+    {
+        OnAttackEnd?.Invoke();
     }
 }

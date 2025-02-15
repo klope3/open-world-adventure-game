@@ -10,6 +10,7 @@ public class EnemyBasicAttackState : EnemyState
     private float timer;
 
     public System.Action OnEnter;
+    public System.Action OnExit;
 
     public override void EnterState()
     {
@@ -24,7 +25,7 @@ public class EnemyBasicAttackState : EnemyState
 
     public override void ExitState()
     {
-
+        OnExit?.Invoke();
     }
 
     public override void UpdateState()
