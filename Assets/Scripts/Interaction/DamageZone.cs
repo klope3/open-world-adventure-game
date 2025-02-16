@@ -12,7 +12,8 @@ public class DamageZone : MonoBehaviour
         HealthHandler health = other.GetComponent<HealthHandler>();
         if (health != null)
         {
-            health.AddHealth(-1 * amount);
+            Vector3 point = other.ClosestPoint(transform.position);
+            health.AddHealth(-1 * amount, point);
         }
     }
 }

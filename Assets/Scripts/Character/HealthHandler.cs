@@ -16,10 +16,12 @@ public class HealthHandler : MonoBehaviour
     [SerializeField] private bool showLogs;
     private float graceTimer;
     private int curHealth;
+    public delegate void PositionEvent(Vector3 position);
     public UnityEvent OnAwake;
     public UnityEvent OnDamage;
     public UnityEvent OnHeal;
     public UnityEvent OnDie;
+    public event PositionEvent OnDamaged;
 
     public int CurHealth
     {
@@ -51,7 +53,7 @@ public class HealthHandler : MonoBehaviour
         }
     }
 
-    public void AddHealth(int amount)
+    public void AddHealth(int amount, Vector3 impactPoint)
     {
         if (amount == 0 || (amount < 0 && invincible))
             return;
@@ -69,6 +71,7 @@ public class HealthHandler : MonoBehaviour
         {
             graceTimer = 0;
             OnDamage?.Invoke();
+            OnDamaged?.Invoke(impactPoint);
         } 
         if (curHealth == 0)
         {

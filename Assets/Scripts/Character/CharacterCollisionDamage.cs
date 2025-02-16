@@ -17,7 +17,7 @@ public class CharacterCollisionDamage : MonoBehaviour
     {
         HealthHandler healthHandler = collisionResult.collider.GetComponent<HealthHandler>();
         if (healthHandler == null) return;
-        healthHandler.AddHealth(-1 * amount);
+        healthHandler.AddHealth(-1 * amount, collisionResult.point);
     }
 
     private void OnDisable()
