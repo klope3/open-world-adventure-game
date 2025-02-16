@@ -2133,6 +2133,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amount: 1
+  force: 0
+  forceOrigin: {fileID: 0}
 --- !u!1001 &422669393
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7880,6 +7882,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amount: 1
+  force: 10
+  forceOrigin: {fileID: 1185212335}
 --- !u!65 &1365353555
 BoxCollider:
   m_ObjectHideFlags: 0
