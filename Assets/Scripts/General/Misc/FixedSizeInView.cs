@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class FixedSizeInView : MonoBehaviour
 {
-    [SerializeField] private Transform cameraTransform;
     [SerializeField] private float referenceDistance;
+    private Transform cameraTransform;
+
+    private void Awake()
+    {
+        cameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;
+        if (cameraTransform == null) Debug.LogError("Couldn't find main camera!");
+    }
 
     private void Update()
     {
