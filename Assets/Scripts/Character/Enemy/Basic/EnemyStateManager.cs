@@ -7,6 +7,7 @@ using ECM2;
 public class EnemyStateManager : StateManager<EnemyState>
 {
     [SerializeField] private Character character;
+    [SerializeField] private HealthHandler healthHandler;
     [SerializeField] private float wanderMoveSpeed;
 
     [SerializeField, Tooltip("The enemy will move for this long before pausing.")] 
@@ -22,6 +23,7 @@ public class EnemyStateManager : StateManager<EnemyState>
     [SerializeField] private float attackProximity;
     [SerializeField] private float attackRecoveryDuration;
     public System.Action OnAttack;
+    public System.Action OnPause;
     public UnityEvent OnAttackStart;
     public UnityEvent OnAttackEnd;
 
@@ -52,11 +54,12 @@ public class EnemyStateManager : StateManager<EnemyState>
         
         wanderState.Initialize(this, character, playerObj, transform, wanderMoveSpeed, wanderMoveTime, wanderPauseTime, playerChaseDistance);
         chaseState.Initialize(this, character, playerObj, transform, playerChaseDistance, chaseSpeed, attackProximity);
-        attackState.Initialize(this, character, playerObj, transform, attackSpeed, attackDuration);
+        attackState.Initialize(this, character, playerObj, transform, healthHandler, attackSpeed, attackDuration);
         pauseState.Initialize(this, character, playerObj, transform, attackRecoveryDuration);
 
         attackState.OnEnter += AttackState_OnEnter;
         attackState.OnExit += AttackState_OnExit;
+        pauseState.OnEnter += PauseState_OnEnter;
 
         states.Add("Wander", wanderState);
         states.Add("Chase", chaseState);
@@ -64,6 +67,11 @@ public class EnemyStateManager : StateManager<EnemyState>
         states.Add("Pause", pauseState);
 
         return states;
+    }
+
+    private void PauseState_OnEnter()
+    {
+        OnPause?.Invoke();
     }
 
     private void AttackState_OnEnter()

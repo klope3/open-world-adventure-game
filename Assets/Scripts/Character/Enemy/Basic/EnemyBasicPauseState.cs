@@ -7,10 +7,13 @@ public class EnemyBasicPauseState : EnemyState
 {
     private float pauseDuration;
     private float timer;
+    public event System.Action OnEnter;
 
     public override void EnterState()
     {
+        Debug.Log("Enemy pause");
         character.SetMovementDirection(Vector3.zero);
+        OnEnter?.Invoke();
     }
 
     public override void ExitState()

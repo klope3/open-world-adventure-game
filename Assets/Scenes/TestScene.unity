@@ -9537,6 +9537,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 320022245168190669, guid: ba127e2bba35cad4f9efc694c6b646aa,
+        type: 3}
+      propertyPath: healthHandler
+      value: 
+      objectReference: {fileID: 922395346}
     - target: {fileID: 1096526407164907730, guid: ba127e2bba35cad4f9efc694c6b646aa,
         type: 3}
       propertyPath: graceTime
