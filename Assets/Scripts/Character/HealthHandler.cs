@@ -21,6 +21,7 @@ public class HealthHandler : MonoBehaviour
     public UnityEvent OnDamage;
     public UnityEvent OnHeal;
     public UnityEvent OnDie;
+    public System.Action OnDied;
     public event PositionEvent OnDamaged;
 
     public int CurHealth
@@ -76,8 +77,15 @@ public class HealthHandler : MonoBehaviour
         if (curHealth == 0)
         {
             OnDie?.Invoke();
+            OnDied?.Invoke();
             if (destroyOnDeath)
                 Destroy(gameObject);
         }
+    }
+
+    public void Reinitialize()
+    {
+        curHealth = startingHealth;
+        graceTimer = graceTime;
     }
 }
