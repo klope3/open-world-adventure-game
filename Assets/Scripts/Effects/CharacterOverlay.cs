@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Sirenix.OdinInspector;
 
 public class CharacterOverlay : MonoBehaviour
 {
-    [SerializeField] private SkinnedMeshRenderer meshRenderer;
+    //[SerializeField] private SkinnedMeshRenderer meshRenderer;
+    [SerializeField] private SkinnedMeshRenderer[] meshRenderers;
     private float timer;
     private delegate Color ColorFunc(float t);
     private ColorFunc colorFunction;
@@ -28,7 +28,11 @@ public class CharacterOverlay : MonoBehaviour
     private void Update()
     {
         timer += Time.deltaTime;
-        meshRenderer.material.SetColor(OVERLAY_ID, colorFunction(timer));
+        for (int i = 0; i < meshRenderers.Length; i++)
+        {
+            SkinnedMeshRenderer meshRenderer = meshRenderers[i];
+            meshRenderer.material.SetColor(OVERLAY_ID, colorFunction(timer));
+        }
     }
 
     public void DoDamagePulse()
