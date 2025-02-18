@@ -12,6 +12,8 @@ public class SkeletonDeath : MonoBehaviour
     [SerializeField] private Collider characterCollider;
     [SerializeField] private SkinnedMeshRenderer[] meshesToHide;
     [SerializeField] private Animator animator;
+    [SerializeField] private DamageZone damageZone;
+    [SerializeField] private EnemyStateManager stateManager;
 
     public void DoDeath()
     {
@@ -19,6 +21,8 @@ public class SkeletonDeath : MonoBehaviour
         targetablePoint.gameObject.SetActive(false);
         characterCollider.enabled = false;
         animator.enabled = false;
+        stateManager.enabled = false;
+        damageZone.gameObject.SetActive(false);
         for (int i = 0; i < meshesToHide.Length; i++)
         {
             meshesToHide[i].gameObject.SetActive(false);
@@ -35,6 +39,7 @@ public class SkeletonDeath : MonoBehaviour
         targetablePoint.gameObject.SetActive(true);
         characterCollider.enabled = true;
         animator.enabled = true;
+        stateManager.enabled = true;
         healthHandler.Reinitialize();
         for (int i = 0; i < meshesToHide.Length; i++)
         {
