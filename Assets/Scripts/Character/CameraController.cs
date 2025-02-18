@@ -105,11 +105,13 @@ public class CameraController : MonoBehaviour
     private void Point_OnDestroyed(TargetablePoint point)
     {
         ForgetPoint(point);
+        if (IsTargeting && point == targetedPoint) ToggleTargeting();
     }
 
     private void Point_OnDisabled(TargetablePoint point)
     {
         ForgetPoint(point);
+        if (IsTargeting && point == targetedPoint) ToggleTargeting();
     }
 
     private void ForgetPoint(TargetablePoint point)
