@@ -6457,7 +6457,7 @@ PrefabInstance:
     - target: {fileID: 2070925441746177912, guid: 363d60fc2acd40a40af824250c677506,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.39
+      value: -6.6800003
       objectReference: {fileID: 0}
     - target: {fileID: 2070925441746177912, guid: 363d60fc2acd40a40af824250c677506,
         type: 3}
@@ -6566,7 +6566,7 @@ MonoBehaviour:
   ShoulderOffset: {x: 0, y: -0.16, z: 0}
   VerticalArmLength: 0.4
   CameraSide: 1
-  CameraDistance: 5.34
+  CameraDistance: 3.63
   CameraCollisionFilter:
     serializedVersion: 2
     m_Bits: 0
@@ -6615,7 +6615,7 @@ MonoBehaviour:
   _rotationMode: 1
   _rotationRate: 800
   _startingMovementMode: 1
-  _maxWalkSpeed: 9.5
+  _maxWalkSpeed: 6
   _minAnalogWalkSpeed: 0
   _maxAcceleration: 47.8
   _brakingDecelerationWalking: 20
@@ -15008,7 +15008,7 @@ PrefabInstance:
     - target: {fileID: 8944336655422409503, guid: da9d4203d9f03f940846cff38141a7a8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.39
+      value: -6.6800003
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: da9d4203d9f03f940846cff38141a7a8,
         type: 3}
