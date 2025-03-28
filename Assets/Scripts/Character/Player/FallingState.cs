@@ -8,7 +8,6 @@ public class FallingState : PlayerState
 
     public override void EnterState()
     {
-        Debug.Log("Entering falling");
         OnEnter?.Invoke();
     }
 
@@ -18,7 +17,6 @@ public class FallingState : PlayerState
 
     public override void ExitState()
     {
-        Debug.Log("Exiting falling");
     }
 
     public override void PostInitialize()
@@ -29,5 +27,10 @@ public class FallingState : PlayerState
     private void Character_Landed(Vector3 landingVelocity)
     {
         stateManager.SwitchState("Idle");
+    }
+
+    public override string GetDebugName()
+    {
+        return "falling";
     }
 }

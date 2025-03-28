@@ -6,30 +6,22 @@ using UnityEngine.Events;
 
 public class PlayerStateManager : StateManager<PlayerState>
 {
-    [SerializeField] private Animator animator;
     [SerializeField] private ECM2CharacterAdapter characterAdapter;
     [SerializeField] private Character character;
-    [SerializeField] private Collider meleeZone;
     [SerializeField] private InteractionZone interactionZone;
     [SerializeField] private DialogueManager dialogueManager;
     [SerializeField] private DialogueBox dialogueBox;
     [SerializeField] private CameraController cameraController;
     [SerializeField] private InputActionsEvents inputActionsEvents;
-    [SerializeField] private float meleeZoneActiveTime;
-    //[SerializeField] private float attacksPerSecond;
     [SerializeField] private float standardAttackDuration;
-    //[SerializeField, Tooltip("The player must press attack at least this long after the current attack started to chain to the next attack.")] 
-    //private float standardAttackChainDelay;
     [SerializeField, Tooltip("The player must press attack at most this long after the previous attack state finished in order to chain the next attack.")]
     private float standardAttackChainTime;
-    [SerializeField] private float stopMovementTime;
     [SerializeField] private float rollDuration;
     [SerializeField] private float rollSpeed;
     [SerializeField] private float rollDeceleration;
     [SerializeField] private float dodgeDuration;
     [SerializeField] private float dodgeSpeed;
     [SerializeField] private float dodgeDeceleration;
-    [SerializeField] private float dodgeJumpForce;
     private int recentStandardAttacks; //increments while chaining attacks; resets to 0 when standardAttackChainTime elapses
     public System.Action OnAttack;
     public System.Action OnAttack2;
@@ -67,7 +59,6 @@ public class PlayerStateManager : StateManager<PlayerState>
         IdleState idleState = new IdleState();
         AttackState attackState = new AttackState();
         AttackState attackState2 = new AttackState();
-        //Attack2State attack2State = new Attack2State();
         JumpState jumpState = new JumpState();
         FallingState fallingState = new FallingState();
         DialogueState dialogueState = new DialogueState();
@@ -78,7 +69,6 @@ public class PlayerStateManager : StateManager<PlayerState>
         idleState.Initialize(this, character, characterAdapter, interactionZone, cameraController);
         attackState.Initialize(this, character, characterAdapter, standardAttackDuration);
         attackState2.Initialize(this, character, characterAdapter, standardAttackDuration);
-        //attack2State.Initialize(this, character, characterAdapter, standardAttackDuration);
         jumpState.Initialize(this, character, characterAdapter);
         fallingState.Initialize(this, character, characterAdapter);
         dialogueState.Initialize(this, character, characterAdapter, dialogueManager, dialogueBox, inputActionsEvents);
@@ -89,7 +79,6 @@ public class PlayerStateManager : StateManager<PlayerState>
         idleState.PostInitialize();
         attackState.PostInitialize();
         attackState2.PostInitialize();
-        //attack2State.PostInitialize();
         jumpState.PostInitialize();
         fallingState.PostInitialize();
         dialogueState.PostInitialize();
@@ -101,8 +90,6 @@ public class PlayerStateManager : StateManager<PlayerState>
         attackState.OnExit += AttackState_OnExit;
         attackState2.OnEnter += AttackState2_OnEnter;
         attackState2.OnExit += AttackState2_OnExit;
-        //attack2State.OnEnter += Attack2State_OnEnter;
-        //attack2State.OnExit += Attack2State_OnExit;
         fallingState.OnEnter += FallingState_OnEnter;
         rollState.OnEnter += RollState_OnEnter;
         dodgeState.OnEnter += DodgeState_OnEnter;
@@ -110,7 +97,6 @@ public class PlayerStateManager : StateManager<PlayerState>
         states.Add("Idle", idleState);
         states.Add("Attack", attackState);
         states.Add("Attack2", attackState2);
-        //states.Add("Attack2", attack2State);
         states.Add("Jump", jumpState);
         states.Add("Falling", fallingState);
         states.Add("Dialogue", dialogueState);

@@ -14,7 +14,6 @@ public class EnemyBasicWanderState : EnemyState
 
     public override void EnterState()
     {
-        Debug.Log("Entering wander");
         character.maxWalkSpeed = moveSpeed;
         character.SetMovementDirection(PickRandomDirection());
         timer = 0;
@@ -47,7 +46,6 @@ public class EnemyBasicWanderState : EnemyState
 
     public override void ExitState()
     {
-        Debug.Log("Exiting wander");
     }
 
     private Vector3 PickRandomDirection()
@@ -63,5 +61,10 @@ public class EnemyBasicWanderState : EnemyState
         pauseTimerMax = wanderPauseTime;
         moveSpeed = wanderMoveSpeed;
         this.playerChaseDistance = playerChaseDistance;
+    }
+
+    public override string GetDebugName()
+    {
+        return "wander";
     }
 }

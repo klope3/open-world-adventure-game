@@ -11,7 +11,6 @@ public class EnemyBasicPauseState : EnemyState
 
     public override void EnterState()
     {
-        Debug.Log("Enemy pause");
         character.SetMovementDirection(Vector3.zero);
         OnEnter?.Invoke();
     }
@@ -35,5 +34,10 @@ public class EnemyBasicPauseState : EnemyState
     {
         Initialize(stateManager, character, playerObj, ownTransform);
         this.pauseDuration = pauseDuration;
+    }
+
+    public override string GetDebugName()
+    {
+        return "pause";
     }
 }

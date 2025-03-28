@@ -11,7 +11,6 @@ public class IdleState : PlayerState
     //default state
     public override void EnterState()
     {
-        Debug.Log("Entering idle");
         characterAdapter.canMove = true;
     }
 
@@ -25,7 +24,6 @@ public class IdleState : PlayerState
 
     public override void ExitState()
     {
-        Debug.Log("Exiting idle");
     }
 
     public void Initialize(PlayerStateManager stateManager, Character character, ECM2CharacterAdapter characterAdapter, InteractionZone interactionZone, CameraController cameraController)
@@ -37,7 +35,6 @@ public class IdleState : PlayerState
 
     public override void PostInitialize()
     {
-        Debug.Log("PostInitialize in idle");
         InputActionsProvider.OnAButtonStarted += Jump_started;
         InputActionsProvider.OnBButtonStarted += BButton_started;
         InputActionsProvider.OnInteractButtonStarted += InteractButton_started;
@@ -67,5 +64,10 @@ public class IdleState : PlayerState
 
         character.Jump();
         stateManager.SwitchState("Jump");
+    }
+
+    public override string GetDebugName()
+    {
+        return "idle";
     }
 }

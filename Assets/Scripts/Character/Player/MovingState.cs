@@ -83,4 +83,9 @@ public class MovingState : PlayerState
 
 
     }
+
+    public override string GetDebugName()
+    {
+        return "moving";
+    }
 }

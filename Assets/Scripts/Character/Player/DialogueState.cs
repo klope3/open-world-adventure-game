@@ -54,4 +54,9 @@ public class DialogueState : PlayerState
     {
         if (stateManager.IsInState(this)) dialogueManager.TryAdvanceDialogue();
     }
+
+    public override string GetDebugName()
+    {
+        return "dialogue";
+    }
 }

@@ -8,7 +8,6 @@ public class JumpState : PlayerState
     //enter from pressing jump
     public override void EnterState()
     {
-        Debug.Log("Entering jump");
     }
 
     public override void UpdateState()
@@ -19,7 +18,6 @@ public class JumpState : PlayerState
     //exit from releasing jump, or landing
     public override void ExitState()
     {
-        Debug.Log("Exiting jump");
     }
 
     public override void PostInitialize()
@@ -44,5 +42,10 @@ public class JumpState : PlayerState
     private void Character_ReachedJumpApex()
     {
         stateManager.SwitchState("Falling");
+    }
+
+    public override string GetDebugName()
+    {
+        return "jump";
     }
 }

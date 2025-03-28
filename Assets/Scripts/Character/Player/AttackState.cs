@@ -13,7 +13,6 @@ public class AttackState : PlayerState
 
     public override void EnterState()
     {
-        Debug.Log("Entering attack");
         characterAdapter.canMove = false;
         //InputActionsProvider.OnBButtonStarted += Attack_started;
 
@@ -30,7 +29,6 @@ public class AttackState : PlayerState
     
     public override void ExitState()
     {
-        Debug.Log("Exiting attack");
         //InputActionsProvider.OnBButtonStarted -= Attack_started;
         OnExit?.Invoke();
     }
@@ -44,6 +42,11 @@ public class AttackState : PlayerState
 
     public override void PostInitialize()
     {
+    }
+
+    public override string GetDebugName()
+    {
+        return "attack";
     }
 
     //private void Attack_started()

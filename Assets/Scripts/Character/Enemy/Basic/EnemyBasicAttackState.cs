@@ -15,7 +15,6 @@ public class EnemyBasicAttackState : EnemyState
 
     public override void EnterState()
     {
-        Debug.Log("Enemy attack");
         Vector3 vecToPlayer = playerObj.transform.position - ownTransform.position;
         Vector3 flattened = new Vector3(vecToPlayer.x, 0, vecToPlayer.z);
 
@@ -55,5 +54,10 @@ public class EnemyBasicAttackState : EnemyState
         this.attackSpeed = attackSpeed;
         this.attackDuration = attackDuration;
         this.healthHandler = ownHealth;
+    }
+
+    public override string GetDebugName()
+    {
+        return "attack";
     }
 }

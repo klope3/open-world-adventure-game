@@ -50,4 +50,9 @@ public class RollState : PlayerState
         this.duration = duration;
         this.deceleration = deceleration;
     }
+
+    public override string GetDebugName()
+    {
+        return "roll";
+    }
 }

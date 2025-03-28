@@ -11,7 +11,6 @@ public class EnemyBasicChaseState : EnemyState
 
     public override void EnterState()
     {
-        Debug.Log("Entering chase");
         character.maxWalkSpeed = chaseSpeed;
     }
 
@@ -35,7 +34,6 @@ public class EnemyBasicChaseState : EnemyState
 
     public override void ExitState()
     {
-        Debug.Log("Exiting chase");
     }
 
     public void Initialize(EnemyStateManager stateManager, Character character, GameObject playerObj, Transform ownTransform, float playerChaseDistance, float chaseSpeed, float attackProximity)
@@ -44,5 +42,10 @@ public class EnemyBasicChaseState : EnemyState
         this.playerChaseDistance = playerChaseDistance;
         this.chaseSpeed = chaseSpeed;
         this.attackProximity = attackProximity;
+    }
+
+    public override string GetDebugName()
+    {
+        return "chase";
     }
 }
