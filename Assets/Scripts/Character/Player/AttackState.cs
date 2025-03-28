@@ -6,7 +6,7 @@ using ECM2;
 public class AttackState : PlayerState
 {
     private float timeInState;
-    private float chainDelay;
+    //private float chainDelay;
 
     public System.Action OnEnter;
     public System.Action OnExit;
@@ -15,7 +15,7 @@ public class AttackState : PlayerState
     {
         Debug.Log("Entering attack");
         characterAdapter.canMove = false;
-        InputActionsProvider.OnBButtonStarted += Attack_started;
+        //InputActionsProvider.OnBButtonStarted += Attack_started;
 
         OnEnter?.Invoke();
     }
@@ -31,23 +31,23 @@ public class AttackState : PlayerState
     public override void ExitState()
     {
         Debug.Log("Exiting attack");
-        InputActionsProvider.OnBButtonStarted -= Attack_started;
+        //InputActionsProvider.OnBButtonStarted -= Attack_started;
         OnExit?.Invoke();
     }
 
-    public void Initialize(PlayerStateManager stateManager, Character character, ECM2CharacterAdapter characterAdapter, float timeInState, float chainDelay)
+    public void Initialize(PlayerStateManager stateManager, Character character, ECM2CharacterAdapter characterAdapter, float timeInState)
     {
         Initialize(stateManager, character, characterAdapter);
         this.timeInState = timeInState;
-        this.chainDelay = chainDelay;
+        //this.chainDelay = chainDelay;
     }
 
     public override void PostInitialize()
     {
     }
 
-    private void Attack_started()
-    {
-        if (stateManager.TimeInState > chainDelay) stateManager.SwitchState("Attack2");
-    }
+    //private void Attack_started()
+    //{
+    //    if (stateManager.TimeInState > chainDelay) stateManager.SwitchState("Attack2");
+    //}
 }

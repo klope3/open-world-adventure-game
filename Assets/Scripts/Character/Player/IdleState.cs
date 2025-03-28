@@ -39,7 +39,7 @@ public class IdleState : PlayerState
     {
         Debug.Log("PostInitialize in idle");
         InputActionsProvider.OnAButtonStarted += Jump_started;
-        InputActionsProvider.OnBButtonStarted += Attack_started;
+        InputActionsProvider.OnBButtonStarted += BButton_started;
         InputActionsProvider.OnInteractButtonStarted += InteractButton_started;
         InputActionsProvider.OnZTargetStarted += ZTarget_started;
     }
@@ -54,11 +54,11 @@ public class IdleState : PlayerState
         if (stateManager.IsInState(this)) interactionZone.Interact();
     }
 
-    private void Attack_started()
+    private void BButton_started()
     {
         if (!stateManager.IsInState(this)) return;
 
-        stateManager.SwitchState("Attack");
+        stateManager.TryDoAttack();
     }
 
     private void Jump_started()

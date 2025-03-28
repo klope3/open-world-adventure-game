@@ -57,7 +57,7 @@ public class MovingState : PlayerState
     {
         if (!stateManager.IsInState(this)) return;
 
-        stateManager.SwitchState("Attack");
+        stateManager.TryDoAttack();
     }
 
     private void Jump_started()

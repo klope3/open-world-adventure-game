@@ -33,11 +33,13 @@ public abstract class StateManager<TState> : MonoBehaviour where TState : State
     protected abstract string GetInitialStateName();
     protected abstract Dictionary<string, TState> GetStateDictionary();
     protected abstract void StartAwake();
+    protected abstract void EndUpdate();
 
     private void Update()
     {
         TimeInState += Time.deltaTime;
         currentState.UpdateState();
+        EndUpdate();
     }
 
     public void SwitchState(string stateName)

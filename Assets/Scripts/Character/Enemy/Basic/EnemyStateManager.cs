@@ -32,6 +32,10 @@ public class EnemyStateManager : StateManager<EnemyState>
     {
     }
 
+    protected override void EndUpdate()
+    {
+    }
+
     protected override string GetInitialStateName()
     {
         return "Wander";

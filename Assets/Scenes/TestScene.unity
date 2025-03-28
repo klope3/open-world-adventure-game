@@ -6884,9 +6884,8 @@ MonoBehaviour:
   cameraController: {fileID: 1185212338}
   inputActionsEvents: {fileID: 1881556815}
   meleeZoneActiveTime: 0.1
-  attacksPerSecond: 0.3
-  standardAttackDuration: 0.35
-  standardAttackChainDelay: 0.25
+  standardAttackDuration: 0.45
+  standardAttackChainTime: 0.2
   stopMovementTime: 0.4
   rollDuration: 0.6
   rollSpeed: 23
@@ -8303,7 +8302,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1365353553
 Transform:
   m_ObjectHideFlags: 0
@@ -8313,8 +8312,8 @@ Transform:
   m_GameObject: {fileID: 1365353552}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.5606, z: 0}
-  m_LocalScale: {x: 0.14126508, y: 1.0082355, z: 0.052811503}
+  m_LocalPosition: {x: 0, y: 0.5885, z: -0}
+  m_LocalScale: {x: 0.14126508, y: 1.0643045, z: 0.052811503}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 164105298}
