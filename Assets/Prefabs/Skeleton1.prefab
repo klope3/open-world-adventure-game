@@ -20353,7 +20353,7 @@ MonoBehaviour:
   invincible: 0
   destroyOnDeath: 0
   graceTime: 0.5
-  showLogs: 1
+  showLogs: 0
   OnAwake:
     m_PersistentCalls:
       m_Calls: []

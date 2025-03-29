@@ -52,7 +52,6 @@ public class Spawner : MonoBehaviour
     
     private void Spawnable_OnDie(Spawnable spawnable)
     {
-        Debug.Log("Noticed death");
         spawnable.OnDie -= Spawnable_OnDie;
         spawnedCount--;
     }
