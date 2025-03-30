@@ -40,6 +40,12 @@ public class EnemyBasicAttackState : EnemyState
 
     public override void UpdateState()
     {
+        if (playerObj.GetComponent<HealthHandler>().CurHealth == 0)
+        {
+            stateManager.SwitchState("Wander");
+            return;
+        }
+
         timer += Time.deltaTime;
         if (timer > attackDuration)
         {

@@ -23,7 +23,8 @@ public class EnemyBasicWanderState : EnemyState
     public override void UpdateState()
     {
         Vector3 vecToPlayer = playerObj.transform.position - ownTransform.position;
-        if (vecToPlayer.magnitude < playerChaseDistance)
+        HealthHandler playerHealth = playerObj.GetComponent<HealthHandler>();
+        if (vecToPlayer.magnitude < playerChaseDistance && playerHealth.CurHealth > 0)
         {
             stateManager.SwitchState("Chase");
             return;

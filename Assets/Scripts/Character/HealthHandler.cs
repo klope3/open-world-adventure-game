@@ -7,7 +7,7 @@ public class HealthHandler : MonoBehaviour
 {
     [SerializeField] private int startingHealth;
     [SerializeField] private int maxHealth;
-    [SerializeField] private bool invincible;
+    [SerializeField] public bool invincible;
     [SerializeField] private bool destroyOnDeath;
 
     [SerializeField, Tooltip("Can't be hurt for this long after taking damage.")] 

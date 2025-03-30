@@ -10,6 +10,7 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] private ECM2CharacterAdapter adapter;
     [SerializeField] private CameraController cameraController;
     [SerializeField] private Animator animator;
+    [SerializeField] private HealthHandler health;
 
     private int speedHash;
     private int speedXHash;
@@ -22,6 +23,7 @@ public class PlayerAnimation : MonoBehaviour
     private int rollHash;
     private int targetingHash;
     private int dodgeHash;
+    private int dieHash;
 
     private void Awake()
     {
@@ -36,6 +38,7 @@ public class PlayerAnimation : MonoBehaviour
         speedYHash = Hash("SpeedY");
         targetingHash = Hash("Targeting");
         dodgeHash = Hash("Dodge");
+        dieHash = Hash("Die");
     
         character.Jumped += Character_Jumped;
         character.Landed += Character_Landed;
@@ -46,7 +49,12 @@ public class PlayerAnimation : MonoBehaviour
         playerStateManager.OnDodge += PlayerStateManager_OnDodge;
         cameraController.OnTargetingStarted += CameraController_OnTargetingStarted;
         cameraController.OnTargetingEnded += CameraController_OnTargetingEnded;
-        
+        health.OnDied += HealthHandler_OnDied;
+    }
+
+    private void HealthHandler_OnDied()
+    {
+        animator.SetTrigger(dieHash);
     }
 
     private void CameraController_OnTargetingEnded()

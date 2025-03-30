@@ -65,6 +65,7 @@ public class PlayerStateManager : StateManager<PlayerState>
         MovingState movingState = new MovingState();
         RollState rollState = new RollState();
         DodgeState dodgeState = new DodgeState();
+        DeathState deathState = new DeathState();
 
         idleState.Initialize(this, character, characterAdapter, interactionZone, cameraController);
         attackState.Initialize(this, character, characterAdapter, standardAttackDuration);
@@ -75,6 +76,7 @@ public class PlayerStateManager : StateManager<PlayerState>
         movingState.Initialize(this, character, characterAdapter, interactionZone, cameraController);
         rollState.Initialize(this, character, characterAdapter, rollSpeed, rollDuration, rollDeceleration);
         dodgeState.Initialize(this, character, characterAdapter, dodgeSpeed, dodgeDuration, dodgeDeceleration);
+        deathState.Initialize(this, character, characterAdapter);
 
         idleState.PostInitialize();
         attackState.PostInitialize();
@@ -85,6 +87,7 @@ public class PlayerStateManager : StateManager<PlayerState>
         movingState.PostInitialize();
         rollState.PostInitialize();
         dodgeState.PostInitialize();
+        deathState.PostInitialize();
 
         attackState.OnEnter += AttackState_OnEnter;
         attackState.OnExit += AttackState_OnExit;
@@ -103,6 +106,7 @@ public class PlayerStateManager : StateManager<PlayerState>
         states.Add("Moving", movingState);
         states.Add("Roll", rollState);
         states.Add("Dodge", dodgeState);
+        states.Add("Death", deathState);
         return states;
     }
 
