@@ -3464,7 +3464,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 6db04fd5cc7afbf43802e8714f702849,
         type: 3}
       propertyPath: m_Name
-      value: sword 1
+      value: sword
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9256,6 +9256,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 2962833217527848606, guid: 87849ada3f5baec4885b43450cdbc425, type: 3}
+    - {fileID: -6140390968867180353, guid: 87849ada3f5baec4885b43450cdbc425, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8725866108186182888, guid: 87849ada3f5baec4885b43450cdbc425,
         type: 3}
