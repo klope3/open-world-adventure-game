@@ -7,173 +7,65 @@ public class CameraController : MonoBehaviour
 {
     [SerializeField] private Transform testTransform;
     [SerializeField] private Transform cameraFollow;
-    [SerializeField] private GameObjectDetector targetableDetector;
     [SerializeField] private float sensitivity;
     [SerializeField] private float minX;
     [SerializeField] private float maxX;
     [SerializeField] private bool lockCursor;
     private Vector3 angles;
-    private bool isTargeting;
-    private Vector3 targetingAngles; //eulerAngles to maintain if targeting without an actual target
-    private TargetablePoint targetedPoint; //the point that is currently targeted (null when targeting is off)
-    private TargetablePoint pointToBeTargeted; //the point that is waiting to be targeted if the player activates targeting
-    private List<TargetablePoint> targetablePoints; //all points that are in range and potentially targetable
+    private Transform targetingTransform; //the point that is currently being targeted (null when targeting is off)
 
     public UnityEvent OnTargetingStart;
     public UnityEvent OnTargetingEnd;
     public System.Action OnTargetingStarted;
     public System.Action OnTargetingEnded;
 
-    public bool IsTargeting
+    public Transform TargetingTransform
     {
         get
         {
-            return isTargeting;
+            return targetingTransform;
         }
     }
 
     private void Awake()
     {
-        targetablePoints = new List<TargetablePoint>();
         if (lockCursor) Cursor.lockState = CursorLockMode.Locked;
     }
 
-    private void OnEnable()
+    public void SetTargetingTransform(Transform targetingTransform)
     {
-        targetableDetector.OnObjectEntered += TargetableDetector_OnObjectEntered;
-        targetableDetector.OnObjectExited += TargetableDetector_OnObjectExited;
-    }
-    
-    private void OnDisable()
-    {
-        targetableDetector.OnObjectEntered -= TargetableDetector_OnObjectEntered;
-        targetableDetector.OnObjectExited -= TargetableDetector_OnObjectExited;
-    }
+        Transform prevTargetingTransform = this.targetingTransform;
+        this.targetingTransform = targetingTransform;
 
-    public void ToggleTargeting()
-    {
-        bool prevIsTargeting = isTargeting;
-        isTargeting = !isTargeting;
-
-        if (!prevIsTargeting && isTargeting)
+        if (prevTargetingTransform == null && this.targetingTransform != null)
         {
-            targetingAngles = cameraFollow.eulerAngles;
             OnTargetingStart?.Invoke();
             OnTargetingStarted?.Invoke();
         }
-        if (prevIsTargeting && !isTargeting)
+        if (prevTargetingTransform != null && this.targetingTransform == null)
         {
             OnTargetingEnd?.Invoke();
             OnTargetingEnded?.Invoke();
         }
-
-        if (!targetedPoint)
-        {
-            targetedPoint = pointToBeTargeted;
-        }
-        else
-        {
-            if (angles.x > 180) angles.x -= 360;
-            targetedPoint = null;
-        }
-    }
-
-    private void TargetableDetector_OnObjectExited(GameObject obj)
-    {
-        TargetablePoint point = obj.GetComponent<TargetablePoint>();
-        if (!point) return;
-
-        ForgetPoint(point);
-        point.SetTargetable(false);
-    }
-
-    private void TargetableDetector_OnObjectEntered(GameObject obj)
-    {
-        TargetablePoint point = obj.GetComponent<TargetablePoint>();
-        if (!point) return;
-
-        if (!targetablePoints.Contains(point))
-        {
-            targetablePoints.Add(point);
-        }
-
-        point.OnDisabled += Point_OnDisabled;
-        point.OnDestroyed += Point_OnDestroyed;
-        point.SetTargetable(true);
-    }
-
-    private void Point_OnDestroyed(TargetablePoint point)
-    {
-        ForgetPoint(point);
-        if (IsTargeting && point == targetedPoint) ToggleTargeting();
-    }
-
-    private void Point_OnDisabled(TargetablePoint point)
-    {
-        ForgetPoint(point);
-        if (IsTargeting && point == targetedPoint) ToggleTargeting();
-    }
-
-    private void ForgetPoint(TargetablePoint point)
-    {
-        if (pointToBeTargeted == point) pointToBeTargeted = null;
-        targetablePoints.Remove(point);
-        point.OnDestroyed -= Point_OnDestroyed;
-        point.OnDisabled -= Point_OnDisabled;
     }
 
     private void Update()
     {
-        UpdateTargetables();
-
-        if (isTargeting)
+        if (targetingTransform != null)
         {
-            if (targetedPoint)
-            {
-                cameraFollow.LookAt(targetedPoint.transform);
-                angles = cameraFollow.eulerAngles;
-            } else
-            {
-                cameraFollow.eulerAngles = targetingAngles;
-            }
+            cameraFollow.LookAt(targetingTransform);
+            angles = cameraFollow.eulerAngles;
             return;
         }
-
+        
         Vector2 inputVec = InputActionsProvider.GetSecondaryAxis();
         angles.x += inputVec.y * sensitivity * Time.deltaTime;
         angles.y += inputVec.x * sensitivity * Time.deltaTime;
 
+        if (angles.x > 180) angles.x -= 360;
         if (angles.x < minX) angles.x = minX;
         if (angles.x > maxX) angles.x = maxX;
 
         cameraFollow.eulerAngles = angles;
-    }
-
-    private void UpdateTargetables()
-    {
-        pointToBeTargeted = ChoosePointToBeTargeted();
-
-        for (int i = 0; i < targetablePoints.Count; i++)
-        {
-            targetablePoints[i].SetTargetable(targetablePoints[i] == pointToBeTargeted);
-        }
-    }
-
-    private TargetablePoint ChoosePointToBeTargeted()
-    {
-        float smallestDist = float.MaxValue;
-        TargetablePoint curToBeTargeted = null;
-
-        for (int i = 0; i < targetablePoints.Count; i++)
-        {
-            float distToThisTargetable = Vector3.Distance(cameraFollow.position, targetablePoints[i].transform.position);
-            if (distToThisTargetable < smallestDist)
-            {
-                curToBeTargeted = targetablePoints[i];
-                smallestDist = distToThisTargetable;
-            }
-        }
-
-        return curToBeTargeted;
     }
 }

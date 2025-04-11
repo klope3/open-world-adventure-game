@@ -1,34 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class TargetablePoint : MonoBehaviour
 {
-    private bool isTargetable;
-    public UnityEvent OnBecomeTargetable;
-    public UnityEvent OnBecomeNotTargetable;
-    public delegate void TargetablePointEvent(TargetablePoint point);
-    public event TargetablePointEvent OnDisabled;
-    public event TargetablePointEvent OnDestroyed;
+    [SerializeField] private bool isTargetable = true;
 
-    public void SetTargetable(bool b)
+    public bool IsTargetable
     {
-        if (b == isTargetable) return;
+        get
+        {
+            return isTargetable;
+        }
+    }
 
+    public void SetIsTargetable(bool b)
+    {
         isTargetable = b;
-        if (isTargetable) OnBecomeTargetable?.Invoke();
-        else OnBecomeNotTargetable?.Invoke();  
-    }
-
-    private void OnDestroy()
-    {
-        OnDestroyed?.Invoke(this);
-    }
-
-    private void OnDisable()
-    {
-        SetTargetable(false);
-        OnDisabled?.Invoke(this);
     }
 }

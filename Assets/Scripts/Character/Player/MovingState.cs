@@ -7,6 +7,7 @@ public class MovingState : PlayerState
 {
     private InteractionZone interactionZone;
     private CameraController cameraController;
+    private TargetingHandler targetingHandler;
 
     public override void EnterState()
     {
@@ -36,16 +37,17 @@ public class MovingState : PlayerState
         }
     }
 
-    public void Initialize(PlayerStateManager stateManager, Character character, ECM2CharacterAdapter characterAdapter, InteractionZone interactionZone, CameraController cameraController)
+    public void Initialize(PlayerStateManager stateManager, Character character, ECM2CharacterAdapter characterAdapter, InteractionZone interactionZone, TargetingHandler targetingHandler, CameraController cameraController)
     {
         Initialize(stateManager, character, characterAdapter);
         this.interactionZone = interactionZone;
         this.cameraController = cameraController;
+        this.targetingHandler = targetingHandler;
     }
 
     private void ZTarget_started()
     {
-        if (stateManager.IsInState(this)) cameraController.ToggleTargeting();
+        if (stateManager.IsInState(this)) targetingHandler.ToggleTargeting();
     }
 
     private void InteractButton_started()
@@ -72,7 +74,7 @@ public class MovingState : PlayerState
     {
         if (!stateManager.IsInState(this)) return;
 
-        if (!cameraController.IsTargeting)
+        if (cameraController.TargetingTransform == null)
         {
             stateManager.SwitchState("Roll");
             return;

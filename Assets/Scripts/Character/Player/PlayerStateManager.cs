@@ -13,6 +13,7 @@ public class PlayerStateManager : StateManager<PlayerState>
     [SerializeField] private DialogueBox dialogueBox;
     [SerializeField] private CameraController cameraController;
     [SerializeField] private InputActionsEvents inputActionsEvents;
+    [SerializeField] private TargetingHandler targetingHandler;
     [SerializeField] private float standardAttackDuration;
     [SerializeField, Tooltip("The player must press attack at most this long after the previous attack state finished in order to chain the next attack.")]
     private float standardAttackChainTime;
@@ -67,13 +68,13 @@ public class PlayerStateManager : StateManager<PlayerState>
         DodgeState dodgeState = new DodgeState();
         DeathState deathState = new DeathState();
 
-        idleState.Initialize(this, character, characterAdapter, interactionZone, cameraController);
+        idleState.Initialize(this, character, characterAdapter, interactionZone, targetingHandler);
         attackState.Initialize(this, character, characterAdapter, standardAttackDuration);
         attackState2.Initialize(this, character, characterAdapter, standardAttackDuration);
         jumpState.Initialize(this, character, characterAdapter);
         fallingState.Initialize(this, character, characterAdapter);
         dialogueState.Initialize(this, character, characterAdapter, dialogueManager, dialogueBox, inputActionsEvents);
-        movingState.Initialize(this, character, characterAdapter, interactionZone, cameraController);
+        movingState.Initialize(this, character, characterAdapter, interactionZone, targetingHandler, cameraController);
         rollState.Initialize(this, character, characterAdapter, rollSpeed, rollDuration, rollDeceleration);
         dodgeState.Initialize(this, character, characterAdapter, dodgeSpeed, dodgeDuration, dodgeDeceleration);
         deathState.Initialize(this, character, characterAdapter);

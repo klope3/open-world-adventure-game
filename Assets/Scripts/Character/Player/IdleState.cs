@@ -6,7 +6,7 @@ using ECM2;
 public class IdleState : PlayerState
 {
     private InteractionZone interactionZone;
-    private CameraController cameraController;
+    private TargetingHandler targetingHandler;
 
     //default state
     public override void EnterState()
@@ -26,11 +26,11 @@ public class IdleState : PlayerState
     {
     }
 
-    public void Initialize(PlayerStateManager stateManager, Character character, ECM2CharacterAdapter characterAdapter, InteractionZone interactionZone, CameraController cameraController)
+    public void Initialize(PlayerStateManager stateManager, Character character, ECM2CharacterAdapter characterAdapter, InteractionZone interactionZone, TargetingHandler targetingHandler)
     {
         Initialize(stateManager, character, characterAdapter);
         this.interactionZone = interactionZone;
-        this.cameraController = cameraController;
+        this.targetingHandler = targetingHandler;
     }
 
     public override void PostInitialize()
@@ -43,7 +43,7 @@ public class IdleState : PlayerState
 
     private void ZTarget_started()
     {
-        if (stateManager.IsInState(this)) cameraController.ToggleTargeting();
+        if (stateManager.IsInState(this)) targetingHandler.ToggleTargeting();
     }
 
     private void InteractButton_started()

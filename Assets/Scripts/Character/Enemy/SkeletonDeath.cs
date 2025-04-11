@@ -18,7 +18,6 @@ public class SkeletonDeath : MonoBehaviour
     public void DoDeath()
     {
         character.enabled = false;
-        targetablePoint.gameObject.SetActive(false);
         characterCollider.enabled = false;
         animator.enabled = false;
         stateManager.enabled = false;
@@ -36,7 +35,7 @@ public class SkeletonDeath : MonoBehaviour
     private void OnEnable()
     {
         character.enabled = true;
-        targetablePoint.gameObject.SetActive(true);
+        targetablePoint.SetIsTargetable(true);
         characterCollider.enabled = true;
         animator.enabled = true;
         stateManager.enabled = true;
