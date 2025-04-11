@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PickupGrabber : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         Pickup pickup = other.GetComponent<Pickup>();
-        if (pickup) pickup.DoPickup(this);
+        if (pickup && pickup.canBePickedUp) pickup.DoPickup(this);
     }
 }
