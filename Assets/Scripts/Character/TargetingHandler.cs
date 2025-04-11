@@ -37,9 +37,11 @@ public class TargetingHandler : MonoBehaviour
         if (cameraController.TargetingTransform == null) return;
 
         TargetablePoint currentTargeted = cameraController.TargetingTransform.GetComponent<TargetablePoint>();
-        if (currentTargeted == null || currentTargeted.IsTargetable) return;
+        if (currentTargeted == null) return;
 
-        cameraController.SetTargetingTransform(null);
+        bool stillInDetectorZone = detectorZone.GetObjectsList().Contains(currentTargeted.gameObject);
+
+        if (!currentTargeted.IsTargetable || !stillInDetectorZone) cameraController.SetTargetingTransform(null);
     }
 
     public void ToggleTargeting()
