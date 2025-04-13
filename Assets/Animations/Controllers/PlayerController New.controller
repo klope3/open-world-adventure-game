@@ -126,8 +126,8 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.08897829
-  m_TransitionOffset: 0.15
+  m_TransitionDuration: 0.05137837
+  m_TransitionOffset: 0.2833548
   m_ExitTime: 0.7335026
   m_HasExitTime: 0
   m_HasFixedDuration: 1
@@ -151,9 +151,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.08897829
-  m_TransitionOffset: 0.15
-  m_ExitTime: 0.7877359
+  m_TransitionDuration: 0.05137837
+  m_TransitionOffset: 0.2833548
+  m_ExitTime: 0.8603868
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -199,7 +199,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Sword Attack 2
-  m_Speed: 1
+  m_Speed: 1.4
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 8608755085798287065}
@@ -214,7 +214,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 485fd33fefd292f4f802eb1f9593144e, type: 2}
+  m_Motion: {fileID: 7400000, guid: 88e18a236edfed841967a1d97b995341, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -306,7 +306,10 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Jump
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1790751414752252554}
   m_Solo: 0
@@ -316,7 +319,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.009363055
   m_TransitionOffset: 0
   m_ExitTime: 0.65
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 2
   m_OrderedInterruption: 1
@@ -465,8 +468,8 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.048249483
-  m_TransitionOffset: 0.11528614
+  m_TransitionDuration: 0.03823483
+  m_TransitionOffset: 0.2689549
   m_ExitTime: 0.7939142
   m_HasExitTime: 0
   m_HasFixedDuration: 1
@@ -887,9 +890,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.14960444
-  m_TransitionOffset: 0
-  m_ExitTime: 0.65
+  m_TransitionDuration: 0.17131329
+  m_TransitionOffset: 0.15594226
+  m_ExitTime: 0.84893143
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 2
@@ -979,7 +982,10 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Fall
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -5557283084770372327}
   m_Solo: 0
@@ -989,7 +995,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.65
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 2
   m_OrderedInterruption: 1
@@ -1092,9 +1098,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.06979072
-  m_TransitionOffset: 0.11263096
-  m_ExitTime: 0.8429841
+  m_TransitionDuration: 0.03823483
+  m_TransitionOffset: 0.26895493
+  m_ExitTime: 0.9352453
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -1108,7 +1114,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Sword Attack 1
-  m_Speed: 1
+  m_Speed: 1.4
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 2670845888001197193}
@@ -1123,7 +1129,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: f3850bd6a25e8cd4c9aae23388baa2b9, type: 2}
+  m_Motion: {fileID: 7400000, guid: 628c3e6bf8b891543b41adacd5eacb29, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -1185,7 +1191,10 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Jump
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1790751414752252554}
   m_Solo: 0
@@ -1374,9 +1383,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.08679533
-  m_TransitionOffset: 0
-  m_ExitTime: 0.5
+  m_TransitionDuration: 0.13102937
+  m_TransitionOffset: 0.2731042
+  m_ExitTime: 0.88387465
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -1389,7 +1398,10 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Fall
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -5557283084770372327}
   m_Solo: 0

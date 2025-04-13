@@ -8780,7 +8780,7 @@ MonoBehaviour:
   cameraController: {fileID: 1185212338}
   inputActionsEvents: {fileID: 1881556815}
   targetingHandler: {fileID: 1600540994}
-  standardAttackDuration: 0.45
+  standardAttackDuration: 0.6
   standardAttackChainTime: 0.2
   rollDuration: 0.6
   rollSpeed: 23
@@ -17104,6 +17104,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1268012135}
     m_Modifications:
+    - target: {fileID: 1522010840836802161, guid: 328eb7aa8ca41c246b6e24792833967f,
+        type: 3}
+      propertyPath: OnDelayEnd.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5689963786434204105, guid: 328eb7aa8ca41c246b6e24792833967f,
         type: 3}
       propertyPath: m_Name
