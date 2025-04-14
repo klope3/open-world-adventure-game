@@ -31,7 +31,10 @@ public class CharacterOverlay : MonoBehaviour
         for (int i = 0; i < meshRenderers.Length; i++)
         {
             SkinnedMeshRenderer meshRenderer = meshRenderers[i];
-            meshRenderer.material.SetColor(OVERLAY_ID, colorFunction(timer));
+            for (int j = 0; j < meshRenderer.materials.Length; j++)
+            {
+                meshRenderer.materials[j].SetColor(OVERLAY_ID, colorFunction(timer));
+            }
         }
     }
 
@@ -43,6 +46,7 @@ public class CharacterOverlay : MonoBehaviour
 
     public void DoDamageFlash()
     {
+        Debug.Log("Called");
         timer = 0;
         colorFunction = DamageFlashFunc;
     }
@@ -64,7 +68,7 @@ public class CharacterOverlay : MonoBehaviour
     {
         if (t > FLASH_SECONDS) return Color.clear;
 
-        float opacity = Mathf.Clamp(t * FLASH_SLOPE + FLASH_OFFSET, 0, 1);
-        return new Color(1, 0, 0, opacity);
+        float redAmount = Mathf.Clamp(t * FLASH_SLOPE + FLASH_OFFSET, 0, 1);
+        return new Color(redAmount, 0, 0, 1);
     }
 }
