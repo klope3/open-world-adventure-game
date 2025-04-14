@@ -8516,7 +8516,7 @@ MonoBehaviour:
   CameraDistance: 3.63
   CameraCollisionFilter:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
   IgnoreTag: 
   CameraRadius: 0.2
   DampingIntoCollision: 0
@@ -15650,7 +15650,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1971790404
 Transform:
   m_ObjectHideFlags: 0
@@ -15684,8 +15684,6 @@ MonoBehaviour:
   character: {fileID: 1185212331}
   playerStateManager: {fileID: 1185212341}
   moveInputArrow: {fileID: 2016540334}
-  moveInputVectorColor: {r: 1, g: 0, b: 0, a: 1}
-  mult: 2
 --- !u!1 &1985160120
 GameObject:
   m_ObjectHideFlags: 0
