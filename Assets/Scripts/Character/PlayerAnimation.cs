@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ECM2;
+using System.Linq;
 
 public class PlayerAnimation : MonoBehaviour
 {
@@ -24,6 +25,10 @@ public class PlayerAnimation : MonoBehaviour
     private int targetingHash;
     private int dodgeHash;
     private int dieHash;
+
+    private readonly int LAYER_INDEX_RIGHT_ARM = 1;
+
+    private readonly float RIGHT_ARM_LOWERED_WEIGHT = 0.75f; //currently the right arm layer is only used for lowering the arm while running AND item equipped, so the layer weight will alternate between 0 and this value
 
     private void Awake()
     {
@@ -111,9 +116,27 @@ public class PlayerAnimation : MonoBehaviour
     {
         Vector3 inputVec = InputActionsProvider.GetPrimaryAxis();
         Vector3 squareVec = Utils.ApproximateSquareInputVector(inputVec);
+        float inputMagnitude = inputVec.magnitude;
         animator.SetFloat(speedXHash, squareVec.x);
         animator.SetFloat(speedYHash, squareVec.y);
-        animator.SetFloat(speedHash, inputVec.magnitude);
+        animator.SetFloat(speedHash, inputMagnitude);
+
+        UpdateRightArmLayerWeights();
+    }
+
+    private void UpdateRightArmLayerWeights()
+    {
+        string[] activeInStates = { 
+            "Moving",
+        }; //the right arm layer should be 0 if the main layer is in any of these states
+        if (activeInStates.Contains(playerStateManager.CurrentStateKey)) //this should also depend on other things, like whether a weapon is equipped
+        {
+            animator.SetLayerWeight(LAYER_INDEX_RIGHT_ARM, RIGHT_ARM_LOWERED_WEIGHT);
+        }
+        else
+        {
+            animator.SetLayerWeight(LAYER_INDEX_RIGHT_ARM, 0);
+        }
     }
     
     private static int Hash(string str)

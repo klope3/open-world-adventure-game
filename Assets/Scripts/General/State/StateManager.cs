@@ -7,12 +7,20 @@ public abstract class StateManager<TState> : MonoBehaviour where TState : State
 {
     public Dictionary<string, TState> registeredStates { get; private set; }
     private TState currentState;
+    private string currentStateKey;
     public float TimeInState { get; private set; }
     public TState CurrentState
     {
         get
         {
             return currentState;
+        }
+    }
+    public string CurrentStateKey
+    {
+        get
+        {
+            return currentStateKey;
         }
     }
 
@@ -52,6 +60,7 @@ public abstract class StateManager<TState> : MonoBehaviour where TState : State
         currentState.ExitState();
         currentState = state;
         state.EnterState();
+        currentStateKey = stateName;
         TimeInState = 0;
     }
 
