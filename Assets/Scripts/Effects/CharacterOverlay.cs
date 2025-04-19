@@ -46,7 +46,6 @@ public class CharacterOverlay : MonoBehaviour
 
     public void DoDamageFlash()
     {
-        Debug.Log("Called");
         timer = 0;
         colorFunction = DamageFlashFunc;
     }

@@ -11,7 +11,7 @@ public class PlayerDeathSequence : MonoBehaviour
     [SerializeField] private PlayerStateManager stateManager;
     [SerializeField] private CameraController cameraController;
     [SerializeField] private HealthHandler health;
-    [SerializeField] private Image bgBlack;
+    [SerializeField] private ScreenFade screenFade;
     [SerializeField] private Image[] fadeInImages;
     [SerializeField] private Image[] buttonImages;
     [SerializeField] private TextMeshProUGUI[] fadeInTexts;
@@ -27,7 +27,7 @@ public class PlayerDeathSequence : MonoBehaviour
         characterAdapter.canMove = false;
         stateManager.SwitchState("Death");
         InputActionsProvider.LockPrimaryAxisTo(Vector3.zero);
-        bgBlack.DOColor(Color.black, fadeDuration).SetUpdate(true);
+        screenFade.FadeOutSlow();
         for (int i = 0; i < fadeInImages.Length; i++)
         {
             Image image = fadeInImages[i];

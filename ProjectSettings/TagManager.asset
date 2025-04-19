@@ -8,6 +8,8 @@ TagManager:
   - DialogueManager
   - Environment
   - Collide
+  - SceneTransition
+  - SceneTitleCardText
   layers:
   - Default
   - TransparentFX
