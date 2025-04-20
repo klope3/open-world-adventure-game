@@ -9,6 +9,7 @@ public class SceneTransition : MonoBehaviour
 {
     [SerializeField] private ScreenFade screenFade;
     [SerializeField] private Character player;
+    [SerializeField] private CameraController cameraController;
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
 
     public void TransitionToScene(string name)
@@ -26,6 +27,7 @@ public class SceneTransition : MonoBehaviour
         player.TeleportPosition(Vector3.zero);
         player.TeleportRotation(Quaternion.identity);
         virtualCamera.PreviousStateIsValid = false;
+        cameraController.ResetCameraAngle();
         yield return new WaitForSecondsRealtime(0.5f);
 
         Time.timeScale = 1;

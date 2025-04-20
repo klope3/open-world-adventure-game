@@ -49,6 +49,11 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    public void ResetCameraAngle()
+    {
+        angles = Vector3.zero;
+    }
+
     private void Update()
     {
         if (targetingTransform != null)

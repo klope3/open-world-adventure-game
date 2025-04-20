@@ -7,7 +7,7 @@ public abstract class DialogueInitiator : MonoBehaviour, IInteractable
 {
     protected DialogueManager dialogueManager;
 
-    private void Awake()
+    private void Start()
     {
         dialogueManager = GameObject.FindGameObjectWithTag("DialogueManager").GetComponent<DialogueManager>();
         if (!dialogueManager) Debug.LogError($"DialogueInitiator '{name}' failed to find the dialogue manager!");

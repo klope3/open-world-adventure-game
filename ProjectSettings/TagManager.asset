@@ -10,6 +10,7 @@ TagManager:
   - Collide
   - SceneTransition
   - SceneTitleCardText
+  - InitializePersistentObjects
   layers:
   - Default
   - TransparentFX
