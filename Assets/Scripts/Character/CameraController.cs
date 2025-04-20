@@ -49,9 +49,9 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    public void ResetCameraAngle()
+    public void SetCameraAngle(Vector3 angles)
     {
-        angles = Vector3.zero;
+        this.angles = angles;
     }
 
     private void Update()

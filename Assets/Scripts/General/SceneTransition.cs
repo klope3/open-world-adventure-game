@@ -14,20 +14,29 @@ public class SceneTransition : MonoBehaviour
 
     public void TransitionToScene(string name)
     {
-        StartCoroutine(CO_Transition(name));
+        StartCoroutine(CO_Transition(name, Vector3.zero, 0));
     }
 
-    private IEnumerator CO_Transition(string name)
+    public void TransitionToScene(string name, Vector3 spawnPosition, float spawnRotation)
+    {
+        StartCoroutine(CO_Transition(name, spawnPosition, spawnRotation));
+    }
+
+    private IEnumerator CO_Transition(string name, Vector3 spawnPosition, float spawnRotation)
     {
         screenFade.FadeOut();
         Time.timeScale = 0;
         yield return new WaitForSecondsRealtime(1);
 
         SceneManager.LoadScene(name);
-        player.TeleportPosition(Vector3.zero);
-        player.TeleportRotation(Quaternion.identity);
+
+        player.TeleportPosition(spawnPosition);
+        Quaternion rot = Quaternion.Euler(new Vector3(0, spawnRotation, 0));
+        player.TeleportRotation(rot);
+
         virtualCamera.PreviousStateIsValid = false;
-        cameraController.ResetCameraAngle();
+        cameraController.SetCameraAngle(new Vector3(0, spawnRotation, 0));
+
         yield return new WaitForSecondsRealtime(0.5f);
 
         Time.timeScale = 1;
