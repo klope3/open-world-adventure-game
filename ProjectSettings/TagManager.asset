@@ -11,6 +11,7 @@ TagManager:
   - SceneTransition
   - SceneTitleCardText
   - InitializePersistentObjects
+  - PlayerFollowCamera
   layers:
   - Default
   - TransparentFX

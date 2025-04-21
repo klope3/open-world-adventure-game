@@ -6,8 +6,8 @@ using UnityEngine;
 public class SceneTransitionTrigger : MonoBehaviour
 {
     [SerializeField] private string sceneName;
-    [SerializeField] private Vector3 spawnPosition;
-    [SerializeField] private float spawnRotation;
+    [SerializeField, Tooltip("The player will use this spawn point in the target scene's PlayerInitialPositioner.")] 
+    private int spawnPointIndex;
     private Collider col;
 
     private void Awake()
@@ -21,6 +21,6 @@ public class SceneTransitionTrigger : MonoBehaviour
         if (!other.CompareTag("Player")) return;
 
         SceneTransition sceneTransition = GameObject.FindGameObjectWithTag("SceneTransition").GetComponent<SceneTransition>();
-        sceneTransition.TransitionToScene(sceneName, spawnPosition, spawnRotation);
+        sceneTransition.TransitionToScene(sceneName, spawnPointIndex);
     }
 }
