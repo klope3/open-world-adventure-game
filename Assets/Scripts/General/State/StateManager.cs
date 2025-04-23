@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public abstract class StateManager<TState> : MonoBehaviour where TState : State
+public abstract class StateManager<TState> : StateManagerBase where TState : State
 {
     public Dictionary<string, TState> registeredStates { get; private set; }
     private TState currentState;

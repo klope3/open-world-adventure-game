@@ -3587,6 +3587,7 @@ MonoBehaviour:
   maxSpawnRadius: 2
   use2DRadius: 1
   maxSpawnedCount: 1
+  spawnerType: 1
 --- !u!4 &1098350372
 Transform:
   m_ObjectHideFlags: 0
@@ -8975,8 +8976,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: GAME_LEVEL_TEMPLATE
   spawnPointIndex: 2
-  spawnPosition: {x: 6.28, y: 0, z: 11.38}
-  spawnRotation: -90
 --- !u!114 &8325026956029568472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8991,8 +8990,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: GAME_LEVEL_TEMPLATE
   spawnPointIndex: 1
-  spawnPosition: {x: -8.58, y: 0, z: 4.62}
-  spawnRotation: 0
 --- !u!4 &8474275534211956139
 Transform:
   m_ObjectHideFlags: 0
@@ -9178,8 +9175,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: GAME_LEVEL_TEMPLATE
   spawnPointIndex: 0
-  spawnPosition: {x: -25.19, y: 0, z: 3.33}
-  spawnRotation: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

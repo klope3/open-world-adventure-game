@@ -11,8 +11,28 @@ public class Spawner : MonoBehaviour
     [SerializeField, Min(0.001f)] private float maxSpawnRadius;
     [SerializeField] private bool use2DRadius;
     [SerializeField, Min(1)] private int maxSpawnedCount;
+    [SerializeField, Tooltip("If the spawner spawns NPCs, it will register/unregister spawned NPCs wih the NonPlayerCharacterManager.")] 
+    private SpawnerType spawnerType;
+    private NonPlayerCharacterManager npcm; //NPC Manager; lazy initialized
     private float spawnTimer;
     private int spawnedCount;
+
+    private NonPlayerCharacterManager NpcManager
+    {
+        get
+        {
+            if (npcm == null) npcm = FindObjectOfType<NonPlayerCharacterManager>();
+            if (npcm == null) Debug.LogError("No NPC Manager found");
+            return npcm;
+        }
+    }
+
+    public enum SpawnerType
+    {
+        Other,
+        NPC_Enemy,
+        NPC_Neutral,
+    }
 
     private void Update()
     {
@@ -41,13 +61,27 @@ public class Spawner : MonoBehaviour
         if (spawnable == null)
         {
             Debug.LogWarning("Spawned an object with no Spawnable component!");
+            return;
         }
-        else
+
+        spawnable.originSpawner = this;
+        spawnable.OnDie += Spawnable_OnDie;
+        spawnedCount++;
+
+        RegisterSpawnedNPC(go);
+    }
+
+    private void RegisterSpawnedNPC(GameObject spawnedGo)
+    {
+        if (spawnerType == SpawnerType.Other) return;
+
+        NonPlayerCharacterBase npcBase = spawnedGo.GetComponent<NonPlayerCharacterBase>();
+        if (npcBase == null)
         {
-            spawnable.originSpawner = this;
-            spawnable.OnDie += Spawnable_OnDie;
-            spawnedCount++;
+            Debug.LogWarning("Tried to register an NPC with no NPC Base");
+            return;
         }
+        if (spawnerType == SpawnerType.NPC_Enemy) NpcManager.RegisterEnemy(npcBase);
     }
     
     private void Spawnable_OnDie(Spawnable spawnable)

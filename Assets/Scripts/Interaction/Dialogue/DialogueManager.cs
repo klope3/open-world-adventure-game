@@ -6,6 +6,7 @@ public class DialogueManager : MonoBehaviour
 {
     [SerializeField] private DialogueBox dialogueBox;
     [SerializeField] private PlayerStateManager playerStateManager;
+    [SerializeField] private NonPlayerCharacterManager npcManager;
     [SerializeField] private WeatherManager weatherManager;
     private DialogueNodeSO currentNode;
     private int selectedChoiceIndex;
@@ -27,6 +28,7 @@ public class DialogueManager : MonoBehaviour
 
         dialogueBox.Print(currentNode.Text, currentNode.HasChoices());
         playerStateManager.SwitchState("Dialogue");
+        npcManager.SetEnemiesFrozen(true);
         weatherManager.enabled = false;
         selectedChoiceIndex = 0;
     }
@@ -50,6 +52,7 @@ public class DialogueManager : MonoBehaviour
     {
         dialogueBox.Hide();
         playerStateManager.SwitchState("Idle");
+        npcManager.SetEnemiesFrozen(false);
         weatherManager.enabled = true;
     }
 
