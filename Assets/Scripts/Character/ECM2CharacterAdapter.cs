@@ -5,6 +5,7 @@ using ECM2;
 using Sirenix.OdinInspector;
 
 //Bridge between ECM2 Character and custom logic
+//this should probably be turned into more of a "movement module" that can be interchanged for other movement types (climbing module, swimming module, etc.) 
 public class ECM2CharacterAdapter : MonoBehaviour
 {
     [SerializeField] private Character character;

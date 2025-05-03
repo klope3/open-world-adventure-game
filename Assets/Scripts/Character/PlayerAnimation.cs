@@ -12,6 +12,7 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] private CameraController cameraController;
     [SerializeField] private Animator animator;
     [SerializeField] private HealthHandler health;
+    [SerializeField] private PlayerClimbingModule climbingModule;
 
     private int speedHash;
     private int speedXHash;
@@ -25,6 +26,11 @@ public class PlayerAnimation : MonoBehaviour
     private int targetingHash;
     private int dodgeHash;
     private int dieHash;
+    private int climbingHash;
+    private int climbingMoveLeftHandUpHash;
+    private int climbingMoveRightHandUpHash;
+    private int climbingMoveLeftHandDownHash;
+    private int climbingMoveRightHandDownHash;
 
     private readonly int LAYER_INDEX_RIGHT_ARM = 1;
 
@@ -44,7 +50,12 @@ public class PlayerAnimation : MonoBehaviour
         targetingHash = Hash("Targeting");
         dodgeHash = Hash("Dodge");
         dieHash = Hash("Die");
-    
+        climbingHash = Hash("Climbing");
+        climbingMoveLeftHandUpHash = Hash("ClimbingMoveLeftHandUp");
+        climbingMoveRightHandUpHash = Hash("ClimbingMoveRightHandUp");
+        climbingMoveLeftHandDownHash = Hash("ClimbingMoveLeftHandDown");
+        climbingMoveRightHandDownHash = Hash("ClimbingMoveRightHandDown");
+
         character.Jumped += Character_Jumped;
         character.Landed += Character_Landed;
         playerStateManager.OnAttack += PlayerStateManager_OnAttack;
@@ -52,9 +63,47 @@ public class PlayerAnimation : MonoBehaviour
         playerStateManager.OnLeftGround += PlayerStateManager_OnLeftGround;
         playerStateManager.OnRoll += PlayerStateManager_OnRoll;
         playerStateManager.OnDodge += PlayerStateManager_OnDodge;
+        playerStateManager.OnClimbingStart += PlayerStateManager_OnClimbingStart;
+        playerStateManager.OnClimbingStop += PlayerStateManager_OnClimbingStop;
+        climbingModule.OnLeftHandMoveUp += PlayerClimbingModule_OnLeftHandMoveUp;
+        climbingModule.OnRightHandMoveUp += PlayerClimbingModule_OnRightHandMoveUp;
+        climbingModule.OnLeftHandMoveDown += PlayerClimbingModule_OnLeftHandMoveDown;
+        climbingModule.OnRightHandMoveDown += PlayerClimbingModule_OnRightHandMoveDown;
+        //climbingModule.OnClimbingUpStart += PlayerClimbingModule_OnClimbingUpStart;
+        //climbingModule.OnClimbingUpStop += PlayerClimbingModule_OnClimbingUpStart;
         cameraController.OnTargetingStarted += CameraController_OnTargetingStarted;
         cameraController.OnTargetingEnded += CameraController_OnTargetingEnded;
         health.OnDied += HealthHandler_OnDied;
+    }
+
+    private void PlayerClimbingModule_OnLeftHandMoveDown()
+    {
+        animator.SetTrigger(climbingMoveLeftHandDownHash);
+    }
+
+    private void PlayerClimbingModule_OnRightHandMoveDown()
+    {
+        animator.SetTrigger(climbingMoveRightHandDownHash);
+    }
+
+    private void PlayerClimbingModule_OnLeftHandMoveUp()
+    {
+        animator.SetTrigger(climbingMoveLeftHandUpHash);
+    }
+
+    private void PlayerClimbingModule_OnRightHandMoveUp()
+    {
+        animator.SetTrigger(climbingMoveRightHandUpHash);
+    }
+
+    private void PlayerStateManager_OnClimbingStart()
+    {
+        animator.SetBool(climbingHash, true);
+    }
+
+    private void PlayerStateManager_OnClimbingStop()
+    {
+        animator.SetBool(climbingHash, false);
     }
 
     private void HealthHandler_OnDied()

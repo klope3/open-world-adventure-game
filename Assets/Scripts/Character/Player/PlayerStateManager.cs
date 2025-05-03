@@ -14,6 +14,8 @@ public class PlayerStateManager : StateManager<PlayerState>
     [SerializeField] private CameraController cameraController;
     [SerializeField] private InputActionsEvents inputActionsEvents;
     [SerializeField] private TargetingHandler targetingHandler;
+    [SerializeField] private PlayerClimbingDetector climbingDetector;
+    [SerializeField] private PlayerClimbingModule climbingModule;
     [SerializeField] private float standardAttackDuration;
     [SerializeField, Tooltip("The player must press attack at most this long after the previous attack state finished in order to chain the next attack.")]
     private float standardAttackChainTime;
@@ -29,6 +31,8 @@ public class PlayerStateManager : StateManager<PlayerState>
     public System.Action OnLeftGround;
     public System.Action OnRoll;
     public System.Action OnDodge;
+    public System.Action OnClimbingStart;
+    public System.Action OnClimbingStop;
 
     public UnityEvent OnAnyAttackStart; 
     public UnityEvent OnAnyAttackEnd;
@@ -67,6 +71,7 @@ public class PlayerStateManager : StateManager<PlayerState>
         RollState rollState = new RollState();
         DodgeState dodgeState = new DodgeState();
         DeathState deathState = new DeathState();
+        ClimbingState climbingState = new ClimbingState();
 
         idleState.Initialize(this, character, characterAdapter, interactionZone, targetingHandler);
         attackState.Initialize(this, character, characterAdapter, standardAttackDuration);
@@ -74,10 +79,11 @@ public class PlayerStateManager : StateManager<PlayerState>
         jumpState.Initialize(this, character, characterAdapter);
         fallingState.Initialize(this, character, characterAdapter);
         dialogueState.Initialize(this, character, characterAdapter, dialogueManager, dialogueBox, inputActionsEvents);
-        movingState.Initialize(this, character, characterAdapter, interactionZone, targetingHandler, cameraController);
+        movingState.Initialize(this, character, characterAdapter, interactionZone, targetingHandler, cameraController, climbingDetector);
         rollState.Initialize(this, character, characterAdapter, rollSpeed, rollDuration, rollDeceleration);
         dodgeState.Initialize(this, character, characterAdapter, dodgeSpeed, dodgeDuration, dodgeDeceleration);
         deathState.Initialize(this, character, characterAdapter);
+        climbingState.Initialize(this, character, characterAdapter, climbingModule);
 
         idleState.PostInitialize();
         attackState.PostInitialize();
@@ -89,6 +95,7 @@ public class PlayerStateManager : StateManager<PlayerState>
         rollState.PostInitialize();
         dodgeState.PostInitialize();
         deathState.PostInitialize();
+        climbingState.PostInitialize();
 
         attackState.OnEnter += AttackState_OnEnter;
         attackState.OnExit += AttackState_OnExit;
@@ -97,6 +104,8 @@ public class PlayerStateManager : StateManager<PlayerState>
         fallingState.OnEnter += FallingState_OnEnter;
         rollState.OnEnter += RollState_OnEnter;
         dodgeState.OnEnter += DodgeState_OnEnter;
+        climbingState.OnEnter += ClimbingState_OnEnter;
+        climbingState.OnExit += ClimbingState_OnExit;
 
         states.Add("Idle", idleState);
         states.Add("Attack", attackState);
@@ -108,6 +117,7 @@ public class PlayerStateManager : StateManager<PlayerState>
         states.Add("Roll", rollState);
         states.Add("Dodge", dodgeState);
         states.Add("Death", deathState);
+        states.Add("Climbing", climbingState);
         return states;
     }
 
@@ -119,6 +129,16 @@ public class PlayerStateManager : StateManager<PlayerState>
         else SwitchState("Attack");
 
         recentStandardAttacks++;
+    }
+
+    private void ClimbingState_OnEnter()
+    {
+        OnClimbingStart?.Invoke();
+    }
+
+    private void ClimbingState_OnExit()
+    {
+        OnClimbingStop?.Invoke();
     }
 
     private void DodgeState_OnEnter()

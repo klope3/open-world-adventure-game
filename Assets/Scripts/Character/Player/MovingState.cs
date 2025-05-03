@@ -8,6 +8,7 @@ public class MovingState : PlayerState
     private InteractionZone interactionZone;
     private CameraController cameraController;
     private TargetingHandler targetingHandler;
+    private PlayerClimbingDetector climbingDetector;
 
     public override void EnterState()
     {
@@ -37,12 +38,13 @@ public class MovingState : PlayerState
         }
     }
 
-    public void Initialize(PlayerStateManager stateManager, Character character, ECM2CharacterAdapter characterAdapter, InteractionZone interactionZone, TargetingHandler targetingHandler, CameraController cameraController)
+    public void Initialize(PlayerStateManager stateManager, Character character, ECM2CharacterAdapter characterAdapter, InteractionZone interactionZone, TargetingHandler targetingHandler, CameraController cameraController, PlayerClimbingDetector climbingDetector)
     {
         Initialize(stateManager, character, characterAdapter);
         this.interactionZone = interactionZone;
         this.cameraController = cameraController;
         this.targetingHandler = targetingHandler;
+        this.climbingDetector = climbingDetector;
     }
 
     private void ZTarget_started()
@@ -52,7 +54,14 @@ public class MovingState : PlayerState
 
     private void InteractButton_started()
     {
-        if (stateManager.IsInState(this)) interactionZone.Interact();
+        if (!stateManager.IsInState(this)) return;
+
+        if (climbingDetector.CheckClimbable())
+        {
+            stateManager.SwitchState("Climbing");
+            return;
+        }
+        interactionZone.Interact();
     }
 
     private void Attack_started()
