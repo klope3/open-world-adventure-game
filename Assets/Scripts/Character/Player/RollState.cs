@@ -11,6 +11,7 @@ public class RollState : PlayerState
     private float deceleration;
 
     public System.Action OnEnter;
+    public System.Action OnExit;
 
     public override void EnterState()
     {
@@ -26,6 +27,8 @@ public class RollState : PlayerState
     {
         character.maxWalkSpeed = initialMoveSpeed;
         InputActionsProvider.UnlockPrimaryAxis();
+
+        OnExit?.Invoke();
     }
 
     public override void PostInitialize()
@@ -37,7 +40,7 @@ public class RollState : PlayerState
     {
         if (stateManager.TimeInState >= duration)
         {
-            stateManager.SwitchState("Moving");
+            stateManager.SwitchState(PlayerStateManager.DEFAULT_STATE);
             return;
         }
         character.maxWalkSpeed = deceleration * stateManager.TimeInState + speed; //deceleration while rolling

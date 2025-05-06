@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ECM2;
 
+//this needs to be merged with IdleState as a single "DefaultState" or something
 public class MovingState : PlayerState
 {
     private InteractionZone interactionZone;
@@ -10,9 +11,12 @@ public class MovingState : PlayerState
     private TargetingHandler targetingHandler;
     private PlayerClimbingDetector climbingDetector;
 
+    public System.Action OnEnter;
+
     public override void EnterState()
     {
-
+        characterAdapter.canMove = true;
+        OnEnter?.Invoke();
     }
 
     public override void ExitState()
@@ -31,11 +35,11 @@ public class MovingState : PlayerState
 
     public override void UpdateState()
     {
-        if (InputActionsProvider.GetPrimaryAxis().magnitude <= 0.005f)
-        {
-            stateManager.SwitchState("Idle");
-            return;
-        }
+        //if (InputActionsProvider.GetPrimaryAxis().magnitude <= 0.005f)
+        //{
+        //    stateManager.SwitchState("Idle");
+        //    return;
+        //}
     }
 
     public void Initialize(PlayerStateManager stateManager, Character character, ECM2CharacterAdapter characterAdapter, InteractionZone interactionZone, TargetingHandler targetingHandler, CameraController cameraController, PlayerClimbingDetector climbingDetector)
@@ -81,7 +85,7 @@ public class MovingState : PlayerState
 
     private void DodgeButton_started()
     {
-        if (!stateManager.IsInState(this)) return;
+        if (!stateManager.IsInState(this) || InputActionsProvider.GetPrimaryAxis().magnitude < 0.005f) return;
 
         if (cameraController.TargetingTransform == null)
         {

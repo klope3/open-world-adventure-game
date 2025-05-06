@@ -31,7 +31,7 @@ public class AttackState : PlayerState
     {
         if (stateManager.TimeInState > timeInState)
         {
-            stateManager.SwitchState("Idle");
+            stateManager.SwitchState(PlayerStateManager.DEFAULT_STATE);
         }
     }
     

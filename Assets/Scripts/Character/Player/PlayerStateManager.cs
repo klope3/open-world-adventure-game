@@ -26,6 +26,7 @@ public class PlayerStateManager : StateManager<PlayerState>
     [SerializeField] private float dodgeSpeed;
     [SerializeField] private float dodgeDeceleration;
     private int recentStandardAttacks; //increments while chaining attacks; resets to 0 when standardAttackChainTime elapses
+    public System.Action OnDefaultState;
     public System.Action OnAttack;
     public System.Action OnAttack2;
     public System.Action OnLeftGround;
@@ -37,6 +38,8 @@ public class PlayerStateManager : StateManager<PlayerState>
     public UnityEvent OnAnyAttackStart; 
     public UnityEvent OnAnyAttackEnd;
     public UnityEvent OnLanded;
+
+    public static readonly string DEFAULT_STATE = "Moving";
 
     protected override void StartAwake()
     {
@@ -54,14 +57,14 @@ public class PlayerStateManager : StateManager<PlayerState>
 
     protected override string GetInitialStateName()
     {
-        return "Idle";
+        return DEFAULT_STATE;
     }
 
     protected override Dictionary<string, PlayerState> GetStateDictionary()
     {
         Dictionary<string, PlayerState> states = new Dictionary<string, PlayerState>();
 
-        IdleState idleState = new IdleState();
+        //IdleState idleState = new IdleState();
         AttackState attackState = new AttackState();
         AttackState attackState2 = new AttackState();
         JumpState jumpState = new JumpState();
@@ -73,7 +76,7 @@ public class PlayerStateManager : StateManager<PlayerState>
         DeathState deathState = new DeathState();
         ClimbingState climbingState = new ClimbingState();
 
-        idleState.Initialize(this, character, characterAdapter, interactionZone, targetingHandler);
+        //idleState.Initialize(this, character, characterAdapter, interactionZone, targetingHandler);
         attackState.Initialize(this, character, characterAdapter, standardAttackDuration);
         attackState2.Initialize(this, character, characterAdapter, standardAttackDuration);
         jumpState.Initialize(this, character, characterAdapter);
@@ -85,7 +88,7 @@ public class PlayerStateManager : StateManager<PlayerState>
         deathState.Initialize(this, character, characterAdapter);
         climbingState.Initialize(this, character, characterAdapter, climbingModule);
 
-        idleState.PostInitialize();
+        //idleState.PostInitialize();
         attackState.PostInitialize();
         attackState2.PostInitialize();
         jumpState.PostInitialize();
@@ -97,6 +100,7 @@ public class PlayerStateManager : StateManager<PlayerState>
         deathState.PostInitialize();
         climbingState.PostInitialize();
 
+        movingState.OnEnter += DefaultState_OnEnter;
         attackState.OnEnter += AttackState_OnEnter;
         attackState.OnExit += AttackState_OnExit;
         attackState2.OnEnter += AttackState2_OnEnter;
@@ -107,13 +111,13 @@ public class PlayerStateManager : StateManager<PlayerState>
         climbingState.OnEnter += ClimbingState_OnEnter;
         climbingState.OnExit += ClimbingState_OnExit;
 
-        states.Add("Idle", idleState);
+        //states.Add("Idle", idleState);
+        states.Add(DEFAULT_STATE, movingState);
         states.Add("Attack", attackState);
         states.Add("Attack2", attackState2);
         states.Add("Jump", jumpState);
         states.Add("Falling", fallingState);
         states.Add("Dialogue", dialogueState);
-        states.Add("Moving", movingState);
         states.Add("Roll", rollState);
         states.Add("Dodge", dodgeState);
         states.Add("Death", deathState);
@@ -129,6 +133,11 @@ public class PlayerStateManager : StateManager<PlayerState>
         else SwitchState("Attack");
 
         recentStandardAttacks++;
+    }
+
+    private void DefaultState_OnEnter()
+    {
+        OnDefaultState?.Invoke();
     }
 
     private void ClimbingState_OnEnter()
