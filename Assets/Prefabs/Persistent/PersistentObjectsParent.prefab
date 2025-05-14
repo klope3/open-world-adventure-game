@@ -123,6 +123,18 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 130420492541690402, guid: 60d5b35953cf3c04da57e2c323dacea7,
         type: 3}
+      propertyPath: jump
+      value: 
+      objectReference: {fileID: 11400000, guid: e7b9d6582eb435b44aad4364fde207e5,
+        type: 2}
+    - target: {fileID: 130420492541690402, guid: 60d5b35953cf3c04da57e2c323dacea7,
+        type: 3}
+      propertyPath: land
+      value: 
+      objectReference: {fileID: 11400000, guid: a76b43075e7f09549b70fef5d7c19f46,
+        type: 2}
+    - target: {fileID: 130420492541690402, guid: 60d5b35953cf3c04da57e2c323dacea7,
+        type: 3}
       propertyPath: roll
       value: 
       objectReference: {fileID: 11400000, guid: 88a306168f420bf47be1635900ed1ad8,
@@ -139,6 +151,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 94ace6670bb54944cb9d73b0eea93066,
         type: 2}
+    - target: {fileID: 130420492541690402, guid: 60d5b35953cf3c04da57e2c323dacea7,
+        type: 3}
+      propertyPath: falling
+      value: 
+      objectReference: {fileID: 7400000, guid: d499670e39dfa0341947500a8b76153a, type: 2}
     - target: {fileID: 130420492541690402, guid: 60d5b35953cf3c04da57e2c323dacea7,
         type: 3}
       propertyPath: rollAnim
@@ -295,6 +312,11 @@ PrefabInstance:
       objectReference: {fileID: 2226203677087192936}
     - target: {fileID: 6112407451696103533, guid: 60d5b35953cf3c04da57e2c323dacea7,
         type: 3}
+      propertyPath: landingDuration
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6112407451696103533, guid: 60d5b35953cf3c04da57e2c323dacea7,
+        type: 3}
       propertyPath: climbingDetector
       value: 
       objectReference: {fileID: 1974531687146458551}
@@ -379,6 +401,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1963843888018128062}
+    - targetCorrespondingSourceObject: {fileID: 6891135391806720415, guid: 60d5b35953cf3c04da57e2c323dacea7,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7259288525522982996}
     - targetCorrespondingSourceObject: {fileID: 7658223766828160145, guid: 60d5b35953cf3c04da57e2c323dacea7,
         type: 3}
       insertIndex: -1
@@ -454,6 +480,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: {fileID: 8302570514508412828}
   handTriggerTime: 0.4
+--- !u!114 &7259288525522982996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2065597179131756315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e5eb755e78b74c4199dd98c2d2151ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateManager: {fileID: 1719214665809884905}
 --- !u!1 &2976663164781748757 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7658223766828160145, guid: 60d5b35953cf3c04da57e2c323dacea7,

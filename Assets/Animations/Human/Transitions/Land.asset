@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c5a8877f26e7a6a43aaf06fade1a064a, type: 3}
-  m_Name: SwordAttack1
+  m_Name: Land
   m_EditorClassIdentifier: 
   _Transition:
     rid: 6822258624411992080
@@ -21,10 +21,10 @@ MonoBehaviour:
       type: {class: ClipTransition, ns: Animancer, asm: Kybernetik.Animancer}
       data:
         _FadeDuration: 0.05
-        _Speed: 1.4
+        _Speed: 1
         _Events:
           _NormalizedTimes: []
           _Callbacks: []
           _Names: []
-        _Clip: {fileID: 7400000, guid: 628c3e6bf8b891543b41adacd5eacb29, type: 2}
-        _NormalizedStartTime: 0.25
+        _Clip: {fileID: 7400000, guid: cdfbfad0b0a9aa8419f07377dc17b7d1, type: 2}
+        _NormalizedStartTime: 0.35

@@ -5,41 +5,41 @@ using ECM2;
 
 public class EnemyBasicWanderState : EnemyState
 {
-    private float playerChaseDistance;
-    private float moveSpeed;
+    //private float playerChaseDistance;
+    //private float moveSpeed;
     private float timer;
-    private float timerMax;
-    private float pauseTimerMax;
-    private bool moving;
+    //private float timerMax;
+    //private float pauseTimerMax;
+    private bool moving; //when false, stop moving; this "pause" behavior is separate from the "pause" state
 
     public override void EnterState()
     {
-        character.maxWalkSpeed = moveSpeed;
-        character.SetMovementDirection(PickRandomDirection());
+        stateManager.Character.maxWalkSpeed = stateManager.WanderSpeed;
+        stateManager.Character.SetMovementDirection(PickRandomDirection());
         timer = 0;
         moving = true;
     }
 
     public override void UpdateState()
     {
-        Vector3 vecToPlayer = playerObj.transform.position - ownTransform.position;
-        HealthHandler playerHealth = playerObj.GetComponent<HealthHandler>();
-        if (vecToPlayer.magnitude < playerChaseDistance && playerHealth.CurHealth > 0)
-        {
-            stateManager.SwitchState("Chase");
-            return;
-        }
+        //Vector3 vecToPlayer = stateManager.PlayerObj.transform.position - stateManager.OwnTransform.position;
+        //HealthHandler playerHealth = stateManager.PlayerObj.GetComponent<HealthHandler>();
+        //if (vecToPlayer.magnitude < playerChaseDistance && playerHealth.CurHealth > 0)
+        //{
+        //    stateManager.SwitchState("Chase");
+        //    return;
+        //}
 
         timer += Time.deltaTime;
 
-        if (timer > timerMax && moving)
+        if (timer > stateManager.WanderMoveTime && moving)
         {
-            character.SetMovementDirection(Vector3.zero);
+            stateManager.Character.SetMovementDirection(Vector3.zero);
             moving = false;
             timer = 0;
-        } else if (timer > pauseTimerMax && !moving)
+        } else if (timer > stateManager.WanderPauseTime && !moving)
         {
-            character.SetMovementDirection(PickRandomDirection());
+            stateManager.Character.SetMovementDirection(PickRandomDirection());
             moving = true;
             timer = 0;
         }
@@ -55,17 +55,32 @@ public class EnemyBasicWanderState : EnemyState
         return new Vector3(rand.x, 0, rand.y);
     }
 
-    public void Initialize(EnemyStateManager stateManager, Character character, GameObject playerObj, Transform ownTransform, float wanderMoveSpeed, float wanderMoveTime, float wanderPauseTime, float playerChaseDistance)
-    {
-        Initialize(stateManager, character, playerObj, ownTransform);
-        timerMax = wanderMoveTime;
-        pauseTimerMax = wanderPauseTime;
-        moveSpeed = wanderMoveSpeed;
-        this.playerChaseDistance = playerChaseDistance;
-    }
+    //public void Initialize(EnemyStateManager stateManager, Character character, GameObject playerObj, Transform ownTransform, float wanderMoveSpeed, float wanderMoveTime, float wanderPauseTime, float playerChaseDistance)
+    //{
+    //    Initialize(stateManager, character, playerObj, ownTransform);
+    //    timerMax = wanderMoveTime;
+    //    pauseTimerMax = wanderPauseTime;
+    //    moveSpeed = wanderMoveSpeed;
+    //    this.playerChaseDistance = playerChaseDistance;
+    //}
 
     public override string GetDebugName()
     {
         return "wander";
+    }
+
+    public override StateTransition[] GetTransitions()
+    {
+        return new StateTransition[]
+        {
+            new StateTransition(EnemyStateManager.CHASE_STATE, ToChaseState),
+        };
+    }
+
+    private bool ToChaseState()
+    {
+        Vector3 vecToPlayer = stateManager.PlayerObject.transform.position - stateManager.OwnTransform.position;
+        HealthHandler playerHealth = stateManager.PlayerObject.GetComponent<HealthHandler>();
+        return vecToPlayer.magnitude < stateManager.PlayerChaseDistance && playerHealth.CurHealth > 0;
     }
 }

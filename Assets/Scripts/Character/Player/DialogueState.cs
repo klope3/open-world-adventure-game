@@ -11,12 +11,12 @@ public class DialogueState : PlayerState
 
     public override void EnterState()
     {
-        characterAdapter.canMove = false;
+        stateManager.CharacterAdapter.canMove = false;
     }
 
     public override void ExitState()
     {
-        characterAdapter.canMove = true;
+        stateManager.CharacterAdapter.canMove = true;
     }
 
     public override void UpdateState()
@@ -24,13 +24,13 @@ public class DialogueState : PlayerState
 
     }
 
-    public void Initialize(PlayerStateManager stateManager, Character character, ECM2CharacterAdapter characterAdapter, DialogueManager dialogueManager, DialogueBox dialogueBox, InputActionsEvents inputActionsEvents)
-    {
-        Initialize(stateManager, character, characterAdapter);
-        this.dialogueManager = dialogueManager;
-        this.dialogueBox = dialogueBox;
-        this.inputActionsEvents = inputActionsEvents;
-    }
+    //public void Initialize(PlayerStateManager stateManager, Character character, ECM2CharacterAdapter characterAdapter, DialogueManager dialogueManager, DialogueBox dialogueBox, InputActionsEvents inputActionsEvents)
+    //{
+    //    Initialize(stateManager, character, characterAdapter);
+    //    this.dialogueManager = dialogueManager;
+    //    this.dialogueBox = dialogueBox;
+    //    this.inputActionsEvents = inputActionsEvents;
+    //}
 
     public override void PostInitialize()
     {
@@ -58,5 +58,10 @@ public class DialogueState : PlayerState
     public override string GetDebugName()
     {
         return "dialogue";
+    }
+
+    public override StateTransition[] GetTransitions()
+    {
+        return new StateTransition[] { };
     }
 }

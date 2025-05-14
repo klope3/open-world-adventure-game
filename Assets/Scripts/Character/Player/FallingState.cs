@@ -4,11 +4,8 @@ using UnityEngine;
 
 public class FallingState : PlayerState
 {
-    public System.Action OnEnter;
-
     public override void EnterState()
     {
-        OnEnter?.Invoke();
     }
 
     public override void UpdateState()
@@ -21,16 +18,30 @@ public class FallingState : PlayerState
 
     public override void PostInitialize()
     {
-        character.Landed += Character_Landed;
+        stateManager.Character.Landed += Character_Landed;
     }
 
     private void Character_Landed(Vector3 landingVelocity)
     {
-        stateManager.SwitchState("Idle");
+        //if (InputActionsProvider.GetPrimaryAxis().magnitude <= 0.005f) stateManager.ToDefaultState();
+        //else stateManager.ToDefaultState();
     }
 
     public override string GetDebugName()
     {
         return "falling";
+    }
+
+    public override StateTransition[] GetTransitions()
+    {
+        return new StateTransition[]
+        {
+            new StateTransition(PlayerStateManager.LANDING_STATE, () => stateManager.Character.IsGrounded()),
+        };
+    }
+
+    private bool ToDefaultState()
+    {
+        return stateManager.Character.IsGrounded();
     }
 }

@@ -25,7 +25,7 @@ public class PlayerDeathSequence : MonoBehaviour
     public void DoDeathSequence()
     {
         characterAdapter.canMove = false;
-        stateManager.SwitchState("Death");
+        //stateManager.SwitchState("Death");
         InputActionsProvider.LockPrimaryAxisTo(Vector3.zero);
         screenFade.FadeOutSlow();
         for (int i = 0; i < fadeInImages.Length; i++)

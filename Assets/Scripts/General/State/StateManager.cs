@@ -8,6 +8,10 @@ public abstract class StateManager<TState> : StateManagerBase where TState : Sta
     public Dictionary<string, TState> registeredStates { get; private set; }
     private TState currentState;
     private string currentStateKey;
+    private StateTransition[] currentTransitions;
+    public delegate void StringFunc(string str);
+    public event StringFunc OnStateChange;
+    public string trigger; //reset at end of every frame to prevent unintentionally "queued" state changes
     public float TimeInState { get; private set; }
     public TState CurrentState
     {
@@ -30,12 +34,7 @@ public abstract class StateManager<TState> : StateManagerBase where TState : Sta
         registeredStates = GetStateDictionary();
 
         string initialStateName = GetInitialStateName();
-        if (!TryGetState(initialStateName, out TState initialState))
-        {
-            return;
-        }
-        currentState = initialState;
-        currentState.EnterState();
+        SwitchState(initialStateName);
     }
 
     protected abstract string GetInitialStateName();
@@ -46,22 +45,37 @@ public abstract class StateManager<TState> : StateManagerBase where TState : Sta
     private void Update()
     {
         TimeInState += Time.deltaTime;
-        currentState.UpdateState();
+
+        bool switched = false;
+        foreach (StateTransition transition in currentTransitions)
+        {
+            if (transition.transitionCondition())
+            {
+                SwitchState(transition.targetStateName);
+                switched = true;
+                break;
+            }
+        }
+
+        if (!switched) currentState.UpdateState();
+        trigger = "";
         EndUpdate();
     }
 
-    public void SwitchState(string stateName)
+    protected void SwitchState(string stateName)
     {
         if (!TryGetState(stateName, out TState state))
         {
             return;
         }
         if (state == currentState) return;
-        currentState.ExitState();
+        if (currentState != null) currentState.ExitState();
         currentState = state;
+        currentTransitions = currentState.GetTransitions();
         state.EnterState();
         currentStateKey = stateName;
         TimeInState = 0;
+        OnStateChange?.Invoke(stateName);
     }
 
     private bool TryGetState(string name, out TState state)

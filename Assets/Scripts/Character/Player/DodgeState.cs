@@ -15,21 +15,21 @@ public class DodgeState : PlayerState
 
     public override void EnterState()
     {
-        initialMoveSpeed = character.maxWalkSpeed;
-        initialAcceleration = character.maxAcceleration;
+        initialMoveSpeed = stateManager.Character.maxWalkSpeed;
+        initialAcceleration = stateManager.Character.maxAcceleration;
 
         Vector2 inputVec = InputActionsProvider.GetPrimaryAxis();
         InputActionsProvider.LockPrimaryAxisTo(inputVec);
 
-        character.maxAcceleration = 1000; //max mobility during dodge
+        stateManager.Character.maxAcceleration = 1000; //max mobility during dodge
 
         OnEnter?.Invoke();
     }
 
     public override void ExitState()
     {
-        character.maxWalkSpeed = initialMoveSpeed;
-        character.maxAcceleration = initialAcceleration;
+        stateManager.Character.maxWalkSpeed = initialMoveSpeed;
+        stateManager.Character.maxAcceleration = initialAcceleration;
         InputActionsProvider.UnlockPrimaryAxis();
     }
 
@@ -42,10 +42,10 @@ public class DodgeState : PlayerState
     {
         if (stateManager.TimeInState >= duration)
         {
-            stateManager.SwitchState("Moving");
+            //stateManager.SwitchState(PlayerStateManager.DEFAULT_STATE);
             return;
         }
-        character.maxWalkSpeed = deceleration * stateManager.TimeInState + speed; //deceleration while rolling
+        stateManager.Character.maxWalkSpeed = deceleration * stateManager.TimeInState + speed; //deceleration while rolling
     }
 
     public void Initialize(PlayerStateManager stateManager, Character character, ECM2CharacterAdapter characterAdapter, float speed, float duration, float deceleration)
@@ -59,5 +59,10 @@ public class DodgeState : PlayerState
     public override string GetDebugName()
     {
         return "dodge";
+    }
+
+    public override StateTransition[] GetTransitions()
+    {
+        return new StateTransition[] { };
     }
 }

@@ -27,7 +27,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         dialogueBox.Print(currentNode.Text, currentNode.HasChoices());
-        playerStateManager.SwitchState("Dialogue");
+        //playerStateManager.SwitchState("Dialogue");
         npcManager.SetEnemiesFrozen(true);
         weatherManager.enabled = false;
         selectedChoiceIndex = 0;
@@ -51,7 +51,7 @@ public class DialogueManager : MonoBehaviour
     private void StopDialogue()
     {
         dialogueBox.Hide();
-        playerStateManager.SwitchState("Idle");
+        //playerStateManager.SwitchState("Idle");
         npcManager.SetEnemiesFrozen(false);
         weatherManager.enabled = true;
     }

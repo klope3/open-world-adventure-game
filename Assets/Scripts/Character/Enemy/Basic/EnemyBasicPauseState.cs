@@ -5,14 +5,14 @@ using ECM2;
 
 public class EnemyBasicPauseState : EnemyState
 {
-    private float pauseDuration;
-    private float timer;
-    public event System.Action OnEnter;
+    //private float pauseDuration;
+    //private float timer;
+    //public event System.Action OnEnter;
 
     public override void EnterState()
     {
-        character.SetMovementDirection(Vector3.zero);
-        OnEnter?.Invoke();
+        stateManager.Character.SetMovementDirection(Vector3.zero);
+        //OnEnter?.Invoke();
     }
 
     public override void ExitState()
@@ -21,23 +21,31 @@ public class EnemyBasicPauseState : EnemyState
 
     public override void UpdateState()
     {
-        timer += Time.deltaTime;
-        if (timer > pauseDuration)
-        {
-            stateManager.SwitchState("Wander");
-            timer = 0;
-            return;
-        }
+        //timer += Time.deltaTime;
+        //if (timer > pauseDuration)
+        //{
+        //    stateManager.SwitchState("Wander");
+        //    timer = 0;
+        //    return;
+        //}
     }
 
-    public void Initialize(EnemyStateManager stateManager, Character character, GameObject playerObj, Transform ownTransform, float pauseDuration)
-    {
-        Initialize(stateManager, character, playerObj, ownTransform);
-        this.pauseDuration = pauseDuration;
-    }
+    //public void Initialize(EnemyStateManager stateManager, Character character, GameObject playerObj, Transform ownTransform, float pauseDuration)
+    //{
+    //    Initialize(stateManager, character, playerObj, ownTransform);
+    //    this.pauseDuration = pauseDuration;
+    //}
 
     public override string GetDebugName()
     {
         return "pause";
+    }
+
+    public override StateTransition[] GetTransitions()
+    {
+        return new StateTransition[]
+        {
+            new StateTransition(EnemyStateManager.WANDER_STATE, () => stateManager.TimeInState > stateManager.AttackRecoveryDuration)
+        };
     }
 }

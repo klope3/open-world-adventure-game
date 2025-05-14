@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c5a8877f26e7a6a43aaf06fade1a064a, type: 3}
-  m_Name: SwordAttack1
+  m_Name: Jump
   m_EditorClassIdentifier: 
   _Transition:
-    rid: 6822258624411992080
+    rid: 6822258814756847617
   references:
     version: 2
     RefIds:
-    - rid: 6822258624411992080
+    - rid: 6822258814756847617
       type: {class: ClipTransition, ns: Animancer, asm: Kybernetik.Animancer}
       data:
-        _FadeDuration: 0.05
-        _Speed: 1.4
+        _FadeDuration: 0.008333334
+        _Speed: 1
         _Events:
           _NormalizedTimes: []
           _Callbacks: []
           _Names: []
-        _Clip: {fileID: 7400000, guid: 628c3e6bf8b891543b41adacd5eacb29, type: 2}
-        _NormalizedStartTime: 0.25
+        _Clip: {fileID: 7400000, guid: 6e9628cb00079d045b3dfed1b2778a9d, type: 2}
+        _NormalizedStartTime: 0.54

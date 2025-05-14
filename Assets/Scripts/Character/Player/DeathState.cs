@@ -6,7 +6,7 @@ public class DeathState : PlayerState
 {
     public override void EnterState()
     {
-        characterAdapter.canMove = false;
+        stateManager.CharacterAdapter.canMove = false;
     }
 
     public override void ExitState()
@@ -16,6 +16,11 @@ public class DeathState : PlayerState
     public override string GetDebugName()
     {
         return "death";
+    }
+
+    public override StateTransition[] GetTransitions()
+    {
+        return new StateTransition[] { };
     }
 
     public override void PostInitialize()

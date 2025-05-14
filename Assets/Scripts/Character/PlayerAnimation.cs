@@ -23,6 +23,9 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] private TransitionAssetBase roll;
     [SerializeField] private TransitionAssetBase attack1;
     [SerializeField] private TransitionAssetBase attack2;
+    [SerializeField] private AnimationClip falling;
+    [SerializeField] private TransitionAssetBase land;
+    [SerializeField] private TransitionAssetBase jump;
 
     private SmoothedVector2Parameter smoothedParameters;
     private MovementAnimationType movementAnimationType;
@@ -44,7 +47,7 @@ public class PlayerAnimation : MonoBehaviour
     private int climbingMoveLeftHandDownHash;
     private int climbingMoveRightHandDownHash;
 
-    private readonly float DEFAULT_FADE_DURATION = 0.25f;
+    private readonly float DEFAULT_FADE_DURATION = 0.1f;
     private readonly int LAYER_INDEX_RIGHT_ARM = 1;
     private readonly float RIGHT_ARM_LOWERED_WEIGHT = 0.75f; //currently the right arm layer is only used for lowering the arm while running AND item equipped, so the layer weight will alternate between 0 and this value
 
@@ -64,9 +67,39 @@ public class PlayerAnimation : MonoBehaviour
             0);
 
         playerStateManager.OnDefaultState += PlayerStateManager_OnDefaultState;
-        playerStateManager.OnRoll += PlayerStateManager_OnRoll;
-        playerStateManager.OnAttack += PlayerStateManager_OnAttack1;
+        //playerStateManager.OnRoll += PlayerStateManager_OnRoll;
+        //playerStateManager.OnAttack += PlayerStateManager_OnAttack1;
         playerStateManager.OnAttack2 += PlayerStateManager_OnAttack2;
+        playerStateManager.OnLeftGround += PlayerStateManager_OnLeftGround;
+        playerStateManager.OnLand += PlayerStateManager_OnLand;
+        playerStateManager.OnStateChange += PlayerStateManager_OnStateChange;
+    }
+
+    private void PlayerStateManager_OnStateChange(string stateName)
+    {
+        //this should probably be a dictionary or something
+        if (stateName == PlayerStateManager.DEFAULT_STATE) animancer.Play(strafeTransitionAsset);
+        if (stateName == PlayerStateManager.ATTACK_STATE) animancer.Play(attack1);
+        if (stateName == PlayerStateManager.ATTACK2_STATE) animancer.Play(attack2);
+        if (stateName == PlayerStateManager.JUMPING_STATE) animancer.Play(jump);
+        if (stateName == PlayerStateManager.FALLING_STATE) animancer.Play(falling, DEFAULT_FADE_DURATION);
+        if (stateName == PlayerStateManager.ROLL_STATE) animancer.Play(roll);
+        if (stateName == PlayerStateManager.LANDING_STATE) animancer.Play(land);
+    }
+
+    private void Update()
+    {
+        Vector3 inputVec = InputActionsProvider.GetPrimaryAxis();
+        Vector3 squareVec = Utils.ApproximateSquareInputVector(inputVec);
+
+        float xComponent = movementAnimationType == MovementAnimationType.ForwardOnly ? 0 : squareVec.x;
+        float yComponent = movementAnimationType == MovementAnimationType.ForwardOnly ? squareVec.magnitude : squareVec.y;
+        smoothedParameters.TargetValue = new Vector2(xComponent, yComponent);
+    }
+
+    private void PlayerStateManager_OnLeftGround()
+    {
+        animancer.Play(falling, DEFAULT_FADE_DURATION);
     }
 
     private void PlayerStateManager_OnAttack2()
@@ -74,19 +107,24 @@ public class PlayerAnimation : MonoBehaviour
         animancer.Play(attack2);
     }
 
-    private void PlayerStateManager_OnAttack1()
-    {
-        animancer.Play(attack1);
-    }
+    //private void PlayerStateManager_OnAttack1()
+    //{
+    //    animancer.Play(attack1);
+    //}
 
-    private void PlayerStateManager_OnRoll()
-    {
-        animancer.Play(roll);
-    }
+    //private void PlayerStateManager_OnRoll()
+    //{
+    //    animancer.Play(roll);
+    //}
 
     private void PlayerStateManager_OnDefaultState()
     {
         animancer.Play(strafeTransitionAsset, DEFAULT_FADE_DURATION);
+    }
+
+    private void PlayerStateManager_OnLand()
+    {
+        animancer.Play(land);
     }
 
     //private void Awake()
@@ -204,26 +242,12 @@ public class PlayerAnimation : MonoBehaviour
     //    animator.SetTrigger(jumpHash);
     //}
     //
-    //private void Character_Landed(Vector3 landingVelocity)
-    //{
-    //    animator.SetTrigger(landHash);
-    //}
     //
     //private void Character_Jumped()
     //{
     //    animator.SetTrigger(jumpHash);
     //}
     //
-
-    private void Update()
-    {
-        Vector3 inputVec = InputActionsProvider.GetPrimaryAxis();
-        Vector3 squareVec = Utils.ApproximateSquareInputVector(inputVec);
-
-        float xComponent = movementAnimationType == MovementAnimationType.ForwardOnly ? 0 : squareVec.x;
-        float yComponent = movementAnimationType == MovementAnimationType.ForwardOnly ? squareVec.magnitude : squareVec.y;
-        smoothedParameters.TargetValue = new Vector2(xComponent, yComponent);
-    }
 
     //private void Update()
     //{
