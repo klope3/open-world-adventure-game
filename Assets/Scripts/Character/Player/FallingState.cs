@@ -18,13 +18,6 @@ public class FallingState : PlayerState
 
     public override void PostInitialize()
     {
-        stateManager.Character.Landed += Character_Landed;
-    }
-
-    private void Character_Landed(Vector3 landingVelocity)
-    {
-        //if (InputActionsProvider.GetPrimaryAxis().magnitude <= 0.005f) stateManager.ToDefaultState();
-        //else stateManager.ToDefaultState();
     }
 
     public override string GetDebugName()
@@ -38,10 +31,5 @@ public class FallingState : PlayerState
         {
             new StateTransition(PlayerStateManager.LANDING_STATE, () => stateManager.Character.IsGrounded()),
         };
-    }
-
-    private bool ToDefaultState()
-    {
-        return stateManager.Character.IsGrounded();
     }
 }

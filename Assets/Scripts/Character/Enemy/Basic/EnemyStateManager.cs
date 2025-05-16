@@ -23,8 +23,6 @@ public class EnemyStateManager : StateManager<EnemyState>
     [SerializeField] private float attackProximity;
     [SerializeField] private float attackRecoveryDuration;
     public GameObject PlayerObject { get; private set; }
-    //public System.Action OnAttack;
-    //public System.Action OnPause;
     public UnityEvent OnAttackStart;
     public UnityEvent OnAttackEnd;
 
@@ -147,18 +145,10 @@ public class EnemyStateManager : StateManager<EnemyState>
         EnemyBasicAttackState attackState = new EnemyBasicAttackState();
         EnemyBasicPauseState pauseState = new EnemyBasicPauseState();
 
-        //wanderState.Initialize(this, character, playerObj, transform, wanderMoveSpeed, wanderMoveTime, wanderPauseTime, playerChaseDistance);
-        //chaseState.Initialize(this, character, playerObj, transform, playerChaseDistance, chaseSpeed, attackProximity);
-        //attackState.Initialize(this, character, playerObj, transform, healthHandler, attackSpeed, attackDuration);
-        //pauseState.Initialize(this, character, playerObj, transform, attackRecoveryDuration);
-        wanderState.Initialize_NEW(this);
-        chaseState.Initialize_NEW(this);
-        attackState.Initialize_NEW(this);
-        pauseState.Initialize_NEW(this);
-
-        //attackState.OnEnter += AttackState_OnEnter;
-        //attackState.OnExit += AttackState_OnExit;
-        //pauseState.OnEnter += PauseState_OnEnter;
+        wanderState.Initialize(this);
+        chaseState.Initialize(this);
+        attackState.Initialize(this);
+        pauseState.Initialize(this);
 
         states.Add(WANDER_STATE, wanderState);
         states.Add(CHASE_STATE, chaseState);
@@ -167,20 +157,4 @@ public class EnemyStateManager : StateManager<EnemyState>
 
         return states;
     }
-
-    //private void PauseState_OnEnter()
-    //{
-    //    OnPause?.Invoke();
-    //}
-    //
-    //private void AttackState_OnEnter()
-    //{
-    //    OnAttack?.Invoke();
-    //    OnAttackStart?.Invoke();
-    //}
-    //
-    //private void AttackState_OnExit()
-    //{
-    //    OnAttackEnd?.Invoke();
-    //}
 }

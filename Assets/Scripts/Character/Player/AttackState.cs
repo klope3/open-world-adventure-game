@@ -5,12 +5,7 @@ using ECM2;
 
 public class AttackState : PlayerState
 {
-    private float timeInState;
     private readonly float DURATION = 0.6f;
-    //private float chainDelay;
-
-    //public System.Action OnEnter;
-    //public System.Action OnExit;
 
     public override void EnterState()
     {
@@ -22,35 +17,21 @@ public class AttackState : PlayerState
         {
             inputVec = new Vector3(inputVec.x, 0, inputVec.y);
             inputVec = inputVec.relativeTo(stateManager.Character.cameraTransform);
-            stateManager.Character.SetRotation(Quaternion.LookRotation(inputVec)); //ensure that player faces direction of input instantly; prevents getting stuck in an attack animation while still turning around
+            //when the attack starts, snap character facing direction to the direction of movement input
+            //this ensures the player doesn't attack in the wrong direction just because they were in the middle of turning around
+            stateManager.Character.SetRotation(Quaternion.LookRotation(inputVec)); 
         }
-        //InputActionsProvider.OnBButtonStarted += Attack_started;
-
-        //OnEnter?.Invoke();
     }
     
     public override void UpdateState()
     {
-        if (stateManager.TimeInState > timeInState)
-        {
-            //stateManager.SwitchState(PlayerStateManager.DEFAULT_STATE);
-        }
     }
     
     public override void ExitState()
     {
         stateManager.attackInput = false;
-        //InputActionsProvider.OnBButtonStarted -= Attack_started;
         stateManager.CharacterAdapter.canMove = true;
-        //OnExit?.Invoke();
     }
-
-    //public void Initialize(PlayerStateManager stateManager, Character character, ECM2CharacterAdapter characterAdapter, float timeInState)
-    //{
-    //    Initialize(stateManager, character, characterAdapter);
-    //    this.timeInState = timeInState;
-    //    //this.chainDelay = chainDelay;
-    //}
 
     public override void PostInitialize()
     {
@@ -73,9 +54,4 @@ public class AttackState : PlayerState
     {
         return stateManager.TimeInState > DURATION;
     }
-
-    //private void Attack_started()
-    //{
-    //    if (stateManager.TimeInState > chainDelay) stateManager.SwitchState("Attack2");
-    //}
 }

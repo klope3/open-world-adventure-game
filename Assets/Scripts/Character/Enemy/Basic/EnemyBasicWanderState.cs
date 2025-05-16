@@ -5,11 +5,7 @@ using ECM2;
 
 public class EnemyBasicWanderState : EnemyState
 {
-    //private float playerChaseDistance;
-    //private float moveSpeed;
     private float timer;
-    //private float timerMax;
-    //private float pauseTimerMax;
     private bool moving; //when false, stop moving; this "pause" behavior is separate from the "pause" state
 
     public override void EnterState()
@@ -22,14 +18,6 @@ public class EnemyBasicWanderState : EnemyState
 
     public override void UpdateState()
     {
-        //Vector3 vecToPlayer = stateManager.PlayerObj.transform.position - stateManager.OwnTransform.position;
-        //HealthHandler playerHealth = stateManager.PlayerObj.GetComponent<HealthHandler>();
-        //if (vecToPlayer.magnitude < playerChaseDistance && playerHealth.CurHealth > 0)
-        //{
-        //    stateManager.SwitchState("Chase");
-        //    return;
-        //}
-
         timer += Time.deltaTime;
 
         if (timer > stateManager.WanderMoveTime && moving)
@@ -54,15 +42,6 @@ public class EnemyBasicWanderState : EnemyState
         Vector2 rand = Random.insideUnitCircle.normalized;
         return new Vector3(rand.x, 0, rand.y);
     }
-
-    //public void Initialize(EnemyStateManager stateManager, Character character, GameObject playerObj, Transform ownTransform, float wanderMoveSpeed, float wanderMoveTime, float wanderPauseTime, float playerChaseDistance)
-    //{
-    //    Initialize(stateManager, character, playerObj, ownTransform);
-    //    timerMax = wanderMoveTime;
-    //    pauseTimerMax = wanderPauseTime;
-    //    moveSpeed = wanderMoveSpeed;
-    //    this.playerChaseDistance = playerChaseDistance;
-    //}
 
     public override string GetDebugName()
     {

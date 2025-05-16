@@ -12,14 +12,4 @@ public class PlayerStateManagerInputs : MonoBehaviour
         InputActionsProvider.OnAButtonStarted += () => stateManager.trigger = PlayerStateManager.JUMPING_STATE;
         InputActionsProvider.OnDodgeButtonStarted += () => stateManager.trigger = PlayerStateManager.ROLL_STATE;
     }
-
-    private void Attack_Started()
-    {
-        
-    }
-
-    private void Jump_Started()
-    {
-        
-    }
 }

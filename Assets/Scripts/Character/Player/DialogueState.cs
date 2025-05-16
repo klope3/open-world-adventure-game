@@ -6,7 +6,6 @@ using ECM2;
 public class DialogueState : PlayerState
 {
     private DialogueManager dialogueManager;
-    private DialogueBox dialogueBox;
     private InputActionsEvents inputActionsEvents;
 
     public override void EnterState()
@@ -23,14 +22,6 @@ public class DialogueState : PlayerState
     {
 
     }
-
-    //public void Initialize(PlayerStateManager stateManager, Character character, ECM2CharacterAdapter characterAdapter, DialogueManager dialogueManager, DialogueBox dialogueBox, InputActionsEvents inputActionsEvents)
-    //{
-    //    Initialize(stateManager, character, characterAdapter);
-    //    this.dialogueManager = dialogueManager;
-    //    this.dialogueBox = dialogueBox;
-    //    this.inputActionsEvents = inputActionsEvents;
-    //}
 
     public override void PostInitialize()
     {

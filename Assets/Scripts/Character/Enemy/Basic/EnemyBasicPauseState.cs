@@ -5,14 +5,9 @@ using ECM2;
 
 public class EnemyBasicPauseState : EnemyState
 {
-    //private float pauseDuration;
-    //private float timer;
-    //public event System.Action OnEnter;
-
     public override void EnterState()
     {
         stateManager.Character.SetMovementDirection(Vector3.zero);
-        //OnEnter?.Invoke();
     }
 
     public override void ExitState()
@@ -21,20 +16,7 @@ public class EnemyBasicPauseState : EnemyState
 
     public override void UpdateState()
     {
-        //timer += Time.deltaTime;
-        //if (timer > pauseDuration)
-        //{
-        //    stateManager.SwitchState("Wander");
-        //    timer = 0;
-        //    return;
-        //}
     }
-
-    //public void Initialize(EnemyStateManager stateManager, Character character, GameObject playerObj, Transform ownTransform, float pauseDuration)
-    //{
-    //    Initialize(stateManager, character, playerObj, ownTransform);
-    //    this.pauseDuration = pauseDuration;
-    //}
 
     public override string GetDebugName()
     {
