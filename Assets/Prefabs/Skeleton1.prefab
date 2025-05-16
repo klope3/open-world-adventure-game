@@ -20675,13 +20675,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8ac04a700353054688402cd81e67c73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 1958062196950245723}
   animancer: {fileID: 1745259611129033764}
   idle: {fileID: 7400000, guid: 6046765c95dea154390d729a4826884a, type: 2}
   walk: {fileID: 7400000, guid: 6822e8f4d879bff4fb7882ed74b940ed, type: 2}
   attack: {fileID: 7400000, guid: 2dd4822812ff4d04cafc06380859ccc2, type: 2}
   enemyStateManager: {fileID: 320022245168190669}
-  character: {fileID: 7108604589716399821}
 --- !u!114 &8841629311436347481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21335,11 +21333,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fded22e965979744c862a67951f41edd,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6434278647787220293}
+      addedObject: {fileID: 1745259611129033764}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fded22e965979744c862a67951f41edd,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1745259611129033764}
+      addedObject: {fileID: 3934997605124832233}
   m_SourcePrefab: {fileID: 100100000, guid: fded22e965979744c862a67951f41edd, type: 3}
 --- !u!95 &1958062196950245723 stripped
 Animator:
@@ -21371,7 +21369,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5352240739438271690}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6434278647787220293
+--- !u!114 &1745259611129033764
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -21380,10 +21378,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 5082192649450594715}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70876a23e0de2724c8f537a9b223e7a1, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ad50f81b1d25c441943c37a89ba23f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnGenericAttack:
+  _Animator: {fileID: 1958062196950245723}
+  _Transitions: {fileID: 0}
+  _ActionOnDisable: 0
+--- !u!114 &3934997605124832233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5082192649450594715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c5a87acff212af45ad74dd3745ace7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnGenericAttackStart:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 9090168643576564221}
@@ -21398,31 +21411,34 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SoundPlayer, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 2606527856130379715}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  OnGenericAttackEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2606527856130379715}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  OnSwordSlashStart:
-    m_PersistentCalls:
-      m_Calls: []
-  OnSwordSlashEnd:
-    m_PersistentCalls:
-      m_Calls: []
   OnJumpStart:
-    m_PersistentCalls:
-      m_Calls: []
-  OnRollStart:
-    m_PersistentCalls:
-      m_Calls: []
-  OnDodgeStart:
     m_PersistentCalls:
       m_Calls: []
   OnFootstepNormal:
@@ -21440,21 +21456,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1745259611129033764
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5082192649450594715}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ad50f81b1d25c441943c37a89ba23f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _Animator: {fileID: 1958062196950245723}
-  _Transitions: {fileID: 0}
-  _ActionOnDisable: 0
 --- !u!4 &5525697134429361064 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 498143484630912866, guid: fded22e965979744c862a67951f41edd,
