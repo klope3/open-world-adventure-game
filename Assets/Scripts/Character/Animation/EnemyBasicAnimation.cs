@@ -16,11 +16,17 @@ public class EnemyBasicAnimation : MonoBehaviour
         enemyStateManager.OnStateChange += EnemyStateManager_OnStateChange;
     }
 
+    private void OnEnable()
+    {
+        animancer.Play(idle);
+    }
+
     private void EnemyStateManager_OnStateChange(string stateName)
     {
         if (stateName == EnemyStateManager.WANDER_STATE) animancer.Play(walk, MiscConstants.DEFAULT_ANIMATION_BLEND_TIME);
         if (stateName == EnemyStateManager.CHASE_STATE) animancer.Play(walk, MiscConstants.DEFAULT_ANIMATION_BLEND_TIME);
         if (stateName == EnemyStateManager.PAUSE_STATE) animancer.Play(idle, MiscConstants.DEFAULT_ANIMATION_BLEND_TIME);
+        if (stateName == EnemyStateManager.RECOVERY_STATE) animancer.Play(idle, MiscConstants.DEFAULT_ANIMATION_BLEND_TIME);
         if (stateName == EnemyStateManager.ATTACK_STATE) animancer.Play(attack, MiscConstants.DEFAULT_ANIMATION_BLEND_TIME);
     }
 }

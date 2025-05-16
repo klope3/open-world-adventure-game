@@ -10,7 +10,7 @@ public class EnemyStateManager : StateManager<EnemyState>
     [SerializeField] private HealthHandler healthHandler;
     [SerializeField] private float wanderMoveSpeed;
 
-    [SerializeField, Tooltip("The enemy will move for this long before pausing.")] 
+    [SerializeField, Tooltip("The enemy will move for this long before pausing.")]
     private float wanderMoveTime;
 
     [SerializeField, Tooltip("The enemy will pause for this long after moving.")]
@@ -30,6 +30,7 @@ public class EnemyStateManager : StateManager<EnemyState>
     public static readonly string CHASE_STATE = "Chase";
     public static readonly string ATTACK_STATE = "Attack";
     public static readonly string PAUSE_STATE = "Pause";
+    public static readonly string RECOVERY_STATE = "Recovery";
 
     public Character Character
     {
@@ -127,7 +128,7 @@ public class EnemyStateManager : StateManager<EnemyState>
 
     protected override string GetInitialStateName()
     {
-        return WANDER_STATE;
+        return PAUSE_STATE;
     }
 
     protected override Dictionary<string, EnemyState> GetStateDictionary()
@@ -144,17 +145,27 @@ public class EnemyStateManager : StateManager<EnemyState>
         EnemyBasicChaseState chaseState = new EnemyBasicChaseState();
         EnemyBasicAttackState attackState = new EnemyBasicAttackState();
         EnemyBasicPauseState pauseState = new EnemyBasicPauseState();
+        EnemyBasicRecoveryState recoveryState = new EnemyBasicRecoveryState();
 
         wanderState.Initialize(this);
         chaseState.Initialize(this);
         attackState.Initialize(this);
         pauseState.Initialize(this);
+        recoveryState.Initialize(this);
 
         states.Add(WANDER_STATE, wanderState);
         states.Add(CHASE_STATE, chaseState);
         states.Add(ATTACK_STATE, attackState);
         states.Add(PAUSE_STATE, pauseState);
+        states.Add(RECOVERY_STATE, recoveryState);
 
         return states;
+    }
+
+    public bool ShouldChasePlayer()
+    {
+        Vector3 vecToPlayer = PlayerObject.transform.position - OwnTransform.position;
+        HealthHandler playerHealth = PlayerObject.GetComponent<HealthHandler>();
+        return vecToPlayer.magnitude < PlayerChaseDistance && playerHealth.CurHealth > 0;
     }
 }
