@@ -24,7 +24,7 @@ public class ClimbingState : PlayerState
         stateManager.Character.flyingFriction = 10;
         stateManager.Character.maxFlySpeed = 1.5f;
         stateManager.ClimbingModule.enabled = true;
-        stateManager.CharacterAdapter.enabled = false;
+        stateManager.DefaultMovementModule.enabled = false;
 
         OnEnter?.Invoke();
     }
@@ -36,7 +36,7 @@ public class ClimbingState : PlayerState
         stateManager.Character.flyingFriction = initialFlyingFriction;
         stateManager.Character.maxFlySpeed = initialFlySpeed;
         stateManager.ClimbingModule.enabled = false;
-        stateManager.CharacterAdapter.enabled = true;
+        stateManager.DefaultMovementModule.enabled = true;
 
         OnExit?.Invoke();
     }

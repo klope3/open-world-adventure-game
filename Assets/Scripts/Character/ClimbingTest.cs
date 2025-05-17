@@ -7,7 +7,7 @@ using ECM2;
 public class ClimbingTest : MonoBehaviour
 {
     [SerializeField] private Character character;
-    [SerializeField] private ECM2CharacterAdapter characterAdapter;
+    [SerializeField] private PlayerDefaultMovementModule characterAdapter;
     [SerializeField] private float rayDistance;
     [SerializeField] private Vector3 rayOffset;
     [SerializeField] private LayerMask raycastLayerMask;

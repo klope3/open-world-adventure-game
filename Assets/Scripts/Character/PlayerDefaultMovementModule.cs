@@ -4,17 +4,31 @@ using UnityEngine;
 using ECM2;
 using Sirenix.OdinInspector;
 
-//Bridge between ECM2 Character and custom logic
-//this should probably be turned into more of a "movement module" that can be interchanged for other movement types (climbing module, swimming module, etc.) 
-public class ECM2CharacterAdapter : MonoBehaviour
+public class PlayerDefaultMovementModule : MonoBehaviour
 {
     [SerializeField] private Character character;
     [SerializeField] private CameraController cameraController;
     [SerializeField] public bool canMove = true;
+    private MovementType movementType;
     public System.Action LeftGround; //ECM2 does not seem to provide this event, but we can use some of its methods to easily implement it
+
+    public MovementType CurrentMovementType
+    {
+        get
+        {
+            return movementType;
+        }
+    }
+
+    public enum MovementType
+    {
+        ForwardOnly, //only animate between idle, walk forward, and run forward (assumes character's body is always facing movement direction)
+        Strafe //forward, backward, strafe, and in-between animations (for when character's body doesn't necessarily face movement direction)
+    }
 
     private void Awake()
     {
+        SetMovementType(MovementType.ForwardOnly);
         cameraController.OnTargetingStarted += CameraController_OnTargetingStarted;
         cameraController.OnTargetingEnded += CameraController_OnTargetingEnded;
     }
@@ -37,6 +51,13 @@ public class ECM2CharacterAdapter : MonoBehaviour
         {
             LeftGround?.Invoke();
         }
+    }
+
+    [Button]
+    public void SetMovementType(MovementType type)
+    {
+        movementType = type;
+        character.SetRotationMode(type == MovementType.Strafe ? Character.RotationMode.OrientRotationToViewDirection : Character.RotationMode.OrientRotationToMovement);
     }
 
     private void CameraController_OnTargetingStarted()

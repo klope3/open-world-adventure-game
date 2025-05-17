@@ -10,12 +10,12 @@ public class DialogueState : PlayerState
 
     public override void EnterState()
     {
-        stateManager.CharacterAdapter.canMove = false;
+        stateManager.DefaultMovementModule.canMove = false;
     }
 
     public override void ExitState()
     {
-        stateManager.CharacterAdapter.canMove = true;
+        stateManager.DefaultMovementModule.canMove = true;
     }
 
     public override void UpdateState()

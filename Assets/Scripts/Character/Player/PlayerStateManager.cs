@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class PlayerStateManager : StateManager<PlayerState>
 {
-    [SerializeField] private ECM2CharacterAdapter characterAdapter;
+    [SerializeField] private PlayerDefaultMovementModule defaultMovementModule;
     [SerializeField] private Character character;
     [SerializeField] private InteractionZone interactionZone;
     [SerializeField] private DialogueManager dialogueManager;
@@ -26,7 +26,6 @@ public class PlayerStateManager : StateManager<PlayerState>
     [SerializeField] private float dodgeSpeed;
     [SerializeField] private float dodgeDeceleration;
     [SerializeField] private float landingDuration;
-    private MovementType movementType;
     private int recentStandardAttacks; //increments while chaining attacks; resets to 0 when standardAttackChainTime elapses
     public System.Action OnDefaultState;
     public System.Action OnAttack2;
@@ -54,17 +53,11 @@ public class PlayerStateManager : StateManager<PlayerState>
     public static readonly string DYING_STATE = "Dying";
     public static readonly string LANDING_STATE = "Landing";
 
-    public enum MovementType
-    {
-        ForwardOnly, //only animate between idle, walk forward, and run forward (assumes character's body is always facing movement direction)
-        Strafe //forward, backward, strafe, and in-between animations (for when character's body doesn't necessarily face movement direction)
-    }
-
-    public ECM2CharacterAdapter CharacterAdapter
+    public PlayerDefaultMovementModule DefaultMovementModule
     {
         get
         {
-            return characterAdapter;
+            return defaultMovementModule;
         }
     }
     public Character Character
@@ -109,17 +102,9 @@ public class PlayerStateManager : StateManager<PlayerState>
             return landingDuration;
         }
     }
-    public MovementType CurrentMovementType
-    {
-        get
-        {
-            return movementType;
-        }
-    }
 
     protected override void StartAwake()
     {
-        InputActionsProvider.OnZTargetStarted += ZTarget_started;
     }
 
     protected override void EndUpdate()
@@ -183,11 +168,6 @@ public class PlayerStateManager : StateManager<PlayerState>
         recentStandardAttacks++;
     }
 
-    private void ZTarget_started()
-    {
-        Debug.Log("Target");
-    }
-
     private void ClimbingState_OnEnter()
     {
         OnClimbingStart?.Invoke();
@@ -217,7 +197,12 @@ public class PlayerStateManager : StateManager<PlayerState>
             new StateTransition(ATTACK_STATE, () => trigger == ATTACK_STATE && recentStandardAttacks % 2 == 0),
             new StateTransition(ATTACK2_STATE, () => trigger == ATTACK_STATE && recentStandardAttacks % 2 != 0),
             new StateTransition(JUMPING_STATE, () => trigger == JUMPING_STATE),
-            new StateTransition(ROLL_STATE, () => trigger == ROLL_STATE && character.velocity.magnitude > 0 && movementType == MovementType.ForwardOnly),
+            new StateTransition(ROLL_STATE, ToRollState),
         };
+    }
+
+    private bool ToRollState()
+    {
+        return trigger == ROLL_STATE && character.velocity.magnitude > 0 && defaultMovementModule.CurrentMovementType == PlayerDefaultMovementModule.MovementType.ForwardOnly;
     }
 }

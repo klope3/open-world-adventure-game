@@ -9,7 +9,7 @@ public class PlayerAnimation : MonoBehaviour
 {
     [SerializeField] private Character character;
     [SerializeField] private PlayerStateManager playerStateManager;
-    [SerializeField] private ECM2CharacterAdapter adapter;
+    [SerializeField] private PlayerDefaultMovementModule defaultMovementModule;
     [SerializeField] private CameraController cameraController;
     [SerializeField] private Animator animator;
     [SerializeField] private HealthHandler health;
@@ -28,19 +28,11 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] private TransitionAssetBase jump;
 
     private SmoothedVector2Parameter smoothedParameters;
-    private MovementAnimationType movementAnimationType;
 
     private readonly float DEFAULT_FADE_DURATION = 0.1f;
 
-    private enum MovementAnimationType
-    {
-        ForwardOnly, //only animate between idle, walk forward, and run forward (assumes character's body is always facing movement direction)
-        Strafe //forward, backward, strafe, and in-between animations (for when character's body doesn't necessarily face movement direction)
-    }
-
     private void Awake()
     {
-        movementAnimationType = MovementAnimationType.ForwardOnly;
         smoothedParameters = new SmoothedVector2Parameter(
             animancer,
             strafeParameterX,
@@ -71,8 +63,8 @@ public class PlayerAnimation : MonoBehaviour
         Vector3 inputVec = InputActionsProvider.GetPrimaryAxis();
         Vector3 squareVec = Utils.ApproximateSquareInputVector(inputVec);
 
-        float xComponent = movementAnimationType == MovementAnimationType.ForwardOnly ? 0 : squareVec.x;
-        float yComponent = movementAnimationType == MovementAnimationType.ForwardOnly ? squareVec.magnitude : squareVec.y;
+        float xComponent = defaultMovementModule.CurrentMovementType == PlayerDefaultMovementModule.MovementType.ForwardOnly ? 0 : squareVec.x;
+        float yComponent = defaultMovementModule.CurrentMovementType == PlayerDefaultMovementModule.MovementType.ForwardOnly ? squareVec.magnitude : squareVec.y;
         smoothedParameters.TargetValue = new Vector2(xComponent, yComponent);
     }
 

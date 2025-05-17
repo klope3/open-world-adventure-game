@@ -9,11 +9,11 @@ public class AttackState : PlayerState
 
     public override void EnterState()
     {
-        stateManager.CharacterAdapter.canMove = false;
+        stateManager.DefaultMovementModule.canMove = false;
         stateManager.IncrementRecentStandardAttacks();
 
         Vector3 inputVec = InputActionsProvider.GetPrimaryAxis();
-        if (inputVec.magnitude > 0.05f)
+        if (stateManager.DefaultMovementModule.CurrentMovementType == PlayerDefaultMovementModule.MovementType.ForwardOnly && inputVec.magnitude > 0.05f)
         {
             inputVec = new Vector3(inputVec.x, 0, inputVec.y);
             inputVec = inputVec.relativeTo(stateManager.Character.cameraTransform);
@@ -30,7 +30,7 @@ public class AttackState : PlayerState
     public override void ExitState()
     {
         stateManager.attackInput = false;
-        stateManager.CharacterAdapter.canMove = true;
+        stateManager.DefaultMovementModule.canMove = true;
     }
 
     public override void PostInitialize()

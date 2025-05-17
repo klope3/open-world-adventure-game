@@ -6,7 +6,7 @@ public class DeathState : PlayerState
 {
     public override void EnterState()
     {
-        stateManager.CharacterAdapter.canMove = false;
+        stateManager.DefaultMovementModule.canMove = false;
     }
 
     public override void ExitState()

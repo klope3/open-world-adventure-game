@@ -7,7 +7,7 @@ using TMPro;
 
 public class PlayerDeathSequence : MonoBehaviour
 {
-    [SerializeField] private ECM2CharacterAdapter characterAdapter;
+    [SerializeField] private PlayerDefaultMovementModule characterAdapter;
     [SerializeField] private PlayerStateManager stateManager;
     [SerializeField] private CameraController cameraController;
     [SerializeField] private HealthHandler health;
