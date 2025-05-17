@@ -12,6 +12,11 @@ public class TargetingHandler : MonoBehaviour
     [SerializeField] private CameraController cameraController;
     private GameObject objectToBeTargeted;
 
+    private void Awake()
+    {
+        InputActionsProvider.OnZTargetStarted += ZTarget_started;
+    }
+
     private void Update()
     {
         CheckStopTargeting();
@@ -48,10 +53,18 @@ public class TargetingHandler : MonoBehaviour
     {
         if (cameraController.TargetingTransform == null)
         {
-            if (objectToBeTargeted != null) cameraController.SetTargetingTransform(objectToBeTargeted.transform);
+            if (objectToBeTargeted != null)
+            {
+                cameraController.SetTargetingTransform(objectToBeTargeted.transform);
+            }
         } else
         {
             cameraController.SetTargetingTransform(null);
         }
+    }
+
+    private void ZTarget_started()
+    {
+        ToggleTargeting();
     }
 }

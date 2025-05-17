@@ -10,6 +10,7 @@ public class PlayerDefaultMovementModule : MonoBehaviour
     [SerializeField] private CameraController cameraController;
     [SerializeField] public bool canMove = true;
     private MovementType movementType;
+    private MovementType prevMovementType;
     public System.Action LeftGround; //ECM2 does not seem to provide this event, but we can use some of its methods to easily implement it
 
     public MovementType CurrentMovementType
@@ -56,17 +57,18 @@ public class PlayerDefaultMovementModule : MonoBehaviour
     [Button]
     public void SetMovementType(MovementType type)
     {
+        prevMovementType = movementType;
         movementType = type;
         character.SetRotationMode(type == MovementType.Strafe ? Character.RotationMode.OrientRotationToViewDirection : Character.RotationMode.OrientRotationToMovement);
     }
 
     private void CameraController_OnTargetingStarted()
     {
-        character.SetRotationMode(Character.RotationMode.OrientRotationToViewDirection);
+        SetMovementType(MovementType.Strafe);
     }
 
     private void CameraController_OnTargetingEnded()
     {
-        character.SetRotationMode(Character.RotationMode.OrientRotationToMovement);
+        SetMovementType(prevMovementType);
     }
 }
