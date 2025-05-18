@@ -1068,7 +1068,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4568263337157175407
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1314,37 +1314,6 @@ MonoBehaviour:
   minRandomPitch: 1.1
   maxRandomPitch: 1.1
   minTimeBetweenPlays: 0
---- !u!1 &1939366451935469482
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6889592352971865157}
-  m_Layer: 3
-  m_Name: CameraAim
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6889592352971865157
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1939366451935469482}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.29, z: -0.04}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7707550780352835142}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3019589707719281460
 GameObject:
   m_ObjectHideFlags: 0
@@ -1704,7 +1673,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6103738423608287526
 Transform:
   m_ObjectHideFlags: 0
@@ -2723,7 +2692,6 @@ GameObject:
   - component: {fileID: 7043432828388514745}
   - component: {fileID: 378699690410169648}
   - component: {fileID: 3472527601884889368}
-  - component: {fileID: 2959734873242569832}
   - component: {fileID: 2547279025996602357}
   - component: {fileID: 130420492541690402}
   - component: {fileID: 6112407451696103533}
@@ -2731,6 +2699,12 @@ GameObject:
   - component: {fileID: 4861405348652155139}
   - component: {fileID: 3882342440690626006}
   - component: {fileID: 2537722216213172501}
+  - component: {fileID: 2387533364648890610}
+  - component: {fileID: 3424729534073826519}
+  - component: {fileID: 8257131962913860261}
+  - component: {fileID: 4484440798046062817}
+  - component: {fileID: 2656083421027639280}
+  - component: {fileID: 2044148599282010169}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -2754,7 +2728,6 @@ Transform:
   - {fileID: 6993150536057835051}
   - {fileID: 4568263337157175407}
   - {fileID: 3339197054375464831}
-  - {fileID: 6889592352971865157}
   - {fileID: 6124443638222371652}
   - {fileID: 278569148895636963}
   - {fileID: 6103738423608287526}
@@ -2907,21 +2880,6 @@ MonoBehaviour:
   _pushForceScale: 1
   _standingDownwardForceScale: 1
   _camera: {fileID: 0}
---- !u!114 &2959734873242569832
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6891135391806720415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e10188ce612b9ce4db4d64630b1ea45d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  character: {fileID: 3472527601884889368}
-  cameraController: {fileID: 2547279025996602357}
-  canMove: 1
 --- !u!114 &2547279025996602357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2935,7 +2893,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   testTransform: {fileID: 0}
-  cameraFollow: {fileID: 3339197054375464831}
+  cameraFollow: {fileID: 0}
   sensitivity: 100
   minX: -60
   maxX: 60
@@ -2984,10 +2942,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: {fileID: 3472527601884889368}
   playerStateManager: {fileID: 6112407451696103533}
-  adapter: {fileID: 2959734873242569832}
+  defaultMovementModule: {fileID: 2656083421027639280}
   cameraController: {fileID: 2547279025996602357}
   animator: {fileID: 7664937493635207607}
   health: {fileID: 4304775399465600812}
+  climbingModule: {fileID: 8257131962913860261}
+  animancer: {fileID: 4389214572166959255}
+  strafeTransitionAsset: {fileID: 11400000, guid: de97ff0c2d168644fb3695b97c6a753c,
+    type: 2}
+  strafeParameterX: {fileID: 11400000, guid: d69c85649a7bd254bbf30d27e1c0344b, type: 2}
+  strafeParameterY: {fileID: 11400000, guid: 1a212edb5530267439c3f958910e4d83, type: 2}
+  roll: {fileID: 11400000, guid: 88a306168f420bf47be1635900ed1ad8, type: 2}
+  attack1: {fileID: 11400000, guid: de527b104ff95c74fa6cd44f26727b93, type: 2}
+  attack2: {fileID: 11400000, guid: 94ace6670bb54944cb9d73b0eea93066, type: 2}
+  falling: {fileID: 7400000, guid: d499670e39dfa0341947500a8b76153a, type: 2}
+  land: {fileID: 11400000, guid: a76b43075e7f09549b70fef5d7c19f46, type: 2}
+  jump: {fileID: 11400000, guid: e7b9d6582eb435b44aad4364fde207e5, type: 2}
+  ladderIdle: {fileID: 7400000, guid: 961fe620ebaa41843b0bab7406927022, type: 2}
+  ladderClimbUpLeftHand: {fileID: 7400000, guid: 7b3699ff51ec5494eb6383dcadd3b30c,
+    type: 2}
+  ladderClimbUpRightHand: {fileID: 7400000, guid: 4a77cc15c8e8b654892052d7397b670c,
+    type: 2}
+  ladderClimbDownLeftHand: {fileID: 0}
+  ladderClimbDownRightHand: {fileID: 0}
 --- !u!114 &6112407451696103533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3000,7 +2977,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 131073e460a689642946e745c1385147, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterAdapter: {fileID: 2959734873242569832}
+  trigger: 
+  defaultMovementModule: {fileID: 2656083421027639280}
   character: {fileID: 3472527601884889368}
   interactionZone: {fileID: 4679247589496149279}
   dialogueManager: {fileID: 0}
@@ -3008,6 +2986,8 @@ MonoBehaviour:
   cameraController: {fileID: 2547279025996602357}
   inputActionsEvents: {fileID: 0}
   targetingHandler: {fileID: 676940428336849650}
+  climbingDetector: {fileID: 3424729534073826519}
+  climbingModule: {fileID: 8257131962913860261}
   standardAttackDuration: 0.6
   standardAttackChainTime: 0.2
   rollDuration: 0.6
@@ -3016,6 +2996,9 @@ MonoBehaviour:
   dodgeDuration: 0.4
   dodgeSpeed: 23
   dodgeDeceleration: -60
+  landingDuration: 0.5
+  attackInput: 0
+  jumpInput: 0
   OnAnyAttackStart:
     m_PersistentCalls:
       m_Calls: []
@@ -3227,6 +3210,104 @@ MonoBehaviour:
   OnMoneyChange:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2387533364648890610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6891135391806720415}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27ffbb453dcf3e94b91f3768b08c088b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 0}
+  characterAdapter: {fileID: 0}
+  rayDistance: 0.9
+  rayOffset: {x: 0, y: 1, z: 0}
+  raycastLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
+--- !u!114 &3424729534073826519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6891135391806720415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a9b477194e0ff446aa6ebe3cd4dd11b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 3472527601884889368}
+  rayOffset: {x: 0, y: 1, z: 0}
+  rayDistance: 0.9
+  raycastLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
+  debugVisuals: 0
+--- !u!114 &8257131962913860261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6891135391806720415}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ecf3ef33d7eab04b89cc9ccb5384c01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 3472527601884889368}
+  handTriggerTime: 0.4
+  movementIncrementTime: 0.35
+  movementIncrementDistance: 0.4
+  movementIncrementFinishDelay: 0.05
+  climbingSpeed: 1.1
+--- !u!114 &4484440798046062817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6891135391806720415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e5eb755e78b74c4199dd98c2d2151ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateManager: {fileID: 6112407451696103533}
+--- !u!114 &2656083421027639280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6891135391806720415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e884eae2fc8342142be635c614959408, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 3472527601884889368}
+  cameraController: {fileID: 2547279025996602357}
+  canMove: 1
+--- !u!114 &2044148599282010169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6891135391806720415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a0842ed589328d4ea2a7723b334d24f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  climbingDetector: {fileID: 3424729534073826519}
+  stateManager: {fileID: 6112407451696103533}
 --- !u!1 &7073896587495278439
 GameObject:
   m_ObjectHideFlags: 0
@@ -3272,7 +3353,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ba1445673ccf804480c8b4f45b98f2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterAdapter: {fileID: 2959734873242569832}
+  characterAdapter: {fileID: 0}
   stateManager: {fileID: 6112407451696103533}
   cameraController: {fileID: 2547279025996602357}
   health: {fileID: 4304775399465600812}
@@ -3926,6 +4007,18 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1828886407278058859}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9634f53245f73e040804b593b11cef94,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7281065607923834839}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9634f53245f73e040804b593b11cef94,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4389214572166959255}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9634f53245f73e040804b593b11cef94,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4691803227370122878}
   m_SourcePrefab: {fileID: 100100000, guid: 9634f53245f73e040804b593b11cef94, type: 3}
 --- !u!137 &17161045016028435 stripped
 SkinnedMeshRenderer:
@@ -3985,7 +4078,7 @@ Animator:
   m_GameObject: {fileID: 7658223766828160145}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 9634f53245f73e040804b593b11cef94, type: 3}
-  m_Controller: {fileID: 9100000, guid: 0976ab07570832a4ebce886b69379468, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -4008,9 +4101,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70876a23e0de2724c8f537a9b223e7a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnGenericAttack:
-    m_PersistentCalls:
-      m_Calls: []
   OnSwordSlashStart:
     m_PersistentCalls:
       m_Calls:
@@ -4089,33 +4179,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  OnJumpStart:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2851054268819871902}
-        m_TargetAssemblyTypeName: SoundPlayer, Assembly-CSharp
-        m_MethodName: PlayRandom
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 7023259996561030030}
-        m_TargetAssemblyTypeName: SoundPlayer, Assembly-CSharp
-        m_MethodName: PlayRandom
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   OnRollStart:
     m_PersistentCalls:
       m_Calls:
@@ -4170,10 +4233,98 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &7281065607923834839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7658223766828160145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c5a87acff212af45ad74dd3745ace7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnGenericAttackStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGenericAttackEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  OnJumpStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2851054268819871902}
+        m_TargetAssemblyTypeName: SoundPlayer, Assembly-CSharp
+        m_MethodName: PlayRandom
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7023259996561030030}
+        m_TargetAssemblyTypeName: SoundPlayer, Assembly-CSharp
+        m_MethodName: PlayRandom
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnFootstepNormal:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7578108303154177590}
+        m_TargetAssemblyTypeName: SoundPlayer, Assembly-CSharp
+        m_MethodName: PlayRandom
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4389214572166959255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7658223766828160145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ad50f81b1d25c441943c37a89ba23f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Animator: {fileID: 7664937493635207607}
+  _Transitions: {fileID: 0}
+  _ActionOnDisable: 0
+--- !u!114 &4691803227370122878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7658223766828160145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e07a4713cd6368e4ea1955e507b09d47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 3472527601884889368}
+  OnLanded:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 733149313206718414}
         m_TargetAssemblyTypeName: SoundPlayer, Assembly-CSharp
         m_MethodName: PlayRandom
         m_Mode: 1

@@ -20,7 +20,6 @@ public class InteractionZone : MonoBehaviour
         if (interactable == null) return;
 
         interactables.Add(interactable);
-        Debug.Log($"Added {other.name}");
     }
 
     private void OnTriggerExit(Collider other)
@@ -29,14 +28,23 @@ public class InteractionZone : MonoBehaviour
         if (interactable == null) return;
 
         interactables.Remove(interactable);
-        Debug.Log($"Removed {other.name}");
     }
 
-    public void Interact()
+    public IInteractable GetPrioritizedInteractable()
     {
-        if (interactables.Count == 0) return;
-
-        IInteractable firstInteractable = interactables[0];
-        firstInteractable.DoInteraction();
+        //unimplemented. Will eventually calculate which interactable should be prioritized currently, 
+        //based on distance, how directly the player's facing it, etc.
+        //another script can retrieve this prioritized interactable and actually interact with it.
+        return null;
     }
+
+    //the InteractionZone's job should be to keep track of what's inside and outside the zone,
+    //not actually interact with any of it.
+    //public void Interact()
+    //{
+    //    if (interactables.Count == 0) return;
+    //
+    //    IInteractable firstInteractable = interactables[0];
+    //    firstInteractable.DoInteraction();
+    //}
 }

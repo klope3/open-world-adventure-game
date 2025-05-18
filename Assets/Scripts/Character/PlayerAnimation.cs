@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using ECM2;
 using Animancer;
-using System.Linq;
 
 public class PlayerAnimation : MonoBehaviour
 {
@@ -27,6 +26,12 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] private TransitionAssetBase land;
     [SerializeField] private TransitionAssetBase jump;
 
+    [SerializeField] private AnimationClip ladderIdle;
+    [SerializeField] private AnimationClip ladderClimbUpLeftHand;
+    [SerializeField] private AnimationClip ladderClimbUpRightHand;
+    [SerializeField] private AnimationClip ladderClimbDownLeftHand;
+    [SerializeField] private AnimationClip ladderClimbDownRightHand;
+
     private SmoothedVector2Parameter smoothedParameters;
 
     private readonly float DEFAULT_FADE_DURATION = 0.1f;
@@ -44,6 +49,19 @@ public class PlayerAnimation : MonoBehaviour
         playerStateManager.OnLeftGround += PlayerStateManager_OnLeftGround;
         playerStateManager.OnLand += PlayerStateManager_OnLand;
         playerStateManager.OnStateChange += PlayerStateManager_OnStateChange;
+
+        climbingModule.OnLeftHandMoveUp += Climbing_LeftHandMoveUp;
+        climbingModule.OnRightHandMoveUp += Climbing_RightHandMoveUp;
+    }
+
+    private void Climbing_LeftHandMoveUp()
+    {
+        animancer.Play(ladderClimbUpLeftHand);
+    }
+
+    private void Climbing_RightHandMoveUp()
+    {
+        animancer.Play(ladderClimbUpRightHand);
     }
 
     private void PlayerStateManager_OnStateChange(string stateName)
@@ -56,10 +74,18 @@ public class PlayerAnimation : MonoBehaviour
         if (stateName == PlayerStateManager.FALLING_STATE) animancer.Play(falling, DEFAULT_FADE_DURATION);
         if (stateName == PlayerStateManager.ROLL_STATE) animancer.Play(roll);
         if (stateName == PlayerStateManager.LANDING_STATE) animancer.Play(land);
+        if (stateName == PlayerStateManager.CLIMBING_STATE) animancer.Play(ladderIdle, MiscConstants.DEFAULT_ANIMATION_BLEND_TIME);
     }
 
     private void Update()
     {
+        DefaultMovementAnimation();
+    }
+    
+    private void DefaultMovementAnimation()
+    {
+        if (playerStateManager.CurrentStateKey != PlayerStateManager.DEFAULT_STATE) return;
+
         Vector3 inputVec = InputActionsProvider.GetPrimaryAxis();
         Vector3 squareVec = Utils.ApproximateSquareInputVector(inputVec);
 

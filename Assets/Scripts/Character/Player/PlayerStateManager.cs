@@ -52,6 +52,7 @@ public class PlayerStateManager : StateManager<PlayerState>
     public static readonly string CLIMBING_STATE = "Climbing";
     public static readonly string DYING_STATE = "Dying";
     public static readonly string LANDING_STATE = "Landing";
+    public static readonly string INTERACT_TRIGGER = "Interact";
 
     public PlayerDefaultMovementModule DefaultMovementModule
     {
@@ -198,6 +199,7 @@ public class PlayerStateManager : StateManager<PlayerState>
             new StateTransition(ATTACK2_STATE, () => trigger == ATTACK_STATE && recentStandardAttacks % 2 != 0),
             new StateTransition(JUMPING_STATE, () => trigger == JUMPING_STATE),
             new StateTransition(ROLL_STATE, ToRollState),
+            new StateTransition(CLIMBING_STATE, () => trigger == INTERACT_TRIGGER && climbingDetector.CheckClimbable()),
         };
     }
 

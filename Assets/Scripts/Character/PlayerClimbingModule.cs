@@ -5,7 +5,11 @@ using UnityEngine;
 public class PlayerClimbingModule : MonoBehaviour
 {
     [SerializeField] private ECM2.Character character;
-    [SerializeField] private float handTriggerTime;
+    [SerializeField, Tooltip("Climbing happens in movement 'increments,' which cover this much distance")]
+    private float movementIncrementDistance;
+    [SerializeField, Tooltip("Short delay after reaching the destination position to ensure player doesn't start moving again too soon")] 
+    private float movementIncrementFinishDelay;
+    [SerializeField] private float climbingSpeed;
     public System.Action OnClimbUpLeft; //the character's left hand moves up
     public System.Action OnClimbUpRight; //the character's right hand moves up
     public System.Action OnClimbingDownStart;
@@ -14,7 +18,11 @@ public class PlayerClimbingModule : MonoBehaviour
     public System.Action OnRightHandMoveUp;
     public System.Action OnLeftHandMoveDown;
     public System.Action OnRightHandMoveDown;
-    private bool readyForNextHand;
+    private float curYDirection;
+    private Vector3 movementIncrementStartPos; //transform.position when the current movement increment started
+    private bool moving;
+    private bool isFinishDelayRunning;
+    private float prevMoveSpeed;
     private Hand currentHandUp;
     private enum Hand
     {
@@ -24,61 +32,64 @@ public class PlayerClimbingModule : MonoBehaviour
 
     private void OnEnable()
     {
-        currentHandUp = Hand.Left;
-        readyForNextHand = true;
+        currentHandUp = Hand.Right;
+        prevMoveSpeed = character.maxFlySpeed;
+        character.maxFlySpeed = climbingSpeed;
+    }
+
+    private void OnDisable()
+    {
+        character.maxFlySpeed = prevMoveSpeed;
+        moving = false;
     }
 
     private void Update()
     {
-        Vector3 primaryAxis = InputActionsProvider.GetPrimaryAxis();
+        if (isFinishDelayRunning) return;
 
-        Vector3 moveVec = new Vector3();
-
-        moveVec.y = primaryAxis.y > 0.05f ? 1 : primaryAxis.y < -0.05f ? -1 : 0;
-        character.SetMovementDirection(moveVec);
-
-        HandleAnimation(moveVec.y);
-    }
-
-    private IEnumerator CO_HandTimer()
-    {
-        readyForNextHand = false;
-        yield return new WaitForSeconds(handTriggerTime);
-        readyForNextHand = true;
-    }
-
-    private void HandleAnimation(float moveY)
-    {
-        if (!readyForNextHand) return;
-
-        if (moveY > 0.05f)
+        if (moving)
         {
-            if (currentHandUp == Hand.Left)
+            float distanceTraveled = Vector3.Distance(character.transform.position, movementIncrementStartPos);
+            if (distanceTraveled >= movementIncrementDistance)
             {
-                currentHandUp = Hand.Right;
-                OnRightHandMoveUp?.Invoke();
+                Vector3 destinationPos = movementIncrementStartPos + Vector3.up * curYDirection * movementIncrementDistance;
+                character.TeleportPosition(destinationPos); //snap to dest position to help prevent floating point drift during long climbing sessions
+                character.SetVelocity(Vector3.zero);
+                character.SetMovementDirection(Vector3.zero);
+                StartCoroutine(CO_MovementFinishDelay());
             }
-            else
+        } else
+        {
+            Vector3 primaryAxis = InputActionsProvider.GetPrimaryAxis();
+            curYDirection = primaryAxis.y > 0.05f ? 1 : primaryAxis.y < -0.05f ? -1 : 0;
+            if (curYDirection != 0)
             {
-                currentHandUp = Hand.Left;
-                OnLeftHandMoveUp?.Invoke();
+                movementIncrementStartPos = character.transform.position;
+                character.SetMovementDirection(new Vector3(0, curYDirection, 0));
+                moving = true;
+                HandleHandMovement();
             }
-            StartCoroutine(CO_HandTimer());
         }
+    }
 
-        if (moveY < -0.05f)
+    private IEnumerator CO_MovementFinishDelay()
+    {
+        isFinishDelayRunning = true;
+        yield return new WaitForSeconds(movementIncrementFinishDelay);
+        moving = false;
+        isFinishDelayRunning = false;
+    }
+
+    private void HandleHandMovement()
+    {
+        if (currentHandUp == Hand.Left)
         {
-            if (currentHandUp == Hand.Left)
-            {
-                currentHandUp = Hand.Right;
-                OnLeftHandMoveDown?.Invoke();
-            }
-            else
-            {
-                currentHandUp = Hand.Left;
-                OnRightHandMoveDown?.Invoke();
-            }
-            StartCoroutine(CO_HandTimer());
+            currentHandUp = Hand.Right;
+            OnRightHandMoveUp?.Invoke();
+        } else
+        {
+            currentHandUp = Hand.Left;
+            OnLeftHandMoveUp?.Invoke();
         }
     }
 }
