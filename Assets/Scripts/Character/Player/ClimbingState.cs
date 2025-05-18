@@ -17,6 +17,8 @@ public class ClimbingState : PlayerState
         initialRotationMode = stateManager.Character.rotationMode;
         initialFlyingFriction = stateManager.Character.flyingFriction;
 
+        Vector3 surfaceNormal = stateManager.ClimbingDetector.GetClimbingSurfaceNormal();
+        stateManager.Character.TeleportRotation(Quaternion.LookRotation(surfaceNormal * -1)); //snap to face climbing surface
         stateManager.Character.SetMovementMode(Character.MovementMode.Flying); //"flying" is the built-in ECM2 mode recommended by the dev for climbing-type movement
         stateManager.Character.SetRotationMode(Character.RotationMode.None);
         stateManager.Character.flyingFriction = 1000; //try to make sure momentum drift doesn't cause player position to become desynced with ladder rungs

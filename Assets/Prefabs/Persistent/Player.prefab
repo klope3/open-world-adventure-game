@@ -2782,10 +2782,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 0.3
+  m_Height: 1.35
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 0.675, z: 0}
 --- !u!114 &378699690410169648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2801,11 +2801,11 @@ MonoBehaviour:
   _planeConstraint: 0
   _rootTransform: {fileID: 0}
   _rootTransformOffset: {x: 0, y: 0, z: 0}
-  _radius: 0.5
-  _height: 2
+  _radius: 0.3
+  _height: 1.35
   _slopeLimit: 45
   _stepOffset: 0.45
-  _perchOffset: 0.5
+  _perchOffset: 0.3
   _perchAdditionalHeight: 0.4
   _slopeLimitOverride: 0
   _useFlatTop: 0
@@ -3243,7 +3243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: {fileID: 3472527601884889368}
   rayOffset: {x: 0, y: 1, z: 0}
-  rayDistance: 0.9
+  rayDistance: 0.35
   raycastLayerMask:
     serializedVersion: 2
     m_Bits: 512
@@ -3261,8 +3261,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 3472527601884889368}
-  handTriggerTime: 0.4
-  movementIncrementTime: 0.35
   movementIncrementDistance: 0.4
   movementIncrementFinishDelay: 0.05
   climbingSpeed: 1.1

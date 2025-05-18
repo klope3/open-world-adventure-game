@@ -75,6 +75,13 @@ public class PlayerStateManager : StateManager<PlayerState>
             return climbingModule;
         }
     }
+    public PlayerClimbingDetector ClimbingDetector
+    {
+        get
+        {
+            return climbingDetector;
+        }
+    }
     public float RollDuration
     {
         get
