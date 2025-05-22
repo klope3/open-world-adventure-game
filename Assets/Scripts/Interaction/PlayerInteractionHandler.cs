@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerInteractionHandler : MonoBehaviour
 {
-    [SerializeField] private PlayerClimbingDetector climbingDetector;
     [SerializeField] private PlayerStateManager stateManager;
 
     private void Awake()

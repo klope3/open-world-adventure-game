@@ -10,6 +10,8 @@ public class PlayerClimbingModule : MonoBehaviour
     [SerializeField, Tooltip("Short delay after reaching the destination position to ensure player doesn't start moving again too soon")] 
     private float movementIncrementFinishDelay;
     [SerializeField] private float climbingSpeed;
+    [SerializeField] private RaycastChecker atTopChecker;
+    [SerializeField] private PlayerStateManager stateManager;
     public System.Action OnClimbUpLeft; //the character's left hand moves up
     public System.Action OnClimbUpRight; //the character's right hand moves up
     public System.Action OnClimbingDownStart;
@@ -62,6 +64,11 @@ public class PlayerClimbingModule : MonoBehaviour
         {
             Vector3 primaryAxis = InputActionsProvider.GetPrimaryAxis();
             curYDirection = primaryAxis.y > 0.05f ? 1 : primaryAxis.y < -0.05f ? -1 : 0;
+            if (curYDirection > 0 && !atTopChecker.Check())
+            {
+                stateManager.trigger = PlayerStateManager.CLIMBING_REACH_TOP_STATE;
+                return;
+            }
             if (curYDirection != 0)
             {
                 movementIncrementStartPos = character.transform.position;

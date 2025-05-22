@@ -14,7 +14,7 @@ public class PlayerStateManager : StateManager<PlayerState>
     [SerializeField] private CameraController cameraController;
     [SerializeField] private InputActionsEvents inputActionsEvents;
     [SerializeField] private TargetingHandler targetingHandler;
-    [SerializeField] private PlayerClimbingDetector climbingDetector;
+    [SerializeField] private RaycastChecker climbingDetector;
     [SerializeField] private PlayerClimbingModule climbingModule;
     [SerializeField] private float standardAttackDuration;
     [SerializeField, Tooltip("The player must press attack at most this long after the previous attack state finished in order to chain the next attack.")]
@@ -26,6 +26,7 @@ public class PlayerStateManager : StateManager<PlayerState>
     [SerializeField] private float dodgeSpeed;
     [SerializeField] private float dodgeDeceleration;
     [SerializeField] private float landingDuration;
+    [SerializeField] private float climbingReachTopDuration;
     private int recentStandardAttacks; //increments while chaining attacks; resets to 0 when standardAttackChainTime elapses
     public System.Action OnDefaultState;
     public System.Action OnAttack2;
@@ -52,8 +53,16 @@ public class PlayerStateManager : StateManager<PlayerState>
     public static readonly string CLIMBING_STATE = "Climbing";
     public static readonly string DYING_STATE = "Dying";
     public static readonly string LANDING_STATE = "Landing";
+    public static readonly string CLIMBING_REACH_TOP_STATE = "Climbing reach top";
     public static readonly string INTERACT_TRIGGER = "Interact";
 
+    public float ClimbingReachTopDuration
+    {
+        get
+        {
+            return climbingReachTopDuration;
+        }
+    }
     public PlayerDefaultMovementModule DefaultMovementModule
     {
         get
@@ -75,7 +84,7 @@ public class PlayerStateManager : StateManager<PlayerState>
             return climbingModule;
         }
     }
-    public PlayerClimbingDetector ClimbingDetector
+    public RaycastChecker ClimbingDetector
     {
         get
         {
@@ -141,6 +150,7 @@ public class PlayerStateManager : StateManager<PlayerState>
         DodgeState dodgeState = new DodgeState();
         DeathState deathState = new DeathState();
         ClimbingState climbingState = new ClimbingState();
+        ClimbingReachTopState reachTopState = new ClimbingReachTopState();
         LandingState landingState = new LandingState();
 
         attackState.Initialize(this);
@@ -152,6 +162,7 @@ public class PlayerStateManager : StateManager<PlayerState>
         dodgeState.Initialize(this);
         deathState.Initialize(this);
         climbingState.Initialize(this);
+        reachTopState.Initialize(this);
         landingState.Initialize(this);
 
         dodgeState.OnEnter += DodgeState_OnEnter;
@@ -167,6 +178,7 @@ public class PlayerStateManager : StateManager<PlayerState>
         states.Add(DODGING_STATE, dodgeState);
         states.Add(DYING_STATE, deathState);
         states.Add(CLIMBING_STATE, climbingState);
+        states.Add(CLIMBING_REACH_TOP_STATE, reachTopState);
         states.Add(LANDING_STATE, landingState);
         return states;
     }
@@ -206,7 +218,7 @@ public class PlayerStateManager : StateManager<PlayerState>
             new StateTransition(ATTACK2_STATE, () => trigger == ATTACK_STATE && recentStandardAttacks % 2 != 0),
             new StateTransition(JUMPING_STATE, () => trigger == JUMPING_STATE),
             new StateTransition(ROLL_STATE, ToRollState),
-            new StateTransition(CLIMBING_STATE, () => trigger == INTERACT_TRIGGER && climbingDetector.CheckClimbable()),
+            new StateTransition(CLIMBING_STATE, () => trigger == INTERACT_TRIGGER && climbingDetector.Check()),
         };
     }
 

@@ -17,7 +17,7 @@ public class ClimbingState : PlayerState
         initialRotationMode = stateManager.Character.rotationMode;
         initialFlyingFriction = stateManager.Character.flyingFriction;
 
-        Vector3 surfaceNormal = stateManager.ClimbingDetector.GetClimbingSurfaceNormal();
+        Vector3 surfaceNormal = stateManager.ClimbingDetector.GetSurfaceNormal();
         stateManager.Character.TeleportRotation(Quaternion.LookRotation(surfaceNormal * -1)); //snap to face climbing surface
         stateManager.Character.SetMovementMode(Character.MovementMode.Flying); //"flying" is the built-in ECM2 mode recommended by the dev for climbing-type movement
         stateManager.Character.SetRotationMode(Character.RotationMode.None);
@@ -57,6 +57,7 @@ public class ClimbingState : PlayerState
         return new StateTransition[]
         {
             new StateTransition(PlayerStateManager.FALLING_STATE, () => stateManager.trigger == PlayerStateManager.INTERACT_TRIGGER),
+            new StateTransition(PlayerStateManager.CLIMBING_REACH_TOP_STATE, () => stateManager.trigger == PlayerStateManager.CLIMBING_REACH_TOP_STATE),
         };
     }
 }

@@ -7,6 +7,7 @@ using Animancer;
 public class PlayerAnimation : MonoBehaviour
 {
     [SerializeField] private Character character;
+    [SerializeField] private Rigidbody characterRb;
     [SerializeField] private PlayerStateManager playerStateManager;
     [SerializeField] private PlayerDefaultMovementModule defaultMovementModule;
     [SerializeField] private CameraController cameraController;
@@ -31,8 +32,11 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] private AnimationClip ladderClimbUpRightHand;
     [SerializeField] private AnimationClip ladderClimbDownLeftHand;
     [SerializeField] private AnimationClip ladderClimbDownRightHand;
+    [SerializeField] private AnimationClip ladderReachTop;
 
+    private RedirectRootMotionToTransform rootMotionRedirector;
     private SmoothedVector2Parameter smoothedParameters;
+    private RigidbodyInterpolation prevRbInterpolation; //stored when we turn off interpolation at the start of a root motion animation, so we can put the RB back to the way it was afterward
 
     private readonly float DEFAULT_FADE_DURATION = 0.1f;
 
@@ -75,6 +79,7 @@ public class PlayerAnimation : MonoBehaviour
         if (stateName == PlayerStateManager.ROLL_STATE) animancer.Play(roll);
         if (stateName == PlayerStateManager.LANDING_STATE) animancer.Play(land);
         if (stateName == PlayerStateManager.CLIMBING_STATE) animancer.Play(ladderIdle, MiscConstants.DEFAULT_ANIMATION_BLEND_TIME);
+        if (stateName == PlayerStateManager.CLIMBING_REACH_TOP_STATE) PlayRootMotionAnimation(ladderReachTop);
     }
 
     private void Update()
@@ -112,5 +117,30 @@ public class PlayerAnimation : MonoBehaviour
     private void PlayerStateManager_OnLand()
     {
         animancer.Play(land);
+    }
+
+    [Sirenix.OdinInspector.Button]
+    public void ReachTop()
+    {
+        animancer.Play(ladderReachTop, MiscConstants.DEFAULT_ANIMATION_BLEND_TIME);
+    }
+
+    private void PlayRootMotionAnimation(AnimationClip clip)
+    {
+        prevRbInterpolation = characterRb.interpolation;
+        characterRb.interpolation = RigidbodyInterpolation.None;
+        if (rootMotionRedirector == null)
+        {
+            rootMotionRedirector = animator.gameObject.AddComponent<RedirectRootMotionToTransform>();
+        }
+        AnimancerState state = animancer.Play(clip);
+        state.Events(this).OnEnd ??= OnRootMotionAnimationEnd;
+    }
+
+    private void OnRootMotionAnimationEnd()
+    {
+        characterRb.interpolation = prevRbInterpolation;
+        Destroy(rootMotionRedirector);
+        rootMotionRedirector = null;
     }
 }

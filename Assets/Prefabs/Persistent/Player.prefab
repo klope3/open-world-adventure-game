@@ -1594,6 +1594,38 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &3427447834582317075
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1006641413625468452}
+  m_Layer: 3
+  m_Name: RaycastCheckers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1006641413625468452
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3427447834582317075}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4329985818442891356}
+  m_Father: {fileID: 7707550780352835142}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3507344442043566605
 GameObject:
   m_ObjectHideFlags: 0
@@ -1889,6 +1921,88 @@ MonoBehaviour:
   detectorZone: {fileID: 0}
   targetingIndicator: {fileID: 0}
   cameraController: {fileID: 2547279025996602357}
+--- !u!1 &4573853000124010269
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8841944481378360514}
+  - component: {fileID: 3709447414868491344}
+  m_Layer: 3
+  m_Name: CheckAtTop
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8841944481378360514
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4573853000124010269}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.477, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4329985818442891356}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3709447414868491344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4573853000124010269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58d0bb0ab68ee6c49b01c6babc983232, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rayDistance: 0.35
+  raycastLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
+  debugVisuals: 1
+--- !u!1 &4799816982936013306
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4329985818442891356}
+  m_Layer: 3
+  m_Name: Climbing
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4329985818442891356
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4799816982936013306}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7187591778544154625}
+  - {fileID: 8841944481378360514}
+  m_Father: {fileID: 1006641413625468452}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4944477511060112943
 GameObject:
   m_ObjectHideFlags: 0
@@ -2700,7 +2814,6 @@ GameObject:
   - component: {fileID: 3882342440690626006}
   - component: {fileID: 2537722216213172501}
   - component: {fileID: 2387533364648890610}
-  - component: {fileID: 3424729534073826519}
   - component: {fileID: 8257131962913860261}
   - component: {fileID: 4484440798046062817}
   - component: {fileID: 2656083421027639280}
@@ -2734,6 +2847,7 @@ Transform:
   - {fileID: 6040655531079689504}
   - {fileID: 4863115450843830939}
   - {fileID: 5328133623915246546}
+  - {fileID: 1006641413625468452}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &7026296820608403941
@@ -2760,7 +2874,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 0
   m_IsKinematic: 1
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!136 &7043432828388514745
@@ -2941,6 +3055,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 3472527601884889368}
+  characterRb: {fileID: 7026296820608403941}
   playerStateManager: {fileID: 6112407451696103533}
   defaultMovementModule: {fileID: 2656083421027639280}
   cameraController: {fileID: 2547279025996602357}
@@ -2965,6 +3080,7 @@ MonoBehaviour:
     type: 2}
   ladderClimbDownLeftHand: {fileID: 0}
   ladderClimbDownRightHand: {fileID: 0}
+  ladderReachTop: {fileID: 7400000, guid: ed8e3bb53c079db4fac6385164b81438, type: 2}
 --- !u!114 &6112407451696103533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2986,7 +3102,7 @@ MonoBehaviour:
   cameraController: {fileID: 2547279025996602357}
   inputActionsEvents: {fileID: 0}
   targetingHandler: {fileID: 676940428336849650}
-  climbingDetector: {fileID: 3424729534073826519}
+  climbingDetector: {fileID: 8538559281397860105}
   climbingModule: {fileID: 8257131962913860261}
   standardAttackDuration: 0.6
   standardAttackChainTime: 0.2
@@ -2997,6 +3113,7 @@ MonoBehaviour:
   dodgeSpeed: 23
   dodgeDeceleration: -60
   landingDuration: 0.5
+  climbingReachTopDuration: 0.9
   attackInput: 0
   jumpInput: 0
   OnAnyAttackStart:
@@ -3229,25 +3346,6 @@ MonoBehaviour:
   raycastLayerMask:
     serializedVersion: 2
     m_Bits: 512
---- !u!114 &3424729534073826519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6891135391806720415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a9b477194e0ff446aa6ebe3cd4dd11b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  character: {fileID: 3472527601884889368}
-  rayOffset: {x: 0, y: 1, z: 0}
-  rayDistance: 0.35
-  raycastLayerMask:
-    serializedVersion: 2
-    m_Bits: 512
-  debugVisuals: 0
 --- !u!114 &8257131962913860261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3264,6 +3362,8 @@ MonoBehaviour:
   movementIncrementDistance: 0.4
   movementIncrementFinishDelay: 0.05
   climbingSpeed: 1.1
+  atTopChecker: {fileID: 3709447414868491344}
+  stateManager: {fileID: 6112407451696103533}
 --- !u!114 &4484440798046062817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3304,7 +3404,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a0842ed589328d4ea2a7723b334d24f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  climbingDetector: {fileID: 3424729534073826519}
   stateManager: {fileID: 6112407451696103533}
 --- !u!1 &7073896587495278439
 GameObject:
@@ -3518,6 +3617,55 @@ MonoBehaviour:
   minRandomPitch: 0.85
   maxRandomPitch: 1.15
   minTimeBetweenPlays: 0
+--- !u!1 &7566107291669294637
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7187591778544154625}
+  - component: {fileID: 8538559281397860105}
+  m_Layer: 3
+  m_Name: CheckClimbable
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7187591778544154625
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7566107291669294637}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4329985818442891356}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8538559281397860105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7566107291669294637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58d0bb0ab68ee6c49b01c6babc983232, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rayDistance: 0.35
+  raycastLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
+  debugVisuals: 1
 --- !u!1001 &3077543888738213770
 PrefabInstance:
   m_ObjectHideFlags: 0
