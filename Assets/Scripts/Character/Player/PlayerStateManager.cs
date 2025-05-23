@@ -55,6 +55,7 @@ public class PlayerStateManager : StateManager<PlayerState>
     public static readonly string LANDING_STATE = "Landing";
     public static readonly string CLIMBING_REACH_TOP_STATE = "Climbing reach top";
     public static readonly string INTERACT_TRIGGER = "Interact";
+    public static readonly string DODGE_TRIGGER = "Dodge";
 
     public float ClimbingReachTopDuration
     {
@@ -117,6 +118,27 @@ public class PlayerStateManager : StateManager<PlayerState>
         get
         {
             return landingDuration;
+        }
+    }
+    public float DodgeDuration
+    {
+        get
+        {
+            return dodgeDuration;
+        }
+    }
+    public float DodgeSpeed
+    {
+        get
+        {
+            return dodgeSpeed;
+        }
+    }
+    public float DodgeDeceleration
+    {
+        get
+        {
+            return dodgeDeceleration;
         }
     }
 
@@ -218,12 +240,18 @@ public class PlayerStateManager : StateManager<PlayerState>
             new StateTransition(ATTACK2_STATE, () => trigger == ATTACK_STATE && recentStandardAttacks % 2 != 0),
             new StateTransition(JUMPING_STATE, () => trigger == JUMPING_STATE),
             new StateTransition(ROLL_STATE, ToRollState),
+            new StateTransition(DODGING_STATE, ToDodgeState),
             new StateTransition(CLIMBING_STATE, () => trigger == INTERACT_TRIGGER && climbingDetector.Check()),
         };
     }
 
+    private bool ToDodgeState()
+    {
+        return trigger == DODGE_TRIGGER && character.velocity.magnitude > 0 && defaultMovementModule.CurrentMovementType == PlayerDefaultMovementModule.MovementType.Strafe;
+    }
+
     private bool ToRollState()
     {
-        return trigger == ROLL_STATE && character.velocity.magnitude > 0 && defaultMovementModule.CurrentMovementType == PlayerDefaultMovementModule.MovementType.ForwardOnly;
+        return trigger == DODGE_TRIGGER && character.velocity.magnitude > 0 && defaultMovementModule.CurrentMovementType == PlayerDefaultMovementModule.MovementType.ForwardOnly;
     }
 }

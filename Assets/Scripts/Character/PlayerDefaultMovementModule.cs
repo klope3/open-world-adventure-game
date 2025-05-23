@@ -9,6 +9,7 @@ public class PlayerDefaultMovementModule : MonoBehaviour
     [SerializeField] private Character character;
     [SerializeField] private CameraController cameraController;
     [SerializeField] public bool canMove = true;
+    [SerializeField] private MovementType initialMovementType;
     private MovementType movementType;
     private MovementType prevMovementType;
     public System.Action LeftGround; //ECM2 does not seem to provide this event, but we can use some of its methods to easily implement it
@@ -29,7 +30,7 @@ public class PlayerDefaultMovementModule : MonoBehaviour
 
     private void Awake()
     {
-        SetMovementType(MovementType.ForwardOnly);
+        SetMovementType(initialMovementType);
         cameraController.OnTargetingStarted += CameraController_OnTargetingStarted;
         cameraController.OnTargetingEnded += CameraController_OnTargetingEnded;
     }

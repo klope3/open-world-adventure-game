@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class DodgeState : PlayerState
 {
-    private float speed;
-    private float deceleration;
     private float initialMoveSpeed;
     private float initialAcceleration;
 
@@ -38,7 +36,7 @@ public class DodgeState : PlayerState
 
     public override void UpdateState()
     {
-        stateManager.Character.maxWalkSpeed = deceleration * stateManager.TimeInState + speed; //deceleration while rolling
+        stateManager.Character.maxWalkSpeed = stateManager.DodgeDeceleration * stateManager.TimeInState + stateManager.DodgeSpeed; //deceleration while rolling
     }
 
     public override string GetDebugName()
@@ -48,6 +46,9 @@ public class DodgeState : PlayerState
 
     public override StateTransition[] GetTransitions()
     {
-        return new StateTransition[] { };
+        return new StateTransition[]
+        {
+            new StateTransition(PlayerStateManager.DEFAULT_STATE, () => stateManager.TimeInState >= stateManager.DodgeDuration),
+        };
     }
 }

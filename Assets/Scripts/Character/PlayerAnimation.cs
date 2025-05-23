@@ -34,6 +34,11 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] private AnimationClip ladderClimbDownRightHand;
     [SerializeField] private AnimationClip ladderReachTop;
 
+    [SerializeField] private AnimationClip dodgeForward;
+    [SerializeField] private AnimationClip dodgeLeft;
+    [SerializeField] private AnimationClip dodgeBack;
+    [SerializeField] private AnimationClip dodgeRight;
+
     private RedirectRootMotionToTransform rootMotionRedirector;
     private SmoothedVector2Parameter smoothedParameters;
     private RigidbodyInterpolation prevRbInterpolation; //stored when we turn off interpolation at the start of a root motion animation, so we can put the RB back to the way it was afterward
@@ -80,6 +85,7 @@ public class PlayerAnimation : MonoBehaviour
         if (stateName == PlayerStateManager.LANDING_STATE) animancer.Play(land);
         if (stateName == PlayerStateManager.CLIMBING_STATE) animancer.Play(ladderIdle, MiscConstants.DEFAULT_ANIMATION_BLEND_TIME);
         if (stateName == PlayerStateManager.CLIMBING_REACH_TOP_STATE) PlayRootMotionAnimation(ladderReachTop);
+        if (stateName == PlayerStateManager.DODGING_STATE) PlayDodgeAnimation();
     }
 
     private void Update()
@@ -97,6 +103,20 @@ public class PlayerAnimation : MonoBehaviour
         float xComponent = defaultMovementModule.CurrentMovementType == PlayerDefaultMovementModule.MovementType.ForwardOnly ? 0 : squareVec.x;
         float yComponent = defaultMovementModule.CurrentMovementType == PlayerDefaultMovementModule.MovementType.ForwardOnly ? squareVec.magnitude : squareVec.y;
         smoothedParameters.TargetValue = new Vector2(xComponent, yComponent);
+    }
+
+    private void PlayDodgeAnimation()
+    {
+        Vector3 inputVec = InputActionsProvider.GetPrimaryAxis();
+        float arctan = Mathf.Atan2(inputVec.y, inputVec.x);
+        float degrees = arctan * Mathf.Rad2Deg;
+        if (degrees < 0) degrees += 360;
+
+        if (degrees > 46 && degrees <= 134) animancer.Play(dodgeForward);
+        if (degrees > 134 && degrees <= 226) animancer.Play(dodgeLeft);
+        if (degrees > 226 && degrees <= 314) animancer.Play(dodgeBack);
+        if ((degrees > 314 && degrees <= 360) || (degrees >= 0 && degrees <= 46)) animancer.Play(dodgeRight);
+
     }
 
     private void PlayerStateManager_OnLeftGround()
