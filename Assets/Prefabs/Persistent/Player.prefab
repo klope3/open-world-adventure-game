@@ -3081,6 +3081,7 @@ MonoBehaviour:
   ladderClimbDownLeftHand: {fileID: 0}
   ladderClimbDownRightHand: {fileID: 0}
   ladderReachTop: {fileID: 7400000, guid: ed8e3bb53c079db4fac6385164b81438, type: 2}
+  ladderStart: {fileID: 7400000, guid: 9a80808bd6af33a42aa2d5640475224c, type: 2}
   dodgeForward: {fileID: 7400000, guid: f115d45ec0922a745b22bb358e737db5, type: 2}
   dodgeLeft: {fileID: 7400000, guid: dc7208b43ab010d4db14e1c918608652, type: 2}
   dodgeBack: {fileID: 7400000, guid: 1e3723f5a9d24ef45aa36f7603345b3a, type: 2}
@@ -3118,6 +3119,7 @@ MonoBehaviour:
   dodgeDeceleration: -60
   landingDuration: 0.5
   climbingReachTopDuration: 0.9
+  climbingStartDuration: 0.2
   attackInput: 0
   jumpInput: 0
   OnAnyAttackStart:
@@ -3396,7 +3398,7 @@ MonoBehaviour:
   character: {fileID: 3472527601884889368}
   cameraController: {fileID: 2547279025996602357}
   canMove: 1
-  initialMovementType: 1
+  initialMovementType: 0
 --- !u!114 &2044148599282010169
 MonoBehaviour:
   m_ObjectHideFlags: 0

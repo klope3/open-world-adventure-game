@@ -27,6 +27,7 @@ public class PlayerStateManager : StateManager<PlayerState>
     [SerializeField] private float dodgeDeceleration;
     [SerializeField] private float landingDuration;
     [SerializeField] private float climbingReachTopDuration;
+    [SerializeField] private float climbingStartDuration;
     private int recentStandardAttacks; //increments while chaining attacks; resets to 0 when standardAttackChainTime elapses
     public System.Action OnDefaultState;
     public System.Action OnAttack2;
@@ -54,6 +55,7 @@ public class PlayerStateManager : StateManager<PlayerState>
     public static readonly string DYING_STATE = "Dying";
     public static readonly string LANDING_STATE = "Landing";
     public static readonly string CLIMBING_REACH_TOP_STATE = "Climbing reach top";
+    public static readonly string CLIMBING_START_STATE = "Climbing start";
     public static readonly string INTERACT_TRIGGER = "Interact";
     public static readonly string DODGE_TRIGGER = "Dodge";
 
@@ -141,6 +143,13 @@ public class PlayerStateManager : StateManager<PlayerState>
             return dodgeDeceleration;
         }
     }
+    public float ClimbingStartDuration
+    {
+        get
+        {
+            return climbingStartDuration;
+        }
+    }
 
     protected override void StartAwake()
     {
@@ -173,6 +182,7 @@ public class PlayerStateManager : StateManager<PlayerState>
         DeathState deathState = new DeathState();
         ClimbingState climbingState = new ClimbingState();
         ClimbingReachTopState reachTopState = new ClimbingReachTopState();
+        ClimbingStartState climbingStartState = new ClimbingStartState();
         LandingState landingState = new LandingState();
 
         attackState.Initialize(this);
@@ -185,6 +195,7 @@ public class PlayerStateManager : StateManager<PlayerState>
         deathState.Initialize(this);
         climbingState.Initialize(this);
         reachTopState.Initialize(this);
+        climbingStartState.Initialize(this);
         landingState.Initialize(this);
 
         dodgeState.OnEnter += DodgeState_OnEnter;
@@ -201,6 +212,7 @@ public class PlayerStateManager : StateManager<PlayerState>
         states.Add(DYING_STATE, deathState);
         states.Add(CLIMBING_STATE, climbingState);
         states.Add(CLIMBING_REACH_TOP_STATE, reachTopState);
+        states.Add(CLIMBING_START_STATE, climbingStartState);
         states.Add(LANDING_STATE, landingState);
         return states;
     }
@@ -241,7 +253,7 @@ public class PlayerStateManager : StateManager<PlayerState>
             new StateTransition(JUMPING_STATE, () => trigger == JUMPING_STATE),
             new StateTransition(ROLL_STATE, ToRollState),
             new StateTransition(DODGING_STATE, ToDodgeState),
-            new StateTransition(CLIMBING_STATE, () => trigger == INTERACT_TRIGGER && climbingDetector.Check()),
+            new StateTransition(CLIMBING_START_STATE, () => trigger == INTERACT_TRIGGER && climbingDetector.Check()),
         };
     }
 

@@ -33,6 +33,7 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] private AnimationClip ladderClimbDownLeftHand;
     [SerializeField] private AnimationClip ladderClimbDownRightHand;
     [SerializeField] private AnimationClip ladderReachTop;
+    [SerializeField] private AnimationClip ladderStart;
 
     [SerializeField] private AnimationClip dodgeForward;
     [SerializeField] private AnimationClip dodgeLeft;
@@ -85,6 +86,7 @@ public class PlayerAnimation : MonoBehaviour
         if (stateName == PlayerStateManager.LANDING_STATE) animancer.Play(land);
         if (stateName == PlayerStateManager.CLIMBING_STATE) animancer.Play(ladderIdle, MiscConstants.DEFAULT_ANIMATION_BLEND_TIME);
         if (stateName == PlayerStateManager.CLIMBING_REACH_TOP_STATE) PlayRootMotionAnimation(ladderReachTop);
+        if (stateName == PlayerStateManager.CLIMBING_START_STATE) PlayRootMotionAnimation(ladderStart);
         if (stateName == PlayerStateManager.DODGING_STATE) PlayDodgeAnimation();
     }
 
