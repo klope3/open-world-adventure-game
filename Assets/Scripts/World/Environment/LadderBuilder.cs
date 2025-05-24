@@ -7,7 +7,7 @@ public class LadderBuilder : MonoBehaviour
 {
     [InfoBox("Use the ladder builder to easily build correct ladders without manually placing each segment. DO NOT add any extra GameObjects as children of this one, or the builder won't work correctly.")]
     [SerializeField] private GameObject ladderPf;
-    private static readonly float SEGMENT_SIZE = 0.8f;
+    private static readonly float SEGMENT_SIZE = 0.7f;
 
     [Button, HideInPlayMode]
     public void AddSegment()

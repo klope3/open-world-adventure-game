@@ -3073,15 +3073,15 @@ MonoBehaviour:
   falling: {fileID: 7400000, guid: d499670e39dfa0341947500a8b76153a, type: 2}
   land: {fileID: 11400000, guid: a76b43075e7f09549b70fef5d7c19f46, type: 2}
   jump: {fileID: 11400000, guid: e7b9d6582eb435b44aad4364fde207e5, type: 2}
-  ladderIdle: {fileID: 7400000, guid: 961fe620ebaa41843b0bab7406927022, type: 2}
-  ladderClimbUpLeftHand: {fileID: 7400000, guid: 7b3699ff51ec5494eb6383dcadd3b30c,
+  ladderIdle: {fileID: 7400000, guid: dc0a0909a52e7ae42bea08567fd3f386, type: 2}
+  ladderClimbUpLeftHand: {fileID: 7400000, guid: 21f15dfe8426d5c479fa32103791bba5,
     type: 2}
-  ladderClimbUpRightHand: {fileID: 7400000, guid: 4a77cc15c8e8b654892052d7397b670c,
+  ladderClimbUpRightHand: {fileID: 7400000, guid: 5a50e4f7eb3ef0f44b67a6ad0405448a,
     type: 2}
   ladderClimbDownLeftHand: {fileID: 0}
   ladderClimbDownRightHand: {fileID: 0}
   ladderReachTop: {fileID: 7400000, guid: ed8e3bb53c079db4fac6385164b81438, type: 2}
-  ladderStart: {fileID: 7400000, guid: 9a80808bd6af33a42aa2d5640475224c, type: 2}
+  ladderStart: {fileID: 7400000, guid: 8ca30280c893a2843b17efa0e3a0747b, type: 2}
   dodgeForward: {fileID: 7400000, guid: f115d45ec0922a745b22bb358e737db5, type: 2}
   dodgeLeft: {fileID: 7400000, guid: dc7208b43ab010d4db14e1c918608652, type: 2}
   dodgeBack: {fileID: 7400000, guid: 1e3723f5a9d24ef45aa36f7603345b3a, type: 2}
@@ -3365,7 +3365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 3472527601884889368}
-  movementIncrementDistance: 0.4
+  movementIncrementDistance: 0.35
   movementIncrementFinishDelay: 0.05
   climbingSpeed: 1.1
   atTopChecker: {fileID: 3709447414868491344}
