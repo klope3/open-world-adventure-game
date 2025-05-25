@@ -3080,7 +3080,7 @@ MonoBehaviour:
     type: 2}
   ladderClimbDownLeftHand: {fileID: 0}
   ladderClimbDownRightHand: {fileID: 0}
-  ladderReachTop: {fileID: 7400000, guid: ed8e3bb53c079db4fac6385164b81438, type: 2}
+  ladderReachTop: {fileID: 7400000, guid: 6dc873816b3da1c41b6dfc699cbd7a9d, type: 2}
   ladderStart: {fileID: 7400000, guid: 8ca30280c893a2843b17efa0e3a0747b, type: 2}
   dodgeForward: {fileID: 7400000, guid: f115d45ec0922a745b22bb358e737db5, type: 2}
   dodgeLeft: {fileID: 7400000, guid: dc7208b43ab010d4db14e1c918608652, type: 2}
@@ -3118,7 +3118,7 @@ MonoBehaviour:
   dodgeSpeed: 23
   dodgeDeceleration: -60
   landingDuration: 0.5
-  climbingReachTopDuration: 0.9
+  climbingReachTopDuration: 1.6
   climbingStartDuration: 0.2
   attackInput: 0
   jumpInput: 0
