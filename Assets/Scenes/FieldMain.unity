@@ -15824,7 +15824,7 @@ GameObject:
   - component: {fileID: 3908442551202498746}
   - component: {fileID: 9059386425682818053}
   m_Layer: 0
-  m_Name: ToTemplate1
+  m_Name: ToDungeon1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16651,7 +16651,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96f0533dc7a576d4e8ddfc63714fb2e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: GAME_LEVEL_TEMPLATE
+  sceneName: dungeon1
   spawnPointIndex: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
