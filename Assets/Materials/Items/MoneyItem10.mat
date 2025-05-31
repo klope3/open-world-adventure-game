@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: MoneyItem10
-  m_Shader: {fileID: -6465566751694194690, guid: cff7a256e959ce149808aa534713a79f,
+  m_Shader: {fileID: -6465566751694194690, guid: 583ff1b370ae1c2478132f126b65b402,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -62,7 +62,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EnvironmentMap:
-        m_Texture: {fileID: 2800000, guid: 416bec8adcded53418fb039fbfa3403e, type: 3}
+        m_Texture: {fileID: 2800000, guid: 2c8384c9bf4c1d642abfa4ff7c8b4a9e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -117,7 +117,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _DstBlendAlpha: 0
-    - _EnvMapOpacity: 1
+    - _EnvMapOpacity: 0.46
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
