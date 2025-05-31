@@ -247,7 +247,7 @@ public class PlayerStateManager : StateManager<PlayerState>
     {
         return new StateTransition[]
         {
-            new StateTransition(FALLING_STATE, () => !character.IsGrounded() && character.velocity.y < 0),
+            new StateTransition(FALLING_STATE, () => !character.IsGrounded()),
             new StateTransition(ATTACK_STATE, () => trigger == ATTACK_STATE && recentStandardAttacks % 2 == 0),
             new StateTransition(ATTACK2_STATE, () => trigger == ATTACK_STATE && recentStandardAttacks % 2 != 0),
             new StateTransition(JUMPING_STATE, () => trigger == JUMPING_STATE),

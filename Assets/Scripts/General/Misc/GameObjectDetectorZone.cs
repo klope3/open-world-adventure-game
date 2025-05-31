@@ -45,6 +45,7 @@ public class GameObjectDetectorZone : MonoBehaviour
         if (!IsObjectValid(other.gameObject)) return;
 
         objectsInside.Add(other.gameObject);
+        OnObjectEntered?.Invoke(other.gameObject);
         GameObjectEvents events = other.GetComponent<GameObjectEvents>();
         if (events)
         {
