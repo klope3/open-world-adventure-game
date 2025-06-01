@@ -552,7 +552,7 @@ GameObject:
   - component: {fileID: 1061721437904344225}
   - component: {fileID: 3070631642915608123}
   m_Layer: 0
-  m_Name: PersistentEnvironment
+  m_Name: Weather
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

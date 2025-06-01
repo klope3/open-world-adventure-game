@@ -525,11 +525,17 @@ PrefabInstance:
       objectReference: {fileID: 9182756490325461818}
     - target: {fileID: 5491394359021868160, guid: cdd8e2664ec2a29458e65c5f63179c3b,
         type: 3}
+      propertyPath: weatherManager
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5491394359021868160, guid: cdd8e2664ec2a29458e65c5f63179c3b,
+        type: 3}
       propertyPath: playerStateManager
       value: 
       objectReference: {fileID: 1719214665809884905}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4672464074486773540, guid: cdd8e2664ec2a29458e65c5f63179c3b, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cdd8e2664ec2a29458e65c5f63179c3b, type: 3}
