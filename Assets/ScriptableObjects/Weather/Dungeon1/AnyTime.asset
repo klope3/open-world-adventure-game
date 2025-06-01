@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizonColor: {r: 0.68235296, g: 0.8797607, b: 1, a: 1}
   zenithColor: {r: 0.072783865, g: 0.36014006, b: 0.8207547, a: 0}
-  ambientLightColor: {r: 0.5660378, g: 0.5660378, b: 0.5660378, a: 0}
-  sunColor: {r: 1, g: 1, b: 1, a: 0}
+  ambientLightColor: {r: 0.3490566, g: 0.29635382, b: 0.22524029, a: 0}
+  sunColor: {r: 0.7169812, g: 0.7043355, b: 0.65881103, a: 0}
   sunInnerColor: {r: 1, g: 1, b: 1, a: 1}
   sunOuterColor: {r: 1, g: 1, b: 1, a: 1}
   cloudColor: {r: 1, g: 1, b: 1, a: 0.18431373}
-  fogColor: {r: 0.4180135, g: 0.4599163, b: 0.5377358, a: 0}
+  fogColor: {r: 0.49056602, g: 0.45842308, b: 0.3674617, a: 0}
   fogDensity: 0.005
