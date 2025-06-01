@@ -5,11 +5,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "DialogueNodeSO", menuName = "Scriptable Objects/Conditions/CheckTimeOfDaySO")]
 public class CheckTimeOfDaySO : ScriptableObject, ICondition
 {
-    [SerializeField] private WeatherManager.TimeOfDay requiredTimeOfDay;
+    [SerializeField] private GameClock.TimeOfDay requiredTimeOfDay;
 
     public bool Evaluate()
     {
-        WeatherManager weatherManager = GameObject.FindGameObjectWithTag("Environment").GetComponent<WeatherManager>();
-        return weatherManager.CurrentTimeOfDay == requiredTimeOfDay;
+        GameClock gameClock = GameObject.FindGameObjectWithTag("GameClock").GetComponent<GameClock>();
+        //WeatherManager weatherManager = GameObject.FindGameObjectWithTag("Environment").GetComponent<WeatherManager>();
+        return gameClock.CurrentTimeOfDay == requiredTimeOfDay;
     }
 }

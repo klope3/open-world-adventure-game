@@ -12,6 +12,7 @@ TagManager:
   - SceneTitleCardText
   - InitializePersistentObjects
   - PlayerFollowCamera
+  - GameClock
   layers:
   - Default
   - TransparentFX
