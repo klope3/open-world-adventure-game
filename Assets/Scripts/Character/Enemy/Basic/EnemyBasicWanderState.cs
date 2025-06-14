@@ -52,6 +52,7 @@ public class EnemyBasicWanderState : EnemyState
     {
         return new StateTransition[]
         {
+            new StateTransition(EnemyStateManager.HURT_STATE, () => stateManager.trigger == EnemyStateManager.HURT_STATE),
             new StateTransition(EnemyStateManager.CHASE_STATE, () => stateManager.ShouldChasePlayer()),
             new StateTransition(EnemyStateManager.PAUSE_STATE, () => stateManager.TimeInState >= stateManager.WanderMoveTime),
         };

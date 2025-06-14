@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//recovery time after an attack
-public class EnemyBasicRecoveryState : EnemyState
+public class EnemyBasicHurtState : EnemyState
 {
     public override void EnterState()
     {
@@ -20,15 +19,14 @@ public class EnemyBasicRecoveryState : EnemyState
 
     public override string GetDebugName()
     {
-        return "recovery";
+        return "hurt";
     }
 
     public override StateTransition[] GetTransitions()
     {
         return new StateTransition[]
         {
-            new StateTransition(EnemyStateManager.HURT_STATE, () => stateManager.trigger == EnemyStateManager.HURT_STATE),
-            new StateTransition(EnemyStateManager.WANDER_STATE, () => stateManager.TimeInState > stateManager.AttackRecoveryDuration)
+            new StateTransition(EnemyStateManager.PAUSE_STATE, () => stateManager.TimeInState >= stateManager.HurtRecoveryTime),
         };
     }
 }

@@ -39,8 +39,9 @@ public class EnemyBasicAttackState : EnemyState
     {
         return new StateTransition[]
         {
+            new StateTransition(EnemyStateManager.HURT_STATE, () => stateManager.trigger == EnemyStateManager.HURT_STATE),
             new StateTransition(EnemyStateManager.RECOVERY_STATE, () => hurt || stateManager.TimeInState > stateManager.AttackDuration),
-            new StateTransition(EnemyStateManager.WANDER_STATE, () => stateManager.PlayerObject.GetComponent<HealthHandler>().CurHealth <= 0)
+            new StateTransition(EnemyStateManager.WANDER_STATE, () => stateManager.PlayerObject.GetComponent<HealthHandler>().CurHealth <= 0),
         };
     }
 }

@@ -20678,7 +20678,9 @@ MonoBehaviour:
   animancer: {fileID: 1745259611129033764}
   idle: {fileID: 7400000, guid: 6046765c95dea154390d729a4826884a, type: 2}
   walk: {fileID: 7400000, guid: 6822e8f4d879bff4fb7882ed74b940ed, type: 2}
+  chase: {fileID: 7400000, guid: 6822e8f4d879bff4fb7882ed74b940ed, type: 2}
   attack: {fileID: 7400000, guid: 2dd4822812ff4d04cafc06380859ccc2, type: 2}
+  recovery: {fileID: 7400000, guid: 6046765c95dea154390d729a4826884a, type: 2}
   enemyStateManager: {fileID: 320022245168190669}
 --- !u!114 &8841629311436347481
 MonoBehaviour:

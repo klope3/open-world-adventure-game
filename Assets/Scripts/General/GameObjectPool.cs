@@ -33,9 +33,17 @@ public class GameObjectPool : MonoBehaviour
 
     private GameObject CreatePooledObject()
     {
-        GameObject go = Instantiate(prefabToPool, transform);
+        GameObject go = InstantiateObject(prefabToPool);
+        go.transform.SetParent(transform);
         go.SetActive(false);
         pooledObjects.Add(go);
         return go;
+    }
+
+    //this can be overridden by inheriting classes that need to initialize objects with references
+    //or do other logic before/after instantiation
+    protected virtual GameObject InstantiateObject(GameObject prefab)
+    {
+        return Instantiate(prefab);
     }
 }

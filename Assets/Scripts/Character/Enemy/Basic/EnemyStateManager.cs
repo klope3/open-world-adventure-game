@@ -22,15 +22,32 @@ public class EnemyStateManager : StateManager<EnemyState>
     [SerializeField] private float attackDuration;
     [SerializeField] private float attackProximity;
     [SerializeField] private float attackRecoveryDuration;
-    public GameObject PlayerObject { get; private set; }
+    [SerializeField] private float hurtRecoveryTime;
+    private GameObject po; //"PlayerObject"; should only be accessed from PlayerObject property
+    public GameObject PlayerObject
+    {
+        get
+        {
+            if (po == null)
+            {
+                po = GameObject.FindGameObjectWithTag("Player");
+                if (!po)
+                {
+                    Debug.LogError("Could not find player!");
+                }
+            }
+            return po;
+        }
+    }
     public UnityEvent OnAttackStart;
     public UnityEvent OnAttackEnd;
 
     public static readonly string WANDER_STATE = "Wander";
     public static readonly string CHASE_STATE = "Chase";
     public static readonly string ATTACK_STATE = "Attack";
-    public static readonly string PAUSE_STATE = "Pause";
+    public static readonly string PAUSE_STATE = "Pause"; //really just an idle state
     public static readonly string RECOVERY_STATE = "Recovery";
+    public static readonly string HURT_STATE = "Hurt";
 
     public Character Character
     {
@@ -109,6 +126,13 @@ public class EnemyStateManager : StateManager<EnemyState>
             return attackRecoveryDuration;
         }
     }
+    public float HurtRecoveryTime
+    {
+        get
+        {
+            return hurtRecoveryTime;
+        }
+    }
     public HealthHandler OwnHealth
     {
         get
@@ -133,11 +157,11 @@ public class EnemyStateManager : StateManager<EnemyState>
 
     protected override Dictionary<string, EnemyState> GetStateDictionary()
     {
-        PlayerObject = GameObject.FindGameObjectWithTag("Player");
-        if (!PlayerObject)
-        {
-            Debug.LogError("Could not find player!");
-        }
+        //PlayerObject = GameObject.FindGameObjectWithTag("Player");
+        //if (!PlayerObject)
+        //{
+        //    Debug.LogError("Could not find player!");
+        //}
 
         Dictionary<string, EnemyState> states = new Dictionary<string, EnemyState>();
 
@@ -146,18 +170,21 @@ public class EnemyStateManager : StateManager<EnemyState>
         EnemyBasicAttackState attackState = new EnemyBasicAttackState();
         EnemyBasicPauseState pauseState = new EnemyBasicPauseState();
         EnemyBasicRecoveryState recoveryState = new EnemyBasicRecoveryState();
+        EnemyBasicHurtState hurtState = new EnemyBasicHurtState();
 
         wanderState.Initialize(this);
         chaseState.Initialize(this);
         attackState.Initialize(this);
         pauseState.Initialize(this);
         recoveryState.Initialize(this);
+        hurtState.Initialize(this);
 
         states.Add(WANDER_STATE, wanderState);
         states.Add(CHASE_STATE, chaseState);
         states.Add(ATTACK_STATE, attackState);
         states.Add(PAUSE_STATE, pauseState);
         states.Add(RECOVERY_STATE, recoveryState);
+        states.Add(HURT_STATE, hurtState);
 
         return states;
     }

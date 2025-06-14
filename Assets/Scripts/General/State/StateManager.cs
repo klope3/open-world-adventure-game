@@ -88,4 +88,10 @@ public abstract class StateManager<TState> : StateManagerBase where TState : Sta
 
         return true;
     }
+
+    //useful for calling from UnityEvents
+    public void SetTrigger(string trigger)
+    {
+        this.trigger = trigger;
+    }
 }

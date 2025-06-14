@@ -28,6 +28,7 @@ public class EnemyBasicChaseState : EnemyState
     {
         return new StateTransition[]
         {
+            new StateTransition(EnemyStateManager.HURT_STATE, () => stateManager.trigger == EnemyStateManager.HURT_STATE),
             new StateTransition(EnemyStateManager.WANDER_STATE, () => GetFlattenedVectorToPlayer().magnitude > stateManager.PlayerChaseDistance),
             new StateTransition(EnemyStateManager.ATTACK_STATE, () => GetFlattenedVectorToPlayer().magnitude < stateManager.AttackProximity),
         };

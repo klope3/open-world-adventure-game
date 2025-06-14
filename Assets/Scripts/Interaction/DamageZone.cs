@@ -20,7 +20,7 @@ public class DamageZone : MonoBehaviour
         }
 
         Character character = other.GetComponent<Character>();
-        if (character != null && force > 0)
+        if (character != null && force > 0 && forceOrigin != null)
         {
             character.AddExplosionForce(force, forceOrigin.position, 1000, 0, ForceMode.Impulse);
         }

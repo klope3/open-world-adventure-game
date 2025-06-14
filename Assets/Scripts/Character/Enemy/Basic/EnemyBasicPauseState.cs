@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ECM2;
 
-//pausing after wandering some distance
+//basically just an idle state
 public class EnemyBasicPauseState : EnemyState
 {
     public override void EnterState()
@@ -28,6 +28,7 @@ public class EnemyBasicPauseState : EnemyState
     {
         return new StateTransition[]
         {
+            new StateTransition(EnemyStateManager.HURT_STATE, () => stateManager.trigger == EnemyStateManager.HURT_STATE),
             new StateTransition(EnemyStateManager.CHASE_STATE, () => stateManager.ShouldChasePlayer()),
             new StateTransition(EnemyStateManager.WANDER_STATE, () => stateManager.TimeInState > stateManager.WanderPauseTime),
         };

@@ -8,7 +8,7 @@ public class MatchRotation : MonoBehaviour
     [SerializeField, Tooltip("If provided, the above reference is ignored and the transform with this tag is assigned on Awake.")] 
     private string targetTransformTag;
 
-    private void Awake()
+    private void Start()
     {
         if (targetTransformTag.Length > 0) targetTransform = GameObject.FindGameObjectWithTag(targetTransformTag).transform;
     }
