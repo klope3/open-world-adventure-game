@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
+//the old dialogue system had dialogue initiators actually "doing" the dialogue initiating.
+//it would be better for simple dialogue objects like signs to be passive data holders, like chests.
+//NPCs may have different needs.
 public abstract class DialogueInitiator : MonoBehaviour, IInteractable
 {
     protected DialogueManager dialogueManager;
@@ -15,8 +18,13 @@ public abstract class DialogueInitiator : MonoBehaviour, IInteractable
 
     public abstract DialogueNodeSO ChooseStartingNode();
 
-    public void DoInteraction()
+    public void DoInteraction(PlayerInteractionHandler interactionHandler)
     {
         dialogueManager.InitiateDialogue(this);
+    }
+
+    public string GetInteractionName()
+    {
+        return "Speak";
     }
 }

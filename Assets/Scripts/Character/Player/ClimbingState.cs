@@ -56,7 +56,7 @@ public class ClimbingState : PlayerState
     {
         return new StateTransition[]
         {
-            new StateTransition(PlayerStateManager.FALLING_STATE, () => stateManager.trigger == PlayerStateManager.INTERACT_TRIGGER),
+            new StateTransition(PlayerStateManager.FALLING_STATE, () => stateManager.trigger == PlayerStateManager.FALLING_STATE),
             new StateTransition(PlayerStateManager.CLIMBING_REACH_TOP_STATE, () => stateManager.trigger == PlayerStateManager.CLIMBING_REACH_TOP_STATE),
         };
     }

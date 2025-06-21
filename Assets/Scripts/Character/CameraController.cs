@@ -11,6 +11,9 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float minX;
     [SerializeField] private float maxX;
     [SerializeField] private bool lockCursor;
+    [SerializeField] private Cinemachine.CinemachineVirtualCamera defaultVirtualCamera;
+    [SerializeField] private Cinemachine.CinemachineVirtualCamera lootingVirtualCamera;
+    private ActiveCamera activeCamera;
     private Vector3 angles;
     private Transform targetingTransform; //the point that is currently being targeted (null when targeting is off)
 
@@ -25,6 +28,12 @@ public class CameraController : MonoBehaviour
         {
             return targetingTransform;
         }
+    }
+
+    public enum ActiveCamera
+    {
+        Default,
+        Looting,
     }
 
     private void Awake()
@@ -72,5 +81,13 @@ public class CameraController : MonoBehaviour
         if (angles.x > maxX) angles.x = maxX;
 
         cameraFollow.eulerAngles = angles;
+    }
+
+    public void SetActiveCamera(ActiveCamera activeCamera)
+    {
+        this.activeCamera = activeCamera;
+
+        defaultVirtualCamera.Priority = this.activeCamera == ActiveCamera.Default ? 1 : 0;
+        lootingVirtualCamera.Priority = this.activeCamera == ActiveCamera.Looting ? 1 : 0;
     }
 }

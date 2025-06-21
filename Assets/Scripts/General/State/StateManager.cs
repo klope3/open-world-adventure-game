@@ -20,6 +20,7 @@ public abstract class StateManager<TState> : StateManagerBase where TState : Sta
             return currentState;
         }
     }
+    [ShowInInspector, DisplayAsString]
     public string CurrentStateKey
     {
         get
@@ -89,7 +90,8 @@ public abstract class StateManager<TState> : StateManagerBase where TState : Sta
         return true;
     }
 
-    //useful for calling from UnityEvents
+    //useful for calling from UnityEvents and the inspector
+    [Button]
     public void SetTrigger(string trigger)
     {
         this.trigger = trigger;

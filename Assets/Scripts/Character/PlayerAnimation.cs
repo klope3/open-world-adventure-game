@@ -40,6 +40,8 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] private AnimationClip dodgeBack;
     [SerializeField] private AnimationClip dodgeRight;
 
+    [SerializeField] private AnimationClip chestSmallOpen;
+
     private RedirectRootMotionToTransform rootMotionRedirector;
     private SmoothedVector2Parameter smoothedParameters;
     private RigidbodyInterpolation prevRbInterpolation; //stored when we turn off interpolation at the start of a root motion animation, so we can put the RB back to the way it was afterward
@@ -88,6 +90,7 @@ public class PlayerAnimation : MonoBehaviour
         if (stateName == PlayerStateManager.CLIMBING_REACH_TOP_STATE) PlayRootMotionAnimation(ladderReachTop);
         if (stateName == PlayerStateManager.CLIMBING_START_STATE) PlayRootMotionAnimation(ladderStart);
         if (stateName == PlayerStateManager.DODGING_STATE) PlayDodgeAnimation();
+        if (stateName == PlayerStateManager.LOOT_STATE) PlayRootMotionAnimation(chestSmallOpen);
     }
 
     private void Update()

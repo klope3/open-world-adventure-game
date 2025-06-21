@@ -40,7 +40,7 @@ public class PlayerStateManager : StateManager<PlayerState>
     public bool attackInput;
     public bool jumpInput;
 
-    public UnityEvent OnAnyAttackStart; 
+    public UnityEvent OnAnyAttackStart;
     public UnityEvent OnAnyAttackEnd;
     public UnityEvent OnLanded;
 
@@ -58,6 +58,7 @@ public class PlayerStateManager : StateManager<PlayerState>
     public static readonly string CLIMBING_START_STATE = "Climbing start";
     public static readonly string INTERACT_TRIGGER = "Interact";
     public static readonly string DODGE_TRIGGER = "Dodge";
+    public static readonly string LOOT_STATE = "Loot";
 
     public float ClimbingReachTopDuration
     {
@@ -184,6 +185,7 @@ public class PlayerStateManager : StateManager<PlayerState>
         ClimbingReachTopState reachTopState = new ClimbingReachTopState();
         ClimbingStartState climbingStartState = new ClimbingStartState();
         LandingState landingState = new LandingState();
+        LootState lootState = new LootState();
 
         attackState.Initialize(this);
         attackState2.Initialize(this);
@@ -197,6 +199,7 @@ public class PlayerStateManager : StateManager<PlayerState>
         reachTopState.Initialize(this);
         climbingStartState.Initialize(this);
         landingState.Initialize(this);
+        lootState.Initialize(this);
 
         dodgeState.OnEnter += DodgeState_OnEnter;
         climbingState.OnEnter += ClimbingState_OnEnter;
@@ -214,6 +217,7 @@ public class PlayerStateManager : StateManager<PlayerState>
         states.Add(CLIMBING_REACH_TOP_STATE, reachTopState);
         states.Add(CLIMBING_START_STATE, climbingStartState);
         states.Add(LANDING_STATE, landingState);
+        states.Add(LOOT_STATE, lootState);
         return states;
     }
 
@@ -253,7 +257,8 @@ public class PlayerStateManager : StateManager<PlayerState>
             new StateTransition(JUMPING_STATE, () => trigger == JUMPING_STATE),
             new StateTransition(ROLL_STATE, ToRollState),
             new StateTransition(DODGING_STATE, ToDodgeState),
-            new StateTransition(CLIMBING_START_STATE, () => trigger == INTERACT_TRIGGER && climbingDetector.Check()),
+            new StateTransition(CLIMBING_START_STATE, () => trigger == CLIMBING_START_STATE),
+            new StateTransition(LOOT_STATE, () => trigger == LOOT_STATE),
         };
     }
 

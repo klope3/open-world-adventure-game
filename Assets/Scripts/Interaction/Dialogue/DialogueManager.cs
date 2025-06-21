@@ -28,8 +28,8 @@ public class DialogueManager : MonoBehaviour
 
         dialogueBox.Print(currentNode.Text, currentNode.HasChoices());
         //playerStateManager.SwitchState("Dialogue");
-        npcManager.SetEnemiesFrozen(true);
-        weatherManager.enabled = false;
+        //npcManager.SetEnemiesFrozen(true);
+        //weatherManager.enabled = false;
         selectedChoiceIndex = 0;
     }
 
@@ -58,6 +58,8 @@ public class DialogueManager : MonoBehaviour
 
     public string[] GetDialogueChoices()
     {
+        if (currentNode == null) return new string[] { };
+
         string[] choices = { };
         if (currentNode.ResponseChoices == null) return choices;
         return currentNode.ResponseChoices;
@@ -65,7 +67,7 @@ public class DialogueManager : MonoBehaviour
 
     public bool AnyFurtherNodes()
     {
-        return currentNode.ChooseNextNode() != null;
+        return currentNode != null && currentNode.ChooseNextNode() != null;
     }
 
     public void IncrementChoiceIndex(int increment)

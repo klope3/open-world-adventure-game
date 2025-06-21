@@ -10,5 +10,6 @@ public abstract class PlayerState : State
         this.stateManager = stateManager;
     }
 
+    //is this still needed?
     public abstract void PostInitialize();
 }
