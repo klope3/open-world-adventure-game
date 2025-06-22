@@ -40,6 +40,11 @@ public class GameObjectPool : MonoBehaviour
         return go;
     }
 
+    public void SetPrefab(GameObject prefab)
+    {
+        prefabToPool = prefab;
+    }
+
     //this can be overridden by inheriting classes that need to initialize objects with references
     //or do other logic before/after instantiation
     protected virtual GameObject InstantiateObject(GameObject prefab)

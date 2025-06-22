@@ -6,6 +6,8 @@ using UnityEngine.AI;
 public class Spawner : MonoBehaviour
 {
     [SerializeField] private GameObjectPool pool;
+    [field: SerializeField, Tooltip("Used for when the pool reference is set dynamically.")] 
+    public GameObject RequestedPrefab { get; private set; }
     [SerializeField, Min(0.001f)] private float spawnsPerSecond;
     [SerializeField, Min(0.001f)] private float minSpawnRadius;
     [SerializeField, Min(0.001f)] private float maxSpawnRadius;
@@ -82,6 +84,11 @@ public class Spawner : MonoBehaviour
             return;
         }
         if (spawnerType == SpawnerType.NPC_Enemy) NpcManager.RegisterEnemy(npcBase);
+    }
+
+    public void SetGameObjectPool(GameObjectPool pool)
+    {
+        this.pool = pool;
     }
     
     private void Spawnable_OnDie(Spawnable spawnable)
