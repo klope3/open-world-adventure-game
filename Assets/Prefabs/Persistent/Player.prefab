@@ -3704,6 +3704,7 @@ MonoBehaviour:
   rewardSmallSound: {fileID: 2024416906147388666}
   lootingObjectAnchor: {fileID: 3843802041090853360}
   dialogueBox: {fileID: 0}
+  moneyHandler: {fileID: 2537722216213172501}
 --- !u!1 &7073896587495278439
 GameObject:
   m_ObjectHideFlags: 0

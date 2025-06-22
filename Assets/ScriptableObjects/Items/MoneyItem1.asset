@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 563ed3ee3c5df4f41ab2568a459a8b76, type: 3}
-  m_Name: TestItem
+  m_Name: MoneyItem1
   m_EditorClassIdentifier: 
-  <ItemName>k__BackingField: Test Item
+  <ItemName>k__BackingField: Blue Gem
   <PrettyPrefab>k__BackingField: {fileID: 3258443688539176592, guid: 0d151ae42ad25b245b6455ba8a1c459e,
     type: 3}
-  <LootingMessage>k__BackingField: This is a test message from the SO.
+  <LootingMessage>k__BackingField: That's 1 money!
+  <GiveMoneyAmount>k__BackingField: 1

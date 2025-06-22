@@ -14,6 +14,7 @@ public class PlayerInteractionHandler : MonoBehaviour
     [SerializeField] private AudioSource rewardSmallSound;
     [SerializeField] private Transform lootingObjectAnchor;
     [SerializeField] private DialogueBox dialogueBox;
+    [SerializeField] private MoneyHandler moneyHandler;
 
     private Lootable currentLootable; //when looting sequence starts, the lootable being used is stored here for reference during the sequence
     private GameObject lootingDisplayObject;
@@ -38,7 +39,8 @@ public class PlayerInteractionHandler : MonoBehaviour
 
     private void ChestSmall_OnHandsRaised()
     {
-        dialogueBox.Print($"You got {currentLootable.ItemSO.name}! {currentLootable.ItemSO.LootingMessage}", false);
+        dialogueBox.Print($"You got {currentLootable.ItemSO.ItemName}! {currentLootable.ItemSO.LootingMessage}", false);
+        if (currentLootable.ItemSO.GiveMoneyAmount > 0) moneyHandler.AddMoney(currentLootable.ItemSO.GiveMoneyAmount);
         rewardSmallSound.Play();
         lootingDisplayObject = Instantiate(currentLootable.ItemSO.PrettyPrefab, lootingObjectAnchor);
     }

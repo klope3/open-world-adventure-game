@@ -8,5 +8,5 @@ public class ItemSO : ScriptableObject
     [field: SerializeField] public string ItemName { get; private set; }
     [field: SerializeField] public GameObject PrettyPrefab { get; private set; } //the "pretty" 3D version of the item, shown in shops, when found in chests, etc.
     [field: SerializeField] public string LootingMessage { get; private set; }
-
+    [field: SerializeField] public int GiveMoneyAmount { get; private set; }
 }
