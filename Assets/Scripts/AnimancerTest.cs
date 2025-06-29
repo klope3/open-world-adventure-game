@@ -4,70 +4,59 @@ using Sirenix.OdinInspector;
 
 public class AnimancerTest : MonoBehaviour
 {
-    [SerializeField] private AnimancerTestInput input;
-    [SerializeField] private AnimancerComponent _Animancer;
+    [SerializeField] private AnimancerComponent animancer;
+    [SerializeField] private AnimationClip idle;
+    [SerializeField] private AnimationClip bowUp;
+    [SerializeField] private AnimationClip bowDown;
+    [SerializeField] private AnimationClip testClip;
+    [SerializeField] private AvatarMask bowLookMask;
+    [SerializeField] private LinearMixerTransition testTransition;
     [SerializeField] private TransitionAssetBase strafeTransitionAsset;
     [SerializeField] private StringAsset strafeParameterX;
     [SerializeField] private StringAsset strafeParameterY;
-    [SerializeField] private AnimationClip run;
-    [SerializeField] private AnimationClip idle;
-    [SerializeField] private AnimationClip walk;
-    [SerializeField] private AnimationClip slash;
-    [SerializeField] private float fade;
+    public float testParam;
+    public Vector2 testVec;
 
-    private LinearMixerState mixer;
+    //private LinearMixerState bowMixer;
     private SmoothedVector2Parameter smoothedParameters;
 
     private void Awake()
     {
         smoothedParameters = new SmoothedVector2Parameter(
-            _Animancer,
+            animancer,
             strafeParameterX,
             strafeParameterY,
             0);
-        _Animancer.Play(strafeTransitionAsset);
-        //mixer = new LinearMixerState();
-        //mixer.Add(idle, 0);
-        //mixer.Add(walk, 0.5f);
-        //mixer.Add(run, 1);
-        //_Animancer.Play(mixer);
+
+        animancer.Play(strafeTransitionAsset);
+
+        //bowMixer = new LinearMixerState
+        //{
+        //    { bowDown, 0 },
+        //    { bowUp, 1 }
+        //};
+        animancer.Layers[1].Mask = bowLookMask;
+        //animancer.Layers[1].IsAdditive = true;
+        //animancer.Layers[1].Play(bowMixer);
     }
 
     private void Update()
     {
-        Vector2 moveInput = input.GetInput();
-        Vector3 squareVec = Utils.ApproximateSquareInputVector(moveInput);
-        smoothedParameters.TargetValue = new Vector2(squareVec.x, squareVec.y);
+        if (testTransition.State != null) testTransition.State.Parameter = testParam;
 
-        //mixer.Parameter = moveInput.y;
+        //bowMixer.Parameter = testParam;
+        smoothedParameters.TargetValue = testVec;
     }
 
     [Button]
-    public void Run()
+    public void StartBow()
     {
-        _Animancer.Play(run, fade);
-
-        // You can manipulate the animation using the returned AnimancerState:
-        //AnimancerState state = _Animancer.Play(_Clip);
-        //state.Speed = ...                  // See the Fine Control samples.
-        //state.Time = ...                   // See the Fine Control samples.
-        //state.NormalizedTime = ...         // See the Fine Control samples.
-        //state.Events(this).OnEnd = ...     // See End Events.
-
-        // If the animation was already playing, it will continue from the current time.
-        // So to force it to play from the beginning you can just reset the Time:
-        //_Animancer.Play(_Clip).Time = 0;
+        animancer.Layers[1].Play(testTransition);
     }
 
     [Button]
-    public void Idle()
+    public void StopBow()
     {
-        _Animancer.Play(idle, fade);
-    }
-
-    [Button]
-    public void Slash()
-    {
-        _Animancer.Play(slash, fade);
+        animancer.Layers[1].Weight = 0;
     }
 }

@@ -18,8 +18,10 @@ public static class InputActionsProvider
                 inputActions.Player.AButton.started += AButton_started;
                 inputActions.Player.AButton.canceled += AButton_canceled;
                 inputActions.Player.BButton.started += BButton_started;
+                inputActions.Player.BButton.canceled += BButton_canceled;
                 inputActions.Player.ZTarget.started += ZTarget_started;
                 inputActions.Player.DodgeButton.started += DodgeButton_started;
+                inputActions.Player.SwapButton.started += SwapButton_started;
             }
             return inputActions;
         }
@@ -29,8 +31,10 @@ public static class InputActionsProvider
     public static System.Action OnAButtonStarted;
     public static System.Action OnAButtonCanceled;
     public static System.Action OnBButtonStarted;
+    public static System.Action OnBButtonCanceled;
     public static System.Action OnZTargetStarted;
     public static System.Action OnDodgeButtonStarted;
+    public static System.Action OnSwapButtonStarted;
 
     private static bool overridePrimaryAxis;
     private static Vector3 primaryAxisOverrideVec;
@@ -46,6 +50,11 @@ public static class InputActionsProvider
         overridePrimaryAxis = false;
     }
 
+    private static void SwapButton_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnSwapButtonStarted?.Invoke();
+    }
+
     private static void DodgeButton_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         OnDodgeButtonStarted?.Invoke();
@@ -59,6 +68,11 @@ public static class InputActionsProvider
     private static void BButton_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         OnBButtonStarted?.Invoke();
+    }
+
+    private static void BButton_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnBButtonCanceled?.Invoke();
     }
 
     private static void InteractButton_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)

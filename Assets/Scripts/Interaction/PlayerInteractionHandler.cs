@@ -53,7 +53,6 @@ public class PlayerInteractionHandler : MonoBehaviour
             playerStateManager.trigger = PlayerStateManager.DEFAULT_STATE;
             gameStateManager.trigger = GameStateManager.DEFAULT_STATE;
             dialogueBox.Hide();
-            cameraController.SetActiveCamera(CameraController.ActiveCamera.Default);
             Destroy(lootingDisplayObject);
             return;
         }

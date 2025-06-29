@@ -13,10 +13,17 @@ public class BlendShapeTween : MonoBehaviour
     [SerializeField] private float period;
     [SerializeField] private SkinnedMeshRenderer skinnedMeshRenderer;
     [SerializeField] private int blendShapeIndex;
+    private Tween tween;
 
     [Sirenix.OdinInspector.Button]
     public void Run()
     {
-        DOTween.To(() => skinnedMeshRenderer.GetBlendShapeWeight(blendShapeIndex), (weight) => skinnedMeshRenderer.SetBlendShapeWeight(blendShapeIndex, weight), endValue, duration).SetEase(ease, overshootOrAmplitude, period);
+        tween = DOTween.To(() => skinnedMeshRenderer.GetBlendShapeWeight(blendShapeIndex), (weight) => skinnedMeshRenderer.SetBlendShapeWeight(blendShapeIndex, weight), endValue, duration).SetEase(ease, overshootOrAmplitude, period);
+    }
+
+    public void CancelAndClear()
+    {
+        skinnedMeshRenderer.SetBlendShapeWeight(blendShapeIndex, 0);
+        if (tween != null) tween.Kill();
     }
 }

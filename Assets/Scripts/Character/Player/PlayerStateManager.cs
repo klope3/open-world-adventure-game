@@ -16,6 +16,7 @@ public class PlayerStateManager : StateManager<PlayerState>
     [SerializeField] private TargetingHandler targetingHandler;
     [SerializeField] private RaycastChecker climbingDetector;
     [SerializeField] private PlayerClimbingModule climbingModule;
+    [SerializeField] private MegaProjectileLauncher arrowLauncher;
     [SerializeField] private float standardAttackDuration;
     [SerializeField, Tooltip("The player must press attack at most this long after the previous attack state finished in order to chain the next attack.")]
     private float standardAttackChainTime;
@@ -28,6 +29,7 @@ public class PlayerStateManager : StateManager<PlayerState>
     [SerializeField] private float landingDuration;
     [SerializeField] private float climbingReachTopDuration;
     [SerializeField] private float climbingStartDuration;
+    [SerializeField] private float bowDrawDuration;
     private int recentStandardAttacks; //increments while chaining attacks; resets to 0 when standardAttackChainTime elapses
     public System.Action OnDefaultState;
     public System.Action OnAttack2;
@@ -59,6 +61,8 @@ public class PlayerStateManager : StateManager<PlayerState>
     public static readonly string INTERACT_TRIGGER = "Interact";
     public static readonly string DODGE_TRIGGER = "Dodge";
     public static readonly string LOOT_STATE = "Loot";
+    public static readonly string BOW_DRAW_STATE = "Bow Draw";
+    public static readonly string BOW_HOLD_STATE = "Bow Hold";
 
     public float ClimbingReachTopDuration
     {
@@ -93,6 +97,20 @@ public class PlayerStateManager : StateManager<PlayerState>
         get
         {
             return climbingDetector;
+        }
+    }
+    public MegaProjectileLauncher ArrowLauncher
+    {
+        get
+        {
+            return arrowLauncher;
+        }
+    }
+    public float BowDrawDuration
+    {
+        get
+        {
+            return bowDrawDuration;
         }
     }
     public float RollDuration
@@ -186,6 +204,8 @@ public class PlayerStateManager : StateManager<PlayerState>
         ClimbingStartState climbingStartState = new ClimbingStartState();
         LandingState landingState = new LandingState();
         LootState lootState = new LootState();
+        BowDrawState bowDrawState = new BowDrawState();
+        BowHoldState bowHoldState = new BowHoldState();
 
         attackState.Initialize(this);
         attackState2.Initialize(this);
@@ -200,6 +220,8 @@ public class PlayerStateManager : StateManager<PlayerState>
         climbingStartState.Initialize(this);
         landingState.Initialize(this);
         lootState.Initialize(this);
+        bowDrawState.Initialize(this);
+        bowHoldState.Initialize(this);
 
         dodgeState.OnEnter += DodgeState_OnEnter;
         climbingState.OnEnter += ClimbingState_OnEnter;
@@ -218,6 +240,8 @@ public class PlayerStateManager : StateManager<PlayerState>
         states.Add(CLIMBING_START_STATE, climbingStartState);
         states.Add(LANDING_STATE, landingState);
         states.Add(LOOT_STATE, lootState);
+        states.Add(BOW_DRAW_STATE, bowDrawState);
+        states.Add(BOW_HOLD_STATE, bowHoldState);
         return states;
     }
 
@@ -259,6 +283,7 @@ public class PlayerStateManager : StateManager<PlayerState>
             new StateTransition(DODGING_STATE, ToDodgeState),
             new StateTransition(CLIMBING_START_STATE, () => trigger == CLIMBING_START_STATE),
             new StateTransition(LOOT_STATE, () => trigger == LOOT_STATE),
+            new StateTransition(BOW_DRAW_STATE, () => trigger == BOW_DRAW_STATE),
         };
     }
 

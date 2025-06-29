@@ -5,6 +5,7 @@ using UnityEngine;
 public class InitializePersistentObjects : MonoBehaviour
 {
     [SerializeField] private GameObject persistentObjectsParentPf;
+    [SerializeField] private GameObjectPool arrowPool;
     private bool initialized;
     public bool Initialized
     {
@@ -22,6 +23,9 @@ public class InitializePersistentObjects : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         GameObject obj = Instantiate(persistentObjectsParentPf);
         DontDestroyOnLoad(obj);
+
+        PlayerInitializer playerInitializer = obj.GetComponentInChildren<PlayerInitializer>();
+        playerInitializer.Initialize(arrowPool);
 
         initialized = true;
     }

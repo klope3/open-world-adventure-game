@@ -7,12 +7,14 @@ public class CameraController : MonoBehaviour
 {
     [SerializeField] private Transform testTransform;
     [SerializeField] private Transform cameraFollow;
+    [SerializeField] private PlayerStateManager stateManager;
     [SerializeField] private float sensitivity;
     [SerializeField] private float minX;
     [SerializeField] private float maxX;
     [SerializeField] private bool lockCursor;
     [SerializeField] private Cinemachine.CinemachineVirtualCamera defaultVirtualCamera;
     [SerializeField] private Cinemachine.CinemachineVirtualCamera lootingVirtualCamera;
+    [SerializeField] private Cinemachine.CinemachineVirtualCamera bowCamera;
     private ActiveCamera activeCamera;
     private Vector3 angles;
     private Transform targetingTransform; //the point that is currently being targeted (null when targeting is off)
@@ -34,11 +36,20 @@ public class CameraController : MonoBehaviour
     {
         Default,
         Looting,
+        Bow,
     }
 
     private void Awake()
     {
         if (lockCursor) Cursor.lockState = CursorLockMode.Locked;
+        stateManager.OnStateChange += StateManager_OnStateChange;
+
+    }
+
+    private void StateManager_OnStateChange(string stateName, string prevState)
+    {
+        if (stateName == PlayerStateManager.BOW_HOLD_STATE) SetActiveCamera(ActiveCamera.Bow);
+        if (stateName == PlayerStateManager.DEFAULT_STATE) SetActiveCamera(ActiveCamera.Default);
     }
 
     public void SetTargetingTransform(Transform targetingTransform)
@@ -89,5 +100,6 @@ public class CameraController : MonoBehaviour
 
         defaultVirtualCamera.Priority = this.activeCamera == ActiveCamera.Default ? 1 : 0;
         lootingVirtualCamera.Priority = this.activeCamera == ActiveCamera.Looting ? 1 : 0;
+        bowCamera.Priority = this.activeCamera == ActiveCamera.Bow ? 1 : 0;
     }
 }

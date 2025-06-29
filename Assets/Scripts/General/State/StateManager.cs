@@ -9,8 +9,8 @@ public abstract class StateManager<TState> : StateManagerBase where TState : Sta
     private TState currentState;
     private string currentStateKey;
     private StateTransition[] currentTransitions;
-    public delegate void StringFunc(string str);
-    public event StringFunc OnStateChange;
+    public delegate void StateChangeFunc(string newState, string prevState);
+    public event StateChangeFunc OnStateChange;
     public string trigger; //reset at end of every frame to prevent unintentionally "queued" state changes
     public float TimeInState { get; private set; }
     public TState CurrentState
@@ -74,9 +74,10 @@ public abstract class StateManager<TState> : StateManagerBase where TState : Sta
         currentState = state;
         currentTransitions = currentState.GetTransitions();
         state.EnterState();
+        string prevState = currentStateKey;
         currentStateKey = stateName;
         TimeInState = 0;
-        OnStateChange?.Invoke(stateName);
+        OnStateChange?.Invoke(stateName, prevState);
     }
 
     private bool TryGetState(string name, out TState state)

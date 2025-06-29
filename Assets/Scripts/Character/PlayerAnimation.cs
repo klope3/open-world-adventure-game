@@ -26,6 +26,7 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] private AnimationClip falling;
     [SerializeField] private TransitionAssetBase land;
     [SerializeField] private TransitionAssetBase jump;
+    [SerializeField] private TransitionAssetBase bowDraw;
 
     [SerializeField] private AnimationClip ladderIdle;
     [SerializeField] private AnimationClip ladderClimbUpLeftHand;
@@ -42,11 +43,19 @@ public class PlayerAnimation : MonoBehaviour
 
     [SerializeField] private AnimationClip chestSmallOpen;
 
+    [SerializeField] private AnimationClip bowLookDown;
+    [SerializeField] private AnimationClip bowLookUp;
+    [SerializeField] private AvatarMask bowLookMask;
+    [SerializeField] private LinearMixerTransition bowMixer;
+    [SerializeField] private Transform cameraFollow;
+
     private RedirectRootMotionToTransform rootMotionRedirector;
     private SmoothedVector2Parameter smoothedParameters;
     private RigidbodyInterpolation prevRbInterpolation; //stored when we turn off interpolation at the start of a root motion animation, so we can put the RB back to the way it was afterward
 
     private readonly float DEFAULT_FADE_DURATION = 0.1f;
+    private readonly float bowLookMult = -0.006235f;
+    private readonly float bowLookAdd = 0.5f;
 
     private void Awake()
     {
@@ -64,6 +73,8 @@ public class PlayerAnimation : MonoBehaviour
 
         climbingModule.OnLeftHandMoveUp += Climbing_LeftHandMoveUp;
         climbingModule.OnRightHandMoveUp += Climbing_RightHandMoveUp;
+
+        animancer.Layers[1].Mask = bowLookMask;
     }
 
     private void Climbing_LeftHandMoveUp()
@@ -76,10 +87,14 @@ public class PlayerAnimation : MonoBehaviour
         animancer.Play(ladderClimbUpRightHand);
     }
 
-    private void PlayerStateManager_OnStateChange(string stateName)
+    private void PlayerStateManager_OnStateChange(string stateName, string prevState)
     {
+        if (stateName == PlayerStateManager.DEFAULT_STATE)
+        {
+            animancer.Play(strafeTransitionAsset);
+            animancer.Layers[1].Weight = 0;
+        }
         //this should probably be a dictionary or something
-        if (stateName == PlayerStateManager.DEFAULT_STATE) animancer.Play(strafeTransitionAsset);
         if (stateName == PlayerStateManager.ATTACK_STATE) animancer.Play(attack1);
         if (stateName == PlayerStateManager.ATTACK2_STATE) animancer.Play(attack2);
         if (stateName == PlayerStateManager.JUMPING_STATE) animancer.Play(jump);
@@ -91,11 +106,20 @@ public class PlayerAnimation : MonoBehaviour
         if (stateName == PlayerStateManager.CLIMBING_START_STATE) PlayRootMotionAnimation(ladderStart);
         if (stateName == PlayerStateManager.DODGING_STATE) PlayDodgeAnimation();
         if (stateName == PlayerStateManager.LOOT_STATE) PlayRootMotionAnimation(chestSmallOpen);
+        if (stateName == PlayerStateManager.BOW_DRAW_STATE) animancer.Play(bowDraw).Time = 0;
+        if (stateName == PlayerStateManager.BOW_HOLD_STATE)
+        {
+            animancer.Layers[1].Play(bowMixer);
+        }
     }
 
     private void Update()
     {
         DefaultMovementAnimation();
+
+        float cameraAngleX = cameraFollow.eulerAngles.x;
+        if (cameraAngleX > 180) cameraAngleX -= 360;
+        if (bowMixer.State != null) bowMixer.State.Parameter = bowLookMult * cameraAngleX + bowLookAdd;
     }
     
     private void DefaultMovementAnimation()

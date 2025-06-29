@@ -8,7 +8,7 @@ public class PlayerStateManagerInputs : MonoBehaviour
 
     private void Awake()
     {
-        InputActionsProvider.OnBButtonStarted += () => stateManager.trigger = PlayerStateManager.ATTACK_STATE;
+        //InputActionsProvider.OnBButtonStarted += () => stateManager.trigger = PlayerStateManager.ATTACK_STATE;
         InputActionsProvider.OnAButtonStarted += () => stateManager.trigger = PlayerStateManager.JUMPING_STATE;
         InputActionsProvider.OnDodgeButtonStarted += () => stateManager.trigger = PlayerStateManager.DODGE_TRIGGER;
     }

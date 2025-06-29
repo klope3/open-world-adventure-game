@@ -24,7 +24,7 @@ public class EnemyBasicAnimation : MonoBehaviour
         animancer.Play(idle);
     }
 
-    private void EnemyStateManager_OnStateChange(string stateName)
+    private void EnemyStateManager_OnStateChange(string stateName, string prevState)
     {
         if (stateName == EnemyStateManager.WANDER_STATE) animancer.Play(walk, MiscConstants.DEFAULT_ANIMATION_BLEND_TIME);
         if (stateName == EnemyStateManager.CHASE_STATE) animancer.Play(chase, MiscConstants.DEFAULT_ANIMATION_BLEND_TIME);
