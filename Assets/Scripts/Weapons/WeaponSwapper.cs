@@ -10,6 +10,7 @@ public class WeaponSwapper : MonoBehaviour
     [SerializeField] private PlayerBowAttackModule bow;
     [SerializeField] private GameObject bowVisual;
     [SerializeField] private GameObject meleeVisual;
+    public System.Action OnSwap;
 
     private void Awake()
     {
@@ -29,5 +30,7 @@ public class WeaponSwapper : MonoBehaviour
 
         meleeVisual.SetActive(melee.enabled);
         bowVisual.SetActive(bow.enabled);
+
+        OnSwap?.Invoke();
     }
 }

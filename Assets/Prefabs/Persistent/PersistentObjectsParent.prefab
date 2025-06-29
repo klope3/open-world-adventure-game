@@ -565,6 +565,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 131073e460a689642946e745c1385147, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1973175709587860506 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6371012697023617694, guid: 60d5b35953cf3c04da57e2c323dacea7,
+    type: 3}
+  m_PrefabInstance: {fileID: 4830183788626671236}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8ba694303354724891a4e1467c8a6b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &2978874530505844531 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7664937493635207607, guid: 60d5b35953cf3c04da57e2c323dacea7,
@@ -1294,6 +1306,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5716087573943983892, guid: 1f94b85c3792a454184c7b9da65ca5fa,
+        type: 3}
+      propertyPath: weaponSwapper
+      value: 
+      objectReference: {fileID: 1973175709587860506}
     - target: {fileID: 7059651522708006758, guid: 1f94b85c3792a454184c7b9da65ca5fa,
         type: 3}
       propertyPath: m_Name
