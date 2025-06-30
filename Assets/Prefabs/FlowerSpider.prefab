@@ -1000,6 +1000,7 @@ GameObject:
   - component: {fileID: 3411461063941866064}
   - component: {fileID: 3181592019636859063}
   - component: {fileID: 2442854591751580943}
+  - component: {fileID: 4264244239958288222}
   m_Layer: 0
   m_Name: FlowerSpider
   m_TagString: Untagged
@@ -1433,6 +1434,22 @@ MonoBehaviour:
   - {fileID: 7026446634220402322}
   - {fileID: 1636265789573120718}
   - {fileID: 3712692051955014737}
+--- !u!114 &4264244239958288222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6637638191872805459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac31813a7a21668458471c301914710b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnImpact:
+    m_PersistentCalls:
+      m_Calls: []
+  healthHandler: {fileID: 1096526407164907730}
 --- !u!1 &6977213805601251097
 GameObject:
   m_ObjectHideFlags: 0
