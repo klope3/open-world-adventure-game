@@ -1,22 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using ECM2;
 
 public class EnemyBasicChaseState : EnemyState
 {
     public override void EnterState()
     {
-        stateManager.Character.maxWalkSpeed = stateManager.ChaseSpeed;
+        if (behavior != null) behavior.enabled = true;
     }
 
     public override void UpdateState()
     {
-        stateManager.Character.SetMovementDirection(GetFlattenedVectorToPlayer().normalized);
     }
 
     public override void ExitState()
     {
+        if (behavior != null) behavior.enabled = false;
     }
 
     public override string GetDebugName()
@@ -30,8 +29,15 @@ public class EnemyBasicChaseState : EnemyState
         {
             new StateTransition(EnemyStateManager.HURT_STATE, () => stateManager.trigger == EnemyStateManager.HURT_STATE),
             new StateTransition(EnemyStateManager.WANDER_STATE, () => GetFlattenedVectorToPlayer().magnitude > stateManager.PlayerChaseDistance),
-            new StateTransition(EnemyStateManager.ATTACK_STATE, () => GetFlattenedVectorToPlayer().magnitude < stateManager.AttackProximity),
+            new StateTransition(EnemyStateManager.ATTACK_STATE, AttackStateCondition),
         };
+    }
+
+    private bool AttackStateCondition()
+    {
+        bool closeEnough = GetFlattenedVectorToPlayer().magnitude < stateManager.AttackProximity;
+        bool aimCondition = stateManager.RequireAimForAttack ? Utils.CalculateInFrontFactor(stateManager.OwnTransform, stateManager.PlayerObject.transform, true) > 1 - stateManager.AimTolerance : true;
+        return closeEnough && aimCondition;
     }
 
     private Vector3 GetFlattenedVectorToPlayer()

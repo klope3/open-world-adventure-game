@@ -13,6 +13,7 @@ public class CharacterDeath : MonoBehaviour
     [SerializeField] private Collider characterCollider;
     [SerializeField] private SkinnedMeshRenderer[] meshesToHide;
     [SerializeField] private Animator animator;
+    [SerializeField] private Animancer.AnimancerComponent animancer;
     [SerializeField] private DamageZone damageZone;
     [SerializeField] private EnemyStateManager stateManager;
 
@@ -21,6 +22,7 @@ public class CharacterDeath : MonoBehaviour
         if (character) character.enabled = false;
         if (characterCollider) characterCollider.enabled = false;
         if (animator) animator.enabled = false;
+        if (animancer != null) animancer.Stop();
         if (stateManager) stateManager.enabled = false;
         if (damageZone) damageZone.gameObject.SetActive(false);
         

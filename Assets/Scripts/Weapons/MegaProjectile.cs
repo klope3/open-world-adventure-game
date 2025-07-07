@@ -23,6 +23,7 @@ public class MegaProjectile : MonoBehaviour
     private bool stopped;
     public delegate void ProjectileImpact(MegaProjectile projectile, RaycastHit hitInfo);
     public event ProjectileImpact OnProjectileImpact;
+    public UnityEvent OnStartMovement;
     public UnityEvent OnImpact;
     public UnityEvent OnDeath;
     public GameObject Source { get; private set; }
@@ -64,6 +65,8 @@ public class MegaProjectile : MonoBehaviour
         Source = source;
         if (trailRenderer != null)
             trailRenderer.Clear();
+
+        OnStartMovement?.Invoke();
     }
 
     protected virtual Vector3 GetNextPosition()

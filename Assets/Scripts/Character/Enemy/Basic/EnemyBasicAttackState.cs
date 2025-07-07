@@ -8,11 +8,7 @@ public class EnemyBasicAttackState : EnemyState
 
     public override void EnterState()
     {
-        Vector3 vecToPlayer = stateManager.PlayerObject.transform.position - stateManager.OwnTransform.position;
-        Vector3 flattened = new Vector3(vecToPlayer.x, 0, vecToPlayer.z);
-
-        stateManager.Character.SetMovementDirection(flattened);
-        stateManager.Character.maxWalkSpeed = stateManager.AttackSpeed;
+        if (behavior != null) behavior.enabled = true;
 
         stateManager.OwnHealth.OnDamaged += HealthHandler_OnDamaged;
     }
@@ -26,6 +22,7 @@ public class EnemyBasicAttackState : EnemyState
     {
         stateManager.OwnHealth.OnDamaged -= HealthHandler_OnDamaged;
         hurt = false;
+        if (behavior != null) behavior.enabled = false;
     }
 
     public override void UpdateState() { }

@@ -38,6 +38,11 @@ public abstract class StateManager<TState> : StateManagerBase where TState : Sta
         SwitchState(initialStateName);
     }
 
+    private void OnEnable()
+    {
+        trigger = "";
+    }
+
     protected abstract string GetInitialStateName();
     protected abstract Dictionary<string, TState> GetStateDictionary();
     protected abstract void StartAwake();

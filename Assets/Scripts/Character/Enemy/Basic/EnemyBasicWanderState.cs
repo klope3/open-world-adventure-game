@@ -5,11 +5,9 @@ using ECM2;
 
 public class EnemyBasicWanderState : EnemyState
 {
-
     public override void EnterState()
     {
-        stateManager.Character.maxWalkSpeed = stateManager.WanderSpeed;
-        stateManager.Character.SetMovementDirection(PickRandomDirection());
+        if (behavior != null) behavior.enabled = true;
     }
 
     public override void UpdateState()
@@ -18,12 +16,7 @@ public class EnemyBasicWanderState : EnemyState
 
     public override void ExitState()
     {
-    }
-
-    private Vector3 PickRandomDirection()
-    {
-        Vector2 rand = Random.insideUnitCircle.normalized;
-        return new Vector3(rand.x, 0, rand.y);
+        if (behavior != null) behavior.enabled = false;
     }
 
     public override string GetDebugName()

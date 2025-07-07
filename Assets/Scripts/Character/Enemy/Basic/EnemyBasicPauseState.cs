@@ -1,18 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using ECM2;
 
 //basically just an idle state
 public class EnemyBasicPauseState : EnemyState
 {
     public override void EnterState()
     {
-        stateManager.Character.SetMovementDirection(Vector3.zero);
+        if (behavior != null) behavior.enabled = true;
     }
 
     public override void ExitState()
     {
+        if (behavior != null) behavior.enabled = false;
     }
 
     public override void UpdateState()

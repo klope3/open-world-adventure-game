@@ -6,9 +6,11 @@ using ECM2;
 public abstract class EnemyState : State
 {
     protected EnemyStateManager stateManager;
+    protected MonoBehaviour behavior;
 
-    public void Initialize(EnemyStateManager stateManager)
+    public void Initialize(EnemyStateManager stateManager, MonoBehaviour behavior)
     {
         this.stateManager = stateManager;
+        this.behavior = behavior;
     }
 }

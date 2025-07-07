@@ -26,6 +26,11 @@ public class RaycastChecker : MonoBehaviour
         return DoRaycast(out RaycastHit _);
     }
 
+    public bool CheckWithInfo(out RaycastHit hitInfo)
+    {
+        return DoRaycast(out hitInfo);
+    }
+
     private bool DoRaycast(out RaycastHit hitInfo)
     {
         return Physics.Raycast(new Ray(transform.position, transform.forward), out hitInfo, rayDistance, raycastLayerMask);

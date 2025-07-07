@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using ECM2;
+using Sirenix.OdinInspector;
 
 public class EnemyStateManager : StateManager<EnemyState>
 {
@@ -23,6 +24,15 @@ public class EnemyStateManager : StateManager<EnemyState>
     [SerializeField] private float attackProximity;
     [SerializeField] private float attackRecoveryDuration;
     [SerializeField] private float hurtRecoveryTime;
+    [SerializeField, ShowIf("@requireAimForAttack"), Range(0, 1), Tooltip("Lower values are more strict.")] private float aimTolerance;
+    [SerializeField, Tooltip("If true, will not transition to the attack state unless it is roughly aimed at the player (among any other conditions).")] 
+    private bool requireAimForAttack;
+    [SerializeField] private MonoBehaviour wanderBehavior;
+    [SerializeField] private MonoBehaviour chaseBehavior;
+    [SerializeField] private MonoBehaviour hurtBehavior;
+    [SerializeField] private MonoBehaviour pauseBehavior;
+    [SerializeField] private MonoBehaviour attackBehavior;
+    [SerializeField] private MonoBehaviour recoveryBehavior;
     private GameObject po; //"PlayerObject"; should only be accessed from PlayerObject property
     public GameObject PlayerObject
     {
@@ -39,8 +49,6 @@ public class EnemyStateManager : StateManager<EnemyState>
             return po;
         }
     }
-    public UnityEvent OnAttackStart;
-    public UnityEvent OnAttackEnd;
 
     public static readonly string WANDER_STATE = "Wander";
     public static readonly string CHASE_STATE = "Chase";
@@ -140,6 +148,20 @@ public class EnemyStateManager : StateManager<EnemyState>
             return healthHandler;
         }
     }
+    public bool RequireAimForAttack
+    {
+        get
+        {
+            return requireAimForAttack;
+        }
+    }
+    public float AimTolerance
+    {
+        get
+        {
+            return aimTolerance;
+        }
+    }
 
 
     protected override void StartAwake()
@@ -172,12 +194,12 @@ public class EnemyStateManager : StateManager<EnemyState>
         EnemyBasicRecoveryState recoveryState = new EnemyBasicRecoveryState();
         EnemyBasicHurtState hurtState = new EnemyBasicHurtState();
 
-        wanderState.Initialize(this);
-        chaseState.Initialize(this);
-        attackState.Initialize(this);
-        pauseState.Initialize(this);
-        recoveryState.Initialize(this);
-        hurtState.Initialize(this);
+        wanderState.Initialize(this, wanderBehavior);
+        chaseState.Initialize(this, chaseBehavior);
+        attackState.Initialize(this, attackBehavior);
+        pauseState.Initialize(this, pauseBehavior);
+        recoveryState.Initialize(this, recoveryBehavior);
+        hurtState.Initialize(this, hurtBehavior);
 
         states.Add(WANDER_STATE, wanderState);
         states.Add(CHASE_STATE, chaseState);
