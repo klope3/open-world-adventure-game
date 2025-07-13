@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class SceneInitializer : MonoBehaviour
 {
+    [SerializeField] private PlayerDataPersister playerDataPersister;
+    [SerializeField] private HealthHandler playerHealth;
+    [SerializeField] private MoneyHandler moneyHandler;
+    [SerializeField] private MoneyDisplay moneyDisplay;
     [SerializeField] private PlayerStateManager playerStateManager;
     [SerializeField] private PlayerAnimation playerAnimation;
     [SerializeField] private NonPlayerCharacterManager npcManager;
@@ -12,6 +16,12 @@ public class SceneInitializer : MonoBehaviour
 
     private void Awake()
     {
+        InputActionsProvider.UnlockPrimaryAxis();
+        playerDataPersister.Initialize();
+        playerHealth.Initialize(PersistentGameData.playerHealth);
+        moneyHandler.Initialize(PersistentGameData.playerMoney);
+        moneyDisplay.Initialize();
+
         playerAnimation.Initialize();
         playerStateManager.Initialize();
 

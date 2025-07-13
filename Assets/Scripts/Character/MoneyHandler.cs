@@ -9,6 +9,7 @@ public class MoneyHandler : MonoBehaviour
     [SerializeField] private int maxMoney;
     private int money;
     public UnityEvent OnMoneyChange;
+    public System.Action OnMoneyChanged;
 
     public int Money
     {
@@ -25,6 +26,11 @@ public class MoneyHandler : MonoBehaviour
         }
     }
 
+    public void Initialize(int initialAmount)
+    {
+        money = initialAmount;
+    }
+
     [Button]
     public void AddMoney(int amount)
     {
@@ -33,5 +39,6 @@ public class MoneyHandler : MonoBehaviour
         if (money == prevMoney) return;
 
         OnMoneyChange?.Invoke();
+        OnMoneyChanged?.Invoke();
     }
 }

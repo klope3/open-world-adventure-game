@@ -13,7 +13,7 @@ public class MoneyDisplay : MonoBehaviour
     private float lerpedMoney; //this increases/decreases toward the player's actual money amount, and is the actual value displayed onscreen
     public UnityEvent OnIncrement;
 
-    private void Awake()
+    public void Initialize()
     {
         lerpedMoney = moneyHandler.Money;
         moneyText.text = BuildString(moneyHandler.Money);

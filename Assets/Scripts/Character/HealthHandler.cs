@@ -14,12 +14,14 @@ public class HealthHandler : MonoBehaviour
     private float graceTime;
 
     [SerializeField] private bool showLogs;
+    [SerializeField] private bool initializeOnAwake = true;
     private float graceTimer;
     private int curHealth;
     public delegate void PositionEvent(Vector3 position);
-    public UnityEvent OnAwake;
+    public UnityEvent OnInitialize;
     public UnityEvent OnDamage;
     public UnityEvent OnHeal;
+    public System.Action OnHealed;
     public UnityEvent OnDie;
     public System.Action OnDied;
     public event PositionEvent OnDamaged;
@@ -41,9 +43,20 @@ public class HealthHandler : MonoBehaviour
 
     private void Awake()
     {
+        if (initializeOnAwake) Initialize();
+    }
+
+    public void Initialize(int startingHealth)
+    {
+        this.startingHealth = startingHealth;
+        Initialize();
+    }
+
+    public void Initialize()
+    {
         curHealth = startingHealth;
         graceTimer = graceTime;
-        OnAwake?.Invoke();
+        OnInitialize?.Invoke();
     }
 
     private void Update()
@@ -67,7 +80,10 @@ public class HealthHandler : MonoBehaviour
             Debug.Log($"Added {amount} to {gameObject.name}'s health");
 
         if (amount > 0)
+        {
             OnHeal?.Invoke();
+            OnHealed?.Invoke();
+        }
         if (amount < 0)
         {
             graceTimer = 0;
@@ -81,11 +97,5 @@ public class HealthHandler : MonoBehaviour
             if (destroyOnDeath)
                 Destroy(gameObject);
         }
-    }
-
-    public void Reinitialize()
-    {
-        curHealth = startingHealth;
-        graceTimer = graceTime;
     }
 }

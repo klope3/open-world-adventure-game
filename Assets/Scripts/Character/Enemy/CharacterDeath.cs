@@ -50,7 +50,7 @@ public class CharacterDeath : MonoBehaviour
         if (characterCollider) characterCollider.enabled = true;
         if (animator) animator.enabled = true;
         if (stateManager) stateManager.enabled = true;
-        if (healthHandler) healthHandler.Reinitialize();
+        if (healthHandler) healthHandler.Initialize();
 
         if (meshesToHide != null)
         {
