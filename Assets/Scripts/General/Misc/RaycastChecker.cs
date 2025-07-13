@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RaycastChecker : MonoBehaviour
+public class RaycastChecker : MonoBehaviour, IVector3Provider
 {
     [SerializeField] private float rayDistance;
     [SerializeField] private LayerMask raycastLayerMask;
@@ -40,5 +40,11 @@ public class RaycastChecker : MonoBehaviour
     {
         bool hit = DoRaycast(out RaycastHit hitInfo);
         return hit ? hitInfo.normal : Vector3.zero;
+    }
+
+    public Vector3 GetVector3()
+    {
+        bool hit = DoRaycast(out RaycastHit hitInfo);
+        return hit ? hitInfo.point : transform.position + transform.forward * rayDistance;
     }
 }

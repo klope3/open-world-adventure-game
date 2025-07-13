@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WaspInitializeHelper : MonoBehaviour
 {
-    [SerializeField] private LookAtTransform launcherAimer;
+    [SerializeField] private LookAtPosition launcherAimer;
     [SerializeField] private MegaProjectileLauncher launcher;
 
     public void Initialize(GameObjectPool projectilePool)
