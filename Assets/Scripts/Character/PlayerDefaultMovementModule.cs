@@ -28,11 +28,17 @@ public class PlayerDefaultMovementModule : MonoBehaviour
         Strafe //forward, backward, strafe, and in-between animations (for when character's body doesn't necessarily face movement direction)
     }
 
-    private void Awake()
+    private void OnEnable()
     {
         SetMovementType(initialMovementType);
         cameraController.OnTargetingStarted += CameraController_OnTargetingStarted;
         cameraController.OnTargetingEnded += CameraController_OnTargetingEnded;
+    }
+
+    private void OnDisable()
+    {
+        cameraController.OnTargetingStarted -= CameraController_OnTargetingStarted;
+        cameraController.OnTargetingEnded -= CameraController_OnTargetingEnded;
     }
 
     private void Update()

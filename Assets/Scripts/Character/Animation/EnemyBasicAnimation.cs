@@ -22,14 +22,15 @@ public class EnemyBasicAnimation : MonoBehaviour
     [SerializeField, Tooltip("Display options to reference transition assets instead of animaction clips.")] private bool showTransitionAssets;
     [SerializeField] private EnemyStateManager enemyStateManager;
 
-    private void Awake()
-    {
-        enemyStateManager.OnStateChange += EnemyStateManager_OnStateChange;
-    }
-
     private void OnEnable()
     {
+        enemyStateManager.OnStateChange += EnemyStateManager_OnStateChange;
         animancer.Play(idle);
+    }
+
+    private void OnDisable()
+    {
+        enemyStateManager.OnStateChange -= EnemyStateManager_OnStateChange;
     }
 
     private void EnemyStateManager_OnStateChange(string stateName, string prevState)

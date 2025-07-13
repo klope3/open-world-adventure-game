@@ -13,6 +13,11 @@ public class WaspInitializer : PooledObjectInitializer
         waspPool.OnObjectInstantiated += GameObjectPool_OnObjectInstantiated;
     }
 
+    private void OnDisable()
+    {
+        waspPool.OnObjectInstantiated -= GameObjectPool_OnObjectInstantiated;
+    }
+
     private void GameObjectPool_OnObjectInstantiated(GameObject gameObject)
     {
         EnemyStateManager stateManager = gameObject.GetComponent<EnemyStateManager>();

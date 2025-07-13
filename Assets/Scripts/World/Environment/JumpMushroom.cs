@@ -19,9 +19,14 @@ public class JumpMushroom : MonoBehaviour
     private readonly float bounceDuration = 0.85f;
     private readonly Ease bounceEase = Ease.OutElastic;
 
-    private void Awake()
+    private void OnEnable()
     {
         detectorZone.OnObjectEntered += DetectorZone_OnObjectEntered;
+    }
+
+    private void OnDisable()
+    {
+        detectorZone.OnObjectEntered -= DetectorZone_OnObjectEntered;
     }
 
     private void DetectorZone_OnObjectEntered(GameObject obj)

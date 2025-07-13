@@ -12,9 +12,14 @@ public class WeaponSwapper : MonoBehaviour
     [SerializeField] private GameObject meleeVisual;
     public System.Action OnSwap;
 
-    private void Awake()
+    private void OnEnable()
     {
         InputActionsProvider.OnSwapButtonStarted += InputActionsProvider_OnSwapButtonStarted;
+    }
+
+    private void OnDisable()
+    {
+        InputActionsProvider.OnSwapButtonStarted -= InputActionsProvider_OnSwapButtonStarted;
     }
 
     private void InputActionsProvider_OnSwapButtonStarted()

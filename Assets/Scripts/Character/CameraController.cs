@@ -39,11 +39,16 @@ public class CameraController : MonoBehaviour
         Bow,
     }
 
-    private void Awake()
+    private void OnEnable()
     {
         if (lockCursor) Cursor.lockState = CursorLockMode.Locked;
         stateManager.OnStateChange += StateManager_OnStateChange;
 
+    }
+
+    private void OnDisable()
+    {
+        stateManager.OnStateChange -= StateManager_OnStateChange;
     }
 
     private void StateManager_OnStateChange(string stateName, string prevState)

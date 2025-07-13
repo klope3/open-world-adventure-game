@@ -13,11 +13,16 @@ public class EnemyStateEvents : MonoBehaviour
     public UnityEvent OnWander;
     public UnityEvent OnHurt;
 
-    private void Awake()
+    private void OnEnable()
     {
         stateManager.OnStateChange += StateManager_OnStateChange;
     }
 
+
+    private void OnDisable()
+    {
+        stateManager.OnStateChange -= StateManager_OnStateChange;
+    }
     private void StateManager_OnStateChange(string newState, string prevState)
     {
         if (newState == EnemyStateManager.WANDER_STATE) OnWander?.Invoke();

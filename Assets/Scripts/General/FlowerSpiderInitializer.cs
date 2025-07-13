@@ -13,6 +13,11 @@ public class FlowerSpiderInitializer : PooledObjectInitializer
         flowerSpiderPool.OnObjectInstantiated += GameObjectPool_OnObjectInstantiated;
     }
 
+    private void OnDisable()
+    {
+        flowerSpiderPool.OnObjectInstantiated -= GameObjectPool_OnObjectInstantiated;
+    }
+
     private void GameObjectPool_OnObjectInstantiated(GameObject gameObject)
     {
         EnemyStateManager stateManager = gameObject.GetComponent<EnemyStateManager>();

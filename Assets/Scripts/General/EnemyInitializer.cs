@@ -12,6 +12,11 @@ public class EnemyInitializer : PooledObjectInitializer
         pool.OnObjectInstantiated += GameObjectPool_OnObjectInstantiated;
     }
 
+    private void OnDisable()
+    {
+        pool.OnObjectInstantiated -= GameObjectPool_OnObjectInstantiated;
+    }
+
     private void GameObjectPool_OnObjectInstantiated(GameObject gameObject)
     {
         EnemyStateManager stateManager = gameObject.GetComponent<EnemyStateManager>();

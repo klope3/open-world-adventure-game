@@ -14,6 +14,12 @@ public class Spawnable : MonoBehaviour
         if (health != null) health.OnDied += HealthHandler_OnDied;
     }
 
+    private void OnDisable()
+    {
+        HealthHandler health = GetComponent<HealthHandler>();
+        if (health != null) health.OnDied -= HealthHandler_OnDied;
+    }
+
     private void HealthHandler_OnDied()
     {
         OnDie?.Invoke(this);

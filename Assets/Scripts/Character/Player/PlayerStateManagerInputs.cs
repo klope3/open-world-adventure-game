@@ -6,10 +6,25 @@ public class PlayerStateManagerInputs : MonoBehaviour
 {
     [SerializeField] private PlayerStateManager stateManager;
 
-    private void Awake()
+    private void OnEnable()
     {
-        //InputActionsProvider.OnBButtonStarted += () => stateManager.trigger = PlayerStateManager.ATTACK_STATE;
-        InputActionsProvider.OnAButtonStarted += () => stateManager.trigger = PlayerStateManager.JUMPING_STATE;
-        InputActionsProvider.OnDodgeButtonStarted += () => stateManager.trigger = PlayerStateManager.DODGE_TRIGGER;
+        InputActionsProvider.OnAButtonStarted += InputActionsProvider_OnAButtonStarted;
+        InputActionsProvider.OnDodgeButtonStarted += InputActionsProvider_OnDodgeButtonStarted;
+    }
+
+    private void OnDisable()
+    {
+        InputActionsProvider.OnAButtonStarted -= InputActionsProvider_OnAButtonStarted;
+        InputActionsProvider.OnDodgeButtonStarted -= InputActionsProvider_OnDodgeButtonStarted;
+    }
+
+    private void InputActionsProvider_OnAButtonStarted()
+    {
+        stateManager.trigger = PlayerStateManager.JUMPING_STATE;
+    }
+
+    private void InputActionsProvider_OnDodgeButtonStarted()
+    {
+        stateManager.trigger = PlayerStateManager.DODGE_TRIGGER;
     }
 }

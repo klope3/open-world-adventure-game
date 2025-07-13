@@ -77,6 +77,18 @@ public class PlayerAnimation : MonoBehaviour
         animancer.Layers[1].Mask = bowLookMask;
     }
 
+    private void OnDisable()
+    {
+        playerStateManager.OnDefaultState -= PlayerStateManager_OnDefaultState;
+        playerStateManager.OnAttack2 -= PlayerStateManager_OnAttack2;
+        playerStateManager.OnLeftGround -= PlayerStateManager_OnLeftGround;
+        playerStateManager.OnLand -= PlayerStateManager_OnLand;
+        playerStateManager.OnStateChange -= PlayerStateManager_OnStateChange;
+
+        climbingModule.OnLeftHandMoveUp -= Climbing_LeftHandMoveUp;
+        climbingModule.OnRightHandMoveUp -= Climbing_RightHandMoveUp;
+    }
+
     private void Climbing_LeftHandMoveUp()
     {
         animancer.Play(ladderClimbUpLeftHand);

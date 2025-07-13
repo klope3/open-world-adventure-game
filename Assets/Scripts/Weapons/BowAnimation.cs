@@ -12,9 +12,14 @@ public class BowAnimation : MonoBehaviour
     public UnityEvent OnShoot;
     public UnityEvent OnCancel;
 
-    private void Awake()
+    private void OnEnable()
     {
         stateManager.OnStateChange += StateManager_OnStateChange;
+    }
+
+    private void OnDisable()
+    {
+        stateManager.OnStateChange -= StateManager_OnStateChange;
     }
 
     private void StateManager_OnStateChange(string stateName, string prevState)

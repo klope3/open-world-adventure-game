@@ -8,9 +8,14 @@ public class CharacterMiscEvents : MonoBehaviour
     [SerializeField] private ECM2.Character character;
     public UnityEvent OnLanded;
 
-    private void Awake()
+    private void OnEnable()
     {
         character.Landed += Character_Landed;
+    }
+
+    private void OnDisable()
+    {
+        character.Landed -= Character_Landed;
     }
 
     private void Character_Landed(Vector3 landingVelocity)

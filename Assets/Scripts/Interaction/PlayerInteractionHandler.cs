@@ -19,12 +19,20 @@ public class PlayerInteractionHandler : MonoBehaviour
     private Lootable currentLootable; //when looting sequence starts, the lootable being used is stored here for reference during the sequence
     private GameObject lootingDisplayObject;
 
-    private void Awake()
+    private void OnEnable()
     {
         InputActionsProvider.OnInteractButtonStarted += Interact_started;
         chestAnimationEvents.ChestSmall_OnHandsRaised += ChestSmall_OnHandsRaised;
         chestAnimationEvents.ChestSmall_OnKicked += ChestSmall_OnKicked;
         chestAnimationEvents.ChestSmall_OnCameraZoomStart += ChestSmall_OnCameraZoomStart;
+    }
+
+    private void OnDisable()
+    {
+        InputActionsProvider.OnInteractButtonStarted -= Interact_started;
+        chestAnimationEvents.ChestSmall_OnHandsRaised -= ChestSmall_OnHandsRaised;
+        chestAnimationEvents.ChestSmall_OnKicked -= ChestSmall_OnKicked;
+        chestAnimationEvents.ChestSmall_OnCameraZoomStart -= ChestSmall_OnCameraZoomStart;
     }
 
     private void ChestSmall_OnCameraZoomStart()

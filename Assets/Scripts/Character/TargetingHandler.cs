@@ -12,9 +12,14 @@ public class TargetingHandler : MonoBehaviour
     [SerializeField] private CameraController cameraController;
     private GameObject objectToBeTargeted;
 
-    private void Awake()
+    private void OnEnable()
     {
         InputActionsProvider.OnZTargetStarted += ZTarget_started;
+    }
+
+    private void OnDisable()
+    {
+        InputActionsProvider.OnZTargetStarted -= ZTarget_started;
     }
 
     private void Update()

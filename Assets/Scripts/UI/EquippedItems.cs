@@ -14,9 +14,14 @@ public class EquippedItems : MonoBehaviour
     private Tween primaryRtScaleTween;
     private Tween secondaryRtScaleTween;
 
-    private void Awake()
+    private void OnEnable()
     {
         weaponSwapper.OnSwap += WeaponSwapper_OnSwap;
+    }
+
+    private void OnDisable()
+    {
+        weaponSwapper.OnSwap -= WeaponSwapper_OnSwap;
     }
 
     private void WeaponSwapper_OnSwap()
