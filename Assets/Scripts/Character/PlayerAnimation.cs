@@ -57,7 +57,7 @@ public class PlayerAnimation : MonoBehaviour
     private readonly float bowLookMult = -0.006235f;
     private readonly float bowLookAdd = 0.5f;
 
-    private void Awake()
+    public void Initialize()
     {
         smoothedParameters = new SmoothedVector2Parameter(
             animancer,

@@ -18,15 +18,10 @@ public class WeatherManager : MonoBehaviour
 
     [SerializeField] private Transform sunMoonParent;
 
-    private GameClock gameClock;
+    [SerializeField] private GameClock gameClock;
 
     private readonly float FULL_NIGHT_COLORS_START = 0.625f; //environment will be 100% night-colored at this time
     private readonly float FULL_NIGHT_COLORS_END = 0.875f; //environment will finish being 100% night-colored at this time; during the night the colors remain consistent; start lerping toward day colors
-
-    private void Start()
-    {
-        gameClock = GameObject.FindGameObjectWithTag("GameClock").GetComponent<GameClock>();
-    }
 
     private void Update()
     {

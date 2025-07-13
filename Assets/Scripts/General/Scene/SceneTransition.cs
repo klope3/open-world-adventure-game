@@ -6,18 +6,10 @@ using UnityEngine.SceneManagement;
 public class SceneTransition : MonoBehaviour
 {
     [SerializeField] private ScreenFade screenFade;
-    private int spawnPointIndex;
-    public int SpawnPointIndex
-    {
-        get
-        {
-            return spawnPointIndex;
-        }
-    }
 
     public void TransitionToScene(string name, int spawnPointIndex)
     {
-        this.spawnPointIndex = spawnPointIndex;
+        PersistentGameData.sceneTransitionIndex = spawnPointIndex;
         StartCoroutine(CO_Transition(name));
     }
 

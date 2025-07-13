@@ -8,12 +8,11 @@ using Sirenix.OdinInspector;
 //NPCs may have different needs.
 public abstract class DialogueInitiator : MonoBehaviour, IInteractable
 {
-    protected DialogueManager dialogueManager;
+    [SerializeField] protected DialogueManager dialogueManager;
 
     private void Start()
     {
-        dialogueManager = GameObject.FindGameObjectWithTag("DialogueManager").GetComponent<DialogueManager>();
-        if (!dialogueManager) Debug.LogError($"DialogueInitiator '{name}' failed to find the dialogue manager!");
+        if (!dialogueManager) Debug.LogError($"DialogueInitiator '{name}' failed to find the dialogue manager!"); //dialogue system will need to be rewritten anyway
     }
 
     public abstract DialogueNodeSO ChooseStartingNode();

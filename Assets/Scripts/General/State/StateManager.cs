@@ -31,7 +31,12 @@ public abstract class StateManager<TState> : StateManagerBase where TState : Sta
 
     private void Awake()
     {
-        StartAwake();
+        if (initializeOnAwake) Initialize();
+    }
+
+    public void Initialize()
+    {
+        StartInitialize();
         registeredStates = GetStateDictionary();
 
         string initialStateName = GetInitialStateName();
@@ -45,11 +50,13 @@ public abstract class StateManager<TState> : StateManagerBase where TState : Sta
 
     protected abstract string GetInitialStateName();
     protected abstract Dictionary<string, TState> GetStateDictionary();
-    protected abstract void StartAwake();
+    protected abstract void StartInitialize();
     protected abstract void EndUpdate();
 
     private void Update()
     {
+        if (currentTransitions == null) return;
+
         TimeInState += Time.deltaTime;
 
         bool switched = false;

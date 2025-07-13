@@ -9,7 +9,8 @@ public class CheckDialogueChoiceSO : ScriptableObject, ICondition
 
     public bool Evaluate()
     {
-        DialogueManager dialogueManager = GameObject.FindGameObjectWithTag("DialogueManager").GetComponent<DialogueManager>();
-        return dialogueManager.SelectedChoiceIndex == requiredChoiceIndex;
+        //DialogueManager dialogueManager = GameObject.FindGameObjectWithTag("DialogueManager").GetComponent<DialogueManager>();
+        //return dialogueManager.SelectedChoiceIndex == requiredChoiceIndex;
+        return false; //the dialogue system needs to be reworked anyway
     }
 }

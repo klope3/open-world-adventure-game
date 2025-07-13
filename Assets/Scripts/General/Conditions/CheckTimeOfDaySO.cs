@@ -9,8 +9,9 @@ public class CheckTimeOfDaySO : ScriptableObject, ICondition
 
     public bool Evaluate()
     {
-        GameClock gameClock = GameObject.FindGameObjectWithTag("GameClock").GetComponent<GameClock>();
+        //GameClock gameClock = GameObject.FindGameObjectWithTag("GameClock").GetComponent<GameClock>();
         //WeatherManager weatherManager = GameObject.FindGameObjectWithTag("Environment").GetComponent<WeatherManager>();
-        return gameClock.CurrentTimeOfDay == requiredTimeOfDay;
+        //return gameClock.CurrentTimeOfDay == requiredTimeOfDay;
+        return false; //the dialogue system needs to be reworked anyway
     }
 }

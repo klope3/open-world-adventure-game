@@ -6,9 +6,17 @@ public class GameObjectPool : MonoBehaviour
 {
     [SerializeField] private GameObject prefabToPool;
     [SerializeField] private int startingCount;
+    [SerializeField] private bool instantiateOnAwake;
     private List<GameObject> pooledObjects;
+    public delegate void GameObjectEvent(GameObject gameObject);
+    public GameObjectEvent OnObjectInstantiated;
 
     private void Awake()
+    {
+        if (instantiateOnAwake) Initialize();
+    }
+
+    public void Initialize()
     {
         pooledObjects = new List<GameObject>();
         for (int i = 0; i < startingCount; i++)
@@ -37,6 +45,7 @@ public class GameObjectPool : MonoBehaviour
         go.transform.SetParent(transform);
         go.SetActive(false);
         pooledObjects.Add(go);
+        OnObjectInstantiated?.Invoke(go);
         return go;
     }
 

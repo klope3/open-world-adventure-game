@@ -15,19 +15,9 @@ public class Spawner : MonoBehaviour
     [SerializeField, Min(1)] private int maxSpawnedCount;
     [SerializeField, Tooltip("If the spawner spawns NPCs, it will register/unregister spawned NPCs wih the NonPlayerCharacterManager.")] 
     private SpawnerType spawnerType;
-    private NonPlayerCharacterManager npcm; //NPC Manager; lazy initialized
+    [field: SerializeField] private NonPlayerCharacterManager npcManager;
     private float spawnTimer;
     private int spawnedCount;
-
-    private NonPlayerCharacterManager NpcManager
-    {
-        get
-        {
-            if (npcm == null) npcm = FindObjectOfType<NonPlayerCharacterManager>();
-            if (npcm == null) Debug.LogError("No NPC Manager found");
-            return npcm;
-        }
-    }
 
     public enum SpawnerType
     {
@@ -83,14 +73,19 @@ public class Spawner : MonoBehaviour
             Debug.LogWarning("Tried to register an NPC with no NPC Base");
             return;
         }
-        if (spawnerType == SpawnerType.NPC_Enemy) NpcManager.RegisterEnemy(npcBase);
+        if (spawnerType == SpawnerType.NPC_Enemy) npcManager.RegisterEnemy(npcBase);
     }
 
     public void SetGameObjectPool(GameObjectPool pool)
     {
         this.pool = pool;
     }
-    
+
+    public void SetNPCManager(NonPlayerCharacterManager npcManager)
+    {
+        this.npcManager = npcManager;
+    }
+
     private void Spawnable_OnDie(Spawnable spawnable)
     {
         spawnable.OnDie -= Spawnable_OnDie;

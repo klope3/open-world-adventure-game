@@ -24,7 +24,7 @@ public class NonPlayerCharacterManager : MonoBehaviour
         }
     }
 
-    private void Awake()
+    public void Initialize()
     {
         enemies = new List<NonPlayerCharacterBase>();
         neutralNpcs = new List<NonPlayerCharacterBase>();

@@ -170,7 +170,7 @@ public class PlayerStateManager : StateManager<PlayerState>
         }
     }
 
-    protected override void StartAwake()
+    protected override void StartInitialize()
     {
     }
 

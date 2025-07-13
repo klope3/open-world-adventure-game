@@ -73,7 +73,7 @@ public class GameStateManager : StateManager<GameState>
         return states;
     }
 
-    protected override void StartAwake()
+    protected override void StartInitialize()
     {
     }
 

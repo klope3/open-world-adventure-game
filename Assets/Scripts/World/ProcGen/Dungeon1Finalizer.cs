@@ -6,7 +6,8 @@ using UnityEngine;
 public class Dungeon1Finalizer : DungeonFinalizer
 {
     [SerializeField] private GameObjectPool skeletonPool;
-    [SerializeField] private FlowerSpiderPool flowerSpiderPool;
+    [SerializeField] private GameObjectPool flowerSpiderPool;
+    [SerializeField] private NonPlayerCharacterManager npcManager;
 
     protected override void FinalizeDungeon(DungeonGenerator generator)
     {
@@ -18,10 +19,12 @@ public class Dungeon1Finalizer : DungeonFinalizer
             foreach (Spawner s in tileFinalizer.FlowerSpiderSpawners)
             {
                 s.SetGameObjectPool(flowerSpiderPool);
+                s.SetNPCManager(npcManager);
             }
             foreach (Spawner s in tileFinalizer.SkeletonSpawners)
             {
                 s.SetGameObjectPool(skeletonPool);
+                s.SetNPCManager(npcManager);
             }
         }
     }

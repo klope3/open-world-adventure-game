@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaspInitializer : MonoBehaviour
+public class WaspInitializeHelper : MonoBehaviour
 {
     [SerializeField] private LookAtTransform launcherAimer;
     [SerializeField] private MegaProjectileLauncher launcher;

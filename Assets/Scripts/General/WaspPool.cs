@@ -9,7 +9,7 @@ public class WaspPool : GameObjectPool
     protected override GameObject InstantiateObject(GameObject prefab)
     {
         GameObject go = Instantiate(prefab);
-        WaspInitializer initializer = go.GetComponent<WaspInitializer>();
+        WaspInitializeHelper initializer = go.GetComponent<WaspInitializeHelper>();
         initializer.Initialize(projectilePool);
 
         return go;

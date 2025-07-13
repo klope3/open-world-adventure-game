@@ -9,6 +9,7 @@ public class EnemyStateManager : StateManager<EnemyState>
 {
     [SerializeField] private Character character;
     [SerializeField] private HealthHandler healthHandler;
+    [field: SerializeField] public GameObject PlayerObject { get; private set; }
     [SerializeField] private float wanderMoveSpeed;
 
     [SerializeField, Tooltip("The enemy will move for this long before pausing.")]
@@ -33,22 +34,6 @@ public class EnemyStateManager : StateManager<EnemyState>
     [SerializeField] private MonoBehaviour pauseBehavior;
     [SerializeField] private MonoBehaviour attackBehavior;
     [SerializeField] private MonoBehaviour recoveryBehavior;
-    private GameObject po; //"PlayerObject"; should only be accessed from PlayerObject property
-    public GameObject PlayerObject
-    {
-        get
-        {
-            if (po == null)
-            {
-                po = GameObject.FindGameObjectWithTag("Player");
-                if (!po)
-                {
-                    Debug.LogError("Could not find player!");
-                }
-            }
-            return po;
-        }
-    }
 
     public static readonly string WANDER_STATE = "Wander";
     public static readonly string CHASE_STATE = "Chase";
@@ -164,7 +149,7 @@ public class EnemyStateManager : StateManager<EnemyState>
     }
 
 
-    protected override void StartAwake()
+    protected override void StartInitialize()
     {
     }
 
@@ -179,12 +164,6 @@ public class EnemyStateManager : StateManager<EnemyState>
 
     protected override Dictionary<string, EnemyState> GetStateDictionary()
     {
-        //PlayerObject = GameObject.FindGameObjectWithTag("Player");
-        //if (!PlayerObject)
-        //{
-        //    Debug.LogError("Could not find player!");
-        //}
-
         Dictionary<string, EnemyState> states = new Dictionary<string, EnemyState>();
 
         EnemyBasicWanderState wanderState = new EnemyBasicWanderState();
@@ -216,5 +195,10 @@ public class EnemyStateManager : StateManager<EnemyState>
         Vector3 vecToPlayer = PlayerObject.transform.position - OwnTransform.position;
         HealthHandler playerHealth = PlayerObject.GetComponent<HealthHandler>();
         return vecToPlayer.magnitude < PlayerChaseDistance && playerHealth.CurHealth > 0;
+    }
+
+    public void SetPlayer(GameObject playerObject)
+    {
+        PlayerObject = playerObject;
     }
 }

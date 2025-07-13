@@ -19,14 +19,9 @@ public class AmbienceManager : MonoBehaviour
     [SerializeField, Tooltip("Maximum distance from the camera to play one-off ambient noises.")]
     private float oneOffMaxDistance;
 
-    private Camera mainCamera;
+    [SerializeField] private Camera mainCamera;
     private float oneOffTimer;
     private float oneOffTimerMax;
-
-    private void Awake()
-    {
-        mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-    }
 
     private void Update()
     {
