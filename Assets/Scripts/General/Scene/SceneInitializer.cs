@@ -13,6 +13,8 @@ public class SceneInitializer : MonoBehaviour
     [SerializeField] private NonPlayerCharacterManager npcManager;
     [SerializeField] private GameStateManager gameStateManager;
     [SerializeField] private PlayerInitialPositioner playerInitialPositioner;
+    [SerializeField] private DunGen.RuntimeDungeon dungeonGenerator;
+    [SerializeField] private DungeonFinalizer dungeonFinalizer;
 
     private void Awake()
     {
@@ -40,5 +42,7 @@ public class SceneInitializer : MonoBehaviour
         npcManager.Initialize();
         gameStateManager.Initialize();
         playerInitialPositioner.PositionPlayer();
+        if (dungeonFinalizer) dungeonFinalizer.Initialize();
+        if (dungeonGenerator) dungeonGenerator.Generate();
     }
 }

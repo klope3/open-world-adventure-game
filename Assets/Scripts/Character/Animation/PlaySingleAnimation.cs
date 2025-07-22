@@ -10,6 +10,7 @@ public class PlaySingleAnimation : MonoBehaviour
     [SerializeField] private Animancer.AnimancerComponent animancer;
     [SerializeField] private AnimationClip clip;
 
+    [Sirenix.OdinInspector.Button]
     public void Play()
     {
         animancer.Play(clip, MiscConstants.DEFAULT_ANIMATION_BLEND_TIME);

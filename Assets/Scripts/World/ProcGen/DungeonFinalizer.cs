@@ -8,7 +8,7 @@ public abstract class DungeonFinalizer : MonoBehaviour
 {
     private RuntimeDungeon runtimeDungeon;
 
-	private void Awake()
+	public void Initialize()
 	{
 		runtimeDungeon = GetComponent<RuntimeDungeon>();
 		runtimeDungeon.Generator.OnGenerationStatusChanged += OnDungeonGenerationStatusChanged;

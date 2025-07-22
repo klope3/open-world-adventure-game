@@ -27,5 +27,11 @@ public class Dungeon1Finalizer : DungeonFinalizer
                 s.SetNPCManager(npcManager);
             }
         }
+
+        LookAtPosition[] playerLookers = FindObjectsOfType<LookAtPosition>();
+        foreach (LookAtPosition looker in playerLookers)
+        {
+            looker.lookAtTransform = GameReferences.Player.transform;
+        }
     }
 }

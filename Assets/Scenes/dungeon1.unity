@@ -284,7 +284,7 @@ PrefabInstance:
         type: 3}
       propertyPath: dayColors
       value: 
-      objectReference: {fileID: 11400000, guid: e559d6212e7d00443b5e5b076f1a4d3b,
+      objectReference: {fileID: 11400000, guid: 58cc2f8efd3dd864082741e8cde5afe9,
         type: 2}
     - target: {fileID: 3070631642915608123, guid: 7c77fab673680924ab7070c7f85e4df5,
         type: 3}
@@ -295,19 +295,19 @@ PrefabInstance:
         type: 3}
       propertyPath: nightColors
       value: 
-      objectReference: {fileID: 11400000, guid: e559d6212e7d00443b5e5b076f1a4d3b,
+      objectReference: {fileID: 11400000, guid: 58cc2f8efd3dd864082741e8cde5afe9,
         type: 2}
     - target: {fileID: 3070631642915608123, guid: 7c77fab673680924ab7070c7f85e4df5,
         type: 3}
       propertyPath: eveningColors
       value: 
-      objectReference: {fileID: 11400000, guid: e559d6212e7d00443b5e5b076f1a4d3b,
+      objectReference: {fileID: 11400000, guid: 58cc2f8efd3dd864082741e8cde5afe9,
         type: 2}
     - target: {fileID: 3070631642915608123, guid: 7c77fab673680924ab7070c7f85e4df5,
         type: 3}
       propertyPath: morningColors
       value: 
-      objectReference: {fileID: 11400000, guid: e559d6212e7d00443b5e5b076f1a4d3b,
+      objectReference: {fileID: 11400000, guid: 58cc2f8efd3dd864082741e8cde5afe9,
         type: 2}
     - target: {fileID: 4793387302797805629, guid: 7c77fab673680924ab7070c7f85e4df5,
         type: 3}
@@ -510,7 +510,7 @@ PrefabInstance:
     - target: {fileID: 2549473654807457172, guid: ce506bbcdd284d0429e4ff13b403208f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.7450001
+      value: -3.63
       objectReference: {fileID: 0}
     - target: {fileID: 4345139370350580892, guid: ce506bbcdd284d0429e4ff13b403208f,
         type: 3}
@@ -535,7 +535,7 @@ PrefabInstance:
     - target: {fileID: 5314009860066945119, guid: ce506bbcdd284d0429e4ff13b403208f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.7450001
+      value: -3.63
       objectReference: {fileID: 0}
     - target: {fileID: 6328336521462651359, guid: ce506bbcdd284d0429e4ff13b403208f,
         type: 3}
@@ -612,6 +612,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8311925560898922151, guid: ce506bbcdd284d0429e4ff13b403208f,
+        type: 3}
+      propertyPath: dungeonFinalizer
+      value: 
+      objectReference: {fileID: 2055081351}
+    - target: {fileID: 8311925560898922151, guid: ce506bbcdd284d0429e4ff13b403208f,
+        type: 3}
+      propertyPath: dungeonGenerator
+      value: 
+      objectReference: {fileID: 2055081349}
     - target: {fileID: 8311925560898922151, guid: ce506bbcdd284d0429e4ff13b403208f,
         type: 3}
       propertyPath: playerInitialPositioner
@@ -881,7 +891,7 @@ MonoBehaviour:
     Root: {fileID: 0}
     DungeonFlow: {fileID: 11400000, guid: 4b4726148fd242347a760d8760f32ca5, type: 2}
     fileVersion: 1
-  GenerateOnStart: 1
+  GenerateOnStart: 0
   Root: {fileID: 0}
 --- !u!4 &2055081350
 Transform:
@@ -998,7 +1008,7 @@ PrefabInstance:
     - target: {fileID: 269603801535727091, guid: e577fdfed78557e4aab8a365e339b537,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.38
+      value: -5.06
       objectReference: {fileID: 0}
     - target: {fileID: 269603801535727091, guid: e577fdfed78557e4aab8a365e339b537,
         type: 3}
