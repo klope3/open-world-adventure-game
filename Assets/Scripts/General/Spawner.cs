@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
+using Sirenix.OdinInspector;
 
 public class Spawner : MonoBehaviour
 {
@@ -18,6 +18,14 @@ public class Spawner : MonoBehaviour
     [field: SerializeField] private NonPlayerCharacterManager npcManager;
     private float spawnTimer;
     private int spawnedCount;
+    [ShowInInspector, DisplayAsString]
+    public float SpawnedCount
+    {
+        get
+        {
+            return spawnedCount;
+        }
+    }
 
     public enum SpawnerType
     {

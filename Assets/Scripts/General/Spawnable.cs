@@ -8,7 +8,7 @@ public class Spawnable : MonoBehaviour
     public delegate void SpawnableEvent(Spawnable spawnable);
     public event SpawnableEvent OnDie;
 
-    private void Awake()
+    public void OnEnable()
     {
         HealthHandler health = GetComponent<HealthHandler>();
         if (health != null) health.OnDied += HealthHandler_OnDied;

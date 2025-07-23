@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
@@ -8,6 +9,8 @@ public class GameClock : MonoBehaviour
     [SerializeField] private float timeMultiplier = 0.00278f;
     [ShowInInspector, DisplayAsString] private float dayTimer;
     [ShowInInspector, DisplayAsString] private int daysElapsed;
+    private List<GameClockAction> clockActions; //these callbacks will be called at (approximately) the specified times of day
+    
     [ShowInInspector, DisplayAsString]
     public TimeOfDay CurrentTimeOfDay
     {
@@ -47,6 +50,11 @@ public class GameClock : MonoBehaviour
         Night
     }
 
+    public void Initialize()
+    {
+        clockActions = new List<GameClockAction>();
+    }
+
     private void Update()
     {
         dayTimer += Time.deltaTime * timeMultiplier;
@@ -54,7 +62,31 @@ public class GameClock : MonoBehaviour
         {
             dayTimer = 0;
             daysElapsed++;
+            ResetClockActions();
         }
+
+        GameClockAction actionToCall = clockActions.Find(a => !a.actionCalled && a.Time < dayTimer);
+        if (actionToCall != null && !actionToCall.actionCalled)
+        {
+            actionToCall.Action();
+            actionToCall.actionCalled = true;
+        }
+    }
+
+    private void ResetClockActions()
+    {
+        foreach (GameClockAction action in clockActions)
+        {
+            action.actionCalled = false;
+        }
+    }
+
+    public void ScheduleClockAction(GameClockAction action)
+    {
+        GameClockAction existingAction = clockActions.Find(a => a.Time == action.Time);
+        if (existingAction != null) Debug.LogError($"There is already an action scheduled at time = {action.Time}. Multiple actions at the same time not currently supported.");
+        clockActions.Add(action);
+        clockActions.Sort((a, b) => a.Time.CompareTo(b.Time));
     }
 
     [Button]

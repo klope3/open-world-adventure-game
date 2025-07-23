@@ -15,6 +15,8 @@ public class SceneInitializer : MonoBehaviour
     [SerializeField] private PlayerInitialPositioner playerInitialPositioner;
     [SerializeField] private DunGen.RuntimeDungeon dungeonGenerator;
     [SerializeField] private DungeonFinalizer dungeonFinalizer;
+    [SerializeField] private GameClock gameClock;
+    [SerializeField] private CastleAttackScheduler castleAttackScheduler;
 
     private void Awake()
     {
@@ -23,6 +25,8 @@ public class SceneInitializer : MonoBehaviour
         playerHealth.Initialize(PersistentGameData.playerHealth);
         moneyHandler.Initialize(PersistentGameData.playerMoney);
         moneyDisplay.Initialize();
+        gameClock.Initialize();
+        castleAttackScheduler.Initialize();
 
         playerAnimation.Initialize();
         playerStateManager.Initialize();

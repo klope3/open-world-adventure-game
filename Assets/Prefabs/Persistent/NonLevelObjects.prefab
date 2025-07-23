@@ -162,6 +162,10 @@ MonoBehaviour:
   npcManager: {fileID: 150213494272306414}
   gameStateManager: {fileID: 446770533177201417}
   playerInitialPositioner: {fileID: 0}
+  dungeonGenerator: {fileID: 0}
+  dungeonFinalizer: {fileID: 0}
+  gameClock: {fileID: 6606902399230613843}
+  castleAttackScheduler: {fileID: 3745354089599157699}
 --- !u!114 &2973392104535525123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,17 +290,17 @@ PrefabInstance:
     - target: {fileID: 2070925441746177912, guid: 363d60fc2acd40a40af824250c677506,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.5
+      value: -0.1335038
       objectReference: {fileID: 0}
     - target: {fileID: 2070925441746177912, guid: 363d60fc2acd40a40af824250c677506,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.49999997
+      value: 0.13350382
       objectReference: {fileID: 0}
     - target: {fileID: 2070925441746177912, guid: 363d60fc2acd40a40af824250c677506,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1
+      value: 0.031691432
       objectReference: {fileID: 0}
     - target: {fileID: 2070925441746177912, guid: 363d60fc2acd40a40af824250c677506,
         type: 3}
@@ -1196,7 +1200,11 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 4672464074486773540, guid: cdd8e2664ec2a29458e65c5f63179c3b, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4310709950670534887, guid: cdd8e2664ec2a29458e65c5f63179c3b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3745354089599157699}
   m_SourcePrefab: {fileID: 100100000, guid: cdd8e2664ec2a29458e65c5f63179c3b, type: 3}
 --- !u!114 &150213494272306414 stripped
 MonoBehaviour:
@@ -1246,7 +1254,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 5967351283003573224}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 7566889309074307855}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9b9f34095e697cc46843de234ef58a8f, type: 3}
@@ -1264,6 +1272,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29aabdef3441a6e4ab50acd0764bd114, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &7566889309074307855 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4310709950670534887, guid: cdd8e2664ec2a29458e65c5f63179c3b,
+    type: 3}
+  m_PrefabInstance: {fileID: 5967351283003573224}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3745354089599157699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7566889309074307855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4325ad09166b2b4da63442bc4a3466f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameClock: {fileID: 6606902399230613843}
+  spawner: {fileID: 0}
 --- !u!1001 &6125529256814389031
 PrefabInstance:
   m_ObjectHideFlags: 0
