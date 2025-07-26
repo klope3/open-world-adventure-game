@@ -22,6 +22,7 @@ public static class InputActionsProvider
                 inputActions.Player.ZTarget.started += ZTarget_started;
                 inputActions.Player.DodgeButton.started += DodgeButton_started;
                 inputActions.Player.SwapButton.started += SwapButton_started;
+                inputActions.Player.PauseButton.started += PauseButton_started;
             }
             return inputActions;
         }
@@ -35,6 +36,7 @@ public static class InputActionsProvider
     public static System.Action OnZTargetStarted;
     public static System.Action OnDodgeButtonStarted;
     public static System.Action OnSwapButtonStarted;
+    public static System.Action OnPauseButtonStarted;
 
     private static bool overridePrimaryAxis;
     private static Vector3 primaryAxisOverrideVec;
@@ -48,6 +50,11 @@ public static class InputActionsProvider
     public static void UnlockPrimaryAxis()
     {
         overridePrimaryAxis = false;
+    }
+
+    private static void PauseButton_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnPauseButtonStarted?.Invoke();
     }
 
     private static void SwapButton_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)

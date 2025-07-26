@@ -56,6 +56,7 @@ public class GameStateManager : StateManager<GameState>
 
     public static readonly string DEFAULT_STATE = "Default";
     public static readonly string LOOT_STATE = "Loot";
+    public static readonly string PAUSE_STATE = "Pause";
 
     protected override Dictionary<string, GameState> GetStateDictionary()
     {
@@ -63,12 +64,15 @@ public class GameStateManager : StateManager<GameState>
 
         GameDefaultState defaultState = new GameDefaultState();
         GameLootState lootState = new GameLootState();
+        GamePauseState pauseState = new GamePauseState();
 
         defaultState.Initialize(this);
         lootState.Initialize(this);
+        pauseState.Initialize(this);
 
         states.Add(DEFAULT_STATE, defaultState);
         states.Add(LOOT_STATE, lootState);
+        states.Add(PAUSE_STATE, pauseState);
 
         return states;
     }

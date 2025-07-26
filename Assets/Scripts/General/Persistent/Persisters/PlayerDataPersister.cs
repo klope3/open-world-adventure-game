@@ -28,21 +28,21 @@ public class PlayerDataPersister : MonoBehaviour
 
     private void MoneyHandler_OnMoneyChanged()
     {
-        PersistentGameData.playerMoney = moneyHandler.Money;
+        PersistentGameData.SaveData.PlayerData.money = moneyHandler.Money;
     }
 
     private void PlayerHealth_OnDamaged(Vector3 position)
     {
-        PersistentGameData.playerHealth = playerHealth.CurHealth;
+        PersistentGameData.SaveData.PlayerData.health = playerHealth.CurHealth;
     }
 
     private void PlayerHealth_OnHealed()
     {
-        PersistentGameData.playerHealth = playerHealth.CurHealth;
+        PersistentGameData.SaveData.PlayerData.health = playerHealth.CurHealth;
     }
 
     private void PlayerHealth_OnDied()
     {
-        PersistentGameData.playerHealth = playerHealth.CurHealth;
+        PersistentGameData.SaveData.PlayerData.health = playerHealth.CurHealth;
     }
 }

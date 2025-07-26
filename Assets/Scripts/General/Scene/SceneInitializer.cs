@@ -17,16 +17,18 @@ public class SceneInitializer : MonoBehaviour
     [SerializeField] private DungeonFinalizer dungeonFinalizer;
     [SerializeField] private GameClock gameClock;
     [SerializeField] private CastleAttackScheduler castleAttackScheduler;
+    [SerializeField] private PauseMenu pauseMenu;
 
     private void Awake()
     {
         InputActionsProvider.UnlockPrimaryAxis();
         playerDataPersister.Initialize();
-        playerHealth.Initialize(PersistentGameData.playerHealth);
-        moneyHandler.Initialize(PersistentGameData.playerMoney);
+        playerHealth.Initialize(PersistentGameData.SaveData.PlayerData.health, PersistentGameData.SaveData.PlayerData.healthMax);
+        moneyHandler.Initialize(PersistentGameData.SaveData.PlayerData.money);
         moneyDisplay.Initialize();
         gameClock.Initialize();
         castleAttackScheduler.Initialize();
+        pauseMenu.Initialize();
 
         playerAnimation.Initialize();
         playerStateManager.Initialize();

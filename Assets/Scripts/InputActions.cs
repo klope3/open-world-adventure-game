@@ -98,6 +98,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PauseButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""9bea9cd5-1f5b-4997-97d0-cfdb48cc1a5d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -375,6 +384,17 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""SwapButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ca75ad3a-6557-4910-ad9f-919e5e327f2b"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KBM"",
+                    ""action"": ""PauseButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -414,6 +434,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Player_InteractButton = m_Player.FindAction("InteractButton", throwIfNotFound: true);
         m_Player_DodgeButton = m_Player.FindAction("DodgeButton", throwIfNotFound: true);
         m_Player_SwapButton = m_Player.FindAction("SwapButton", throwIfNotFound: true);
+        m_Player_PauseButton = m_Player.FindAction("PauseButton", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -483,6 +504,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_InteractButton;
     private readonly InputAction m_Player_DodgeButton;
     private readonly InputAction m_Player_SwapButton;
+    private readonly InputAction m_Player_PauseButton;
     public struct PlayerActions
     {
         private @InputActions m_Wrapper;
@@ -495,6 +517,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         public InputAction @InteractButton => m_Wrapper.m_Player_InteractButton;
         public InputAction @DodgeButton => m_Wrapper.m_Player_DodgeButton;
         public InputAction @SwapButton => m_Wrapper.m_Player_SwapButton;
+        public InputAction @PauseButton => m_Wrapper.m_Player_PauseButton;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -528,6 +551,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @SwapButton.started += instance.OnSwapButton;
             @SwapButton.performed += instance.OnSwapButton;
             @SwapButton.canceled += instance.OnSwapButton;
+            @PauseButton.started += instance.OnPauseButton;
+            @PauseButton.performed += instance.OnPauseButton;
+            @PauseButton.canceled += instance.OnPauseButton;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -556,6 +582,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @SwapButton.started -= instance.OnSwapButton;
             @SwapButton.performed -= instance.OnSwapButton;
             @SwapButton.canceled -= instance.OnSwapButton;
+            @PauseButton.started -= instance.OnPauseButton;
+            @PauseButton.performed -= instance.OnPauseButton;
+            @PauseButton.canceled -= instance.OnPauseButton;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -601,5 +630,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         void OnInteractButton(InputAction.CallbackContext context);
         void OnDodgeButton(InputAction.CallbackContext context);
         void OnSwapButton(InputAction.CallbackContext context);
+        void OnPauseButton(InputAction.CallbackContext context);
     }
 }

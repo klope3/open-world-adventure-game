@@ -12,10 +12,18 @@ public class GameDefaultState : GameState
         stateManager.NPCManager.SetEnemiesFrozen(false);
         stateManager.GameClock.enabled = true;
         stateManager.CameraController.enabled = true;
+
+        InputActionsProvider.OnPauseButtonStarted += ToPauseState;
     }
 
     public override void ExitState()
     {
+        InputActionsProvider.OnPauseButtonStarted -= ToPauseState;
+    }
+
+    private void ToPauseState()
+    {
+        stateManager.trigger = GameStateManager.PAUSE_STATE;
     }
 
     public override string GetDebugName()
@@ -28,6 +36,7 @@ public class GameDefaultState : GameState
         return new StateTransition[]
         {
             new StateTransition(GameStateManager.LOOT_STATE, () => stateManager.trigger == GameStateManager.LOOT_STATE),
+            new StateTransition(GameStateManager.PAUSE_STATE, () => stateManager.trigger == GameStateManager.PAUSE_STATE),
         };
     }
 

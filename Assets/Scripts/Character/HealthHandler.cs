@@ -46,9 +46,10 @@ public class HealthHandler : MonoBehaviour
         if (initializeOnAwake) Initialize();
     }
 
-    public void Initialize(int startingHealth)
+    public void Initialize(int startingHealth, int startingHealthMax)
     {
         this.startingHealth = startingHealth;
+        this.maxHealth = startingHealthMax;
         Initialize();
     }
 
