@@ -1,8 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 
-public class LandingState : PlayerState
+public class MovingState : PlayerState
 {
     public override void EnterState()
     {
@@ -10,11 +9,6 @@ public class LandingState : PlayerState
 
     public override void ExitState()
     {
-    }
-
-    public override string GetDebugName()
-    {
-        return "landing";
     }
 
     public override void PostInitialize()
@@ -25,12 +19,16 @@ public class LandingState : PlayerState
     {
     }
 
+    public override string GetDebugName()
+    {
+        return "moving";
+    }
+
     public override StateTransition[] GetTransitions()
     {
         return new StateTransition[]
         {
-            new StateTransition(PlayerStateManager.MOVING_STATE, () => stateManager.TimeInState > stateManager.LandingDuration || stateManager.DefaultMovementModule.MoveVec.magnitude > 0),
-            new StateTransition(PlayerStateManager.IDLE_STATE, () => stateManager.TimeInState > stateManager.LandingDuration),
+            new StateTransition(PlayerStateManager.IDLE_STATE, () => stateManager.DefaultMovementModule.MoveVec.magnitude < 0.005f),
             new StateTransition(PlayerStateManager.FALLING_STATE, () => !stateManager.Character.IsGrounded()),
             new StateTransition(PlayerStateManager.ATTACK_STATE, () => stateManager.trigger == PlayerStateManager.ATTACK_STATE),
             new StateTransition(PlayerStateManager.JUMPING_STATE, () => stateManager.trigger == PlayerStateManager.JUMPING_STATE),
@@ -40,13 +38,6 @@ public class LandingState : PlayerState
             new StateTransition(PlayerStateManager.LOOT_STATE, () => stateManager.trigger == PlayerStateManager.LOOT_STATE),
             new StateTransition(PlayerStateManager.BOW_DRAW_STATE, () => stateManager.trigger == PlayerStateManager.BOW_DRAW_STATE),
         };
-        //StateTransition[] defaultTransitions = stateManager.GetDefaultTransitions();
-        //StateTransition[] additionalTransitions = new StateTransition[]
-        //{
-        //    new StateTransition(PlayerStateManager.MOVING_STATE, () => stateManager.TimeInState > stateManager.LandingDuration || InputActionsProvider.GetPrimaryAxis().magnitude > 0),
-        //};
-        //StateTransition[] allTransitions = defaultTransitions.Concat(additionalTransitions).ToArray();
-        //return allTransitions;
     }
 
     private bool ToDodgeState()

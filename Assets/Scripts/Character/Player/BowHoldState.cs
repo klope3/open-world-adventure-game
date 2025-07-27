@@ -26,7 +26,7 @@ public class BowHoldState : PlayerState
     private void InputActionsProvider_OnBButtonCanceled()
     {
         stateManager.ArrowLauncher.SetTriggerState(true);
-        stateManager.trigger = PlayerStateManager.DEFAULT_STATE;
+        stateManager.trigger = PlayerStateManager.MOVING_STATE;
     }
 
     public override string GetDebugName()
@@ -38,7 +38,7 @@ public class BowHoldState : PlayerState
     {
         return new StateTransition[]
         {
-            new StateTransition(PlayerStateManager.DEFAULT_STATE, () => stateManager.trigger == PlayerStateManager.DEFAULT_STATE),
+            new StateTransition(PlayerStateManager.MOVING_STATE, () => stateManager.trigger == PlayerStateManager.MOVING_STATE),
         };
     }
 

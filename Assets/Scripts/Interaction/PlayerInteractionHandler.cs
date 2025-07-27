@@ -58,7 +58,7 @@ public class PlayerInteractionHandler : MonoBehaviour
         //all of these checks are a sign this needs refactoring
         if (playerStateManager.CurrentStateKey == PlayerStateManager.LOOT_STATE)
         {
-            playerStateManager.trigger = PlayerStateManager.DEFAULT_STATE;
+            playerStateManager.trigger = PlayerStateManager.MOVING_STATE;
             gameStateManager.trigger = GameStateManager.DEFAULT_STATE;
             dialogueBox.Hide();
             Destroy(lootingDisplayObject);

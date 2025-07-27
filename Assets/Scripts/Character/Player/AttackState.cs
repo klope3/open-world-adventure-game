@@ -46,7 +46,7 @@ public class AttackState : PlayerState
     {
         return new StateTransition[]
         {
-            new StateTransition(PlayerStateManager.DEFAULT_STATE, ToDefaultState),
+            new StateTransition(PlayerStateManager.MOVING_STATE, ToDefaultState),
         };
     }
 

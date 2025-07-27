@@ -46,7 +46,8 @@ public class PlayerStateManager : StateManager<PlayerState>
     public UnityEvent OnAnyAttackEnd;
     public UnityEvent OnLanded;
 
-    public static readonly string DEFAULT_STATE = "Moving";
+    public static readonly string IDLE_STATE = "Idle";
+    public static readonly string MOVING_STATE = "Moving";
     public static readonly string ROLL_STATE = "Rolling";
     public static readonly string ATTACK_STATE = "Attacking";
     public static readonly string ATTACK2_STATE = "Attacking2";
@@ -184,18 +185,19 @@ public class PlayerStateManager : StateManager<PlayerState>
 
     protected override string GetInitialStateName()
     {
-        return DEFAULT_STATE;
+        return IDLE_STATE;
     }
 
     protected override Dictionary<string, PlayerState> GetStateDictionary()
     {
         Dictionary<string, PlayerState> states = new Dictionary<string, PlayerState>();
 
+        IdleState idleState = new IdleState();
         AttackState attackState = new AttackState();
         AttackState attackState2 = new AttackState();
         JumpState jumpState = new JumpState();
         FallingState fallingState = new FallingState();
-        DefaultState movingState = new DefaultState();
+        MovingState movingState = new MovingState();
         RollState rollState = new RollState();
         DodgeState dodgeState = new DodgeState();
         DeathState deathState = new DeathState();
@@ -207,6 +209,7 @@ public class PlayerStateManager : StateManager<PlayerState>
         BowDrawState bowDrawState = new BowDrawState();
         BowHoldState bowHoldState = new BowHoldState();
 
+        idleState.Initialize(this);
         attackState.Initialize(this);
         attackState2.Initialize(this);
         jumpState.Initialize(this);
@@ -227,7 +230,8 @@ public class PlayerStateManager : StateManager<PlayerState>
         climbingState.OnEnter += ClimbingState_OnEnter;
         climbingState.OnExit += ClimbingState_OnExit;
 
-        states.Add(DEFAULT_STATE, movingState);
+        states.Add(IDLE_STATE, idleState);
+        states.Add(MOVING_STATE, movingState);
         states.Add(ATTACK_STATE, attackState);
         states.Add(ATTACK2_STATE, attackState2);
         states.Add(JUMPING_STATE, jumpState);
@@ -271,6 +275,7 @@ public class PlayerStateManager : StateManager<PlayerState>
     }
 
     //shared between the default state and any state that should have the same transitions as it
+    //currently unused
     public StateTransition[] GetDefaultTransitions()
     {
         return new StateTransition[]

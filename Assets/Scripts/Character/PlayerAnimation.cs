@@ -20,6 +20,7 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] private StringAsset strafeParameterX;
     [SerializeField] private StringAsset strafeParameterY;
 
+    [SerializeField] private AnimationClip idle;
     [SerializeField] private TransitionAssetBase roll;
     [SerializeField] private TransitionAssetBase attack1;
     [SerializeField] private TransitionAssetBase attack2;
@@ -101,9 +102,10 @@ public class PlayerAnimation : MonoBehaviour
 
     private void PlayerStateManager_OnStateChange(string stateName, string prevState)
     {
-        if (stateName == PlayerStateManager.DEFAULT_STATE)
+        if (stateName == PlayerStateManager.IDLE_STATE) animancer.Play(idle, DEFAULT_FADE_DURATION);
+        if (stateName == PlayerStateManager.MOVING_STATE)
         {
-            animancer.Play(strafeTransitionAsset);
+            animancer.Play(strafeTransitionAsset, DEFAULT_FADE_DURATION);
             animancer.Layers[1].Weight = 0;
         }
         //this should probably be a dictionary or something
@@ -136,7 +138,7 @@ public class PlayerAnimation : MonoBehaviour
     
     private void DefaultMovementAnimation()
     {
-        if (playerStateManager.CurrentStateKey != PlayerStateManager.DEFAULT_STATE) return;
+        if (playerStateManager.CurrentStateKey != PlayerStateManager.MOVING_STATE) return;
 
         Vector3 inputVec = InputActionsProvider.GetPrimaryAxis();
         Vector3 squareVec = Utils.ApproximateSquareInputVector(inputVec);

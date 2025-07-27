@@ -54,7 +54,7 @@ public class CameraController : MonoBehaviour
     private void StateManager_OnStateChange(string stateName, string prevState)
     {
         if (stateName == PlayerStateManager.BOW_HOLD_STATE) SetActiveCamera(ActiveCamera.Bow);
-        if (stateName == PlayerStateManager.DEFAULT_STATE) SetActiveCamera(ActiveCamera.Default);
+        if (stateName == PlayerStateManager.MOVING_STATE) SetActiveCamera(ActiveCamera.Default);
     }
 
     public void SetTargetingTransform(Transform targetingTransform)

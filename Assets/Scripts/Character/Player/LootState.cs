@@ -21,7 +21,7 @@ public class LootState : PlayerState
     {
         return new StateTransition[]
         {
-            new StateTransition(PlayerStateManager.DEFAULT_STATE, () => stateManager.trigger == PlayerStateManager.DEFAULT_STATE),
+            new StateTransition(PlayerStateManager.MOVING_STATE, () => stateManager.trigger == PlayerStateManager.MOVING_STATE),
         };
     }
 

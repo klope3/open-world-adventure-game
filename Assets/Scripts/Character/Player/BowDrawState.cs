@@ -26,7 +26,7 @@ public class BowDrawState : PlayerState
 
     private void InputActionsProvider_OnBButtonCanceled()
     {
-        stateManager.trigger = PlayerStateManager.DEFAULT_STATE;
+        stateManager.trigger = PlayerStateManager.MOVING_STATE;
     }
 
     public override string GetDebugName()
@@ -38,7 +38,7 @@ public class BowDrawState : PlayerState
     {
         return new StateTransition[]
         {
-            new StateTransition(PlayerStateManager.DEFAULT_STATE, () => stateManager.trigger == PlayerStateManager.DEFAULT_STATE),
+            new StateTransition(PlayerStateManager.MOVING_STATE, () => stateManager.trigger == PlayerStateManager.MOVING_STATE),
             new StateTransition(PlayerStateManager.BOW_HOLD_STATE, () => stateManager.TimeInState >= stateManager.BowDrawDuration),
         };
     }

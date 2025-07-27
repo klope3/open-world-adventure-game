@@ -38,7 +38,7 @@ public class RollState : PlayerState
     {
         return new StateTransition[]
         {
-            new StateTransition(PlayerStateManager.DEFAULT_STATE, () => stateManager.TimeInState > stateManager.RollDuration),
+            new StateTransition(PlayerStateManager.MOVING_STATE, () => stateManager.TimeInState > stateManager.RollDuration),
         };
     }
 }

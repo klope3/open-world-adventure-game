@@ -23,7 +23,7 @@ public class ClimbingReachTopState : PlayerState
     {
         return new StateTransition[]
         {
-            new StateTransition(PlayerStateManager.DEFAULT_STATE, () => stateManager.TimeInState >= stateManager.ClimbingReachTopDuration),
+            new StateTransition(PlayerStateManager.MOVING_STATE, () => stateManager.TimeInState >= stateManager.ClimbingReachTopDuration),
         };
     }
 

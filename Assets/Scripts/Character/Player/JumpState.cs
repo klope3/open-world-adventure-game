@@ -34,7 +34,7 @@ public class JumpState : PlayerState
     {
         return new StateTransition[]
         {
-            new StateTransition(PlayerStateManager.DEFAULT_STATE, ToDefaultState),
+            new StateTransition(PlayerStateManager.MOVING_STATE, ToDefaultState),
             new StateTransition(PlayerStateManager.FALLING_STATE, () => stateManager.Character.velocity.y < 0),
         };
     }

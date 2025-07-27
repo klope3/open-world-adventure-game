@@ -48,7 +48,7 @@ public class DodgeState : PlayerState
     {
         return new StateTransition[]
         {
-            new StateTransition(PlayerStateManager.DEFAULT_STATE, () => stateManager.TimeInState >= stateManager.DodgeDuration),
+            new StateTransition(PlayerStateManager.MOVING_STATE, () => stateManager.TimeInState >= stateManager.DodgeDuration),
         };
     }
 }

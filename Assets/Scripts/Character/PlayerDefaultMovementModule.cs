@@ -10,6 +10,7 @@ public class PlayerDefaultMovementModule : MonoBehaviour
     [SerializeField] private CameraController cameraController;
     [SerializeField] public bool canMove = true;
     [SerializeField] private MovementType initialMovementType;
+    public Vector3 MoveVec { get; private set; }
     private MovementType movementType;
     private MovementType prevMovementType;
     public System.Action LeftGround; //ECM2 does not seem to provide this event, but we can use some of its methods to easily implement it
@@ -43,17 +44,24 @@ public class PlayerDefaultMovementModule : MonoBehaviour
 
     private void Update()
     {
-        Vector3 inputVec = InputActionsProvider.GetPrimaryAxis();
-        Vector3 moveVec = new Vector3(inputVec.x, 0, inputVec.y);
-        moveVec = moveVec.relativeTo(character.cameraTransform);
+        MoveVec = Vector3.zero;
 
         if (canMove)
         {
-            character.SetMovementDirection(moveVec);
-        } else
-        {
-            character.SetMovementDirection(Vector3.zero);
+            Vector3 inputVec = InputActionsProvider.GetPrimaryAxis();
+            Vector3 modifiedVec = new Vector3(inputVec.x, 0, inputVec.y);
+            MoveVec = modifiedVec.relativeTo(character.cameraTransform);
         }
+
+        character.SetMovementDirection(MoveVec);
+
+        //if (canMove)
+        //{
+        //    character.SetMovementDirection(moveVec);
+        //} else
+        //{
+        //    character.SetMovementDirection(Vector3.zero);
+        //}
 
         if (character.WasGrounded() && !character.IsGrounded())
         {

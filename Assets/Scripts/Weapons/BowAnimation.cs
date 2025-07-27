@@ -24,7 +24,7 @@ public class BowAnimation : MonoBehaviour
 
     private void StateManager_OnStateChange(string stateName, string prevState)
     {
-        if (stateName != PlayerStateManager.DEFAULT_STATE) return;
+        if (stateName != PlayerStateManager.MOVING_STATE) return;
 
         //if (prevState == PlayerStateManager.BOW_HOLD_STATE || prevState == PlayerStateManager.BOW_DRAW_STATE)
         //{
