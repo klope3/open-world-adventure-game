@@ -14,6 +14,7 @@ public class LookAtPosition : MonoBehaviour
     [SerializeField, ShowIf("@constrainLook"), Tooltip("The deviance will be calculated relative to this transform's forward vector.")] 
     private Transform constraintReference;
     [SerializeField] private bool constrainLook;
+    public Vector3 PrevLookVector { get; private set; } //cached each frame in case something is null when we try to get the current look vector
 
     private void OnValidate()
     {
@@ -32,9 +33,10 @@ public class LookAtPosition : MonoBehaviour
     {
         if (transformToModify == null || (lookAtTransform == null && positionProvider == null)) return;
 
-        Vector3 positionToLookAt = positionProvider == null ? lookAtTransform.position : positionProvider.GetComponent<IVector3Provider>().GetVector3();
+        Vector3 newForwardVector = GetLookVector();
+        if (newForwardVector == Vector3.zero) newForwardVector = transformToModify.forward; //avoid the "look rotation viewing vector is zero" error
+        PrevLookVector = newForwardVector;
 
-        Vector3 newForwardVector = (positionToLookAt - transformToModify.position).normalized;
         if (!constrainLook)
         {
             transformToModify.forward = newForwardVector;
@@ -43,5 +45,18 @@ public class LookAtPosition : MonoBehaviour
 
         float deviance = 1 - Vector3.Dot(constraintReference.forward, newForwardVector);
         if (deviance < maxDeviance) transformToModify.forward = newForwardVector;
+    }
+
+    public Vector3 GetLookVector()
+    {
+        if (transformToModify == null || (lookAtTransform == null && positionProvider == null))
+        {
+            Debug.LogWarning("LookVector may be incorrect since transformToModify is null OR lookAtTransform and positionProvider are both null.");
+            return Vector3.zero;
+        }
+
+        //if we get here, we know that either lookAtTransform OR positionProvider is non-null
+        Vector3 positionToLookAt = positionProvider == null ? lookAtTransform.position : positionProvider.GetComponent<IVector3Provider>().GetVector3();
+        return (positionToLookAt - transformToModify.position).normalized;
     }
 }

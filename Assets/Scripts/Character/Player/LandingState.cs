@@ -40,13 +40,6 @@ public class LandingState : PlayerState
             new StateTransition(PlayerStateManager.LOOT_STATE, () => stateManager.trigger == PlayerStateManager.LOOT_STATE),
             new StateTransition(PlayerStateManager.BOW_DRAW_STATE, () => stateManager.trigger == PlayerStateManager.BOW_DRAW_STATE),
         };
-        //StateTransition[] defaultTransitions = stateManager.GetDefaultTransitions();
-        //StateTransition[] additionalTransitions = new StateTransition[]
-        //{
-        //    new StateTransition(PlayerStateManager.MOVING_STATE, () => stateManager.TimeInState > stateManager.LandingDuration || InputActionsProvider.GetPrimaryAxis().magnitude > 0),
-        //};
-        //StateTransition[] allTransitions = defaultTransitions.Concat(additionalTransitions).ToArray();
-        //return allTransitions;
     }
 
     private bool ToDodgeState()

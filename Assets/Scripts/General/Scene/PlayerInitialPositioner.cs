@@ -24,8 +24,8 @@ public class PlayerInitialPositioner : MonoBehaviour
         playerCharacter.TeleportPosition(spawnPoint.position);
         playerCharacter.TeleportRotation(spawnPoint.rotation);
 
-        CameraController cameraController = FindObjectOfType<CameraController>();
-        cameraController.SetCameraAngle(new Vector3(0, spawnPoint.rotation.eulerAngles.y, 0));
+        CameraLookOrbiter cameraLookOrbiter = FindObjectOfType<CameraLookOrbiter>();
+        cameraLookOrbiter.SetCameraAngle(new Vector3(0, spawnPoint.rotation.eulerAngles.y, 0));
 
         StartCoroutine(CO_CameraTeleport());
     }

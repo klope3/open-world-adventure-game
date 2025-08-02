@@ -2269,54 +2269,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!1 &4526921136930751529
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5328133623915246546}
-  - component: {fileID: 676940428336849650}
-  m_Layer: 3
-  m_Name: TargetingHandler
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5328133623915246546
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4526921136930751529}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7707550780352835142}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &676940428336849650
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4526921136930751529}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98f637624f659c649a717e2383d7c312, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerTrans: {fileID: 7707550780352835142}
-  detectorZone: {fileID: 0}
-  targetingIndicator: {fileID: 0}
-  cameraController: {fileID: 2547279025996602357}
 --- !u!1 &4573853000124010269
 GameObject:
   m_ObjectHideFlags: 0
@@ -3233,7 +3185,6 @@ GameObject:
   - component: {fileID: 7043432828388514745}
   - component: {fileID: 378699690410169648}
   - component: {fileID: 3472527601884889368}
-  - component: {fileID: 2547279025996602357}
   - component: {fileID: 130420492541690402}
   - component: {fileID: 6112407451696103533}
   - component: {fileID: 4304775399465600812}
@@ -3277,7 +3228,6 @@ Transform:
   - {fileID: 6103738423608287526}
   - {fileID: 6040655531079689504}
   - {fileID: 4863115450843830939}
-  - {fileID: 5328133623915246546}
   - {fileID: 1006641413625468452}
   - {fileID: 3843802041090853360}
   - {fileID: 2947448555060935565}
@@ -3427,58 +3377,6 @@ MonoBehaviour:
   _pushForceScale: 1
   _standingDownwardForceScale: 1
   _camera: {fileID: 0}
---- !u!114 &2547279025996602357
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6891135391806720415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d247de40a8ac33746a2d428ae13aba40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  testTransform: {fileID: 0}
-  cameraFollow: {fileID: 0}
-  stateManager: {fileID: 6112407451696103533}
-  sensitivity: 100
-  minX: -80
-  maxX: 80
-  lockCursor: 1
-  defaultVirtualCamera: {fileID: 0}
-  lootingVirtualCamera: {fileID: 0}
-  bowCamera: {fileID: 0}
-  OnTargetingStart:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CinemaBars, Assembly-CSharp
-        m_MethodName: SetBarsVisibility
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-  OnTargetingEnd:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CinemaBars, Assembly-CSharp
-        m_MethodName: SetBarsVisibility
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &130420492541690402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3495,7 +3393,6 @@ MonoBehaviour:
   characterRb: {fileID: 7026296820608403941}
   playerStateManager: {fileID: 6112407451696103533}
   defaultMovementModule: {fileID: 2656083421027639280}
-  cameraController: {fileID: 2547279025996602357}
   animator: {fileID: 7664937493635207607}
   health: {fileID: 4304775399465600812}
   climbingModule: {fileID: 8257131962913860261}
@@ -3504,6 +3401,7 @@ MonoBehaviour:
     type: 2}
   strafeParameterX: {fileID: 11400000, guid: d69c85649a7bd254bbf30d27e1c0344b, type: 2}
   strafeParameterY: {fileID: 11400000, guid: 1a212edb5530267439c3f958910e4d83, type: 2}
+  idle: {fileID: 0}
   roll: {fileID: 11400000, guid: 88a306168f420bf47be1635900ed1ad8, type: 2}
   attack1: {fileID: 11400000, guid: de527b104ff95c74fa6cd44f26727b93, type: 2}
   attack2: {fileID: 11400000, guid: 94ace6670bb54944cb9d73b0eea93066, type: 2}
@@ -3569,9 +3467,7 @@ MonoBehaviour:
   interactionZone: {fileID: 4679247589496149279}
   dialogueManager: {fileID: 0}
   dialogueBox: {fileID: 0}
-  cameraController: {fileID: 2547279025996602357}
   inputActionsEvents: {fileID: 0}
-  targetingHandler: {fileID: 676940428336849650}
   climbingDetector: {fileID: 8538559281397860105}
   climbingModule: {fileID: 8257131962913860261}
   arrowLauncher: {fileID: 351449263906233429}
@@ -3628,21 +3524,10 @@ MonoBehaviour:
   destroyOnDeath: 0
   graceTime: 1
   showLogs: 0
-  OnAwake:
+  initializeOnAwake: 1
+  OnInitialize:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlayerHearts, Assembly-CSharp
-        m_MethodName: UpdateDisplay
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   OnDamage:
     m_PersistentCalls:
       m_Calls:
@@ -3863,7 +3748,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 3472527601884889368}
-  cameraController: {fileID: 2547279025996602357}
+  cameraStateManager: {fileID: 0}
   canMove: 1
   initialMovementType: 0
 --- !u!114 &2044148599282010169
@@ -3883,7 +3768,7 @@ MonoBehaviour:
   gameStateManager: {fileID: 0}
   climbingDetector: {fileID: 8538559281397860105}
   detectorZone: {fileID: 3405753769229944603}
-  cameraController: {fileID: 0}
+  cameraSwitcher: {fileID: 0}
   chestAnimationEvents: {fileID: 1777505099955932275}
   rewardSmallSound: {fileID: 2024416906147388666}
   lootingObjectAnchor: {fileID: 3843802041090853360}
@@ -3978,7 +3863,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterAdapter: {fileID: 0}
   stateManager: {fileID: 6112407451696103533}
-  cameraController: {fileID: 2547279025996602357}
   health: {fileID: 4304775399465600812}
   screenFade: {fileID: 0}
   fadeInImages:

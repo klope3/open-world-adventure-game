@@ -6,10 +6,10 @@ public class GameStateManager : StateManager<GameState>
 {
     [SerializeField] private PlayerStateManager playerStateManager;
     [SerializeField] private ECM2.Character playerCharacter;
-    [SerializeField] private CameraController cameraController;
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private NonPlayerCharacterManager npcManager;
     [SerializeField] private GameClock gameClock;
+    [field: SerializeField] public bool AllowPauseMenu;
 
     public PlayerStateManager PlayerStateManager
     {
@@ -44,13 +44,6 @@ public class GameStateManager : StateManager<GameState>
         get
         {
             return gameClock;
-        }
-    }
-    public CameraController CameraController
-    {
-        get
-        {
-            return cameraController;
         }
     }
 

@@ -21,10 +21,10 @@ MonoBehaviour:
       type: {class: ClipTransition, ns: Animancer, asm: Kybernetik.Animancer}
       data:
         _FadeDuration: 0.05
-        _Speed: 2
+        _Speed: 1.1
         _Events:
           _NormalizedTimes: []
           _Callbacks: []
           _Names: []
-        _Clip: {fileID: 7400000, guid: 8aa7d16c224b39848aa4932b0941e433, type: 2}
+        _Clip: {fileID: 7400000, guid: 8f1f4e8eb7956824ba25626102901d7e, type: 2}
         _NormalizedStartTime: 0.35

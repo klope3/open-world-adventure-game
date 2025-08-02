@@ -28,8 +28,8 @@ MonoBehaviour:
           _Names: []
         _Animations:
         - {fileID: 7400000, guid: 63fb636f216e6db4c87ac03c3abbe1b7, type: 2}
-        - {fileID: 7400000, guid: 8f1f4e8eb7956824ba25626102901d7e, type: 2}
-        - {fileID: 11400000, guid: 0a2db4f76c5d23a4e9bc0d6a1751d273, type: 2}
+        - {fileID: 11400000, guid: 44f01b6ab9a0e3f4cb04b8096849cfd8, type: 2}
+        - {fileID: 7400000, guid: 8aa7d16c224b39848aa4932b0941e433, type: 2}
         - {fileID: 7400000, guid: 6b35a3d076602f5449c2de92b57b5898, type: 2}
         - {fileID: 7400000, guid: da225c5cf2256044baac7fc5e7570bdd, type: 2}
         - {fileID: 7400000, guid: 2c30719cc7e17524db44954f6e5e708c, type: 2}
@@ -40,7 +40,7 @@ MonoBehaviour:
         _SynchronizeChildren: 
         _Thresholds:
         - {x: 0, y: 0}
-        - {x: 0, y: 0.1}
+        - {x: 0, y: 0.2}
         - {x: 0, y: 1}
         - {x: 0, y: -0.5}
         - {x: 0, y: -1}

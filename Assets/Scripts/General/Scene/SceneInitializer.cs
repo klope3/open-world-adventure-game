@@ -18,6 +18,8 @@ public class SceneInitializer : MonoBehaviour
     [SerializeField] private GameClock gameClock;
     [SerializeField] private CastleAttackScheduler castleAttackScheduler;
     [SerializeField] private PauseMenu pauseMenu;
+    [SerializeField] private CameraStateManager cameraStateManager;
+    [SerializeField] private CameraStateEvents cameraStateEvents;
 
     private void Awake()
     {
@@ -29,6 +31,8 @@ public class SceneInitializer : MonoBehaviour
         gameClock.Initialize();
         castleAttackScheduler.Initialize();
         pauseMenu.Initialize();
+        cameraStateEvents.Initialize();
+        cameraStateManager.Initialize();
 
         playerAnimation.Initialize();
         playerStateManager.Initialize();

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 //state the game is in while player is running around, fighting, etc.
 public class GameDefaultState : GameState
@@ -11,7 +12,7 @@ public class GameDefaultState : GameState
         stateManager.PlayerAnimator.enabled = true;
         stateManager.NPCManager.SetEnemiesFrozen(false);
         stateManager.GameClock.enabled = true;
-        stateManager.CameraController.enabled = true;
+        Cursor.lockState = CursorLockMode.Locked;
 
         InputActionsProvider.OnPauseButtonStarted += ToPauseState;
     }
@@ -23,6 +24,7 @@ public class GameDefaultState : GameState
 
     private void ToPauseState()
     {
+        if (!stateManager.AllowPauseMenu) return;
         stateManager.trigger = GameStateManager.PAUSE_STATE;
     }
 

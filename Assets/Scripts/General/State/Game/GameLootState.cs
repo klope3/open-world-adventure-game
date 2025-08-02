@@ -7,7 +7,6 @@ public class GameLootState : GameState
     {
         stateManager.NPCManager.SetEnemiesFrozen(true);
         stateManager.GameClock.enabled = false;
-        stateManager.CameraController.enabled = false;
     }
 
     public override void ExitState()

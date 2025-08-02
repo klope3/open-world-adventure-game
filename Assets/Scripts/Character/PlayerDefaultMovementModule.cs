@@ -7,7 +7,7 @@ using Sirenix.OdinInspector;
 public class PlayerDefaultMovementModule : MonoBehaviour
 {
     [SerializeField] private Character character;
-    [SerializeField] private CameraController cameraController;
+    [SerializeField] private CameraStateManager cameraStateManager;
     [SerializeField] public bool canMove = true;
     [SerializeField] private MovementType initialMovementType;
     public Vector3 MoveVec { get; private set; }
@@ -32,14 +32,18 @@ public class PlayerDefaultMovementModule : MonoBehaviour
     private void OnEnable()
     {
         SetMovementType(initialMovementType);
-        cameraController.OnTargetingStarted += CameraController_OnTargetingStarted;
-        cameraController.OnTargetingEnded += CameraController_OnTargetingEnded;
+        cameraStateManager.OnStateChange += CameraStateManager_OnStateChange;
+    }
+
+    private void CameraStateManager_OnStateChange(string newState, string prevState)
+    {
+        if (newState == CameraStateManager.LOCKED_STATE || newState == CameraStateManager.TARGETING_STATE) SetMovementType(MovementType.Strafe);
+        if (newState == CameraStateManager.DEFAULT_STATE) SetMovementType(MovementType.ForwardOnly);
     }
 
     private void OnDisable()
     {
-        cameraController.OnTargetingStarted -= CameraController_OnTargetingStarted;
-        cameraController.OnTargetingEnded -= CameraController_OnTargetingEnded;
+        cameraStateManager.OnStateChange -= CameraStateManager_OnStateChange;
     }
 
     private void Update()

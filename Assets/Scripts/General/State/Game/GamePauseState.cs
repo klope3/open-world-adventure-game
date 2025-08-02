@@ -10,7 +10,6 @@ public class GamePauseState : GameState
     {
         stateManager.NPCManager.SetEnemiesFrozen(true);
         stateManager.GameClock.enabled = false;
-        stateManager.CameraController.enabled = false;
         prevTimeScale = Time.timeScale;
         Time.timeScale = 0;
         Cursor.lockState = CursorLockMode.None;

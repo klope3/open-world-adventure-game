@@ -10,7 +10,6 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] private Rigidbody characterRb;
     [SerializeField] private PlayerStateManager playerStateManager;
     [SerializeField] private PlayerDefaultMovementModule defaultMovementModule;
-    [SerializeField] private CameraController cameraController;
     [SerializeField] private Animator animator;
     [SerializeField] private HealthHandler health;
     [SerializeField] private PlayerClimbingModule climbingModule;

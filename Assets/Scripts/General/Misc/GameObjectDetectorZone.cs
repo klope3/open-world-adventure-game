@@ -34,7 +34,7 @@ public class GameObjectDetectorZone : MonoBehaviour
         {
             if (!IsObjectValid(obj)) invalidObjects.Add(obj);
         }
-        foreach (GameObject obj in invalidObjects)
+        foreach (GameObject obj in invalidObjects) 
         {
             ObjectExit(obj);
         }
@@ -56,13 +56,15 @@ public class GameObjectDetectorZone : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        if (!objectsInside.Contains(other.gameObject)) return;
         ObjectExit(other.gameObject);
     }
 
     private void ObjectExit(GameObject obj)
     {
         objectsInside.Remove(obj);
-        GameObjectEvents events = obj.GetComponent<GameObjectEvents>();
+        OnObjectExited?.Invoke(obj);
+        GameObjectEvents events = obj == null ? null : obj.GetComponent<GameObjectEvents>();
         if (events)
         {
             events.OnDisabled -= ObjectExit;

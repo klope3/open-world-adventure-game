@@ -21,6 +21,7 @@ public class CharacterDeath : MonoBehaviour
     {
         if (character) character.enabled = false;
         if (characterCollider) characterCollider.enabled = false;
+        if (targetablePoint) targetablePoint.gameObject.SetActive(false);
         if (animator) animator.enabled = false;
         if (animancer != null) animancer.Stop();
         if (stateManager) stateManager.enabled = false;
@@ -46,7 +47,7 @@ public class CharacterDeath : MonoBehaviour
     private void OnEnable()
     {
         if (character) character.enabled = true;
-        if (targetablePoint) targetablePoint.SetIsTargetable(true);
+        if (targetablePoint) targetablePoint.gameObject.SetActive(true);
         if (characterCollider) characterCollider.enabled = true;
         if (animator) animator.enabled = true;
         if (stateManager) stateManager.enabled = true;

@@ -9,7 +9,6 @@ public class PlayerDeathSequence : MonoBehaviour
 {
     [SerializeField] private PlayerDefaultMovementModule characterAdapter;
     [SerializeField] private PlayerStateManager stateManager;
-    [SerializeField] private CameraController cameraController;
     [SerializeField] private HealthHandler health;
     [SerializeField] private ScreenFade screenFade;
     [SerializeField] private Image[] fadeInImages;
@@ -35,7 +34,6 @@ public class PlayerDeathSequence : MonoBehaviour
         StartCoroutine(CO_Buttons());
         Time.timeScale = timeScale;
         Cursor.lockState = CursorLockMode.None;
-        cameraController.enabled = false;
         sound.Play();
         health.invincible = true;
     }

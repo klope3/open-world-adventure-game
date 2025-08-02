@@ -9,7 +9,7 @@ public class PlayerInteractionHandler : MonoBehaviour
     [SerializeField] private GameStateManager gameStateManager;
     [SerializeField] private RaycastChecker climbingDetector;
     [SerializeField] private GameObjectDetectorZone detectorZone;
-    [SerializeField] private CameraController cameraController;
+    [SerializeField] private CameraSwitcher cameraSwitcher;
     [SerializeField] private PlayerChestAnimationEvents chestAnimationEvents;
     [SerializeField] private AudioSource rewardSmallSound;
     [SerializeField] private Transform lootingObjectAnchor;
@@ -37,7 +37,7 @@ public class PlayerInteractionHandler : MonoBehaviour
 
     private void ChestSmall_OnCameraZoomStart()
     {
-        cameraController.SetActiveCamera(CameraController.ActiveCamera.Looting);
+        cameraSwitcher.SetActiveCamera(CameraSwitcher.ActiveCamera.Looting);
     }
 
     private void ChestSmall_OnKicked()

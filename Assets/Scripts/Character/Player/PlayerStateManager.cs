@@ -11,9 +11,7 @@ public class PlayerStateManager : StateManager<PlayerState>
     [SerializeField] private InteractionZone interactionZone;
     [SerializeField] private DialogueManager dialogueManager;
     [SerializeField] private DialogueBox dialogueBox;
-    [SerializeField] private CameraController cameraController;
     [SerializeField] private InputActionsEvents inputActionsEvents;
-    [SerializeField] private TargetingHandler targetingHandler;
     [SerializeField] private RaycastChecker climbingDetector;
     [SerializeField] private PlayerClimbingModule climbingModule;
     [SerializeField] private MegaProjectileLauncher arrowLauncher;
