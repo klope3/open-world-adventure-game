@@ -28,6 +28,11 @@ public class PlayerStateManager : StateManager<PlayerState>
     [SerializeField] private float climbingReachTopDuration;
     [SerializeField] private float climbingStartDuration;
     [SerializeField] private float bowDrawDuration;
+    [field: SerializeField] public float SwordSpinDuration { get; private set; }
+    [field: SerializeField, Tooltip("The time window in which pressing attack during a dodge will trigger a sword spin.")] 
+    public float SwordSpinWindow { get; private set; }
+    [HideInInspector] public float cachedPlayerSpeed; //useful for when player speed needs to be reset to a previous value after multiple state transitions
+    [HideInInspector] public float cachedPlayerAcceleration;
     private int recentStandardAttacks; //increments while chaining attacks; resets to 0 when standardAttackChainTime elapses
     public System.Action OnDefaultState;
     public System.Action OnAttack2;
@@ -62,6 +67,7 @@ public class PlayerStateManager : StateManager<PlayerState>
     public static readonly string LOOT_STATE = "Loot";
     public static readonly string BOW_DRAW_STATE = "Bow Draw";
     public static readonly string BOW_HOLD_STATE = "Bow Hold";
+    public static readonly string SWORD_SPIN_STATE = "Sword Spin";
 
     public float ClimbingReachTopDuration
     {
@@ -206,6 +212,7 @@ public class PlayerStateManager : StateManager<PlayerState>
         LootState lootState = new LootState();
         BowDrawState bowDrawState = new BowDrawState();
         BowHoldState bowHoldState = new BowHoldState();
+        SwordSpinState swordSpinState = new SwordSpinState();
 
         idleState.Initialize(this);
         attackState.Initialize(this);
@@ -223,6 +230,7 @@ public class PlayerStateManager : StateManager<PlayerState>
         lootState.Initialize(this);
         bowDrawState.Initialize(this);
         bowHoldState.Initialize(this);
+        swordSpinState.Initialize(this);
 
         dodgeState.OnEnter += DodgeState_OnEnter;
         climbingState.OnEnter += ClimbingState_OnEnter;
@@ -244,6 +252,7 @@ public class PlayerStateManager : StateManager<PlayerState>
         states.Add(LOOT_STATE, lootState);
         states.Add(BOW_DRAW_STATE, bowDrawState);
         states.Add(BOW_HOLD_STATE, bowHoldState);
+        states.Add(SWORD_SPIN_STATE, swordSpinState);
         return states;
     }
 
@@ -298,5 +307,10 @@ public class PlayerStateManager : StateManager<PlayerState>
     private bool ToRollState()
     {
         return trigger == DODGE_TRIGGER && character.velocity.magnitude > 0 && defaultMovementModule.CurrentMovementType == PlayerDefaultMovementModule.MovementType.ForwardOnly;
+    }
+
+    public float CalculateDodgeMoveSpeed(float time)
+    {
+        return dodgeDeceleration * time + dodgeSpeed;
     }
 }

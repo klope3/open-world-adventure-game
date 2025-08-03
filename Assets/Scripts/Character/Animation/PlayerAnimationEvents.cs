@@ -7,6 +7,7 @@ public class PlayerAnimationEvents : MonoBehaviour
 {
     public UnityEvent OnSwordSlashStart;
     public UnityEvent OnSwordSlashEnd;
+    public UnityEvent OnSwordSpecialStart;
     public UnityEvent OnRollStart;
     public UnityEvent OnDodgeStart;
 
@@ -18,6 +19,11 @@ public class PlayerAnimationEvents : MonoBehaviour
     public void Attack_SwordSlashEnd()
     {
         OnSwordSlashEnd?.Invoke();
+    }
+
+    public void Attack_SwordSpecialStart()
+    {
+        OnSwordSpecialStart?.Invoke();
     }
 
     public void Movement_RollStart()

@@ -43,6 +43,8 @@ public class PlayerAnimation : MonoBehaviour
 
     [SerializeField] private AnimationClip chestSmallOpen;
 
+    [SerializeField] private AnimationClip swordSpin;
+
     [SerializeField] private AnimationClip bowLookDown;
     [SerializeField] private AnimationClip bowLookUp;
     [SerializeField] private AvatarMask bowLookMask;
@@ -124,6 +126,7 @@ public class PlayerAnimation : MonoBehaviour
         {
             animancer.Layers[1].Play(bowMixer);
         }
+        if (stateName == PlayerStateManager.SWORD_SPIN_STATE) animancer.Play(swordSpin);
     }
 
     private void Update()
