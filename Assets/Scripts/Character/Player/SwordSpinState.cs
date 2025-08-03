@@ -6,8 +6,8 @@ public class SwordSpinState : PlayerState
 {
     public override void EnterState()
     {
-        Vector2 inputVec = InputActionsProvider.GetPrimaryAxis();
-        InputActionsProvider.LockPrimaryAxisTo(inputVec);
+        Vector2 snappedInputVec = InputActionsProvider.GetSnappedPrimaryAxis();
+        InputActionsProvider.LockPrimaryAxisTo(snappedInputVec);
     }
 
     public override void ExitState()

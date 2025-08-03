@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ECM2;
 
 public class DodgeState : PlayerState
 {
@@ -11,9 +12,9 @@ public class DodgeState : PlayerState
         stateManager.cachedPlayerSpeed = stateManager.Character.maxWalkSpeed;
         stateManager.Character.maxWalkSpeed = 0;
         stateManager.cachedPlayerAcceleration = stateManager.Character.maxAcceleration;
-        
-        Vector2 inputVec = InputActionsProvider.GetPrimaryAxis();
-        InputActionsProvider.LockPrimaryAxisTo(inputVec);
+
+        Vector2 snappedInputVec = InputActionsProvider.GetSnappedPrimaryAxis();
+        InputActionsProvider.LockPrimaryAxisTo(snappedInputVec);
         
         stateManager.Character.maxAcceleration = 1000; //max mobility during dodge
 

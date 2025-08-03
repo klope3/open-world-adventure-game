@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public static class Utils
 {
@@ -16,6 +17,24 @@ public static class Utils
         float heading = Mathf.Atan(circularVector.y / x);
         float multiplier = (Mathf.Sqrt(2) * -1 + 1) * Mathf.Abs(Mathf.Cos(heading * 2)) + Mathf.Sqrt(2);
         return circularVector * multiplier;
+    }
+
+    /// <summary>
+    /// Snaps the input vector to the nearest of the following "cardinal" vectors: forward, backward, left, and right.
+    /// </summary>
+    /// <param name="inputVec"></param>
+    /// <returns></returns>
+    public static Vector3 SnapToOrthogonalVector(Vector3 inputVec)
+    {
+        Dictionary<Vector3, float> vectorDots = new Dictionary<Vector3, float>();
+
+        vectorDots.Add(Vector3.forward, Vector3.Dot(inputVec, Vector3.forward));
+        vectorDots.Add(Vector3.right, Vector3.Dot(inputVec, Vector3.right));
+        vectorDots.Add(Vector3.left, Vector3.Dot(inputVec, Vector3.left));
+        vectorDots.Add(Vector3.back, Vector3.Dot(inputVec, Vector3.back));
+
+        Vector3 closestVec = vectorDots.Aggregate((x, y) => x.Value > y.Value ? x : y).Key;
+        return closestVec;
     }
 
     /// <summary>

@@ -97,6 +97,13 @@ public static class InputActionsProvider
         OnAButtonCanceled?.Invoke();
     }
 
+    public static Vector2 GetSnappedPrimaryAxis()
+    {
+        Vector2 inputVec = GetPrimaryAxis();
+        Vector3 snappedVec = Utils.SnapToOrthogonalVector(new Vector3(inputVec.x, 0, inputVec.y));
+        return new Vector2(snappedVec.x, snappedVec.z);
+    }
+
     public static Vector2 GetPrimaryAxis()
     {
         return overridePrimaryAxis ? primaryAxisOverrideVec : InputActions.Player.PrimaryDirectionalAxis.ReadValue<Vector2>();
