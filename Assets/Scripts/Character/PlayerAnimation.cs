@@ -44,6 +44,8 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] private AnimationClip chestSmallOpen;
 
     [SerializeField] private AnimationClip swordSpin;
+    [SerializeField] private TransitionAssetBase swordDownwardSlash;
+    [SerializeField] private AnimationClip swordUpwardSlash;
 
     [SerializeField] private AnimationClip bowLookDown;
     [SerializeField] private AnimationClip bowLookUp;
@@ -127,6 +129,8 @@ public class PlayerAnimation : MonoBehaviour
             animancer.Layers[1].Play(bowMixer);
         }
         if (stateName == PlayerStateManager.SWORD_SPIN_STATE) animancer.Play(swordSpin);
+        if (stateName == PlayerStateManager.SWORD_UP_SLASH_STATE) animancer.Play(swordUpwardSlash);
+        if (stateName == PlayerStateManager.SWORD_DOWN_SLASH_STATE) animancer.Play(swordDownwardSlash);
     }
 
     private void Update()

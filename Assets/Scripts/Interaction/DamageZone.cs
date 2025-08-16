@@ -9,6 +9,7 @@ public class DamageZone : MonoBehaviour
     [SerializeField] private int amount;
     [SerializeField] private float force;
     [SerializeField] private Transform forceOrigin;
+    public event System.Action OnDamageAdded;
 
     private void OnTriggerStay(Collider other)
     {
@@ -17,6 +18,7 @@ public class DamageZone : MonoBehaviour
         {
             Vector3 point = other.ClosestPoint(transform.position);
             health.AddHealth(-1 * amount, point);
+            OnDamageAdded?.Invoke();
         }
 
         Character character = other.GetComponent<Character>();

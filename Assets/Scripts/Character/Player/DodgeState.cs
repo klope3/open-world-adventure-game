@@ -62,6 +62,10 @@ public class DodgeState : PlayerState
 
     private bool ToSwordSpin()
     {
-        return stateManager.trigger == PlayerStateManager.SWORD_SPIN_STATE && stateManager.TimeInState < stateManager.SwordSpinWindow;
+        Vector2 snappedInputVec = InputActionsProvider.GetSnappedPrimaryAxis().normalized;
+        bool correctTrigger = stateManager.trigger == PlayerStateManager.SWORD_SPIN_STATE;
+        bool inWindow = stateManager.TimeInState < stateManager.SwordSpinWindow;
+        bool isLeftOrRight = snappedInputVec.x > 0.98f || snappedInputVec.x < -0.98f;
+        return correctTrigger && inWindow && isLeftOrRight;
     }
 }

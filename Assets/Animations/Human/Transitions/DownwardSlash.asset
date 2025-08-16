@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c5a8877f26e7a6a43aaf06fade1a064a, type: 3}
-  m_Name: Jump
+  m_Name: DownwardSlash
   m_EditorClassIdentifier: 
   _Transition:
     rid: 6822258814756847617
@@ -21,11 +21,11 @@ MonoBehaviour:
       type: {class: ClipTransition, ns: Animancer, asm: Kybernetik.Animancer}
       data:
         _FadeDuration: 0.008333334
-        _Speed: 1
+        _Speed: 1.5
         _Events:
           _NormalizedTimes:
           - 1
           _Callbacks: []
           _Names: []
-        _Clip: {fileID: 7400000, guid: 7addad3ab5f8b5a4ca9b7ff8e6ce11d1, type: 2}
-        _NormalizedStartTime: 0
+        _Clip: {fileID: 7400000, guid: 2637ffb4fb4055c429627ccf4ad542f4, type: 2}
+        _NormalizedStartTime: 0.27

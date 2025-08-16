@@ -8,6 +8,12 @@ public class JumpState : PlayerState
     public override void EnterState()
     {
         stateManager.Character.Jump();
+        InputActionsProvider.OnBButtonStarted += InputActionsProvider_OnBButtonStarted;
+    }
+
+    private void InputActionsProvider_OnBButtonStarted()
+    {
+        stateManager.trigger = PlayerStateManager.SWORD_UP_SLASH_STATE;
     }
 
     public override void UpdateState()
@@ -19,6 +25,7 @@ public class JumpState : PlayerState
     {
         stateManager.jumpInput = false;
         stateManager.Character.StopJumping();
+        InputActionsProvider.OnBButtonStarted -= InputActionsProvider_OnBButtonStarted;
     }
 
     public override void PostInitialize()
@@ -35,6 +42,7 @@ public class JumpState : PlayerState
         return new StateTransition[]
         {
             new StateTransition(PlayerStateManager.MOVING_STATE, ToDefaultState),
+            new StateTransition(PlayerStateManager.SWORD_UP_SLASH_STATE, () => stateManager.trigger == PlayerStateManager.SWORD_UP_SLASH_STATE),
             new StateTransition(PlayerStateManager.FALLING_STATE, () => stateManager.Character.velocity.y < 0),
         };
     }
