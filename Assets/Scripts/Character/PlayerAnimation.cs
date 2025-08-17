@@ -27,6 +27,7 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] private TransitionAssetBase land;
     [SerializeField] private TransitionAssetBase jump;
     [SerializeField] private AnimationClip ledgeHang;
+    [SerializeField] private AnimationClip ledgeHangJumpUp;
     [SerializeField] private TransitionAssetBase bowDraw;
 
     [SerializeField] private AnimationClip ladderIdle;
@@ -133,6 +134,7 @@ public class PlayerAnimation : MonoBehaviour
         if (stateName == PlayerStateManager.SWORD_UP_SLASH_STATE) animancer.Play(swordUpwardSlash);
         if (stateName == PlayerStateManager.SWORD_DOWN_SLASH_STATE) animancer.Play(swordDownwardSlash);
         if (stateName == PlayerStateManager.LEDGE_HANG_STATE) animancer.Play(ledgeHang, MiscConstants.DEFAULT_ANIMATION_BLEND_TIME);
+        if (stateName == PlayerStateManager.LEDGE_JUMP_UP_STATE) animancer.Play(ledgeHangJumpUp, MiscConstants.DEFAULT_ANIMATION_BLEND_TIME);
     }
 
     private void Update()

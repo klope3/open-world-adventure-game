@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ECM2;
 
 public class LedgeHangState : PlayerState
 {
@@ -26,7 +27,18 @@ public class LedgeHangState : PlayerState
 
     private void InputActionsProvider_OnAButtonStarted()
     {
-        stateManager.trigger = PlayerStateManager.FALLING_STATE;
+        Vector3 inputVec = InputActionsProvider.GetPrimaryAxis();
+        inputVec = new Vector3(inputVec.x, 0, inputVec.y);
+        inputVec = inputVec.relativeTo(stateManager.Character.cameraTransform);
+        float forwardness = Vector3.Dot(stateManager.Character.transform.forward, inputVec);
+        //if (1 - forwardness < stateManager.LedgeGrabJumpTolerance) stateManager.Character.LaunchCharacter(Vector3.up * stateManager.LedgeGrabJumpUpForce);
+        if (1 - forwardness < stateManager.LedgeGrabJumpTolerance)
+        {
+            stateManager.trigger = PlayerStateManager.LEDGE_JUMP_UP_STATE;
+        } else
+        {
+            stateManager.trigger = PlayerStateManager.FALLING_STATE;
+        }
     }
 
     public override void ExitState()
@@ -55,6 +67,7 @@ public class LedgeHangState : PlayerState
         return new StateTransition[]
         {
             new StateTransition(PlayerStateManager.FALLING_STATE, () => stateManager.trigger == PlayerStateManager.FALLING_STATE),
+            new StateTransition(PlayerStateManager.LEDGE_JUMP_UP_STATE, () => stateManager.trigger == PlayerStateManager.LEDGE_JUMP_UP_STATE),
         };
     }
 }

@@ -40,6 +40,10 @@ public class PlayerStateManager : StateManager<PlayerState>
     public float LedgeGrabDepthOffset { get; private set; }
     [field: SerializeField, Tooltip("Ledge grab will snap the player's position this far down from the horizontal surface of the ledge.")]
     public float LedgeGrabHeightOffset { get; private set; }
+    [field: SerializeField, Tooltip("How 'forward' the the player's movement input needs to be to trigger a jump up onto the hung ledge.")]
+    public float LedgeGrabJumpTolerance { get; private set; }
+    [field: SerializeField, Tooltip("The force to use when jumping up onto the hung ledge.")]
+    public float LedgeGrabJumpUpForce { get; private set; }
     [field: SerializeField, Tooltip("The time window in which pressing attack during a dodge will trigger a sword spin.")] 
     public float SwordSpinWindow { get; private set; }
     [HideInInspector] public float cachedPlayerSpeed; //useful for when player speed needs to be reset to a previous value after multiple state transitions
@@ -82,6 +86,7 @@ public class PlayerStateManager : StateManager<PlayerState>
     public static readonly string SWORD_UP_SLASH_STATE = "Sword Up Slash";
     public static readonly string SWORD_DOWN_SLASH_STATE = "Sword Down Slash";
     public static readonly string LEDGE_HANG_STATE = "Ledge Hang";
+    public static readonly string LEDGE_JUMP_UP_STATE = "Ledge Jump Up";
 
     public float ClimbingReachTopDuration
     {
@@ -230,6 +235,7 @@ public class PlayerStateManager : StateManager<PlayerState>
         PlayerUpSlashState swordUpSlashState = new PlayerUpSlashState();
         PlayerDownSlashState swordDownSlashState = new PlayerDownSlashState();
         LedgeHangState ledgeHangState = new LedgeHangState();
+        LedgeHangJumpUpState ledgeHangJumpUpState = new LedgeHangJumpUpState();
 
         idleState.Initialize(this);
         attackState.Initialize(this);
@@ -251,6 +257,7 @@ public class PlayerStateManager : StateManager<PlayerState>
         swordUpSlashState.Initialize(this);
         swordDownSlashState.Initialize(this);
         ledgeHangState.Initialize(this);
+        ledgeHangJumpUpState.Initialize(this);
 
         dodgeState.OnEnter += DodgeState_OnEnter;
         climbingState.OnEnter += ClimbingState_OnEnter;
@@ -276,6 +283,7 @@ public class PlayerStateManager : StateManager<PlayerState>
         states.Add(SWORD_UP_SLASH_STATE, swordUpSlashState);
         states.Add(SWORD_DOWN_SLASH_STATE, swordDownSlashState);
         states.Add(LEDGE_HANG_STATE, ledgeHangState);
+        states.Add(LEDGE_JUMP_UP_STATE, ledgeHangJumpUpState);
         return states;
     }
 
