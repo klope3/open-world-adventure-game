@@ -38,6 +38,12 @@ public class FallingState : PlayerState
         {
             new StateTransition(PlayerStateManager.LANDING_STATE, () => stateManager.Character.IsGrounded()),
             new StateTransition(PlayerStateManager.SWORD_DOWN_SLASH_STATE, () => stateManager.trigger == PlayerStateManager.SWORD_DOWN_SLASH_STATE),
+            new StateTransition(PlayerStateManager.LEDGE_HANG_STATE, ToLedgeHang),
         };
+    }
+
+    private bool ToLedgeHang()
+    {
+        return stateManager.TimeInState > stateManager.MinLedgeGrabFallTime && stateManager.LedgeChecker.LedgeFound();
     }
 }

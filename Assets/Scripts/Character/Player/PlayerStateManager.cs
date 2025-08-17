@@ -16,6 +16,7 @@ public class PlayerStateManager : StateManager<PlayerState>
     [SerializeField] private PlayerClimbingModule climbingModule;
     [SerializeField] private MegaProjectileLauncher arrowLauncher;
     [field: SerializeField] public DamageZone SwordDamageZone { get; private set; }
+    [field: SerializeField] public LedgeChecker LedgeChecker { get; private set; }
     [SerializeField] private float standardAttackDuration;
     [SerializeField, Tooltip("The player must press attack at most this long after the previous attack state finished in order to chain the next attack.")]
     private float standardAttackChainTime;
@@ -33,6 +34,12 @@ public class PlayerStateManager : StateManager<PlayerState>
     [field: SerializeField] public float SwordUpSlashDuration { get; private set; }
     [field: SerializeField] public float SwordDownSlashDuration { get; private set; }
     [field: SerializeField] public float SwordDownSlashBounceAmount { get; private set; }
+    [field: SerializeField, Tooltip("Player must be falling for at least this long before a ledge grab is allowed.")]
+    public float MinLedgeGrabFallTime { get; private set; }
+    [field: SerializeField, Tooltip("Ledge grab will snap the player's position this far back from the vertical surface of the ledge.")]
+    public float LedgeGrabDepthOffset { get; private set; }
+    [field: SerializeField, Tooltip("Ledge grab will snap the player's position this far down from the horizontal surface of the ledge.")]
+    public float LedgeGrabHeightOffset { get; private set; }
     [field: SerializeField, Tooltip("The time window in which pressing attack during a dodge will trigger a sword spin.")] 
     public float SwordSpinWindow { get; private set; }
     [HideInInspector] public float cachedPlayerSpeed; //useful for when player speed needs to be reset to a previous value after multiple state transitions
@@ -74,6 +81,7 @@ public class PlayerStateManager : StateManager<PlayerState>
     public static readonly string SWORD_SPIN_STATE = "Sword Spin";
     public static readonly string SWORD_UP_SLASH_STATE = "Sword Up Slash";
     public static readonly string SWORD_DOWN_SLASH_STATE = "Sword Down Slash";
+    public static readonly string LEDGE_HANG_STATE = "Ledge Hang";
 
     public float ClimbingReachTopDuration
     {
@@ -221,6 +229,7 @@ public class PlayerStateManager : StateManager<PlayerState>
         SwordSpinState swordSpinState = new SwordSpinState();
         PlayerUpSlashState swordUpSlashState = new PlayerUpSlashState();
         PlayerDownSlashState swordDownSlashState = new PlayerDownSlashState();
+        LedgeHangState ledgeHangState = new LedgeHangState();
 
         idleState.Initialize(this);
         attackState.Initialize(this);
@@ -241,6 +250,7 @@ public class PlayerStateManager : StateManager<PlayerState>
         swordSpinState.Initialize(this);
         swordUpSlashState.Initialize(this);
         swordDownSlashState.Initialize(this);
+        ledgeHangState.Initialize(this);
 
         dodgeState.OnEnter += DodgeState_OnEnter;
         climbingState.OnEnter += ClimbingState_OnEnter;
@@ -265,6 +275,7 @@ public class PlayerStateManager : StateManager<PlayerState>
         states.Add(SWORD_SPIN_STATE, swordSpinState);
         states.Add(SWORD_UP_SLASH_STATE, swordUpSlashState);
         states.Add(SWORD_DOWN_SLASH_STATE, swordDownSlashState);
+        states.Add(LEDGE_HANG_STATE, ledgeHangState);
         return states;
     }
 

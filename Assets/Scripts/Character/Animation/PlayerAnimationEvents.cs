@@ -10,6 +10,7 @@ public class PlayerAnimationEvents : MonoBehaviour
     public UnityEvent OnSwordSpecialStart;
     public UnityEvent OnRollStart;
     public UnityEvent OnDodgeStart;
+    public UnityEvent OnLedgeGrab;
 
     public void Attack_SwordSlashStart()
     {
@@ -34,5 +35,10 @@ public class PlayerAnimationEvents : MonoBehaviour
     public void Movement_DodgeStart()
     {
         OnDodgeStart?.Invoke();
+    }
+
+    public void Movement_LedgeGrab()
+    {
+        OnLedgeGrab?.Invoke();
     }
 }
