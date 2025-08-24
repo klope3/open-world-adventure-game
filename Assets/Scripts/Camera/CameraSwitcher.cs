@@ -30,7 +30,7 @@ public class CameraSwitcher : MonoBehaviour
     private void PlayerStateManager_OnStateChange(string newState, string prevState)
     {
         if (newState == PlayerStateManager.BOW_HOLD_STATE) SetActiveCamera(ActiveCamera.Bow);
-        if (newState == PlayerStateManager.IDLE_STATE) SetActiveCamera(ActiveCamera.Default);
+        if (newState == PlayerStateManager.MOVING_STATE) SetActiveCamera(ActiveCamera.Default);
     }
 
     public void SetActiveCamera(ActiveCamera activeCamera)

@@ -30,6 +30,8 @@ public class PlayerStateManager : StateManager<PlayerState>
     [SerializeField] private float climbingReachTopDuration;
     [SerializeField] private float climbingStartDuration;
     [SerializeField] private float bowDrawDuration;
+    [field: SerializeField] public float DefaultMoveSpeed { get; private set; }
+    [field: SerializeField] public float BowMoveSpeed { get; private set; }
     [field: SerializeField] public float SwordSpinDuration { get; private set; }
     [field: SerializeField] public float SwordUpSlashDuration { get; private set; }
     [field: SerializeField] public float SwordDownSlashDuration { get; private set; }

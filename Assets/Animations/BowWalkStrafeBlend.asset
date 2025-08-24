@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5a8877f26e7a6a43aaf06fade1a064a, type: 3}
+  m_Name: BowWalkStrafeBlend
+  m_EditorClassIdentifier: 
+  _Transition:
+    rid: 6822258624411992076
+  references:
+    version: 2
+    RefIds:
+    - rid: 6822258624411992076
+      type: {class: MixerTransition2D, ns: Animancer, asm: Kybernetik.Animancer}
+      data:
+        _FadeDuration: 0.25
+        _Speed: 1
+        _Events:
+          _NormalizedTimes: []
+          _Callbacks: []
+          _Names: []
+        _Animations:
+        - {fileID: 7400000, guid: 4a589d6b458b9ed41bb80066e39e37f3, type: 2}
+        - {fileID: 7400000, guid: c0d02af3484f7d848904687fb05c3257, type: 2}
+        - {fileID: 7400000, guid: 321830779a258b042bc943fbb083b491, type: 2}
+        - {fileID: 7400000, guid: 5b3fa44d258dc7a43804c1fdd4cecd5f, type: 2}
+        - {fileID: 7400000, guid: de02fa39956adb54eb32679ccfae6b52, type: 2}
+        _Speeds:
+        - 1
+        - 2
+        - 2
+        - 2
+        - 2
+        _SynchronizeChildren: 
+        _Thresholds:
+        - {x: 0, y: 0}
+        - {x: 0, y: 0.5}
+        - {x: 0, y: -0.5}
+        - {x: -0.5, y: 0}
+        - {x: 0.5, y: 0}
+        _DefaultParameter: {x: 0, y: 0}
+        _Type: 0
+        _ParameterNameX: {fileID: 11400000, guid: b0e0ad6922816634bb93c0baf9129b97,
+          type: 2}
+        _ParameterNameY: {fileID: 11400000, guid: 3fa059d2a5d18b242a941fcfb1137819,
+          type: 2}

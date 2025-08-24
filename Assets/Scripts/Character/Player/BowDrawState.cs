@@ -8,10 +8,11 @@ public class BowDrawState : PlayerState
 
     public override void EnterState()
     {
-        stateManager.DefaultMovementModule.canMove = false;
+        //stateManager.DefaultMovementModule.canMove = false;
         initialMovementType = stateManager.DefaultMovementModule.CurrentMovementType;
         stateManager.DefaultMovementModule.SetMovementType(PlayerDefaultMovementModule.MovementType.Strafe);
         stateManager.ArrowLauncher.SetTriggerState(false);
+        stateManager.Character.maxWalkSpeed = stateManager.BowMoveSpeed;
 
         InputActionsProvider.OnBButtonCanceled += InputActionsProvider_OnBButtonCanceled;
     }
@@ -20,6 +21,7 @@ public class BowDrawState : PlayerState
     {
         stateManager.DefaultMovementModule.SetMovementType(initialMovementType);
         stateManager.DefaultMovementModule.canMove = true;
+        stateManager.Character.maxWalkSpeed = stateManager.DefaultMoveSpeed;
 
         InputActionsProvider.OnBButtonCanceled -= InputActionsProvider_OnBButtonCanceled;
     }

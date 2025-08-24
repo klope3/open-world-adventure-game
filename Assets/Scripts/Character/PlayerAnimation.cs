@@ -16,8 +16,11 @@ public class PlayerAnimation : MonoBehaviour
 
     [SerializeField] private AnimancerComponent animancer;
     [SerializeField] private TransitionAssetBase strafeTransitionAsset;
+    [SerializeField] private TransitionAssetBase bowStrafeTransitionAsset;
     [SerializeField] private StringAsset strafeParameterX;
     [SerializeField] private StringAsset strafeParameterY;
+    [SerializeField] private StringAsset bowStrafeParameterX;
+    [SerializeField] private StringAsset bowStrafeParameterY;
 
     [SerializeField] private AnimationClip idle;
     [SerializeField] private TransitionAssetBase roll;
@@ -57,6 +60,7 @@ public class PlayerAnimation : MonoBehaviour
 
     private RedirectRootMotionToTransform rootMotionRedirector;
     private SmoothedVector2Parameter smoothedParameters;
+    private SmoothedVector2Parameter bowSmoothedParameters;
     private RigidbodyInterpolation prevRbInterpolation; //stored when we turn off interpolation at the start of a root motion animation, so we can put the RB back to the way it was afterward
 
     private readonly float DEFAULT_FADE_DURATION = 0.1f;
@@ -69,6 +73,11 @@ public class PlayerAnimation : MonoBehaviour
             animancer,
             strafeParameterX,
             strafeParameterY,
+            0);
+        bowSmoothedParameters = new SmoothedVector2Parameter(
+            animancer,
+            bowStrafeParameterX,
+            bowStrafeParameterY,
             0);
 
         playerStateManager.OnDefaultState += PlayerStateManager_OnDefaultState;
@@ -125,7 +134,12 @@ public class PlayerAnimation : MonoBehaviour
         if (stateName == PlayerStateManager.CLIMBING_START_STATE) PlayRootMotionAnimation(ladderStart);
         if (stateName == PlayerStateManager.DODGING_STATE) PlayDodgeAnimation();
         if (stateName == PlayerStateManager.LOOT_STATE) PlayRootMotionAnimation(chestSmallOpen);
-        if (stateName == PlayerStateManager.BOW_DRAW_STATE) animancer.Play(bowDraw).Time = 0;
+        //if (stateName == PlayerStateManager.BOW_DRAW_STATE) animancer.Play(bowDraw).Time = 0;
+        if (stateName == PlayerStateManager.BOW_DRAW_STATE)
+        {
+            animancer.Play(bowStrafeTransitionAsset, DEFAULT_FADE_DURATION);
+            animancer.Layers[1].Play(bowDraw).Time = 0;
+        }
         if (stateName == PlayerStateManager.BOW_HOLD_STATE)
         {
             animancer.Layers[1].Play(bowMixer);
@@ -140,15 +154,27 @@ public class PlayerAnimation : MonoBehaviour
     private void Update()
     {
         DefaultMovementAnimation();
+        BowMovementAnimation();
 
         float cameraAngleX = cameraFollow.eulerAngles.x;
         if (cameraAngleX > 180) cameraAngleX -= 360;
         if (bowMixer.State != null) bowMixer.State.Parameter = bowLookMult * cameraAngleX + bowLookAdd;
     }
+
+    private void BowMovementAnimation()
+    {
+        string key = playerStateManager.CurrentStateKey;
+        if (key != PlayerStateManager.BOW_DRAW_STATE && key != PlayerStateManager.BOW_HOLD_STATE) return;
+
+        Vector3 inputVec = InputActionsProvider.GetPrimaryAxis();
+        Vector3 squareVec = Utils.ApproximateSquareInputVector(inputVec);
+        bowSmoothedParameters.TargetValue = new Vector2(squareVec.x, squareVec.y);
+    }
     
     private void DefaultMovementAnimation()
     {
-        if (playerStateManager.CurrentStateKey != PlayerStateManager.MOVING_STATE) return;
+        string key = playerStateManager.CurrentStateKey;
+        if (key != PlayerStateManager.MOVING_STATE) return;
 
         Vector3 inputVec = InputActionsProvider.GetPrimaryAxis();
         Vector3 squareVec = Utils.ApproximateSquareInputVector(inputVec);

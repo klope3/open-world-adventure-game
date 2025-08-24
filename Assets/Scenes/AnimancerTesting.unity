@@ -1049,12 +1049,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animancer: {fileID: 80076321}
-  idle: {fileID: 7400000, guid: 63fb636f216e6db4c87ac03c3abbe1b7, type: 2}
-  bowUp: {fileID: 7400000, guid: b51adf4410014d7409d351305078932c, type: 2}
-  bowDown: {fileID: 7400000, guid: 4907f742f71b28b4bbce48233e871d09, type: 2}
-  testClip: {fileID: 7400000, guid: 63fb636f216e6db4c87ac03c3abbe1b7, type: 2}
-  bowLookMask: {fileID: 31900000, guid: d4f5d943e61a5fe42bfac1fc1de1635c, type: 2}
-  testTransition:
+  bowMixer:
     _FadeDuration: 0.25
     _Speed: 1
     _Events:
@@ -1062,22 +1057,19 @@ MonoBehaviour:
       _Callbacks: []
       _Names: []
     _Animations:
-    - {fileID: 7400000, guid: 4907f742f71b28b4bbce48233e871d09, type: 2}
-    - {fileID: 7400000, guid: b51adf4410014d7409d351305078932c, type: 2}
+    - {fileID: 7400000, guid: 0fae972e200e7384b9bc6aee5d1e8583, type: 2}
+    - {fileID: 7400000, guid: 4a589d6b458b9ed41bb80066e39e37f3, type: 2}
+    - {fileID: 7400000, guid: 929f9ee6e92b5b542b26d957777c40f1, type: 2}
     _Speeds: []
     _SynchronizeChildren: 
     _Thresholds:
     - 0
+    - 0.5
     - 1
-    _DefaultParameter: 0
+    _DefaultParameter: 0.5
     _ExtrapolateSpeed: 1
     _ParameterName: {fileID: 0}
-  strafeTransitionAsset: {fileID: 11400000, guid: de97ff0c2d168644fb3695b97c6a753c,
-    type: 2}
-  strafeParameterX: {fileID: 11400000, guid: d69c85649a7bd254bbf30d27e1c0344b, type: 2}
-  strafeParameterY: {fileID: 11400000, guid: 1a212edb5530267439c3f958910e4d83, type: 2}
   testParam: 0.5
-  testVec: {x: 0, y: 0.5}
   references:
     version: 2
     RefIds: []
@@ -1088,6 +1080,52 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1138590536}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1288479356
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1288479358}
+  - component: {fileID: 1288479357}
+  m_Layer: 0
+  m_Name: README
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1288479357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288479356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 535ff1e9bdfc53443bd3f1382f87b1b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  note: try making a new avatar from player2 using a player2.blend file with no animations,
+    see if that fixes it
+--- !u!4 &1288479358
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288479356}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -1210,3 +1248,4 @@ SceneRoots:
   - {fileID: 1774273717}
   - {fileID: 80076318}
   - {fileID: 1138590538}
+  - {fileID: 1288479358}
