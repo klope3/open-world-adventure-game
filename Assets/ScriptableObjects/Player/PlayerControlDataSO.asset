@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7558af102dc5054a9dcd9e604e52472, type: 3}
+  m_Name: PlayerControlDataSO
+  m_EditorClassIdentifier: 
+  <DefaultMoveSpeed>k__BackingField: 6
+  <BowMoveSpeed>k__BackingField: 2
+  <SwordSpinDuration>k__BackingField: 0.9
+  <SwordUpSlashDuration>k__BackingField: 2
+  <SwordDownSlashDuration>k__BackingField: 0.6
+  <SwordDownSlashBounceAmount>k__BackingField: 10
+  <MinLedgeGrabFallTime>k__BackingField: 0.15
+  <LedgeGrabDepthOffset>k__BackingField: 0.3
+  <LedgeGrabHeightOffset>k__BackingField: 1.2
+  <LedgeGrabJumpTolerance>k__BackingField: 0.2
+  <LedgeGrabJumpUpForce>k__BackingField: 10
+  <SwordSpinWindow>k__BackingField: 0.2
+  <StandardAttackDuration>k__BackingField: 0.6
+  StandardAttackChainTime: 0.2
+  <RollDuration>k__BackingField: 0.6
+  <RollSpeed>k__BackingField: 23
+  <RollDeceleration>k__BackingField: -34
+  <DodgeDuration>k__BackingField: 0.4
+  <DodgeSpeed>k__BackingField: 20
+  <DodgeDeceleration>k__BackingField: -60
+  <LandingDuration>k__BackingField: 0.5
+  <ClimbingReachTopDuration>k__BackingField: 1.6
+  <ClimbingStartDuration>k__BackingField: 0.2
+  <BowDrawDuration>k__BackingField: 0.5

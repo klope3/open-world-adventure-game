@@ -11,7 +11,7 @@ public abstract class StateManager<TState> : StateManagerBase where TState : Sta
     private StateTransition[] currentTransitions;
     public delegate void StateChangeFunc(string newState, string prevState);
     public event StateChangeFunc OnStateChange;
-    public string trigger; //reset at end of every frame to prevent unintentionally "queued" state changes
+    [HideInInspector] public string trigger; //reset at end of every frame to prevent unintentionally "queued" state changes
     public float TimeInState { get; private set; }
     public TState CurrentState
     {

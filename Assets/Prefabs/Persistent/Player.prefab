@@ -3191,9 +3191,7 @@ GameObject:
   - component: {fileID: 4861405348652155139}
   - component: {fileID: 3882342440690626006}
   - component: {fileID: 2537722216213172501}
-  - component: {fileID: 2387533364648890610}
   - component: {fileID: 8257131962913860261}
-  - component: {fileID: 4484440798046062817}
   - component: {fileID: 2656083421027639280}
   - component: {fileID: 2044148599282010169}
   - component: {fileID: 3930180537416534221}
@@ -3399,8 +3397,11 @@ MonoBehaviour:
   animancer: {fileID: 4389214572166959255}
   strafeTransitionAsset: {fileID: 11400000, guid: de97ff0c2d168644fb3695b97c6a753c,
     type: 2}
+  bowStrafeTransitionAsset: {fileID: 0}
   strafeParameterX: {fileID: 11400000, guid: d69c85649a7bd254bbf30d27e1c0344b, type: 2}
   strafeParameterY: {fileID: 11400000, guid: 1a212edb5530267439c3f958910e4d83, type: 2}
+  bowStrafeParameterX: {fileID: 0}
+  bowStrafeParameterY: {fileID: 0}
   idle: {fileID: 0}
   roll: {fileID: 11400000, guid: 88a306168f420bf47be1635900ed1ad8, type: 2}
   attack1: {fileID: 11400000, guid: de527b104ff95c74fa6cd44f26727b93, type: 2}
@@ -3408,6 +3409,8 @@ MonoBehaviour:
   falling: {fileID: 7400000, guid: d499670e39dfa0341947500a8b76153a, type: 2}
   land: {fileID: 11400000, guid: a76b43075e7f09549b70fef5d7c19f46, type: 2}
   jump: {fileID: 11400000, guid: e7b9d6582eb435b44aad4364fde207e5, type: 2}
+  ledgeHang: {fileID: 0}
+  ledgeHangJumpUp: {fileID: 0}
   bowDraw: {fileID: 11400000, guid: 3fa221d52c8a24940bc6cbe1cffd059e, type: 2}
   ladderIdle: {fileID: 7400000, guid: dc0a0909a52e7ae42bea08567fd3f386, type: 2}
   ladderClimbUpLeftHand: {fileID: 7400000, guid: 21f15dfe8426d5c479fa32103791bba5,
@@ -3423,6 +3426,9 @@ MonoBehaviour:
   dodgeBack: {fileID: 7400000, guid: 1e3723f5a9d24ef45aa36f7603345b3a, type: 2}
   dodgeRight: {fileID: 7400000, guid: dc13b336df723b24dbd9e906c24e41a7, type: 2}
   chestSmallOpen: {fileID: 0}
+  swordSpin: {fileID: 0}
+  swordDownwardSlash: {fileID: 0}
+  swordUpwardSlash: {fileID: 0}
   bowLookDown: {fileID: 7400000, guid: a7e5e64f9e7f74c41aa4f625f6d2905e, type: 2}
   bowLookUp: {fileID: 7400000, guid: dafbe1970002de94684a3536d15566e4, type: 2}
   bowLookMask: {fileID: 31900000, guid: d4f5d943e61a5fe42bfac1fc1de1635c, type: 2}
@@ -3462,50 +3468,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initializeOnAwake: 1
   trigger: 
-  defaultMovementModule: {fileID: 2656083421027639280}
-  character: {fileID: 3472527601884889368}
-  interactionZone: {fileID: 4679247589496149279}
-  dialogueManager: {fileID: 0}
-  dialogueBox: {fileID: 0}
-  inputActionsEvents: {fileID: 0}
-  climbingDetector: {fileID: 8538559281397860105}
-  climbingModule: {fileID: 8257131962913860261}
-  arrowLauncher: {fileID: 351449263906233429}
-  standardAttackDuration: 0.6
-  standardAttackChainTime: 0.2
-  rollDuration: 0.6
-  rollSpeed: 23
-  rollDeceleration: -34
-  dodgeDuration: 0.4
-  dodgeSpeed: 23
-  dodgeDeceleration: -60
-  landingDuration: 0.5
-  climbingReachTopDuration: 1.6
-  climbingStartDuration: 0.2
-  bowDrawDuration: 0.5
-  attackInput: 0
-  jumpInput: 0
-  OnAnyAttackStart:
-    m_PersistentCalls:
-      m_Calls: []
-  OnAnyAttackEnd:
-    m_PersistentCalls:
-      m_Calls: []
-  OnLanded:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 733149313206718414}
-        m_TargetAssemblyTypeName: SoundPlayer, Assembly-CSharp
-        m_MethodName: PlayRandom
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  <DefaultMovementModule>k__BackingField: {fileID: 0}
+  <PlayerControlDataSO>k__BackingField: {fileID: 0}
+  <SwordDamageZone>k__BackingField: {fileID: 0}
+  <LedgeChecker>k__BackingField: {fileID: 0}
+  <Character>k__BackingField: {fileID: 0}
+  <ClimbingModule>k__BackingField: {fileID: 0}
+  <ClimbingDetector>k__BackingField: {fileID: 0}
+  <ArrowLauncher>k__BackingField: {fileID: 0}
+  cachedPlayerSpeed: 0
+  cachedPlayerAcceleration: 0
 --- !u!114 &4304775399465600812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3685,25 +3657,6 @@ MonoBehaviour:
   OnMoneyChange:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2387533364648890610
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6891135391806720415}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27ffbb453dcf3e94b91f3768b08c088b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  character: {fileID: 0}
-  characterAdapter: {fileID: 0}
-  rayDistance: 0.9
-  rayOffset: {x: 0, y: 1, z: 0}
-  raycastLayerMask:
-    serializedVersion: 2
-    m_Bits: 512
 --- !u!114 &8257131962913860261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3721,19 +3674,6 @@ MonoBehaviour:
   movementIncrementFinishDelay: 0.05
   climbingSpeed: 1.1
   atTopChecker: {fileID: 3709447414868491344}
-  stateManager: {fileID: 6112407451696103533}
---- !u!114 &4484440798046062817
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6891135391806720415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e5eb755e78b74c4199dd98c2d2151ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   stateManager: {fileID: 6112407451696103533}
 --- !u!114 &2656083421027639280
 MonoBehaviour:
@@ -5361,6 +5301,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnSwordSpecialStart:
+    m_PersistentCalls:
+      m_Calls: []
   OnRollStart:
     m_PersistentCalls:
       m_Calls:
@@ -5415,6 +5358,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnLedgeGrab:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &7281065607923834839
 MonoBehaviour:
   m_ObjectHideFlags: 0
