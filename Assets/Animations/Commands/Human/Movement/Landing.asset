@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5fa3db8ed8500642b548416582a5502, type: 3}
+  m_Name: Landing
+  m_EditorClassIdentifier: 
+  BaseAnimation: {fileID: 7400000, guid: aaf11cedaeb082a47bf54d7566881aea, type: 2}
+  BaseTransitionAsset: {fileID: 11400000, guid: a76b43075e7f09549b70fef5d7c19f46,
+    type: 2}
+  TorsoLayerWeight: 0
+  TorsoAnimation: {fileID: 0}
+  FadeDuration: 0.1
+  UseCustomFadeDuration: 0
+  UseRootMotion: 0
+  UpdateType: 0
+  SpecialFunction: 0

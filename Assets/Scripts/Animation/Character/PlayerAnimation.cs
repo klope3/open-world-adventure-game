@@ -1,75 +1,105 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using ECM2;
 using Animancer;
+using Sirenix.OdinInspector;
 
 public class PlayerAnimation : MonoBehaviour
 {
-    [SerializeField] private Character character;
-    [SerializeField] private Rigidbody characterRb;
-    [SerializeField] private PlayerStateManager playerStateManager;
-    [SerializeField] private PlayerDefaultMovementModule defaultMovementModule;
-    [SerializeField] private Animator animator;
-    [SerializeField] private HealthHandler health;
-    [SerializeField] private PlayerClimbingModule climbingModule;
+    [SerializeField, FoldoutGroup("Components")] private AnimancerComponent animancer;
+    [SerializeField, FoldoutGroup("Components")] private PlayerStateManager playerStateManager;
+    [SerializeField, FoldoutGroup("Components")] private Rigidbody characterRb;
+    [SerializeField, FoldoutGroup("Components")] private PlayerDefaultMovementModule defaultMovementModule;
+    [SerializeField, FoldoutGroup("Components")] private PlayerClimbingModule climbingModule;
+    [SerializeField, FoldoutGroup("Components")] private Animator animator;
+    [SerializeField, FoldoutGroup("Components")] private Transform cameraFollow;
 
-    [SerializeField] private AnimancerComponent animancer;
-    [SerializeField] private TransitionAssetBase strafeTransitionAsset;
-    [SerializeField] private TransitionAssetBase bowStrafeTransitionAsset;
-    [SerializeField] private StringAsset strafeParameterX;
-    [SerializeField] private StringAsset strafeParameterY;
-    [SerializeField] private StringAsset bowStrafeParameterX;
-    [SerializeField] private StringAsset bowStrafeParameterY;
+    [SerializeField, FoldoutGroup("Commands")] private PlayerAnimationCommandSO idle;
+    [SerializeField, FoldoutGroup("Commands")] private PlayerAnimationCommandSO moving;
+    [SerializeField, FoldoutGroup("Commands")] private PlayerAnimationCommandSO attack1;
+    [SerializeField, FoldoutGroup("Commands")] private PlayerAnimationCommandSO jump;
+    [SerializeField, FoldoutGroup("Commands")] private PlayerAnimationCommandSO falling;
+    [SerializeField, FoldoutGroup("Commands")] private PlayerAnimationCommandSO roll;
+    [SerializeField, FoldoutGroup("Commands")] private PlayerAnimationCommandSO dodge;
+    [SerializeField, FoldoutGroup("Commands")] private PlayerAnimationCommandSO landing;
+    [SerializeField, FoldoutGroup("Commands")] private PlayerAnimationCommandSO ladderIdle;
+    [SerializeField, FoldoutGroup("Commands")] private PlayerAnimationCommandSO ladderReachTop;
+    [SerializeField, FoldoutGroup("Commands")] private PlayerAnimationCommandSO ladderStart;
+    [SerializeField, FoldoutGroup("Commands")] private PlayerAnimationCommandSO swordSpin;
+    [SerializeField, FoldoutGroup("Commands")] private PlayerAnimationCommandSO swordUpSlash;
+    [SerializeField, FoldoutGroup("Commands")] private PlayerAnimationCommandSO swordDownSlash;
+    [SerializeField, FoldoutGroup("Commands")] private PlayerAnimationCommandSO ledgeHang;
+    [SerializeField, FoldoutGroup("Commands")] private PlayerAnimationCommandSO ledgeJumpUp;
+    [SerializeField, FoldoutGroup("Commands")] private PlayerAnimationCommandSO bowDraw;
+    [SerializeField, FoldoutGroup("Commands")] private PlayerAnimationCommandSO bowHold;
+    [SerializeField, FoldoutGroup("Commands")] private PlayerAnimationCommandSO chestSmallOpen;
 
-    [SerializeField] private AnimationClip idle;
-    [SerializeField] private TransitionAssetBase roll;
-    [SerializeField] private TransitionAssetBase attack1;
-    [SerializeField] private TransitionAssetBase attack2;
-    [SerializeField] private AnimationClip falling;
-    [SerializeField] private TransitionAssetBase land;
-    [SerializeField] private TransitionAssetBase jump;
-    [SerializeField] private AnimationClip ledgeHang;
-    [SerializeField] private AnimationClip ledgeHangJumpUp;
-    [SerializeField] private TransitionAssetBase bowDraw;
+    [SerializeField, FoldoutGroup("Clips")] private AnimationClip ladderClimbUpLeftHand;
+    [SerializeField, FoldoutGroup("Clips")] private AnimationClip ladderClimbUpRightHand;
+    [SerializeField, FoldoutGroup("Clips")] private AnimationClip dodgeForward;
+    [SerializeField, FoldoutGroup("Clips")] private AnimationClip dodgeLeft;
+    [SerializeField, FoldoutGroup("Clips")] private AnimationClip dodgeBack;
+    [SerializeField, FoldoutGroup("Clips")] private AnimationClip dodgeRight;
 
-    [SerializeField] private AnimationClip ladderIdle;
-    [SerializeField] private AnimationClip ladderClimbUpLeftHand;
-    [SerializeField] private AnimationClip ladderClimbUpRightHand;
-    [SerializeField] private AnimationClip ladderClimbDownLeftHand;
-    [SerializeField] private AnimationClip ladderClimbDownRightHand;
-    [SerializeField] private AnimationClip ladderReachTop;
-    [SerializeField] private AnimationClip ladderStart;
+    [SerializeField, FoldoutGroup("Parameters")] private StringAsset strafeParameterX;
+    [SerializeField, FoldoutGroup("Parameters")] private StringAsset strafeParameterY;
+    [SerializeField, FoldoutGroup("Parameters")] private StringAsset bowStrafeParameterX;
+    [SerializeField, FoldoutGroup("Parameters")] private StringAsset bowStrafeParameterY;
 
-    [SerializeField] private AnimationClip dodgeForward;
-    [SerializeField] private AnimationClip dodgeLeft;
-    [SerializeField] private AnimationClip dodgeBack;
-    [SerializeField] private AnimationClip dodgeRight;
+    [SerializeField, FoldoutGroup("Masks")] private AvatarMask torsoMask;
 
-    [SerializeField] private AnimationClip chestSmallOpen;
+    [SerializeField, FoldoutGroup("Mixers")] private LinearMixerTransition bowMixer;
 
-    [SerializeField] private AnimationClip swordSpin;
-    [SerializeField] private TransitionAssetBase swordDownwardSlash;
-    [SerializeField] private AnimationClip swordUpwardSlash;
-
-    [SerializeField] private AnimationClip bowLookDown;
-    [SerializeField] private AnimationClip bowLookUp;
-    [SerializeField] private AvatarMask bowLookMask;
-    [SerializeField] private LinearMixerTransition bowMixer;
-    [SerializeField] private Transform cameraFollow;
-
-    private RedirectRootMotionToTransform rootMotionRedirector;
-    private SmoothedVector2Parameter smoothedParameters;
+    private Dictionary<string, PlayerAnimationCommandSO> commands;
+    private PlayerAnimationCommandSO currentCommand;
+    private SmoothedVector2Parameter strafeSmoothedParameters;
     private SmoothedVector2Parameter bowSmoothedParameters;
     private RigidbodyInterpolation prevRbInterpolation; //stored when we turn off interpolation at the start of a root motion animation, so we can put the RB back to the way it was afterward
+    private RedirectRootMotionToTransform rootMotionRedirector;
 
-    private readonly float DEFAULT_FADE_DURATION = 0.1f;
     private readonly float bowLookMult = -0.006235f;
     private readonly float bowLookAdd = 0.5f;
 
+    public enum SpecialFunction
+    {
+        None,
+        Dodge,
+        BowAim
+    }
+
+    public enum UpdateType
+    {
+        None,
+        Strafe,
+        Bow
+    }
+
     public void Initialize()
     {
-        smoothedParameters = new SmoothedVector2Parameter(
+        commands = new Dictionary<string, PlayerAnimationCommandSO>()
+        {
+            { PlayerStateManager.IDLE_STATE, idle },
+            { PlayerStateManager.MOVING_STATE, moving },
+            { PlayerStateManager.ATTACK_STATE, attack1 },
+            { PlayerStateManager.JUMPING_STATE, jump },
+            { PlayerStateManager.DODGING_STATE, dodge },
+            { PlayerStateManager.LANDING_STATE, landing },
+            { PlayerStateManager.FALLING_STATE, falling },
+            { PlayerStateManager.ROLL_STATE, roll },
+            { PlayerStateManager.CLIMBING_STATE, ladderIdle },
+            { PlayerStateManager.CLIMBING_START_STATE, ladderStart },
+            { PlayerStateManager.CLIMBING_REACH_TOP_STATE, ladderReachTop },
+            { PlayerStateManager.SWORD_SPIN_STATE, swordSpin },
+            { PlayerStateManager.SWORD_UP_SLASH_STATE, swordUpSlash },
+            { PlayerStateManager.SWORD_DOWN_SLASH_STATE, swordDownSlash },
+            { PlayerStateManager.LEDGE_HANG_STATE, ledgeHang },
+            { PlayerStateManager.LEDGE_JUMP_UP_STATE, ledgeJumpUp },
+            { PlayerStateManager.BOW_DRAW_STATE, bowDraw },
+            { PlayerStateManager.BOW_HOLD_STATE, bowHold },
+            { PlayerStateManager.LOOT_STATE, chestSmallOpen },
+        };
+
+        strafeSmoothedParameters = new SmoothedVector2Parameter(
             animancer,
             strafeParameterX,
             strafeParameterY,
@@ -80,24 +110,15 @@ public class PlayerAnimation : MonoBehaviour
             bowStrafeParameterY,
             0);
 
-        //playerStateManager.OnDefaultState += PlayerStateManager_OnDefaultState;
-        //playerStateManager.OnAttack2 += PlayerStateManager_OnAttack2;
-        //playerStateManager.OnLeftGround += PlayerStateManager_OnLeftGround;
-        //playerStateManager.OnLand += PlayerStateManager_OnLand;
-        playerStateManager.OnStateChange += PlayerStateManager_OnStateChange;
+        animancer.Layers[1].Mask = torsoMask;
 
+        playerStateManager.OnStateChange += PlayerStateManager_OnStateChange;
         climbingModule.OnLeftHandMoveUp += Climbing_LeftHandMoveUp;
         climbingModule.OnRightHandMoveUp += Climbing_RightHandMoveUp;
-
-        animancer.Layers[1].Mask = bowLookMask;
     }
 
     private void OnDisable()
     {
-        //playerStateManager.OnDefaultState -= PlayerStateManager_OnDefaultState;
-        //playerStateManager.OnAttack2 -= PlayerStateManager_OnAttack2;
-        //playerStateManager.OnLeftGround -= PlayerStateManager_OnLeftGround;
-        //playerStateManager.OnLand -= PlayerStateManager_OnLand;
         playerStateManager.OnStateChange -= PlayerStateManager_OnStateChange;
 
         climbingModule.OnLeftHandMoveUp -= Climbing_LeftHandMoveUp;
@@ -114,114 +135,62 @@ public class PlayerAnimation : MonoBehaviour
         animancer.Play(ladderClimbUpRightHand);
     }
 
-    private void PlayerStateManager_OnStateChange(string stateName, string prevState)
-    {
-        if (stateName == PlayerStateManager.IDLE_STATE) animancer.Play(idle, DEFAULT_FADE_DURATION);
-        if (stateName == PlayerStateManager.MOVING_STATE)
-        {
-            animancer.Play(strafeTransitionAsset, DEFAULT_FADE_DURATION);
-            animancer.Layers[1].Weight = 0;
-        }
-        //this should probably be a dictionary or something
-        if (stateName == PlayerStateManager.ATTACK_STATE) animancer.Play(attack1);
-        if (stateName == PlayerStateManager.ATTACK2_STATE) animancer.Play(attack2);
-        if (stateName == PlayerStateManager.JUMPING_STATE) animancer.Play(jump);
-        if (stateName == PlayerStateManager.FALLING_STATE) animancer.Play(falling, DEFAULT_FADE_DURATION);
-        if (stateName == PlayerStateManager.ROLL_STATE) animancer.Play(roll);
-        if (stateName == PlayerStateManager.LANDING_STATE) animancer.Play(land);
-        if (stateName == PlayerStateManager.CLIMBING_STATE) animancer.Play(ladderIdle, MiscConstants.DEFAULT_ANIMATION_BLEND_TIME);
-        if (stateName == PlayerStateManager.CLIMBING_REACH_TOP_STATE) PlayRootMotionAnimation(ladderReachTop);
-        if (stateName == PlayerStateManager.CLIMBING_START_STATE) PlayRootMotionAnimation(ladderStart);
-        if (stateName == PlayerStateManager.DODGING_STATE) PlayDodgeAnimation();
-        if (stateName == PlayerStateManager.LOOT_STATE) PlayRootMotionAnimation(chestSmallOpen);
-        //if (stateName == PlayerStateManager.BOW_DRAW_STATE) animancer.Play(bowDraw).Time = 0;
-        if (stateName == PlayerStateManager.BOW_DRAW_STATE)
-        {
-            animancer.Play(bowStrafeTransitionAsset, DEFAULT_FADE_DURATION);
-            animancer.Layers[1].Play(bowDraw).Time = 0;
-        }
-        if (stateName == PlayerStateManager.BOW_HOLD_STATE)
-        {
-            animancer.Layers[1].Play(bowMixer);
-        }
-        if (stateName == PlayerStateManager.SWORD_SPIN_STATE) animancer.Play(swordSpin);
-        if (stateName == PlayerStateManager.SWORD_UP_SLASH_STATE) animancer.Play(swordUpwardSlash);
-        if (stateName == PlayerStateManager.SWORD_DOWN_SLASH_STATE) animancer.Play(swordDownwardSlash);
-        if (stateName == PlayerStateManager.LEDGE_HANG_STATE) animancer.Play(ledgeHang, MiscConstants.DEFAULT_ANIMATION_BLEND_TIME);
-        if (stateName == PlayerStateManager.LEDGE_JUMP_UP_STATE) animancer.Play(ledgeHangJumpUp, MiscConstants.DEFAULT_ANIMATION_BLEND_TIME);
-    }
-
     private void Update()
     {
-        DefaultMovementAnimation();
-        BowMovementAnimation();
+        if (currentCommand == null) return;
+
+        if (currentCommand.UpdateType == UpdateType.Strafe) UpdateStrafeAnimation();
+        if (currentCommand.UpdateType == UpdateType.Bow) UpdateBowAnimation();
+    }
+
+    private void UpdateBowAnimation()
+    {
+        Vector3 inputVec = InputActionsProvider.GetPrimaryAxis();
+        Vector3 squareVec = Utils.ApproximateSquareInputVector(inputVec);
+        bowSmoothedParameters.TargetValue = new Vector2(squareVec.x, squareVec.y);
 
         float cameraAngleX = cameraFollow.eulerAngles.x;
         if (cameraAngleX > 180) cameraAngleX -= 360;
         if (bowMixer.State != null) bowMixer.State.Parameter = bowLookMult * cameraAngleX + bowLookAdd;
     }
 
-    private void BowMovementAnimation()
+    private void UpdateStrafeAnimation()
     {
-        string key = playerStateManager.CurrentStateKey;
-        if (key != PlayerStateManager.BOW_DRAW_STATE && key != PlayerStateManager.BOW_HOLD_STATE) return;
-
         Vector3 inputVec = InputActionsProvider.GetPrimaryAxis();
-        Vector3 squareVec = Utils.ApproximateSquareInputVector(inputVec);
-        bowSmoothedParameters.TargetValue = new Vector2(squareVec.x, squareVec.y);
-    }
-    
-    private void DefaultMovementAnimation()
-    {
-        string key = playerStateManager.CurrentStateKey;
-        if (key != PlayerStateManager.MOVING_STATE) return;
-
-        Vector3 inputVec = InputActionsProvider.GetPrimaryAxis();
-        Vector3 squareVec = Utils.ApproximateSquareInputVector(inputVec);
+        Vector3 squareVec = Utils.ApproximateSquareInputVector(inputVec); 
 
         float xComponent = defaultMovementModule.CurrentMovementType == PlayerDefaultMovementModule.MovementType.ForwardOnly ? 0 : squareVec.x;
         float yComponent = defaultMovementModule.CurrentMovementType == PlayerDefaultMovementModule.MovementType.ForwardOnly ? squareVec.magnitude : squareVec.y;
-        smoothedParameters.TargetValue = new Vector2(xComponent, yComponent);
+        strafeSmoothedParameters.TargetValue = new Vector2(xComponent, yComponent);
     }
 
-    private void PlayDodgeAnimation()
+    private void PlayerStateManager_OnStateChange(string newState, string prevState)
     {
-        Vector3 inputVec = InputActionsProvider.GetPrimaryAxis();
-        float arctan = Mathf.Atan2(inputVec.y, inputVec.x);
-        float degrees = arctan * Mathf.Rad2Deg;
-        if (degrees < 0) degrees += 360;
-
-        if (degrees > 46 && degrees <= 134) animancer.Play(dodgeForward);
-        if (degrees > 134 && degrees <= 226) animancer.Play(dodgeLeft);
-        if (degrees > 226 && degrees <= 314) animancer.Play(dodgeBack);
-        if ((degrees > 314 && degrees <= 360) || (degrees >= 0 && degrees <= 46)) animancer.Play(dodgeRight);
-
+        if (commands.TryGetValue(newState, out PlayerAnimationCommandSO command))
+        {
+            RunAnimationCommand(command);
+        }
     }
 
-    //private void PlayerStateManager_OnLeftGround()
-    //{
-    //    animancer.Play(falling, DEFAULT_FADE_DURATION);
-    //}
-    //
-    //private void PlayerStateManager_OnAttack2()
-    //{
-    //    animancer.Play(attack2);
-    //}
-    //
-    //private void PlayerStateManager_OnDefaultState()
-    //{
-    //    animancer.Play(strafeTransitionAsset, DEFAULT_FADE_DURATION);
-    //}
-    //
-    //private void PlayerStateManager_OnLand()
-    //{
-    //    animancer.Play(land);
-    //}
-
-    [Sirenix.OdinInspector.Button]
-    public void ReachTop()
+    public void RunAnimationCommand(PlayerAnimationCommandSO command)
     {
-        animancer.Play(ladderReachTop, MiscConstants.DEFAULT_ANIMATION_BLEND_TIME);
+        currentCommand = command;
+
+        float fadeDuration = command.UseCustomFadeDuration ? command.FadeDuration : MiscConstants.DEFAULT_ANIMATION_BLEND_TIME;
+        if (command.UseRootMotion && command.BaseAnimation != null)
+        {
+            PlayRootMotionAnimation(command.BaseAnimation);
+            return;
+        }
+        if (command.BaseAnimation != null) animancer.Play(command.BaseAnimation, fadeDuration);
+        if (command.BaseTransitionAsset != null) animancer.Play(command.BaseTransitionAsset, fadeDuration);
+        if (command.TorsoAnimation != null) animancer.Layers[1].Play(command.TorsoAnimation, fadeDuration);
+        if (command.TorsoTransitionAsset != null) animancer.Layers[1].Play(command.TorsoTransitionAsset, fadeDuration).Time = 0;
+        animancer.Layers[1].Weight = command.TorsoLayerWeight;
+        if (command.SpecialFunction != SpecialFunction.None)
+        {
+            RunSpecialFunction(command.SpecialFunction);
+        }
     }
 
     private void PlayRootMotionAnimation(AnimationClip clip)
@@ -241,5 +210,30 @@ public class PlayerAnimation : MonoBehaviour
         characterRb.interpolation = prevRbInterpolation;
         Destroy(rootMotionRedirector);
         rootMotionRedirector = null;
+    }
+
+    private void RunSpecialFunction(SpecialFunction func)
+    {
+        if (func == SpecialFunction.Dodge) PlayDodgeAnimation();
+        if (func == SpecialFunction.BowAim) PlayBowAim();
+    }
+
+    private void PlayDodgeAnimation()
+    {
+        Vector3 inputVec = InputActionsProvider.GetPrimaryAxis();
+        float arctan = Mathf.Atan2(inputVec.y, inputVec.x);
+        float degrees = arctan * Mathf.Rad2Deg;
+        if (degrees < 0) degrees += 360;
+
+        if (degrees > 46 && degrees <= 134) animancer.Play(dodgeForward);
+        if (degrees > 134 && degrees <= 226) animancer.Play(dodgeLeft);
+        if (degrees > 226 && degrees <= 314) animancer.Play(dodgeBack);
+        if ((degrees > 314 && degrees <= 360) || (degrees >= 0 && degrees <= 46)) animancer.Play(dodgeRight);
+
+    }
+
+    private void PlayBowAim()
+    {
+        animancer.Layers[1].Play(bowMixer);
     }
 }
