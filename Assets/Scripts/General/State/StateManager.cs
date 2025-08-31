@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public abstract class StateManager<TState> : StateManagerBase where TState : State
+public abstract class StateManager<TState> : StateManagerBase, IDebugTextProvider where TState : State
 {
     public Dictionary<string, TState> registeredStates { get; private set; }
     private TState currentState;
@@ -38,7 +38,11 @@ public abstract class StateManager<TState> : StateManagerBase where TState : Sta
     {
         StartInitialize();
         registeredStates = GetStateDictionary();
+        SetInitialState();
+    }
 
+    public void SetInitialState()
+    {
         string initialStateName = GetInitialStateName();
         SwitchState(initialStateName);
     }
@@ -108,5 +112,11 @@ public abstract class StateManager<TState> : StateManagerBase where TState : Sta
     public void SetTrigger(string trigger)
     {
         this.trigger = trigger;
+    }
+
+    public string GetDebugText()
+    {
+        if (currentState == null) return "(none)";
+        return currentState.GetDebugName();
     }
 }

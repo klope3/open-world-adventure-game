@@ -65,6 +65,7 @@ public class Spawner : MonoBehaviour
         }
 
         spawnable.originSpawner = this;
+        spawnable.Initialize();
         spawnable.OnDie += Spawnable_OnDie;
         spawnedCount++;
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Sirenix.OdinInspector;
 
 public class HealthHandler : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class HealthHandler : MonoBehaviour
     public System.Action OnDied;
     public event PositionEvent OnDamaged;
 
+    [ShowInInspector, DisplayAsString]
     public int CurHealth
     {
         get
@@ -68,6 +70,7 @@ public class HealthHandler : MonoBehaviour
         }
     }
 
+    [Button]
     public void AddHealth(int amount, Vector3 impactPoint)
     {
         if (amount == 0 || (amount < 0 && invincible))

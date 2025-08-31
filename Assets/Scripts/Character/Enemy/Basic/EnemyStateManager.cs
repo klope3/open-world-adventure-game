@@ -5,6 +5,8 @@ using UnityEngine.Events;
 using ECM2;
 using Sirenix.OdinInspector;
 
+//this script is old and should be replaced with the new EnemyBasicStateManager soon
+//along with all the states that go with it
 public class EnemyStateManager : StateManager<EnemyState>
 {
     [SerializeField] private Character character;
