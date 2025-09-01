@@ -505,6 +505,7 @@ MonoBehaviour:
   DirectionalMovement: {fileID: 2097540719051224394}
   ChaseGameObject: {fileID: 3169395664981121125}
   HealthHandler: {fileID: 6673482808461320131}
+  Character: {fileID: 1694597844430037558}
   targetDetectorZone: {fileID: 2808648247560535138}
   OnAttackStart:
     m_PersistentCalls:

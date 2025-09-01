@@ -9,6 +9,7 @@ public class EnemyBasicStateManager : StateManager<EnemyBasicState>
     [field: SerializeField] public DirectionalMovement DirectionalMovement;
     [field: SerializeField] public ChaseGameObject ChaseGameObject;
     [field: SerializeField] public HealthHandler HealthHandler;
+    [field: SerializeField] public ECM2.Character Character;
     [SerializeField, Tooltip("Objects detected by this zone will be attacked.")] private GameObjectDetectorZone targetDetectorZone;
     public GameObject Target { get; private set; }
     public UnityEvent OnAttackStart;

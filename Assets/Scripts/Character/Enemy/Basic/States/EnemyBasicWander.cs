@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class EnemyBasicWander : EnemyBasicState
 {
+    private float prevWalkSpeed;
+
     public override void EnterState()
     {
+        prevWalkSpeed = stateManager.Character.maxWalkSpeed;
+        stateManager.Character.maxWalkSpeed = stateManager.BehaviorData.WanderSpeed;
         stateManager.DirectionalMovement.enabled = true;
         stateManager.DirectionalMovement.RandomizeDirection();
     }
 
     public override void ExitState()
     {
+        stateManager.Character.maxWalkSpeed = prevWalkSpeed;
         stateManager.DirectionalMovement.enabled = false;
     }
 

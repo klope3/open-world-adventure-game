@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class EnemyBasicChase : EnemyBasicState
 {
+    private float prevWalkSpeed;
+
     public override void EnterState()
     {
+        prevWalkSpeed = stateManager.Character.maxWalkSpeed;
+        stateManager.Character.maxWalkSpeed = stateManager.BehaviorData.ChaseSpeed;
         stateManager.ChaseGameObject.target = stateManager.Target;
         stateManager.ChaseGameObject.enabled = true;
     }
 
     public override void ExitState()
     {
+        stateManager.Character.maxWalkSpeed = prevWalkSpeed;
         stateManager.ChaseGameObject.enabled = false;
     }
 

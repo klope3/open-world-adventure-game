@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Archer
   m_EditorClassIdentifier: 
   WanderTime: 2
+  WanderSpeed: 1.5
   PauseTime: 2
+  ChaseSpeed: 1.5
   AttackDuration: 1
   AttackDistance: 10
   AttackRecoveryTime: 2
