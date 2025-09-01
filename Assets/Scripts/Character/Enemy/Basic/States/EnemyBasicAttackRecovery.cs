@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBasicAttack : EnemyBasicState
+public class EnemyBasicAttackRecovery : EnemyBasicState
 {
     public override void EnterState()
     {
-        stateManager.Attack();
     }
 
     public override void ExitState()
@@ -15,15 +14,14 @@ public class EnemyBasicAttack : EnemyBasicState
 
     public override string GetDebugName()
     {
-        return "attack";
+        return "attack recovery";
     }
 
     public override StateTransition[] GetTransitions()
     {
         return new StateTransition[]
         {
-            new StateTransition(EnemyBasicStateManager.ATTACK_RECOVERY_STATE, () => stateManager.TimeInState > stateManager.BehaviorData.AttackDuration),
-            new StateTransition(EnemyBasicStateManager.DEATH_STATE, () => stateManager.HealthHandler.CurHealth <= 0),
+            new StateTransition(EnemyBasicStateManager.WANDER_STATE, () => stateManager.TimeInState > stateManager.BehaviorData.AttackRecoveryTime),
         };
     }
 

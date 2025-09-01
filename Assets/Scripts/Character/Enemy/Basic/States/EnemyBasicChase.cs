@@ -32,7 +32,12 @@ public class EnemyBasicChase : EnemyBasicState
 
     private bool ToAttack()
     {
-        return stateManager.Target != null && Vector3.Distance(stateManager.transform.position, stateManager.Target.transform.position) < stateManager.BehaviorData.AttackDistance;
+        bool hasTarget = stateManager.Target != null;
+        if (!hasTarget) return false;
+
+        bool closeEnough = Vector3.Distance(stateManager.transform.position, stateManager.Target.transform.position) < stateManager.BehaviorData.AttackDistance;
+        bool facing = Utils.CalculateInFrontFactor(stateManager.transform, stateManager.Target.transform, true) > 0.999f;
+        return closeEnough && facing;
     }
 
     public override void UpdateState()

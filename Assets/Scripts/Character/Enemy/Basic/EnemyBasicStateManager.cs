@@ -17,7 +17,11 @@ public class EnemyBasicStateManager : StateManager<EnemyBasicState>
     public static readonly string PAUSE_STATE = "pause";
     public static readonly string CHASE_STATE = "chase";
     public static readonly string ATTACK_STATE = "attack";
+    public static readonly string ATTACK_RECOVERY_STATE = "attack recovery";
     public static readonly string DEATH_STATE = "death";
+
+    public delegate void GameObjectEvent(GameObject gameObject);
+    public event GameObjectEvent OnTargetSet;
 
     protected override void EndUpdate()
     {
@@ -36,6 +40,7 @@ public class EnemyBasicStateManager : StateManager<EnemyBasicState>
             { WANDER_STATE, new EnemyBasicWander() },
             { CHASE_STATE, new EnemyBasicChase() },
             { ATTACK_STATE, new EnemyBasicAttack() },
+            { ATTACK_RECOVERY_STATE, new EnemyBasicAttackRecovery() },
             { DEATH_STATE, new EnemyBasicDeath() },
         };
 
@@ -55,12 +60,12 @@ public class EnemyBasicStateManager : StateManager<EnemyBasicState>
 
     private void TargetDetectorZone_OnObjectExited(GameObject obj)
     {
-        if (Target == obj) Target = null;
+        if (Target == obj) ClearTarget();
     }
 
     private void TargetDetectorZone_OnObjectEntered(GameObject obj)
     {
-        Target = obj;
+        SetTarget(obj);
     }
 
     public bool ShouldChaseTarget()
@@ -75,6 +80,12 @@ public class EnemyBasicStateManager : StateManager<EnemyBasicState>
 
     public void ClearTarget()
     {
-        Target = null;
+        SetTarget(null);
+    }
+
+    private void SetTarget(GameObject target)
+    {
+        Target = target;
+        OnTargetSet?.Invoke(Target);
     }
 }
