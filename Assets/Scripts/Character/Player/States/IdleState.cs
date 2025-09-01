@@ -39,6 +39,7 @@ public class IdleState : PlayerState
             new StateTransition(PlayerStateManager.MOVING_STATE, () => stateManager.DefaultMovementModule.MoveVec.magnitude >= 0.005f),
             new StateTransition(PlayerStateManager.FALLING_STATE, () => !stateManager.Character.IsGrounded()),
             new StateTransition(PlayerStateManager.ATTACK_STATE, () => stateManager.trigger == PlayerStateManager.ATTACK_STATE),
+            new StateTransition(PlayerStateManager.ATTACK2_STATE, () => stateManager.trigger == PlayerStateManager.ATTACK2_STATE),
             new StateTransition(PlayerStateManager.JUMPING_STATE, () => stateManager.trigger == PlayerStateManager.JUMPING_STATE),
             new StateTransition(PlayerStateManager.CLIMBING_START_STATE, () => stateManager.trigger == PlayerStateManager.CLIMBING_START_STATE),
             new StateTransition(PlayerStateManager.LOOT_STATE, () => stateManager.trigger == PlayerStateManager.LOOT_STATE),

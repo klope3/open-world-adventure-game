@@ -24,8 +24,9 @@ MonoBehaviour:
   <LedgeGrabJumpTolerance>k__BackingField: 0.2
   <LedgeGrabJumpUpForce>k__BackingField: 10
   <SwordSpinWindow>k__BackingField: 0.2
-  <StandardAttackDuration>k__BackingField: 0.6
-  StandardAttackChainTime: 0.2
+  <StandardAttackDuration>k__BackingField: 0.3
+  StandardAttackMinChainTime: 0.3
+  StandardAttackMaxChainTime: 0.45
   <RollDuration>k__BackingField: 0.6
   <RollSpeed>k__BackingField: 23
   <RollDeceleration>k__BackingField: -34

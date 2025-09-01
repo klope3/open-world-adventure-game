@@ -24,8 +24,10 @@ public class PlayerControlDataSO : ScriptableObject
     [field: SerializeField, Tooltip("The time window in which pressing attack during a dodge will trigger a sword spin.")]
     public float SwordSpinWindow { get; private set; }
     [field: SerializeField] public float StandardAttackDuration { get; private set; }
-    [field: SerializeField, Tooltip("The player must press attack at most this long after the previous attack state finished in order to chain the next attack.")]
-    public float StandardAttackChainTime;
+    [field: SerializeField, Tooltip("The player must press attack AT LEAST this long after the previous attack state finished in order to chain the next attack.")]
+    public float StandardAttackMinChainTime;
+    [field: SerializeField, Tooltip("The player must press attack AT MOST this long after the previous attack state finished in order to chain the next attack.")]
+    public float StandardAttackMaxChainTime;
     [field: SerializeField] public float RollDuration { get; private set; }
     [field: SerializeField] public float RollSpeed { get; private set; }
     [field: SerializeField] public float RollDeceleration { get; private set; }

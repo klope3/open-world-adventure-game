@@ -17,6 +17,7 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField, FoldoutGroup("Commands")] private PlayerAnimationCommandSO idle;
     [SerializeField, FoldoutGroup("Commands")] private PlayerAnimationCommandSO moving;
     [SerializeField, FoldoutGroup("Commands")] private PlayerAnimationCommandSO attack1;
+    [SerializeField, FoldoutGroup("Commands")] private PlayerAnimationCommandSO attack2;
     [SerializeField, FoldoutGroup("Commands")] private PlayerAnimationCommandSO jump;
     [SerializeField, FoldoutGroup("Commands")] private PlayerAnimationCommandSO falling;
     [SerializeField, FoldoutGroup("Commands")] private PlayerAnimationCommandSO roll;
@@ -81,6 +82,7 @@ public class PlayerAnimation : MonoBehaviour
             { PlayerStateManager.IDLE_STATE, idle },
             { PlayerStateManager.MOVING_STATE, moving },
             { PlayerStateManager.ATTACK_STATE, attack1 },
+            { PlayerStateManager.ATTACK2_STATE, attack2 },
             { PlayerStateManager.JUMPING_STATE, jump },
             { PlayerStateManager.DODGING_STATE, dodge },
             { PlayerStateManager.LANDING_STATE, landing },
@@ -182,7 +184,7 @@ public class PlayerAnimation : MonoBehaviour
             PlayRootMotionAnimation(command.BaseAnimation);
             return;
         }
-        if (command.BaseAnimation != null) animancer.Play(command.BaseAnimation, fadeDuration);
+        if (command.BaseAnimation != null) animancer.Play(command.BaseAnimation, fadeDuration).Time = 0;
         if (command.BaseTransitionAsset != null) animancer.Play(command.BaseTransitionAsset, fadeDuration);
         if (command.TorsoAnimation != null) animancer.Layers[1].Play(command.TorsoAnimation, fadeDuration);
         if (command.TorsoTransitionAsset != null) animancer.Layers[1].Play(command.TorsoTransitionAsset, fadeDuration).Time = 0;

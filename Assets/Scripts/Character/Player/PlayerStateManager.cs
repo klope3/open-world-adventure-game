@@ -15,7 +15,7 @@ public class PlayerStateManager : StateManager<PlayerState>
     [field: SerializeField] public MegaProjectileLauncher ArrowLauncher { get; private set; }
     [HideInInspector] public float cachedPlayerSpeed; //useful for when player speed needs to be reset to a previous value after multiple state transitions
     [HideInInspector] public float cachedPlayerAcceleration;
-    private int recentStandardAttacks; //increments while chaining attacks; resets to 0 when standardAttackChainTime elapses
+    //private int recentStandardAttacks; //increments while chaining attacks; resets to 0 when standardAttackChainTime elapses
 
     public static readonly string IDLE_STATE = "Idle";
     public static readonly string MOVING_STATE = "Moving";
@@ -48,10 +48,10 @@ public class PlayerStateManager : StateManager<PlayerState>
 
     protected override void EndUpdate()
     {
-        if (recentStandardAttacks > 0 && !(CurrentState is AttackState) && TimeInState > PlayerControlDataSO.StandardAttackChainTime)
-        {
-            recentStandardAttacks = 0; //forget about chaining if we haven't been attacking for a long enough period
-        }
+        //if (recentStandardAttacks > 0 && !(CurrentState is AttackState) && TimeInState > PlayerControlDataSO.StandardAttackChainTime)
+        //{
+        //    recentStandardAttacks = 0; //forget about chaining if we haven't been attacking for a long enough period
+        //}
     }
 
     protected override string GetInitialStateName()
@@ -94,10 +94,10 @@ public class PlayerStateManager : StateManager<PlayerState>
         return states;
     }
 
-    public void IncrementRecentStandardAttacks()
-    {
-        recentStandardAttacks++;
-    }
+    //public void IncrementRecentStandardAttacks()
+    //{
+    //    recentStandardAttacks++;
+    //}
 
     public bool IsInState(PlayerState state)
     {

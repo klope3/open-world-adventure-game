@@ -45,6 +45,7 @@ public class MovingState : PlayerState
             new StateTransition(PlayerStateManager.IDLE_STATE, () => stateManager.DefaultMovementModule.MoveVec.magnitude < 0.005f),
             new StateTransition(PlayerStateManager.FALLING_STATE, () => !stateManager.Character.IsGrounded()),
             new StateTransition(PlayerStateManager.ATTACK_STATE, () => stateManager.trigger == PlayerStateManager.ATTACK_STATE),
+            new StateTransition(PlayerStateManager.ATTACK2_STATE, () => stateManager.trigger == PlayerStateManager.ATTACK2_STATE),
             new StateTransition(PlayerStateManager.JUMPING_STATE, () => stateManager.trigger == PlayerStateManager.JUMPING_STATE),
             new StateTransition(PlayerStateManager.ROLL_STATE, ToRollState),
             new StateTransition(PlayerStateManager.DODGING_STATE, ToDodgeState),

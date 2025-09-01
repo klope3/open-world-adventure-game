@@ -10,7 +10,7 @@ public class AttackState : PlayerState
     public override void EnterState()
     {
         stateManager.DefaultMovementModule.canMove = false;
-        stateManager.IncrementRecentStandardAttacks();
+        //stateManager.IncrementRecentStandardAttacks();
 
         Vector3 inputVec = InputActionsProvider.GetPrimaryAxis();
         if (stateManager.DefaultMovementModule.CurrentMovementType == PlayerDefaultMovementModule.MovementType.ForwardOnly && inputVec.magnitude > 0.05f)
@@ -46,7 +46,7 @@ public class AttackState : PlayerState
     {
         return new StateTransition[]
         {
-            new StateTransition(PlayerStateManager.MOVING_STATE, ToDefaultState),
+            new StateTransition(PlayerStateManager.MOVING_STATE, () => stateManager.TimeInState > stateManager.PlayerControlDataSO.StandardAttackDuration),
         };
     }
 
