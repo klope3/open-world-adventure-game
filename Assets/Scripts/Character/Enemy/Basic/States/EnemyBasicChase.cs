@@ -10,7 +10,7 @@ public class EnemyBasicChase : EnemyBasicState
     {
         prevWalkSpeed = stateManager.Character.maxWalkSpeed;
         stateManager.Character.maxWalkSpeed = stateManager.BehaviorData.ChaseSpeed;
-        stateManager.ChaseGameObject.target = stateManager.Target;
+        stateManager.ChaseGameObject.target = stateManager.TargetHandler.Target;
         stateManager.ChaseGameObject.enabled = true;
     }
 
@@ -29,7 +29,7 @@ public class EnemyBasicChase : EnemyBasicState
     {
         return new StateTransition[]
         {
-            new StateTransition(EnemyBasicStateManager.PAUSE_STATE, () => stateManager.Target == null),
+            new StateTransition(EnemyBasicStateManager.PAUSE_STATE, () => stateManager.TargetHandler.Target == null),
             new StateTransition(EnemyBasicStateManager.ATTACK_STATE, ToAttack),
             new StateTransition(EnemyBasicStateManager.DEATH_STATE, () => stateManager.HealthHandler.CurHealth <= 0),
         };
@@ -37,11 +37,11 @@ public class EnemyBasicChase : EnemyBasicState
 
     private bool ToAttack()
     {
-        bool hasTarget = stateManager.Target != null;
+        bool hasTarget = stateManager.TargetHandler.Target != null;
         if (!hasTarget) return false;
 
-        bool closeEnough = Vector3.Distance(stateManager.transform.position, stateManager.Target.transform.position) < stateManager.BehaviorData.AttackDistance;
-        bool facing = Utils.CalculateInFrontFactor(stateManager.transform, stateManager.Target.transform, true) > 0.999f;
+        bool closeEnough = Vector3.Distance(stateManager.transform.position, stateManager.TargetHandler.Target.transform.position) < stateManager.BehaviorData.AttackDistance;
+        bool facing = Utils.CalculateInFrontFactor(stateManager.transform, stateManager.TargetHandler.Target.transform, true) > 0.999f;
         return closeEnough && facing;
     }
 

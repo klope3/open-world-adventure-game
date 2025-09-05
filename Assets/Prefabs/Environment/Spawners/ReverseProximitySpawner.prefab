@@ -79,12 +79,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pool: {fileID: 0}
   <RequestedPrefab>k__BackingField: {fileID: 0}
-  spawnsPerSecond: 4
+  spawnsPerSecond: 1
   minSpawnRadius: 2
   maxSpawnRadius: 2
   use2DRadius: 1
-  maxSpawnedCount: 1
+  maxSpawnedCount: 4
   spawnerType: 1
+  npcManager: {fileID: 0}
 --- !u!1 &4091482246725239398
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,7 +184,7 @@ SphereCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 2039
+    m_Bits: 4087
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0

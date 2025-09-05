@@ -60,6 +60,19 @@ public class GameObjectDetectorZone : MonoBehaviour
         ObjectExit(other.gameObject);
     }
 
+    private void OnDisable()
+    {
+        List<GameObject> objectsToRemove = new List<GameObject>();
+        foreach (GameObject obj in objectsInside)
+        {
+            objectsToRemove.Add(obj);
+        }
+        foreach (GameObject obj in objectsToRemove)
+        {
+            ObjectExit(obj);
+        }
+    }
+
     private void ObjectExit(GameObject obj)
     {
         objectsInside.Remove(obj);

@@ -5,13 +5,12 @@ using UnityEngine.Events;
 
 public class EnemyBasicStateManager : StateManager<EnemyBasicState>
 {
-    [field: SerializeField] public EnemyBasicBehaviorDataSO BehaviorData;
-    [field: SerializeField] public DirectionalMovement DirectionalMovement;
-    [field: SerializeField] public ChaseGameObject ChaseGameObject;
-    [field: SerializeField] public HealthHandler HealthHandler;
-    [field: SerializeField] public ECM2.Character Character;
-    [SerializeField, Tooltip("Objects detected by this zone will be attacked.")] private GameObjectDetectorZone targetDetectorZone;
-    public GameObject Target { get; private set; }
+    [field: SerializeField] public EnemyBasicBehaviorDataSO BehaviorData { get; private set; }
+    [field: SerializeField] public DirectionalMovement DirectionalMovement { get; private set; }
+    [field: SerializeField] public ChaseGameObject ChaseGameObject { get; private set; }
+    [field: SerializeField] public HealthHandler HealthHandler { get; private set; }
+    [field: SerializeField] public ECM2.Character Character { get; private set; }
+    [field: SerializeField] public EnemyBasicTargetHandler TargetHandler { get; private set; }
     public UnityEvent OnAttackStart;
 
     public static readonly string WANDER_STATE = "wander";
@@ -20,9 +19,6 @@ public class EnemyBasicStateManager : StateManager<EnemyBasicState>
     public static readonly string ATTACK_STATE = "attack";
     public static readonly string ATTACK_RECOVERY_STATE = "attack recovery";
     public static readonly string DEATH_STATE = "death";
-
-    public delegate void GameObjectEvent(GameObject gameObject);
-    public event GameObjectEvent OnTargetSet;
 
     protected override void EndUpdate()
     {
@@ -55,38 +51,15 @@ public class EnemyBasicStateManager : StateManager<EnemyBasicState>
 
     protected override void StartInitialize()
     {
-        targetDetectorZone.OnObjectEntered += TargetDetectorZone_OnObjectEntered;
-        targetDetectorZone.OnObjectExited += TargetDetectorZone_OnObjectExited;
-    }
-
-    private void TargetDetectorZone_OnObjectExited(GameObject obj)
-    {
-        if (Target == obj) ClearTarget();
-    }
-
-    private void TargetDetectorZone_OnObjectEntered(GameObject obj)
-    {
-        SetTarget(obj);
     }
 
     public bool ShouldChaseTarget()
     {
-        return Target != null;
+        return TargetHandler.Target != null;
     }
 
     public void Attack()
     {
         OnAttackStart?.Invoke();
-    }
-
-    public void ClearTarget()
-    {
-        SetTarget(null);
-    }
-
-    private void SetTarget(GameObject target)
-    {
-        Target = target;
-        OnTargetSet?.Invoke(Target);
     }
 }
