@@ -343,6 +343,7 @@ Transform:
   - {fileID: 5587378352995566062}
   - {fileID: 3973080633440535306}
   - {fileID: 8999714511741782383}
+  - {fileID: 6619186508400363817}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &6721421090089685915
@@ -513,21 +514,9 @@ MonoBehaviour:
   OnAttackStart:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6158900782881718702}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 65005577969213076}
-        m_TargetAssemblyTypeName: DelayedEvent, Assembly-CSharp
-        m_MethodName: StartDelay
+      - m_Target: {fileID: 8492420802518588216}
+        m_TargetAssemblyTypeName: DamageRaycast, Assembly-CSharp
+        m_MethodName: Cast
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -535,7 +524,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &6819141807624992728
 MonoBehaviour:
@@ -695,6 +684,56 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 9
   lineOfSightOrigin: {fileID: 3973080633440535306}
+--- !u!1 &3958249068825113409
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6619186508400363817}
+  - component: {fileID: 8492420802518588216}
+  m_Layer: 11
+  m_Name: AttackRaycast
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6619186508400363817
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3958249068825113409}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.822, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1085584127008927840}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8492420802518588216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3958249068825113409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9c0e566e5173944b8cdd820e5d75794, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 0.76
+  amount: 1
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 4105
+  drawGizmos: 1
 --- !u!1 &4431674756947211643
 GameObject:
   m_ObjectHideFlags: 0

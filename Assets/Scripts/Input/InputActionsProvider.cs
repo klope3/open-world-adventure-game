@@ -23,6 +23,8 @@ public static class InputActionsProvider
                 inputActions.Player.DodgeButton.started += DodgeButton_started;
                 inputActions.Player.SwapButton.started += SwapButton_started;
                 inputActions.Player.PauseButton.started += PauseButton_started;
+                inputActions.Player.BlockButton.started += BlockButton_started;
+                inputActions.Player.BlockButton.canceled += BlockButton_canceled;
             }
             return inputActions;
         }
@@ -37,6 +39,8 @@ public static class InputActionsProvider
     public static System.Action OnDodgeButtonStarted;
     public static System.Action OnSwapButtonStarted;
     public static System.Action OnPauseButtonStarted;
+    public static System.Action OnBlockButtonStarted;
+    public static System.Action OnBlockButtonCanceled;
 
     private static bool overridePrimaryAxis;
     private static Vector3 primaryAxisOverrideVec;
@@ -50,6 +54,16 @@ public static class InputActionsProvider
     public static void UnlockPrimaryAxis()
     {
         overridePrimaryAxis = false;
+    }
+
+    private static void BlockButton_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnBlockButtonStarted?.Invoke();
+    }
+
+    private static void BlockButton_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnBlockButtonCanceled?.Invoke();
     }
 
     private static void PauseButton_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)

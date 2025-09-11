@@ -34,6 +34,7 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField, FoldoutGroup("Commands")] private PlayerAnimationCommandSO bowDraw;
     [SerializeField, FoldoutGroup("Commands")] private PlayerAnimationCommandSO bowHold;
     [SerializeField, FoldoutGroup("Commands")] private PlayerAnimationCommandSO chestSmallOpen;
+    [SerializeField, FoldoutGroup("Commands")] private PlayerAnimationCommandSO shieldHold;
 
     [SerializeField, FoldoutGroup("Clips")] private AnimationClip ladderClimbUpLeftHand;
     [SerializeField, FoldoutGroup("Clips")] private AnimationClip ladderClimbUpRightHand;
@@ -99,6 +100,7 @@ public class PlayerAnimation : MonoBehaviour
             { PlayerStateManager.BOW_DRAW_STATE, bowDraw },
             { PlayerStateManager.BOW_HOLD_STATE, bowHold },
             { PlayerStateManager.LOOT_STATE, chestSmallOpen },
+            { PlayerStateManager.SHIELD_HOLD_STATE, shieldHold },
         };
 
         strafeSmoothedParameters = new SmoothedVector2Parameter(

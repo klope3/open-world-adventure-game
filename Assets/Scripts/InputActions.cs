@@ -107,6 +107,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""BlockButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""9474089b-d0d8-420a-9dc2-eb0057587ee3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -395,6 +404,28 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""PauseButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""df5841c3-a6c4-44f6-8668-c5606543ad94"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KBM"",
+                    ""action"": ""BlockButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""578c8278-48e7-49bf-9223-e22ffd4b951f"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""BlockButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -435,6 +466,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Player_DodgeButton = m_Player.FindAction("DodgeButton", throwIfNotFound: true);
         m_Player_SwapButton = m_Player.FindAction("SwapButton", throwIfNotFound: true);
         m_Player_PauseButton = m_Player.FindAction("PauseButton", throwIfNotFound: true);
+        m_Player_BlockButton = m_Player.FindAction("BlockButton", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -505,6 +537,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_DodgeButton;
     private readonly InputAction m_Player_SwapButton;
     private readonly InputAction m_Player_PauseButton;
+    private readonly InputAction m_Player_BlockButton;
     public struct PlayerActions
     {
         private @InputActions m_Wrapper;
@@ -518,6 +551,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         public InputAction @DodgeButton => m_Wrapper.m_Player_DodgeButton;
         public InputAction @SwapButton => m_Wrapper.m_Player_SwapButton;
         public InputAction @PauseButton => m_Wrapper.m_Player_PauseButton;
+        public InputAction @BlockButton => m_Wrapper.m_Player_BlockButton;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -554,6 +588,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @PauseButton.started += instance.OnPauseButton;
             @PauseButton.performed += instance.OnPauseButton;
             @PauseButton.canceled += instance.OnPauseButton;
+            @BlockButton.started += instance.OnBlockButton;
+            @BlockButton.performed += instance.OnBlockButton;
+            @BlockButton.canceled += instance.OnBlockButton;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -585,6 +622,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @PauseButton.started -= instance.OnPauseButton;
             @PauseButton.performed -= instance.OnPauseButton;
             @PauseButton.canceled -= instance.OnPauseButton;
+            @BlockButton.started -= instance.OnBlockButton;
+            @BlockButton.performed -= instance.OnBlockButton;
+            @BlockButton.canceled -= instance.OnBlockButton;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -631,5 +671,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         void OnDodgeButton(InputAction.CallbackContext context);
         void OnSwapButton(InputAction.CallbackContext context);
         void OnPauseButton(InputAction.CallbackContext context);
+        void OnBlockButton(InputAction.CallbackContext context);
     }
 }

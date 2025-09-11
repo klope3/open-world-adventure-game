@@ -10,6 +10,7 @@ public class PlayerStateManager : StateManager<PlayerState>
     [field: SerializeField] public DamageZone SwordDamageZone { get; private set; }
     [field: SerializeField] public LedgeChecker LedgeChecker { get; private set; }
     [field: SerializeField] public Character Character { get; private set; }
+    [field: SerializeField] public Collider ShieldCollider { get; private set; }
     [field: SerializeField] public PlayerClimbingModule ClimbingModule { get; private set; }
     [field: SerializeField] public RaycastChecker ClimbingDetector { get; private set; }
     [field: SerializeField] public MegaProjectileLauncher ArrowLauncher { get; private set; }
@@ -40,6 +41,7 @@ public class PlayerStateManager : StateManager<PlayerState>
     public static readonly string SWORD_DOWN_SLASH_STATE = "Sword Down Slash";
     public static readonly string LEDGE_HANG_STATE = "Ledge Hang";
     public static readonly string LEDGE_JUMP_UP_STATE = "Ledge Jump Up";
+    public static readonly string SHIELD_HOLD_STATE = "shield hold";
 
 
     protected override void StartInitialize()
@@ -84,6 +86,7 @@ public class PlayerStateManager : StateManager<PlayerState>
             { SWORD_DOWN_SLASH_STATE, new PlayerDownSlashState() },
             { LEDGE_HANG_STATE, new LedgeHangState() },
             { LEDGE_JUMP_UP_STATE, new LedgeHangJumpUpState() },
+            { SHIELD_HOLD_STATE, new ShieldHoldState() },
         };
 
         foreach (KeyValuePair<string, PlayerState> state in states)
