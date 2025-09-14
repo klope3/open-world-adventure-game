@@ -128,6 +128,7 @@ public class MegaProjectileLauncher : MonoBehaviour
 
     public void SetTriggerState(bool state)
     {
+        Debug.Log($"Setting {state}");
         triggerState = state;
 
         if (!prevTriggerState && triggerState)

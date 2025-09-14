@@ -4141,7 +4141,7 @@ PrefabInstance:
     - target: {fileID: 461558982800607758, guid: f16fae779a3194e43bcf6ad58f1fd2f4,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2148544099590793484, guid: f16fae779a3194e43bcf6ad58f1fd2f4,
         type: 3}
@@ -5827,7 +5827,7 @@ PrefabInstance:
     - target: {fileID: 461558982800607758, guid: f16fae779a3194e43bcf6ad58f1fd2f4,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2148544099590793484, guid: f16fae779a3194e43bcf6ad58f1fd2f4,
         type: 3}
@@ -6203,7 +6203,7 @@ PrefabInstance:
         type: 3}
       propertyPath: prefabToPool
       value: 
-      objectReference: {fileID: 3746107289303878614, guid: bf968a5c9c6dd8741a12e2365856f599,
+      objectReference: {fileID: 3746107289303878614, guid: 6f11a4255e435d44ebea422cd73d8f19,
         type: 3}
     - target: {fileID: 5213061134883512386, guid: 118566f4c2f24b041b7ef3f2675c4f00,
         type: 3}
