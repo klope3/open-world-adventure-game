@@ -15,7 +15,7 @@ public class CharacterDeath : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private Animancer.AnimancerComponent animancer;
     [SerializeField] private DamageZone damageZone;
-    [SerializeField] private EnemyStateManager stateManager;
+    [SerializeField] private EnemyBasicStateManager stateManager;
 
     public void DoDeath()
     {

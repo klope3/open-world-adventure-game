@@ -16,6 +16,6 @@ MonoBehaviour:
   <WanderSpeed>k__BackingField: 1.5
   <PauseTime>k__BackingField: 2
   <ChaseSpeed>k__BackingField: 1.5
-  <AttackDuration>k__BackingField: 0.1
+  <AttackDuration>k__BackingField: 1
   <AttackDistance>k__BackingField: 0.8
-  <AttackRecoveryTime>k__BackingField: 1
+  <AttackRecoveryTime>k__BackingField: 0.2

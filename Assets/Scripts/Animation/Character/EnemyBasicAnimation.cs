@@ -21,16 +21,28 @@ public class EnemyBasicAnimation : MonoBehaviour
     [SerializeField, ShowIf("@showTransitionAssets"), Tooltip("If provided, this will be used instead of the animation clip.")] private TransitionAssetBase hurtTransition;
     [SerializeField, Tooltip("Display options to reference transition assets instead of animaction clips.")] private bool showTransitionAssets;
     [SerializeField] private EnemyStateManager enemyStateManager;
+    [SerializeField] private EnemyBasicStateManager stateManager;
 
     private void OnEnable()
     {
-        enemyStateManager.OnStateChange += EnemyStateManager_OnStateChange;
+        //enemyStateManager.OnStateChange += EnemyStateManager_OnStateChange;
+        stateManager.OnStateChange += StateManager_OnStateChange;
         animancer.Play(idle);
+    }
+
+    private void StateManager_OnStateChange(string newState, string prevState)
+    {
+        if (newState == EnemyBasicStateManager.WANDER_STATE) PlayClipOrTransition(walkTransition, walk);
+        if (newState == EnemyBasicStateManager.CHASE_STATE) PlayClipOrTransition(chaseTransition, chase);
+        if (newState == EnemyBasicStateManager.PAUSE_STATE) PlayClipOrTransition(idleTransition, idle);
+        if (newState == EnemyBasicStateManager.ATTACK_RECOVERY_STATE) PlayClipOrTransition(recoveryTransition, recovery);
+        if (newState == EnemyBasicStateManager.ATTACK_STATE) PlayClipOrTransition(attackTransition, attack);
+        //if (newState == EnemyBasicStateManager.HURT_STATE) PlayClipOrTransition(hurtTransition, hurt);
     }
 
     private void OnDisable()
     {
-        enemyStateManager.OnStateChange -= EnemyStateManager_OnStateChange;
+        //enemyStateManager.OnStateChange -= EnemyStateManager_OnStateChange;
     }
 
     private void EnemyStateManager_OnStateChange(string stateName, string prevState)

@@ -105,3 +105,5 @@ crashlytics-build.properties
 /[Aa]ssets/[Dd]un[Gg]en.meta
 /[Aa]ssets/DOTween*Examples/
 /[Aa]ssets/DOTween*Examples.meta
+/[Aa]ssets/[Ss]imple[Aa]ssets/
+/[Aa]ssets/[Ss]imple[Aa]ssets.meta
