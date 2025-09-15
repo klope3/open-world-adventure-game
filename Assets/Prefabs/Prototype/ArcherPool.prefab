@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9000477503337655791}
   - component: {fileID: 4262812351933376256}
-  - component: {fileID: 1225578265739828650}
+  - component: {fileID: 3641032293194841980}
   m_Layer: 0
   m_Name: ArcherPool
   m_TagString: Untagged
@@ -49,7 +49,7 @@ MonoBehaviour:
     type: 3}
   startingCount: 3
   instantiateOnAwake: 0
---- !u!114 &1225578265739828650
+--- !u!114 &3641032293194841980
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -58,8 +58,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 589712473319651643}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5691ab856e93b0f49af7a378f38d2014, type: 3}
+  m_Script: {fileID: 11500000, guid: cef911a56ae4e1344afd189ce83fd640, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  archerPool: {fileID: 4262812351933376256}
-  archerProjectilePool: {fileID: 0}
+  targetPool: {fileID: 4262812351933376256}
+  poolToAssign: {fileID: 0}

@@ -13,11 +13,11 @@ public class DamageZone : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        HealthHandler health = other.GetComponent<HealthHandler>();
-        if (health != null)
+        IDamageReceiver damageReceiver = other.GetComponent<IDamageReceiver>();
+        if (damageReceiver != null)
         {
             Vector3 point = other.ClosestPoint(transform.position);
-            health.AddHealth(-1 * amount, point);
+            damageReceiver.ReceiveDamage(amount, point);
             OnDamageAdded?.Invoke();
         }
 

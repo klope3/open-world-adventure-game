@@ -515,6 +515,7 @@ GameObject:
   - component: {fileID: 1873145635853950406}
   - component: {fileID: 118756265246545567}
   - component: {fileID: 8443958149963696764}
+  - component: {fileID: 7243550384831939439}
   m_Layer: 11
   m_Name: Archer
   m_TagString: Untagged
@@ -920,6 +921,22 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 9
   lineOfSightOrigin: {fileID: 3050034235339085641}
+--- !u!114 &7243550384831939439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3746107289303878614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89eff00c1068250439171cc2277d671a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthHandler: {fileID: 6673482808461320131}
+  OnReceiveDamage:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3958840467149064136
 GameObject:
   m_ObjectHideFlags: 0

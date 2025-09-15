@@ -145,6 +145,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 94cdc45f41ce2fa49b86b6d4158fb938, type: 3}
   minRandomPitch: 0.8
   maxRandomPitch: 1.2
+  useOneShot: 0
   minTimeBetweenPlays: 0
 --- !u!1 &3340195307882566613
 GameObject:
@@ -5080,6 +5081,7 @@ GameObject:
   - component: {fileID: 9065998052575939028}
   - component: {fileID: 1475156872125930257}
   - component: {fileID: 8191849474360218659}
+  - component: {fileID: 7378158328748679759}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -5141,7 +5143,8 @@ MonoBehaviour:
   destroyOnDeath: 0
   graceTime: 0
   showLogs: 0
-  OnAwake:
+  initializeOnAwake: 1
+  OnInitialize:
     m_PersistentCalls:
       m_Calls: []
   OnDamage:
@@ -5225,6 +5228,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &7378158328748679759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8693022772136824613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89eff00c1068250439171cc2277d671a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthHandler: {fileID: 8191849474360218659}
+  OnReceiveDamage:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &9141029789350002164
 GameObject:
   m_ObjectHideFlags: 0
@@ -5271,6 +5290,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   launchPoint: {fileID: 2014690681735299360}
   inaccuracy: 0.25
+  poolToUse: {fileID: 0}
   rigidbodyToLaunch: {fileID: 1582137178273825033}
   launchForce: 8
 --- !u!1001 &4080111535513396496

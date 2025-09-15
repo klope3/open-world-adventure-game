@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class ColliderEvents : MonoBehaviour
 {
+    public UnityEvent OnCollisionEntered;
     public UnityEvent OnTriggerEntered;
     public UnityEvent OnTriggerExited;
 
@@ -16,5 +17,10 @@ public class ColliderEvents : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         OnTriggerExited?.Invoke();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        OnCollisionEntered?.Invoke();
     }
 }
