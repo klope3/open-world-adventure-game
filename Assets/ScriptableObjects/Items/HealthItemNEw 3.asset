@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6a570a3461a2054d804b5dc41143658, type: 3}
   m_Name: HealthItemNEw 3
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: Healing Item NEw 2
-  <Sprite>k__BackingField: {fileID: 21300000, guid: cd0124e12c14c7042b6713b9c0ee74cb,
+  <Name>k__BackingField: Healing Item NEw 4
+  <Sprite>k__BackingField: {fileID: -1528375828, guid: c29dad0eb885d1747a6738065db04de5,
     type: 3}
   <PrettyPrefab>k__BackingField: {fileID: 0}
   <ItemBehaviors>k__BackingField:
