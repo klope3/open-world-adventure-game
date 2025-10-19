@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ce09443ae55cdf245999a9be5f4d3439
+guid: cb26c39cb965a16489f80f2a1d01c554
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -13,7 +13,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: black
-    second: {fileID: 2100000, guid: e29bdf2a407a1ab44ac94ddc36bc93a0, type: 2}
+    second: {fileID: 2100000, guid: be811e5129dbb4d44bbb299e53b50c09, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -28,22 +28,17 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: dirt1
-    second: {fileID: 2100000, guid: e29bdf2a407a1ab44ac94ddc36bc93a0, type: 2}
+    second: {fileID: 2100000, guid: 27503569b1e21a44fa0bb335e4bc3831, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: field
+    second: {fileID: 2100000, guid: d794f64326761f84bba7c355c1fa26e9, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: floor3
     second: {fileID: 2100000, guid: ff81dd8fbb453004a8df015adf275307, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: gradientBlack
-    second: {fileID: 2100000, guid: e29bdf2a407a1ab44ac94ddc36bc93a0, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: grass
-    second: {fileID: 2100000, guid: d794f64326761f84bba7c355c1fa26e9, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -102,7 +97,7 @@ ModelImporter:
   materials:
     materialImportMode: 2
     materialName: 0
-    materialSearch: 1
+    materialSearch: 2
     materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
