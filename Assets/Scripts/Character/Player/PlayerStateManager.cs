@@ -42,6 +42,7 @@ public class PlayerStateManager : StateManager<PlayerState>
     public static readonly string LEDGE_HANG_STATE = "Ledge Hang";
     public static readonly string LEDGE_JUMP_UP_STATE = "Ledge Jump Up";
     public static readonly string SHIELD_HOLD_STATE = "shield hold";
+    public static readonly string CARRY_STATE = "carry";
 
 
     protected override void StartInitialize()
@@ -87,6 +88,7 @@ public class PlayerStateManager : StateManager<PlayerState>
             { LEDGE_HANG_STATE, new LedgeHangState() },
             { LEDGE_JUMP_UP_STATE, new LedgeHangJumpUpState() },
             { SHIELD_HOLD_STATE, new ShieldHoldState() },
+            { CARRY_STATE, new CarryState() },
         };
 
         foreach (KeyValuePair<string, PlayerState> state in states)

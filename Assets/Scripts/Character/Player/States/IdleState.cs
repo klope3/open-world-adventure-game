@@ -45,6 +45,7 @@ public class IdleState : PlayerState
             new StateTransition(PlayerStateManager.LOOT_STATE, () => stateManager.trigger == PlayerStateManager.LOOT_STATE),
             new StateTransition(PlayerStateManager.BOW_DRAW_STATE, () => stateManager.trigger == PlayerStateManager.BOW_DRAW_STATE),
             new StateTransition(PlayerStateManager.SHIELD_HOLD_STATE, () => stateManager.trigger == PlayerStateManager.SHIELD_HOLD_STATE),
+            new StateTransition(PlayerStateManager.CARRY_STATE, () => stateManager.trigger == PlayerStateManager.CARRY_STATE),
         };
     }
 }

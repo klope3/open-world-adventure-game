@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Rock1_2
-  m_Shader: {fileID: -6465566751694194690, guid: 54787c9fea7bef64682e714c9118351d,
+  m_Name: magicCube
+  m_Shader: {fileID: -6465566751694194690, guid: 6a2baf2604448d544981d7fbd899a317,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -45,7 +45,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Emission:
-        m_Texture: {fileID: 2800000, guid: 58f38a73739bcca43b36e84e404769c8, type: 3}
+        m_Texture: {fileID: 2800000, guid: c43001f26d5ac00408fc63878ad8d98f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
@@ -73,7 +73,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2D:
-        m_Texture: {fileID: 2800000, guid: ea6aca5162d5e5040b39f85873385f62, type: 3}
+        m_Texture: {fileID: 2800000, guid: d4f8a9f9bc2eae943a3adb9c0113a876, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
